@@ -1,0 +1,39 @@
+﻿<div id="body">
+    <form id="saveContactForm" method="post">
+        <h3>Create a new Contact</h3>
+        <p>
+            <label for="IpAddress">Number:</label>
+            <input type="text" name="Number"/>
+        </p>
+        <p>
+            <label for="Discription">Name:</label>
+            <input type="text" name="Name"/>
+        </p>
+        <input type="button" id="saveContact" value="Save"/>
+    </form>
+    <ul id="contacts"></ul>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(function() {
+            $.getJSON('/api/contact', function(contactsJsonPayload) {
+                $(contactsJsonPayload).each(function(w,item) {
+                    $('#contacts').append('<li>' + item.Name + '</li>');
+                });
+            });
+        });
+    </script>
+    
+<script type="text/javascript">
+    $('#saveContact').click(function () {
+        $.post("api/contact",
+            $("#saveContactForm").serialize(),
+            function (value) {
+                $('#contacts').append('<li>' + value.Name + '</li>');
+            },
+            "json"
+        );
+    });
+</script>
+}
+

@@ -1,0 +1,9 @@
+c:\users\aotuo.zhang\documents\visual studio 2013\Projects\ELS\ELS\bin\Debug\ELS.exe.config
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\ELS\ELS\bin\Debug\ELS.exe
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\ELS\ELS\bin\Debug\ELS.pdb
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\ELS\ELS\obj\Debug\ELS.csprojResolveAssemblyReference.cache
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\ELS\ELS\obj\Debug\ELS.Properties.Resources.resources
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\ELS\ELS\obj\Debug\ELS.csproj.GenerateResource.Cache
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\ELS\ELS\obj\Debug\ELS.exe
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\ELS\ELS\obj\Debug\ELS.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ELS\bin\Debug\ELS.exe.config

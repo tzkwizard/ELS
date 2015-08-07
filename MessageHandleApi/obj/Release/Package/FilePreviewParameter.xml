@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Microsoft-ApiApp463245e7d2084cb79dbc3d162e7b94cb" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="Microsoft-ApiApp463245e7d2084cb79dbc3d162e7b94cb/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="AzureRedis-Web.config Connection String" description="" value="elsazure.redis.cache.windows.net,password=JL2ATsoHzQ8PHw4LSj/VgpgcEPlCkKKT3Qfvr69yrCA=" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AzureRedis']/@connectionString" />
+  </parameter>
+  <parameter name="AzureWebJobsStorage-Web.config Connection String" description="" value="DefaultEndpointsProtocol=https;AccountName=elsaotuo;AccountKey=AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AzureWebJobsStorage']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-WebApi-20150126151813;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-WebApi-20150126151813.mdf" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

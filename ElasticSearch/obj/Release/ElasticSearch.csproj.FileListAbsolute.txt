@@ -1,0 +1,17 @@
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\ElasticSearch.exe.config
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\ElasticSearch.exe
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\ElasticSearch.pdb
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\Elasticsearch.Net.dll
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\Nest.dll
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\Newtonsoft.Json.dll
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\nunit.framework.dll
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\TechTalk.SpecFlow.dll
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\Elasticsearch.Net.pdb
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\Elasticsearch.Net.xml
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\Nest.pdb
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\Nest.xml
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\Newtonsoft.Json.xml
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\bin\Release\nunit.framework.xml
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\obj\Release\ElasticSearch.csprojResolveAssemblyReference.cache
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\obj\Release\ElasticSearch.exe
+C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\obj\Release\ElasticSearch.pdb
