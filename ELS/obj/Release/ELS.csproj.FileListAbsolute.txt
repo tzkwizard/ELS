@@ -6,3 +6,6 @@ C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ELS\obj\Re
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ELS\obj\Release\ELS.csproj.GenerateResource.Cache
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ELS\obj\Release\ELS.exe
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ELS\obj\Release\ELS.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ELS\bin\Release\ELS.exe.config
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ELS\obj\Release\ELS.exe
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ELS\obj\Release\ELS.pdb

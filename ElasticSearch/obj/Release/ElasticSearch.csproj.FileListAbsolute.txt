@@ -15,3 +15,6 @@ C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSea
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\obj\Release\ElasticSearch.csprojResolveAssemblyReference.cache
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\obj\Release\ElasticSearch.exe
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\ElasticSearch\obj\Release\ElasticSearch.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Release\ElasticSearch.exe.config
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\obj\Release\ElasticSearch.exe
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\obj\Release\ElasticSearch.pdb
