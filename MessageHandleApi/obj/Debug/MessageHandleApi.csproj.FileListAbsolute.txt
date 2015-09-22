@@ -193,7 +193,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\FireSharp.dll

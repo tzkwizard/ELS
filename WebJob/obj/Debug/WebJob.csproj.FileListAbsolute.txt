@@ -218,6 +218,5 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob\bin\Debug\k
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob\bin\Debug\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob\bin\Debug\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob\obj\Debug\WebJob.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob\obj\Debug\WebJob.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob\obj\Debug\WebJob.pdb
