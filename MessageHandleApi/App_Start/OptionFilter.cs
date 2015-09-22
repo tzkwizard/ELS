@@ -13,7 +13,7 @@ namespace MessageHandleApi
 {
     public class OptionFilter : DelegatingHandler
     {
-        private LogHandler _logHandler;
+        //private LogHandler _logHandler;
 
         public OptionFilter()
         {

@@ -1,0 +1,12 @@
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\doucumentDB.exe.config
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\doucumentDB.exe
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\doucumentDB.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Microsoft.Azure.Documents.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Newtonsoft.Json.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Microsoft.Azure.Documents.Client.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Newtonsoft.Json.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.csprojResolveAssemblyReference.cache
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.exe
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Autofac.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Autofac.xml

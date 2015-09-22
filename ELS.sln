@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELS", "ELS\ELS.csproj", "{AC8F5131-1C58-4E03-BA89-28CEBFB88895}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebJob", "WebJob\WebJob.csproj", "{37D42001-C6F1-4628-A3E7-575E36746E82}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch", "ElasticSearch\ElasticSearch.csproj", "{8192A5BA-0BD9-4AD4-BC95-AE90026DCDE2}"
@@ -28,16 +26,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageHandleApi.Test", "MessageHandleApi.Test\MessageHandleApi.Test.csproj", "{AFE27D1B-18DB-440E-AA86-CDA1653C7BB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "doucumentDB", "doucumentDB\doucumentDB.csproj", "{76D97633-2A4A-4AA2-A8DC-68FA436FE737}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "firebase1", "firebase1\firebase1.csproj", "{59956C5C-31E7-460E-9A7F-529F42B87236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMSqueue", "LMSqueue\LMSqueue.csproj", "{82F8E72D-E80D-480E-89E1-EDD0D311AB0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC8F5131-1C58-4E03-BA89-28CEBFB88895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC8F5131-1C58-4E03-BA89-28CEBFB88895}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC8F5131-1C58-4E03-BA89-28CEBFB88895}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC8F5131-1C58-4E03-BA89-28CEBFB88895}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37D42001-C6F1-4628-A3E7-575E36746E82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{37D42001-C6F1-4628-A3E7-575E36746E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37D42001-C6F1-4628-A3E7-575E36746E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -70,6 +70,18 @@ Global
 		{AFE27D1B-18DB-440E-AA86-CDA1653C7BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFE27D1B-18DB-440E-AA86-CDA1653C7BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFE27D1B-18DB-440E-AA86-CDA1653C7BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D97633-2A4A-4AA2-A8DC-68FA436FE737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D97633-2A4A-4AA2-A8DC-68FA436FE737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D97633-2A4A-4AA2-A8DC-68FA436FE737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D97633-2A4A-4AA2-A8DC-68FA436FE737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59956C5C-31E7-460E-9A7F-529F42B87236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59956C5C-31E7-460E-9A7F-529F42B87236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59956C5C-31E7-460E-9A7F-529F42B87236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59956C5C-31E7-460E-9A7F-529F42B87236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F8E72D-E80D-480E-89E1-EDD0D311AB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F8E72D-E80D-480E-89E1-EDD0D311AB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F8E72D-E80D-480E-89E1-EDD0D311AB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F8E72D-E80D-480E-89E1-EDD0D311AB0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

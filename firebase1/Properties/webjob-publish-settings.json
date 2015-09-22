@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
+  "webJobName": "firebase1",
+  "startTime": "2015-09-17T09:00:00-06:00",
+  "endTime": "2015-09-18T00:00:00-06:00",
+  "jobRecurrenceFrequency": "Minute",
+  "interval": 1,
+  "runMode": "Scheduled"
+}

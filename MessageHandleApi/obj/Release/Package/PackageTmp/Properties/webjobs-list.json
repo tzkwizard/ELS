@@ -3,6 +3,12 @@
   "WebJobs": [
     {
       "filePath": "../QueueWebjob/QueueWebjob.csproj"
+    },
+    {
+      "filePath": "../firebase1/firebase1.csproj"
+    },
+    {
+      "filePath": "../LMSqueue/LMSqueue.csproj"
     }
   ]
 }
