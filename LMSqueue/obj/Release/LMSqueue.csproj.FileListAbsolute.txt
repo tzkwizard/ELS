@@ -113,3 +113,5 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Relea
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Release\Antlr3.Runtime.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Release\Autofac.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Release\Antlr3.Runtime.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Release\Autofac.Integration.WebApi.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Release\Autofac.Integration.WebApi.xml

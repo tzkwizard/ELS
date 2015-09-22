@@ -23,7 +23,7 @@ namespace MessageHandleApi.Controllers
         private readonly string _firebaseSecret;
         private IQueueService _iQueueService;
 
-        public LMSController()
+        public LMSController(IQueueService iQueueService)
         {
             _node = "https://dazzling-inferno-4653.firebaseio.com/";
             _firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
@@ -33,7 +33,7 @@ namespace MessageHandleApi.Controllers
                 BasePath = _node
             };
             _client = new FirebaseClient(_config);
-          
+            _iQueueService = iQueueService;
         }
 
 
@@ -61,7 +61,6 @@ namespace MessageHandleApi.Controllers
             {
                 message.body.timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                 string m = JsonConvert.SerializeObject(message);
-                _iQueueService=new QueueService();
                 await _iQueueService.SendToQueue(m);
                 //FirebaseResponse response = await _client.PushAsync(message.url, message.body);
                 return Ok();

@@ -5,8 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
+using Autofac;
 using Elasticsearch.Net.ConnectionPool;
 using MessageHandleApi.Models;
+using MessageHandleApi.Service;
 using Nest;
 using RenWeb.Framework.Handlers;
 using RenWeb.Framework.Interfaces;
@@ -19,7 +21,7 @@ namespace MessageHandleApi
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            //_logHandler = new LogHandler();    
+            GlobalConfiguration.Configure(Autofac.Configure);
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

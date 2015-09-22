@@ -108,3 +108,10 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Deb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Autofac.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Autofac.Integration.WebApi.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\WebGrease.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Antlr3.Runtime.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Autofac.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Autofac.Integration.WebApi.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Antlr3.Runtime.pdb
