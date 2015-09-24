@@ -140,6 +140,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.AspNet.Identity.Owin.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Azure.AppService.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Data.OData.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Data.Services.Client.dll
@@ -176,8 +177,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\System.
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\System.Web.WebPages.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\System.Web.WebPages.Razor.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\WebGrease.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\RenWeb.Resource.Interfaces.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\RenWeb.Resource.Models.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Antlr3.Runtime.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\EntityFramework.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\EntityFramework.SqlServer.xml
@@ -185,6 +184,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Azure.AppService.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Azure.KeyVault.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Data.Edm.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Data.OData.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.Data.Services.Client.xml

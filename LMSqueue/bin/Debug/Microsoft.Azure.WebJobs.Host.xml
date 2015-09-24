@@ -86,6 +86,14 @@
         <member name="T:Microsoft.Azure.WebJobs.Host.Protocols.BindingDataParameterDescriptor">
             <summary>Represents a parameter bound to binding data.</summary>
         </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Protocols.BlobMetadataKeys">
+            <summary>Provides well-known blob metadata keys.</summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Host.Protocols.BlobMetadataKeys.ParentId">
+            <summary>
+            Gets the name of the blob metadata key used to store ID of the function instance that wrote the blob.
+            </summary>
+        </member>
         <member name="T:Microsoft.Azure.WebJobs.Host.Protocols.BlobNames">
             <summary>Provides blob names in the protocol.</summary>
         </member>
@@ -330,7 +338,7 @@
             <param name="cancellationToken">The token to monitor for cancellation requests.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that will signal the heartbeat.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Protocols.HeartbeatCommand.#ctor(Microsoft.WindowsAzure.Storage.CloudStorageAccount,System.String,System.String)">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Protocols.HeartbeatCommand.#ctor(Microsoft.Azure.WebJobs.Host.Storage.IStorageAccount,System.String,System.String)">
             <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Protocols.HeartbeatCommand"/> class.</summary>
             <param name="account">The storage account in which to write the heartbeat.</param>
             <param name="containerName">The name of the container in which to write the heartbeat.</param>
@@ -423,13 +431,13 @@
             <summary>Represents a persistent queue writer.</summary>
             <typeparam name="T">The type of messages in the queue.</typeparam>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Protocols.PersistentQueueWriter`1.#ctor(Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient)">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Protocols.PersistentQueueWriter`1.#ctor(Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobClient)">
             <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Protocols.PersistentQueueWriter`1"/> class.</summary>
             <param name="client">
             A blob client for the storage account into which host output messages are written.
             </param>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Protocols.PersistentQueueWriter`1.#ctor(Microsoft.WindowsAzure.Storage.Blob.CloudBlobContainer)">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Protocols.PersistentQueueWriter`1.#ctor(Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer)">
             <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Protocols.PersistentQueueWriter`1"/> class.</summary>
             <param name="container">The container into which host output messages are written.</param>
         </member>
@@ -627,73 +635,718 @@
         <member name="P:Microsoft.Azure.WebJobs.Host.Protocols.WriteBlobParameterLog.BytesWritten">
             <summary>When the blob was written, gets or sets the number of bytes written.</summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.ICloudStorageAccount.CreateCloudQueueClient">
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob">
+            <summary>Defines a blob.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageListBlobItem">
+            <summary>Defines an item returned from a blob listing operation.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.AcquireLeaseAsync(System.Nullable{System.TimeSpan},System.String,System.Threading.CancellationToken)">
+            <summary>Acquires a lease for the blob.</summary>
+            <param name="leaseTime">The length of the lease.</param>
+            <param name="proposedLeaseId">The proposed ID for the lease.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will acquire a lease for the blob.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.DeleteAsync(System.Threading.CancellationToken)">
+            <summary>Deletes the blob.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will delete the blob.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.ExistsAsync(System.Threading.CancellationToken)">
+            <summary>Determines whether the blob exists.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will determine whether the blob exists.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.FetchAttributesAsync(System.Threading.CancellationToken)">
+            <summary>Populates the blob's properties and metadata.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will populate the blob's properties and metadata.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.OpenReadAsync(System.Threading.CancellationToken)">
+            <summary>Opens a stream to read from the blob.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will open a stream to read from the blob.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.ReleaseLeaseAsync(Microsoft.WindowsAzure.Storage.AccessCondition,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <summary>Releases a lease on the blob.</summary>
+            <param name="accessCondition">
+            The condition containing the current lease ID that must be met for the request to succeed.
+            </param>
+            <param name="options">The options for the request.</param>
+            <param name="operationContext">The operation context for the request.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will release a lease on the blob.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.SetMetadataAsync(Microsoft.WindowsAzure.Storage.AccessCondition,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <summary>Updates the blob's metadata.</summary>
+            <param name="accessCondition">The condition that must be met for the request to succeed.</param>
+            <param name="options">The options for the request.</param>
+            <param name="operationContext">The operation context for the request.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will update the blob's metadata.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.BlobType">
+            <summary>Gets the type of the blob.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.Container">
+            <summary>Gets the container for the blob.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.Metadata">
+            <summary>Gets the user-defined metadata for the blob.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.Name">
+            <summary>Gets the name of the blob.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.Properties">
+            <summary>Gets the blob's system properties.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.Blob.ICloudBlob"/>.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobClient">
+            <summary>Defines a blob client.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobClient.GetContainerReference(System.String)">
+            <summary>Gets a container reference.</summary>
+            <param name="containerName">The container name.</param>
+            <returns>A container reference.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobClient.GetServicePropertiesAsync(System.Threading.CancellationToken)">
+            <summary>Gets the service's properties.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will retrieve the services's properties.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobClient.ListBlobsSegmentedAsync(System.String,System.Boolean,Microsoft.WindowsAzure.Storage.Blob.BlobListingDetails,System.Nullable{System.Int32},Microsoft.WindowsAzure.Storage.Blob.BlobContinuationToken,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <summary>Gets a segment of blobs in a container.</summary>
+            <param name="prefix">The blob name prefix.</param>
+            <param name="useFlatBlobListing">
+            Whether to use a flat listing rather than a hierarchical one by virtual directory.
+            </param>
+            <param name="blobListingDetails">The details to include in the listing.</param>
+            <param name="maxResults">A limit on the number of results to be returned.</param>
+            <param name="currentToken">A continuation token indicating where to resume listing.</param>
+            <param name="options">The options for the request.</param>
+            <param name="operationContext">The operation context for the request.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will get a segment of blobs in a container.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobClient.SetServicePropertiesAsync(Microsoft.WindowsAzure.Storage.Shared.Protocol.ServiceProperties,System.Threading.CancellationToken)">
+            <summary>Sets the service's properties.</summary>
+            <param name="properties">The service properties to set.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will retrieve the services's properties.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobClient.Credentials">
+            <summary>Gets the credentials used to connect to the account.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer">
+            <summary>Defines a blob container.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.CreateIfNotExistsAsync(System.Threading.CancellationToken)">
+            <summary>Creates the container if it does not already exist.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will create the container if it does not already exist.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.ExistsAsync(System.Threading.CancellationToken)">
+            <summary>Determines whether the container exists.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will determine whether the container exists.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.GetBlobReferenceFromServerAsync(System.String,System.Threading.CancellationToken)">
+            <summary>Gets a blob reference from the server.</summary>
+            <param name="blobName">The blob name.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will get a blob reference from the server.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.GetBlockBlobReference(System.String)">
+            <summary>Gets a block blob reference.</summary>
+            <param name="blobName">The blob name.</param>
+            <returns>A block blob reference.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.GetDirectoryReference(System.String)">
+            <summary>Gets a reference to a virtual directory beneath this container.</summary>
+            <param name="relativeAddress">The address of the directory.</param>
+            <returns>A reference to a virtual directory beneath this container.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.GetPageBlobReference(System.String)">
+            <summary>Gets a page blob reference.</summary>
+            <param name="blobName">The blob name.</param>
+            <returns>A page blob reference.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.ListBlobsSegmentedAsync(System.String,System.Boolean,Microsoft.WindowsAzure.Storage.Blob.BlobListingDetails,System.Nullable{System.Int32},Microsoft.WindowsAzure.Storage.Blob.BlobContinuationToken,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <summary>Gets a segment of blobs in the container.</summary>
+            <param name="prefix">The blob name prefix.</param>
+            <param name="useFlatBlobListing">
+            Whether to use a flat listing rather than a hierarchical one by virtual directory.
+            </param>
+            <param name="blobListingDetails">The details to include in the listing.</param>
+            <param name="maxResults">A limit on the number of results to be returned.</param>
+            <param name="currentToken">A continuation token indicating where to resume listing.</param>
+            <param name="options">The options for the request.</param>
+            <param name="operationContext">The operation context for the request.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will get a segment of blobs in the container.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.Name">
+            <summary>Gets the name of the container.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudBlobContainer"/>.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.ServiceClient">
+            <summary>Gets the blob service client.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer.Uri">
+            <summary>Gets the URI of the container's primary location.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobDirectory">
+            <summary>Defines a blob directory.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobDirectory.GetBlockBlobReference(System.String)">
+            <summary>Gets a block blob reference.</summary>
+            <param name="blobName">The blob name.</param>
+            <returns>A block blob reference.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobDirectory.Container">
+            <summary>Gets the container for the blob.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobDirectory.ServiceClient">
+            <summary>Gets the blob service client.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobProperties">
+            <summary>Defines the system properties of a blob.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobProperties.ETag">
+            <summary>Gets the ETag of the blob.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobProperties.LastModified">
+            <summary>Gets the last time the blob was modified.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobResultSegment">
+            <summary>Defines a segment of blob list results.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobResultSegment.ContinuationToken">
+            <summary>Gets the continuation token to use to retrieve the next segment of results.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobResultSegment.Results">
+            <summary>Gets the results in this segment.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlockBlob">
+            <summary>Defines a block blob.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlockBlob.DownloadTextAsync(System.Threading.CancellationToken)">
+            <summary>Downloads text contents from the blob.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will download text contents from the blob.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlockBlob.OpenWriteAsync(System.Threading.CancellationToken)">
+            <summary>Opens a stream to write to the blob.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will open a stream to write to the blob.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlockBlob.UploadTextAsync(System.String,System.Text.Encoding,Microsoft.WindowsAzure.Storage.AccessCondition,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <summary>Uploads text contents to the blob.</summary>
+            <param name="content">The text to upload.</param>
+            <param name="encoding">The text encoding to use.</param>
+            <param name="accessCondition">The condition that must be met for the request to succeed.</param>
+            <param name="options">The options for the request.</param>
+            <param name="operationContext">The operation context for the request.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will upload text contents to the blob.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlockBlob.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudBlockBlob"/>.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStoragePageBlob">
+            <summary>Defines a page blob.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStoragePageBlob.OpenWriteAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>Opens a stream to write to the blob.</summary>
+            <param name="size">The size of the page blob, in bytes (must be a multiple of 512).</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will open a stream to write to the blob.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.IStoragePageBlob.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.Blob.CloudPageBlob"/>.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobClient">
+            <summary>Represents a blob client.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobClient.#ctor(Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobClient"/> class.</summary>
+            <param name="sdk">The SDK client to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobClient.GetContainerReference(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobClient.GetServicePropertiesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobClient.ListBlobsSegmentedAsync(System.String,System.Boolean,Microsoft.WindowsAzure.Storage.Blob.BlobListingDetails,System.Nullable{System.Int32},Microsoft.WindowsAzure.Storage.Blob.BlobContinuationToken,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobClient.SetServicePropertiesAsync(Microsoft.WindowsAzure.Storage.Shared.Protocol.ServiceProperties,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobClient.Credentials">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer">
+            <summary>Represents a blob container.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.#ctor(Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobClient,Microsoft.WindowsAzure.Storage.Blob.CloudBlobContainer)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer"/> class.</summary>
+            <param name="parent">The parent blob client.</param>
+            <param name="sdk">The SDK container to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.CreateIfNotExistsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.ExistsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.GetBlobReferenceFromServerAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.GetBlockBlobReference(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.GetDirectoryReference(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.GetPageBlobReference(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.ListBlobsSegmentedAsync(System.String,System.Boolean,Microsoft.WindowsAzure.Storage.Blob.BlobListingDetails,System.Nullable{System.Int32},Microsoft.WindowsAzure.Storage.Blob.BlobContinuationToken,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.SdkObject">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.ServiceClient">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobContainer.Uri">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobDirectory">
+            <summary>Represents a blob directory.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobDirectory.#ctor(Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer,Microsoft.WindowsAzure.Storage.Blob.CloudBlobDirectory)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobDirectory"/> class.</summary>
+            <param name="parent">The parent blob container.</param>
+            <param name="sdk">The SDK directory to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobDirectory.GetBlockBlobReference(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobDirectory.Container">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobDirectory.ServiceClient">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobProperties">
+            <summary>Represents the system properties of a blob.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobProperties.#ctor(Microsoft.WindowsAzure.Storage.Blob.ICloudBlob)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobProperties"/> class.</summary>
+            <param name="sdk">The SDK blob whose properties to wrap.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobProperties.ETag">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobProperties.LastModified">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobResultSegment">
+            <summary>Represents a segment of blob list results.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobResultSegment.#ctor(Microsoft.WindowsAzure.Storage.Blob.BlobContinuationToken,System.Collections.Generic.IEnumerable{Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageListBlobItem})">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobResultSegment"/> class.</summary>
+            <param name="continuationToken">The continuation token.</param>
+            <param name="results">The results in the segment.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobResultSegment.ContinuationToken">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobResultSegment.Results">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobType">
+            <summary>Defines blob types.</summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobType.BlockBlob">
+            <summary>A block blob.</summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlobType.PageBlob">
+            <summary>A page blob.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob">
+            <summary>Represents a block blob.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.#ctor(Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer,Microsoft.WindowsAzure.Storage.Blob.CloudBlockBlob)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob"/> class.</summary>
+            <param name="parent">The parent blob container.</param>
+            <param name="sdk">The SDK blob to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.AcquireLeaseAsync(System.Nullable{System.TimeSpan},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.DeleteAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.DownloadTextAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.ExistsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.FetchAttributesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.OpenReadAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.OpenWriteAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.ReleaseLeaseAsync(Microsoft.WindowsAzure.Storage.AccessCondition,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.SetMetadataAsync(Microsoft.WindowsAzure.Storage.AccessCondition,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.UploadTextAsync(System.String,System.Text.Encoding,Microsoft.WindowsAzure.Storage.AccessCondition,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.BlobType">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.Container">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.Metadata">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.Properties">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.Microsoft#Azure#WebJobs#Host#Storage#Blob#IStorageBlob#SdkObject">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StorageBlockBlob.SdkObject">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob">
+            <summary>Represents a page blob.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.#ctor(Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlobContainer,Microsoft.WindowsAzure.Storage.Blob.CloudPageBlob)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob"/> class.</summary>
+            <param name="parent">The parent blob container.</param>
+            <param name="sdk">The SDK blob to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.AcquireLeaseAsync(System.Nullable{System.TimeSpan},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.DeleteAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.ExistsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.FetchAttributesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.OpenReadAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.OpenWriteAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.ReleaseLeaseAsync(Microsoft.WindowsAzure.Storage.AccessCondition,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.SetMetadataAsync(Microsoft.WindowsAzure.Storage.AccessCondition,Microsoft.WindowsAzure.Storage.Blob.BlobRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.BlobType">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.Container">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.Metadata">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.Properties">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.Microsoft#Azure#WebJobs#Host#Storage#Blob#IStorageBlob#SdkObject">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Blob.StoragePageBlob.SdkObject">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.IStorageAccount.CreateBlobClient">
+            <summary>Creates a blob client.</summary>
+            <returns>A blob client.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.IStorageAccount.CreateQueueClient">
             <summary>Creates a queue client.</summary>
             <returns>A queue client.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.ICloudStorageAccount.CreateCloudTableClient">
-            <summary>
-            Creates a table client.</summary>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.IStorageAccount.CreateTableClient">
+            <summary>Creates a table client.</summary>
             <returns>A table client.</returns>
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.ICloudQueue">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.IStorageAccount.ToString(System.Boolean)">
+            <summary>Gets the connection string for the storage account.</summary>
+            <param name="exportSecrets">
+            <see langword="true"/> to include credentials in the connection string; otherwise, <see langword="false"/>.
+            </param>
+            <returns>The connection string for the storage account.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.IStorageAccount.BlobEndpoint">
+            <summary>Gets the primary endpoint for the blob service.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.IStorageAccount.Credentials">
+            <summary>Gets the credentials used to connect to the account.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.IStorageAccount.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.CloudStorageAccount"/>.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue">
             <summary>Defines a queue.</summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.ICloudQueue.AddMessage(Microsoft.WindowsAzure.Storage.Queue.CloudQueueMessage)">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.AddMessageAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage,System.Threading.CancellationToken)">
             <summary>Adds a message to the queue.</summary>
             <param name="message">The message to enqueue.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <remarks>A task that will add the message to the queue.</remarks>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.ICloudQueue.CreateIfNotExists">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.CreateIfNotExistsAsync(System.Threading.CancellationToken)">
             <summary>Creates the queue if it does not already exist.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will create the queue if it does not already exist.</returns>
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.ICloudQueueClient">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.CreateMessage(System.Byte[])">
+            <summary>Creates a new queue message.</summary>
+            <param name="content">The message content.</param>
+            <returns>A new queue message</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.CreateMessage(System.String)">
+            <summary>Creates a new queue message.</summary>
+            <param name="content">The message content.</param>
+            <returns>A new queue message</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.DeleteMessageAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage,System.Threading.CancellationToken)">
+            <summary>Deletes a message.</summary>
+            <param name="message">The message to delete.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will delete the message.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.ExistsAsync(System.Threading.CancellationToken)">
+            <summary>Determines whether the queue exists.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will determine whether the queue exists.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.GetMessagesAsync(System.Int32,System.Nullable{System.TimeSpan},Microsoft.WindowsAzure.Storage.Queue.QueueRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <summary>Gets messages from the queue and marks them invisible during the visibility timeout.</summary>
+            <param name="messageCount">The number of messages to retrieve.</param>
+            <param name="visibilityTimeout">The visibility timeout.</param>
+            <param name="options">The options for the request.</param>
+            <param name="operationContext">The operation context for the request.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>
+            A task that will get messages from the queue and marks them invisible during the visibility timeout.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.UpdateMessageAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage,System.TimeSpan,Microsoft.WindowsAzure.Storage.Queue.MessageUpdateFields,System.Threading.CancellationToken)">
+            <summary>Updates the visibility timeout and optionally the content of a message.</summary>
+            <param name="message">The message to update.</param>
+            <param name="visibilityTimeout">The visibility timeout.</param>
+            <param name="updateFields">
+            <see cref="T:Microsoft.WindowsAzure.Storage.Queue.MessageUpdateFields"/> flags specifying which parts of the message to update.
+            </param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will update the message.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.Name">
+            <summary>Gets the name of the queue.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.Queue.CloudQueue"/>.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue.ServiceClient">
+            <summary>Gets the queue service client.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueClient">
             <summary>Defines a queue client.</summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.ICloudQueueClient.GetQueueReference(System.String)">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueClient.GetQueueReference(System.String)">
             <summary>Gets a queue reference.</summary>
             <param name="queueName">The queue name.</param>
             <returns>A queue reference.</returns>
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.SdkCloudStorageAccount">
-            <summary>Represents a cloud storage account.</summary>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueClient.Credentials">
+            <summary>Gets the credentials used to connect to the account.</summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.SdkCloudStorageAccount.#ctor(Microsoft.WindowsAzure.Storage.CloudStorageAccount)">
-            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.SdkCloudStorageAccount"/> class.</summary>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage">
+            <summary>Defines a queue message.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.AsBytes">
+            <summary>Get the message contents as a byte array.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.AsString">
+            <summary>Gets the message contents as text.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.DequeueCount">
+            <summary>Gets the number of times the message has been dequeued.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.ExpirationTime">
+            <summary>Gets the time at which the message expires.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.Id">
+            <summary>Gets the message ID.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.InsertionTime">
+            <summary>Gets the time at which the message was added to the queue.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.NextVisibleTime">
+            <summary>Gets the next time at which the message will be visible.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.PopReceipt">
+            <summary>Gets the pop receipt for the message.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage.SdkObject">
+            <summary>Gets the underlying SDK queue message.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue">
+            <summary>Represents a queue.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.#ctor(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueClient,Microsoft.WindowsAzure.Storage.Queue.CloudQueue)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue"/> class.</summary>
+            <param name="parent">The parent queue client.</param>
+            <param name="sdk">The SDK queue to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.AddMessageAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.CreateIfNotExistsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.CreateMessage(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.CreateMessage(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.DeleteMessageAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.ExistsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.GetMessagesAsync(System.Int32,System.Nullable{System.TimeSpan},Microsoft.WindowsAzure.Storage.Queue.QueueRequestOptions,Microsoft.WindowsAzure.Storage.OperationContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.UpdateMessageAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueueMessage,System.TimeSpan,Microsoft.WindowsAzure.Storage.Queue.MessageUpdateFields,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.SdkObject">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueue.ServiceClient">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueClient">
+            <summary>Represents a queue client.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueClient.#ctor(Microsoft.WindowsAzure.Storage.Queue.CloudQueueClient)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueClient"/> class.</summary>
+            <param name="sdk">The SDK client to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueClient.GetQueueReference(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueClient.Credentials">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage">
+            <summary>Represents a queue message.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.#ctor(Microsoft.WindowsAzure.Storage.Queue.CloudQueueMessage)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage"/> class.</summary>
+            <param name="message">The SDK message to wrap.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.AsBytes">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.AsString">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.DequeueCount">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.ExpirationTime">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.InsertionTime">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.NextVisibleTime">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.PopReceipt">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Queue.StorageQueueMessage.SdkObject">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount">
+            <summary>Represents a storage account.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount.#ctor(Microsoft.WindowsAzure.Storage.CloudStorageAccount)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount"/> class.</summary>
             <param name="sdkAccount">The underlying SDK cloud storage account.</param>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.SdkCloudStorageAccount.CreateCloudQueueClient">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount.CreateBlobClient">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.SdkCloudStorageAccount.CreateCloudTableClient">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount.CreateQueueClient">
             <inheritdoc />
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTableClient">
-            <summary>Defines a table client.</summary>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount.CreateTableClient">
+            <inheritdoc />
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTableClient.GetTableReference(System.String)">
-            <summary>Gets a table reference.</summary>
-            <param name="tableName">The table name.</param>
-            <returns>A table reference.</returns>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount.ToString(System.Boolean)">
+            <inheritdoc />
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTable">
-            <summary>Defines a table.</summary>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount.BlobEndpoint">
+            <inheritdoc />
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTable.Insert(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
-            <summary>Inserts an entity into the table.</summary>
-            <param name="entity">The entity to insert.</param>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount.Credentials">
+            <inheritdoc />
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTable.Query``1(System.Nullable{System.Int32},Microsoft.Azure.WebJobs.Host.Storage.Table.IQueryModifier[])">
-            <summary>Queries the table.</summary>
-            <typeparam name="TElement">The type of entities to query.</typeparam>
-            <param name="limit">The maximum number of rows to retrieve, if any.</param>
-            <param name="queryModifiers">The query modifiers.</param>
-            <returns>The matching entities.</returns>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTable.GetOrInsert``1(``0)">
-            <summary>Gets an existing entity or inserts a new entity into the table.</summary>
-            <typeparam name="TElement">The type of the entity.</typeparam>
-            <param name="entity">The entity to insert, if no existing entity exists.</param>
-            <returns>The existing entity found on the new entity inserted.</returns>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount.SdkObject">
+            <inheritdoc />
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Host.Storage.StorageExceptionExtensions">
             <summary>Provides extension methods for the <see cref="T:Microsoft.WindowsAzure.Storage.StorageException"/> class.</summary>
@@ -904,87 +1557,270 @@
             LeaseLost; otherwise <see langword="false"/>.
             </returns>
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.CloudTableExtensions">
-            <summary>Provides extension methods for <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTable"/>.</summary>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.IEntityResolver">
+            <summary>Defines an entity resolver.</summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.CloudTableExtensions.QueryByRowKeyPrefix``1(Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTable,System.String,System.String)">
-            <summary>Queries the table by a row key prefix.</summary>
-            <typeparam name="TElement">The type of entities to query.</typeparam>
-            <param name="table">The table to query.</param>
-            <param name="partitionKey">The partition key by which to filter.</param>
-            <param name="rowKeyPrefix">The row key prefix by which to filter.</param>
-            <returns>The matching entities.</returns>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IEntityResolver.Resolve(System.String,System.String,System.DateTimeOffset,System.Collections.Generic.IDictionary{System.String,Microsoft.WindowsAzure.Storage.Table.EntityProperty},System.String)">
+            <summary>Resolves an entity.</summary>
+            <param name="partitionKey">The partition key of the entity.</param>
+            <param name="rowKey">The row key of the entity.</param>
+            <param name="timestamp">The timestamp of the entity.</param>
+            <param name="properties">The properties of the entity.</param>
+            <param name="eTag">The ETag of the entity.</param>
+            <returns>The entity resolved.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.CloudTableExtensions.QueryByRowKeyPrefix``1(Microsoft.Azure.WebJobs.Host.Storage.Table.ICloudTable,System.String,System.String,Microsoft.WindowsAzure.Storage.Table.EntityResolver{``0})">
-            <summary>Queries the table by a row key prefix.</summary>
-            <typeparam name="TElement">The type of entities to query.</typeparam>
-            <param name="table">The table to query.</param>
-            <param name="partitionKey">The partition key by which to filter.</param>
-            <param name="rowKeyPrefix">The row key prefix by which to filter.</param>
-            <param name="resolver">The entity resolver to use to resolve entities.</param>
-            <returns>The matching entities.</returns>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IEntityResolver.EntityType">
+            <summary>Gets the type of entity returned by <see cref="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IEntityResolver.Resolve(System.String,System.String,System.DateTimeOffset,System.Collections.Generic.IDictionary{System.String,Microsoft.WindowsAzure.Storage.Table.EntityProperty},System.String)"/>.</summary>
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.IQueryModifier">
-            <summary>Defines a query modifier.</summary>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable">
+            <summary>Defines a table.</summary>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IQueryModifier.Apply``1(System.Linq.IQueryable{``0})">
-            <summary>Applies a query modifier to a query.</summary>
-            <typeparam name="T">The type of entities in the query.</typeparam>
-            <param name="queryable">The queryable to which to apply the modifier.</param>
-            <returns>The queryable with the modifier applied.</returns>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.CreateBatch">
+            <summary>Creates a batch operation.</summary>
+            <returns>A new batch operation.</returns>
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.PartitionKeyEqualsQueryModifier">
-            <summary>Represents a query modifier that filters by partition key.</summary>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.CreateIfNotExistsAsync(System.Threading.CancellationToken)">
+            <summary>Creates the table if it does not already exist.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will create the table if it does not already exist.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.PartitionKeyEqualsQueryModifier.#ctor(System.String)">
-            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.PartitionKeyEqualsQueryModifier"/> class.</summary>
-            <param name="partitionKey">The partition key by which to filter.</param>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.CreateInsertOperation(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
+            <summary>Creates an operation to insert an entity.</summary>
+            <param name="entity">The entity to insert.</param>
+            <returns>An operation to insert an entity.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.PartitionKeyEqualsQueryModifier.Apply``1(System.Linq.IQueryable{``0})">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.CreateInsertOrReplaceOperation(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
+            <summary>Creates an operation to insert or replace an entity.</summary>
+            <param name="entity">The entity to insert or replace.</param>
+            <returns>An operation to insert or replace an entity.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.CreateQuery``1">
+            <summary>Creates a LINQ query.</summary>
+            <typeparam name="TElement">The type of entity to query.</typeparam>
+            <returns>A LINQ query.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.CreateReplaceOperation(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
+            <summary>Creates an operation to replace an entity.</summary>
+            <param name="entity">The entity to replace.</param>
+            <returns>An operation to replace an entity.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.CreateRetrieveOperation``1(System.String,System.String)">
+            <summary>Creates an operation to retrieve an entity.</summary>
+            <typeparam name="TElement">The type of entity to retrieve.</typeparam>
+            <param name="partitionKey">The partition key of the entity to retrieve.</param>
+            <param name="rowKey">The row key of the entity to retrieve.</param>
+            <returns>An operation to retrieve an entity.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.ExecuteAsync(Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation,System.Threading.CancellationToken)">
+            <summary>Executes an operation.</summary>
+            <param name="operation">The operation to execute.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will execute an operation and return the result.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.ExecuteBatchAsync(Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableBatchOperation,System.Threading.CancellationToken)">
+            <summary>Executes an atomic batch operation.</summary>
+            <param name="batch">The batch operation to execute.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will execute an atomic batch operation and return the results.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.ExistsAsync(System.Threading.CancellationToken)">
+            <summary>Determines whether the table exists.</summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A task that will determine whether the table exists.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.Name">
+            <summary>Gets the name of the table.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTable.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.Table.CloudTable"/>.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableBatchOperation">
+            <summary>Defines an atomic batch operation on a table.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableBatchOperation.Add(Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation)">
+            <summary>Adds an operation to the batch.</summary>
+            <param name="operation">The operation to add.</param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableClient">
+            <summary>Defines a table client.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableClient.GetTableReference(System.String)">
+            <summary>Gets a table reference.</summary>
+            <param name="tableName">The table name.</param>
+            <returns>A table reference.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableClient.Credentials">
+            <summary>Gets the credentials used to connect to the account.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation">
+            <summary>Defines an operation on a table.</summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.OperationType">
+            <summary>Gets the type of operation to perform.</summary>
+            <remarks>
+            When <see cref="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.OperationType"/> is <see cref="F:Microsoft.WindowsAzure.Storage.Table.TableOperationType.Retrieve"/>, returns
+            <see langword="null"/>.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.Entity">
+            <summary>Gets the entity on which to operate.</summary>
+            <remarks>
+            When <see cref="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.OperationType"/> is <see cref="F:Microsoft.WindowsAzure.Storage.Table.TableOperationType.Retrieve"/>, returns
+            <see langword="null"/>.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.RetrievePartitionKey">
+            <summary>Gets the partition key of the entity to retrieve.</summary>
+            <remarks>
+            When <see cref="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.OperationType"/> is not <see cref="F:Microsoft.WindowsAzure.Storage.Table.TableOperationType.Retrieve"/>, returns
+            <see langword="null"/>.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.RetrieveRowKey">
+            <summary>Gets the row key of the entity to retrieve.</summary>
+            <remarks>
+            When <see cref="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.OperationType"/> is not <see cref="F:Microsoft.WindowsAzure.Storage.Table.TableOperationType.Retrieve"/>, returns
+            <see langword="null"/>.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.RetrieveEntityResolver">
+            <summary>Gets the resolver to resolve the entity to retrieve.</summary>
+            <remarks>
+            When <see cref="P:Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation.OperationType"/> is not <see cref="F:Microsoft.WindowsAzure.Storage.Table.TableOperationType.Retrieve"/>, returns
+            <see langword="null"/>.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable">
+            <summary>Represents a table.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.#ctor(Microsoft.WindowsAzure.Storage.Table.CloudTable)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable"/> class.</summary>
+            <param name="sdk">The SDK table to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.CreateBatch">
             <inheritdoc />
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.ResolverQueryModifier`1">
-            <summary>Represents a query modifier that adds an entity resolver.</summary>
-            <typeparam name="TResult">The type of the resolved entities.</typeparam>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.ResolverQueryModifier`1.#ctor(Microsoft.WindowsAzure.Storage.Table.EntityResolver{`0})">
-            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.ResolverQueryModifier`1"/> class.</summary>
-            <param name="entityResolver">The entity resolver to use to resolve entities.</param>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.ResolverQueryModifier`1.Apply``1(System.Linq.IQueryable{``0})">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.CreateIfNotExistsAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyGreaterThanOrEqualQueryModifier">
-            <summary>Represents a query modifier that filters by row keys greater than or equal to a value.</summary>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyGreaterThanOrEqualQueryModifier.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyGreaterThanOrEqualQueryModifier"/> class.
-            </summary>
-            <param name="rowKeyInclusiveLowerBound">The inclusive lower bound for the row key.</param>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyGreaterThanOrEqualQueryModifier.Apply``1(System.Linq.IQueryable{``0})">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.CreateInsertOperation(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
             <inheritdoc />
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyGreaterThanQueryModifier">
-            <summary>Represents a query modifier that filters by row keys greater than a value.</summary>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyGreaterThanQueryModifier.#ctor(System.String)">
-            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyGreaterThanQueryModifier"/> class.</summary>
-            <param name="rowKeyExclusiveLowerBound">The exclusive lower bound for the row key.</param>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyGreaterThanQueryModifier.Apply``1(System.Linq.IQueryable{``0})">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.CreateInsertOrReplaceOperation(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
             <inheritdoc />
         </member>
-        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyLessThanQueryModifier">
-            <summary>Represents a query modifier that filters by row keys less than a value.</summary>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyLessThanQueryModifier.#ctor(System.String)">
-            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyLessThanQueryModifier"/> class.</summary>
-            <param name="rowKeyExclusiveUpperBound">The exclusive upper bound for the row key.</param>
-        </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.RowKeyLessThanQueryModifier.Apply``1(System.Linq.IQueryable{``0})">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.CreateQuery``1">
             <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.CreateReplaceOperation(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.CreateRetrieveOperation``1(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.ExecuteAsync(Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.ExecuteBatchAsync(Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableBatchOperation,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.ExistsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTable.SdkObject">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation">
+            <summary>Represents an atomic batch operation on a table.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation.#ctor(Microsoft.WindowsAzure.Storage.Table.TableBatchOperation)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation"/> class.</summary>
+            <param name="sdk">The SDK batch operation to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation.Add(Microsoft.Azure.WebJobs.Host.Storage.Table.IStorageTableOperation)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation.Item(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableBatchOperation.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableBatchOperation"/>.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableClient">
+            <summary>Represents a table client.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableClient.#ctor(Microsoft.WindowsAzure.Storage.Table.CloudTableClient)">
+            <summary>Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableClient"/> class.</summary>
+            <param name="sdk">The SDK client to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableClient.GetTableReference(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableClient.Credentials">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation">
+            <summary>Represents an operation on a table.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.Insert(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
+            <summary>Creates an operation to insert an entity.</summary>
+            <param name="entity">The entity to insert.</param>
+            <returns>An operation to insert an entity.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.InsertOrReplace(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
+            <summary>Creates an operation to insert or replace an entity.</summary>
+            <param name="entity">The entity to insert or replace.</param>
+            <returns>An operation to insert or replace an entity.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.Replace(Microsoft.WindowsAzure.Storage.Table.ITableEntity)">
+            <summary>Creates an operation to replace an entity.</summary>
+            <param name="entity">The entity to replace.</param>
+            <returns>An operation to replace an entity.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.Retrieve``1(System.String,System.String)">
+            <summary>Creates an operation to retrieve an entity.</summary>
+            <typeparam name="TElement">The type of entity to retrieve.</typeparam>
+            <param name="partitionKey">The partition key of the entity to retrieve.</param>
+            <param name="rowKey">The row key of the entity to retrieve.</param>
+            <returns>An operation to retrieve an entity.</returns>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.OperationType">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.Entity">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.RetrievePartitionKey">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.RetrieveRowKey">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.RetrieveEntityResolver">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Host.Storage.Table.StorageTableOperation.SdkObject">
+            <summary>Gets the underlying <see cref="T:Microsoft.WindowsAzure.Storage.Table.TableOperation"/>.</summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Host.IJobActivator">
+            <summary>Defines an activator that creates an instance of a job type.</summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Host.IJobActivator.CreateInstance``1">
+            <summary>Creates a new instance of a job type.</summary>
+            <typeparam name="T">The job type.</typeparam>
+            <returns>A new instance of the job type.</returns>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Host.Bindings.Path.BindingTemplateSource">
             <summary>
@@ -1098,7 +1934,7 @@
             Storage Analytics Log Format defined at http://msdn.microsoft.com/en-us/library/windowsazure/hh343259.aspx
             </remarks>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Blobs.Listeners.StorageAnalyticsLogParser.ParseLogAsync(Microsoft.WindowsAzure.Storage.Blob.ICloudBlob,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Blobs.Listeners.StorageAnalyticsLogParser.ParseLogAsync(Microsoft.Azure.WebJobs.Host.Storage.Blob.IStorageBlob,System.Threading.CancellationToken)">
             <summary>
             Given a log file (as a blob), parses it and return a collection of log entries matching version 1.0
             of the Storage Analytics Log Format.
@@ -1159,11 +1995,11 @@
         <member name="M:Microsoft.Azure.WebJobs.Host.Executors.StorageAccountParser.ParseAccount(System.String,System.String)">
             <summary>
             Throwing version of parse account API. It calls TryParseAccount internally, analyzes returned result,
-            and throws an exception with formatted message in case of error
+            and throws an exception with formatted message in case of error.
             </summary>
             <param name="connectionString">A Storage account connection string as retrieved from the config</param>
-            <param name="accountName">Friendly account name used to format error message</param>
-            <returns>An instance of <see cref="T:Microsoft.WindowsAzure.Storage.CloudStorageAccount"/> associated with the given connection string</returns>
+            <param name="connectionStringName">Friendly connection string name used to format error message</param>
+            <returns>An instance of <see cref="T:Microsoft.Azure.WebJobs.Host.Storage.StorageAccount"/> associated with the given connection string</returns>
         </member>
         <member name="M:Microsoft.Azure.WebJobs.Host.Executors.StorageAccountParser.TryParseAccount(System.String,Microsoft.WindowsAzure.Storage.CloudStorageAccount@)">
             <summary>
@@ -1178,7 +2014,7 @@
             Formats an error message corresponding to the provided error code and account.
             </summary>
             <param name="error">The error code as returned by <see cref="M:Microsoft.Azure.WebJobs.Host.Executors.StorageAccountParser.TryParseAccount(System.String,Microsoft.WindowsAzure.Storage.CloudStorageAccount@)"/> method call.</param>
-            <param name="accountName">Friendly account name used to format error message</param>
+            <param name="connectionStringName">Friendly connection string name used to format error message</param>
             <returns>Formatted error message with details about reason of the failure and possible ways of mitigation</returns>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Host.JobHostQueuesConfiguration">
@@ -1245,9 +2081,10 @@
             <returns>Normalized (lower-case'd) storage queue name</returns>
             <exception cref="T:System.ArgumentException">If the normalized name is invalid</exception>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Queues.Bindings.ByteArrayArgumentBindingProvider.ByteArrayArgumentBinding.BindAsync(Microsoft.WindowsAzure.Storage.Queue.CloudQueue,Microsoft.Azure.WebJobs.Host.Bindings.ValueBindingContext)">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Queues.Bindings.ByteArrayArgumentBindingProvider.ByteArrayArgumentBinding.BindAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue,Microsoft.Azure.WebJobs.Host.Bindings.ValueBindingContext)">
             <remarks>
-            As this method handles out byte array parameter it distinguishes following possible scenarios:
+            The out byte array parameter is processed as follows:
+            <list type="bullet">
             <item>
             <description>
             If the value is <see langword="null"/>, no message will be sent.
@@ -1260,9 +2097,10 @@
             </item>
             <item>
             <description>
-            If the value is a non-empty byte array, a message with content from given argument will be sent.
+            If the value is a non-empty byte array, a message with that content will be sent.
             </description>
             </item>
+            </list>
             </remarks>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Host.Queues.BoundQueuePath">
@@ -1330,21 +2168,22 @@
             </summary>
             <param name="value">string object as retrieved from user's WebJobs method argument.</param>
             <param name="cancellationToken">a cancellation token</param>
-            <remarks>As this method handles out string parameter it distinguishes following possible scenarios:
+            <remarks>
+            The out string parameter is processed as follows:
             <list type="bullet">
             <item>
             <description>
-            the value is null - no CloudBlob will be created;
+            If the value is <see langword="null"/>, no blob will be created.
             </description>
             </item>
             <item>
             <description>
-            the value is an empty string - a CloudBlob with empty content will be created;
+            If the value is an empty string, a blob with empty content will be created.
             </description>
             </item>
             <item>
             <description>
-            the value is a non-empty string - a CloudBlob with content from given string will be created.
+            If the value is a non-empty string, a blob with that content will be created.
             </description>
             </item>
             </list>
@@ -1388,33 +2227,32 @@
             <param name="hostId">The host ID.</param>
             <returns>The host instance queue name.</returns>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Queues.Bindings.CloudQueueMessageArgumentBinding.MessageValueBinder.SetValueAsync(System.Object,System.Threading.CancellationToken)">
-            <summary>
-            Sends a CloudQueueMessage to the bound queue.
-            </summary>
-            <param name="value">CloudQueueMessage instance as retrieved from user's WebJobs method argument.</param>
-            <param name="cancellationToken">a cancellation token</param>
-            <remarks>As this method handles out message instance parameter it distinguishes following possible scenarios:
+        <member name="M:Microsoft.Azure.WebJobs.Host.Queues.Bindings.CloudQueueMessageArgumentBindingProvider.CloudQueueMessageArgumentBinding.BindAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue,Microsoft.Azure.WebJobs.Host.Bindings.ValueBindingContext)">
+            <remarks>
+            The out message parameter is processed as follows:
+            <list type="bullet">
             <item>
             <description>
-            the value is null - no message will be sent;
+            If the value is <see langword="null"/>, no message will be sent.
             </description>
             </item>
             <item>
             <description>
-            the value is an instance with empty content - a message with empty content will be sent;
+            If the value has empty content, a message with empty content will be sent.
             </description>
             </item>
             <item>
             <description>
-            the value is an instance with non-empty content - a message with content from given argument will be sent.
+            If the value has non-empty content, a message with that content will be sent.
             </description>
             </item>
+            </list>
             </remarks>
         </member>
-        <member name="M:Microsoft.Azure.WebJobs.Host.Queues.Bindings.StringArgumentBindingProvider.StringArgumentBinding.BindAsync(Microsoft.WindowsAzure.Storage.Queue.CloudQueue,Microsoft.Azure.WebJobs.Host.Bindings.ValueBindingContext)">
+        <member name="M:Microsoft.Azure.WebJobs.Host.Queues.Bindings.StringArgumentBindingProvider.StringArgumentBinding.BindAsync(Microsoft.Azure.WebJobs.Host.Storage.Queue.IStorageQueue,Microsoft.Azure.WebJobs.Host.Bindings.ValueBindingContext)">
             <remarks>
-            As this method handles out string parameter it distinguishes following possible scenarios:
+            The out string parameter is processed as follows:
+            <list type="bullet">
             <item>
             <description>
             If the value is <see langword="null"/>, no message will be sent.
@@ -1427,9 +2265,10 @@
             </item>
             <item>
             <description>
-            If the value is a non-empty string, a message with content from given argument will be sent.
+            If the value is a non-empty string, a message with that content will be sent.
             </description>
             </item>
+            </list>
             </remarks>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.INameResolver">
@@ -1518,6 +2357,10 @@
             </para>
             </remarks>
         </member>
+        <member name="P:Microsoft.Azure.WebJobs.JobHostConfiguration.JobActivator">
+            <summary>Gets or sets the job activator.</summary>
+            <remarks>The job activator creates instances of job classes when calling instance methods.</remarks>
+        </member>
         <member name="P:Microsoft.Azure.WebJobs.JobHostConfiguration.DashboardConnectionString">
             <summary>Gets or sets the Azure Storage connection string used for logging and diagnostics.</summary>
         </member>
@@ -1560,9 +2403,6 @@
         </member>
         <member name="P:Microsoft.Azure.WebJobs.Host.Executors.DefaultStorageAccountProvider.StorageConnectionString">
             <summary>Gets or sets the Azure Storage connection string used for reading and writing data.</summary>
-        </member>
-        <member name="P:Microsoft.Azure.WebJobs.Host.Executors.DefaultStorageAccountProvider.ServiceBusConnectionString">
-            <summary>Gets or sets the Azure Service bus connection string.</summary>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Host.Timers.TaskSeriesTimer">
             <summary>Represents a timer that executes one task after another in a series.</summary>
@@ -1765,8 +2605,13 @@
         <member name="T:Microsoft.Azure.WebJobs.Host.Blobs.Listeners.StorageServiceOperationType">
             <summary>
             Enumerates the operations that are logged for the corresponding storage service.
-            See full list of possible operations at http://msdn.microsoft.com/en-us/library/windowsazure/hh343260.aspx.
             </summary>
+            <remarks>
+            The only items included here are the ones used by BlobTrigger.
+            See full list of possible operations at http://msdn.microsoft.com/en-us/library/windowsazure/hh343260.aspx, but
+            note that currently it is slightly buggy (PreflightBlobRequest should be BlobPreflightRequest, and GetLeaseInfo
+            should be GetBlobLeaseInfo).
+            </remarks>
         </member>
         <member name="T:Microsoft.Azure.WebJobs.Host.Blobs.Listeners.StorageAnalyticsLogColumnId">
             <summary>

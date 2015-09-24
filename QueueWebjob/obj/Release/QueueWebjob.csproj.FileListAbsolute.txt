@@ -78,10 +78,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Re
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.Data.OData.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.Data.Services.Client.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.WindowsAzure.Configuration.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.WindowsAzure.Storage.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Nest.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Newtonsoft.Json.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Ninject.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\StackExchange.Redis.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\System.Spatial.dll
@@ -92,11 +90,9 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Re
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.Data.Edm.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.Data.OData.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.Data.Services.Client.xml
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.WindowsAzure.Configuration.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.WindowsAzure.Storage.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Nest.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Nest.xml
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Newtonsoft.Json.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Ninject.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\StackExchange.Redis.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\StackExchange.Redis.xml
@@ -140,3 +136,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Re
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\obj\Release\QueueWebjob.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\obj\Release\QueueWebjob.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\obj\Release\QueueWebjob.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.Azure.KeyVault.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Microsoft.Azure.KeyVault.Core.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Newtonsoft.Json.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Release\Newtonsoft.Json.xml

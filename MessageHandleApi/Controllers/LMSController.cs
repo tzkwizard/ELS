@@ -17,40 +17,34 @@ namespace MessageHandleApi.Controllers
     [RoutePrefix("api/LMS")]
     public class LMSController : ApiController
     {
-        private string _node;
-        private IFirebaseConfig _config;
         private readonly IFirebaseClient _client;
         private readonly string _firebaseSecret;
         private IQueueService _iQueueService;
-
-        public LMSController(IQueueService iQueueService)
+        private IDBService _iDbService;
+        public LMSController(IQueueService iQueueService,IDBService iDbService)
         {
-            _node = "https://dazzling-inferno-4653.firebaseio.com/";
             _firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
-            _config = new FirebaseConfig
-            {
-                AuthSecret = _firebaseSecret,
-                BasePath = _node
-            };
-            _client = new FirebaseClient(_config);
             _iQueueService = iQueueService;
+            _iDbService = iDbService;
+            _client = _iDbService.GetFirebaseClient();
         }
 
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get([FromUri] string url)
+        public IHttpActionResult Get([FromUri] string url, int start, int end)
         {
             try
             {
-                FirebaseResponse response = await _client.GetAsync(url);
-                dynamic ds = JsonConvert.DeserializeObject(response.Body);
-                return Ok(ds);
+                var res = (start == 0) ? _iDbService.GetList(url) : _iDbService.GetMoreList(url,start,end);
+                //FirebaseResponse response = await _client.GetAsync(url);
+                //dynamic ds = JsonConvert.DeserializeObject(response.Body);
+                //return Ok(ds);
+                return Ok(res);
             }
             catch (Exception e)
             {
-                return NotFound();
+                return BadRequest(e.Message);
             }
-
         }
 
 
@@ -80,7 +74,6 @@ namespace MessageHandleApi.Controllers
             {
                 message.body.timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                 string m = JsonConvert.SerializeObject(message);
-                _iQueueService = new QueueService();
                 await _iQueueService.SendToQueue(m);
                 //FirebaseResponse response = await _client.PushAsync(message.url, message.body);
                 return Ok();

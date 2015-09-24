@@ -3,12 +3,10 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Linq;
-using FireSharp;
-using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 using MessageHandleApi.Models;
-using Microsoft.WindowsAzure.Storage;
+using MessageHandleApi.Service;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Newtonsoft.Json;
 using Microsoft.Azure.Documents;
@@ -21,17 +19,16 @@ namespace LMSqueue.ProcessMessage
     {
         private static CloudQueue _queue;
         private static IFirebaseClient _client;
-        private static string EndpointUrl = "https://tstaz.documents.azure.com:443/";
-        private static string AuthorizationKey =
-            "6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==";
         private readonly DocumentClient _documentClient;
-
-
-        public ProcessMessage()
+        private static DocumentCollection _documentCollection;
+        private static StoredProcedure _sp;
+        public ProcessMessage(DBService iDbService, QueueService iQueueService)
         {
-            _documentClient = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
-            _client = GetFirebase();
-            _queue = GetQueue();
+            _documentClient = iDbService.GetDocumentClient();
+            _client = iDbService.GetFirebaseClient();
+            _documentCollection = iDbService.GetDc(_documentClient, "LMSCollection", "LMSRegistry");
+            _sp = iDbService.GetSp(_documentClient, _documentCollection, "Post");
+            _queue = iQueueService.GetQueue("queue");
         }
 
 
@@ -51,13 +48,8 @@ namespace LMSqueue.ProcessMessage
             try
             {
                 dynamic x = JsonConvert.DeserializeObject(m);
-                var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
-                var sp =
-                    _documentClient.CreateStoredProcedureQuery(documentCollection.SelfLink).Where(c => c.Id == "Post")
-                        .AsEnumerable()
-                        .FirstOrDefault();
                 var path = x.url.ToString().Split('/');
-                if (sp != null)
+                if (_sp != null)
                 {
                     PostMessage mess = new PostMessage
                     {
@@ -77,7 +69,9 @@ namespace LMSqueue.ProcessMessage
                         }
                     };
                     var res = await _documentClient.ExecuteStoredProcedureAsync<Document>(
-                        sp.SelfLink, mess, documentCollection.SelfLink);
+                        _sp.SelfLink, mess, _documentCollection.SelfLink);
+
+                    //After save in DB success, save in Firebase
                     if (res.StatusCode == HttpStatusCode.OK)
                     {
                         FirebaseResponse response = await _client.PushAsync(x.url.ToString(), x.body);
@@ -89,48 +83,6 @@ namespace LMSqueue.ProcessMessage
                 Console.WriteLine(e.Message);
             }
         }
-
-        private static CloudQueue GetQueue()
-        {
-            var storageAccount =
-                CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"].ToString());
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-            CloudQueue queue = queueClient.GetQueueReference("queue");
-            return queue;
-        }
-
-        private static IFirebaseClient GetFirebase()
-        {
-            var node = "https://dazzling-inferno-4653.firebaseio.com/";
-            var firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
-            IFirebaseConfig config = new FirebaseConfig
-            {
-                AuthSecret = firebaseSecret,
-                BasePath = node
-            };
-            var client = new FirebaseClient(config);
-            return client;
-        }
-
-        private static Database GetDd(DocumentClient client, string dName)
-        {
-            Database database = client.CreateDatabaseQuery().Where(db => db.Id == dName)
-                .AsEnumerable().FirstOrDefault();
-
-            return database;
-        }
-
-        private static DocumentCollection GetDc(DocumentClient client, string cName, string dName)
-        {
-            var database = GetDd(client, dName);
-            DocumentCollection documentCollection = client.CreateDocumentCollectionQuery(database.SelfLink)
-                .Where(c => c.Id == cName)
-                .AsEnumerable()
-                .FirstOrDefault();
-
-            return documentCollection;
-        }
-
 
     }
 }

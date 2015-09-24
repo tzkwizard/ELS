@@ -109,7 +109,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Data.OData.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Data.Services.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.WindowsAzure.Configuration.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.WindowsAzure.Storage.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Newtonsoft.Json.dll
@@ -137,7 +136,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Data.Edm.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Data.OData.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Data.Services.Client.xml
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.WindowsAzure.Configuration.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.WindowsAzure.Storage.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Nest.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Nest.xml
@@ -214,3 +212,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Autofac.Integration.WebApi.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Autofac.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Autofac.Integration.WebApi.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Azure.Documents.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Azure.KeyVault.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Azure.Documents.Client.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Azure.KeyVault.Core.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\System.IdentityModel.Tokens.Jwt.pdb

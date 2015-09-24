@@ -13,6 +13,7 @@ namespace MessageHandleApi
             builder.RegisterApiControllers(typeof(Autofac).Assembly);
             builder.RegisterType<QueueService>().As<IQueueService>().InstancePerLifetimeScope();
             builder.RegisterType<ELSService>().As<IELSService>().InstancePerLifetimeScope();
+            builder.RegisterType<DBService>().As<IDBService>().InstancePerLifetimeScope();
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LMSqueue.ProcessMessage;
+using MessageHandleApi.Service;
 using Microsoft.Azure.WebJobs;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
@@ -18,7 +19,9 @@ namespace LMSqueue
         // on an Azure Queue called queue.
         static Functions()
         {
-            _iProcessMessage = new ProcessMessage.ProcessMessage();
+            var iDbService = new DBService();
+            var iQueueService=new QueueService();
+            _iProcessMessage = new ProcessMessage.ProcessMessage(iDbService, iQueueService);
         }
         public static void ProcessQueueMessage([QueueTrigger("queue")] string message, TextWriter log ,CloudStorageAccount cloudStorageAccount, string queueTrigger, string id, string popReceipt, int dequeueCount,
             DateTimeOffset expirationTime, DateTimeOffset insertionTime, DateTimeOffset nextVisibleTime)

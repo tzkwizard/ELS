@@ -5,6 +5,8 @@
         public string Type { get; set; }
         public Info Info { get; set; }
         public ChatRoom Room { get; set; }
+
+        //public string _self { get; set; }
     }
 
     public class ChatRoom

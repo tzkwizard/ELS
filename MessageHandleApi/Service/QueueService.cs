@@ -21,7 +21,8 @@ namespace MessageHandleApi.Service
 
         public QueueService()
         {
-            _queue = GetQueue();
+            var qName = "queue";
+            _queue = GetQueue(qName);
         }
 
 
@@ -76,7 +77,7 @@ namespace MessageHandleApi.Service
             return queueError;
         }
 
-        private static CloudQueue GetQueue()
+        public CloudQueue GetQueue(string n)
         {
             try
             {
@@ -85,7 +86,7 @@ namespace MessageHandleApi.Service
 
                 // Create a queue client for interacting with the queue service
                 CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-                CloudQueue queue = queueClient.GetQueueReference("queue");
+                CloudQueue queue = queueClient.GetQueueReference(n);
                 queue.CreateIfNotExists();
                 return queue;
             }

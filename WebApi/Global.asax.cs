@@ -27,9 +27,9 @@ namespace WebApi
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        private static ILogHandler _logHandler;
+        //private static ILogHandler _logHandler;
 
-        private static IComponentManager _globalComponentManager;
+        //private static IComponentManager _globalComponentManager;
 
         public const string Userlog = "Userlog";
         protected void Application_Start()

@@ -17,6 +17,12 @@ namespace QueueWebjob.QueueAndRedis
       
         private ConnectionMultiplexer _connection;
         private IDatabase _cache;
+        private static CloudQueue _queue;
+
+        public QueueAndredis()
+        {
+            _queue = GetQueue();
+        }
         public void InsertData(string message)
         {
            /*
@@ -32,16 +38,16 @@ namespace QueueWebjob.QueueAndRedis
         }
 
 
-        public void ProcessMessageAsync(CloudQueue queue)
+        public void ProcessMessageAsync()
         {
             int i = 1;
-            foreach (CloudQueueMessage message in queue.GetMessages(20, TimeSpan.FromSeconds(30), null, null))
+            foreach (CloudQueueMessage message in _queue.GetMessages(20, TimeSpan.FromSeconds(30), null, null))
             {
                 // Process all messages in less than 30s, deleting each message after processing.
                 string m = message.AsString;
                 Console.WriteLine("message  --" + m + "///" + i);              
                 InsertData(m);
-                queue.DeleteMessage(message);
+                _queue.DeleteMessage(message);
                 i++;
             }
         }

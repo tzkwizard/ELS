@@ -17,7 +17,7 @@ namespace ElasticSearch
         public static ConnectionSettings Settings;
         public static ElasticClient Client;
         // public static ElasticsearchClient Client;
-        public static  int Escount;
+        public static  int Escount=1;
         static void Main(string[] args)
         { 
 

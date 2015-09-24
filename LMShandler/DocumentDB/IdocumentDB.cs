@@ -1,8 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage.Queue;
+﻿using System.Threading.Tasks;
 
-namespace firebase1.DocumentDB
+namespace LMShandler.DocumentDB
 {
     public interface IDocumentDB
     {

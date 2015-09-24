@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Autofac;
+using MessageHandleApi.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
@@ -103,9 +104,9 @@ namespace doucumentDB
 
             var documentCollection = await GetDC(client, database);
 
-            
             await GetData(client, documentCollection);
             //ReadData(client, documentCollection);
+
 
 
             /*await client.DeleteDatabaseAsync(database.SelfLink);
@@ -188,7 +189,7 @@ namespace doucumentDB
 */
 
             // Query the documents using DocumentSQL with one join.
-            /* var items = client.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
+             var items = client.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
                 "SELECT f.id, c.FirstName AS child " +
                 "FROM Families f " +
                 "JOIN c IN f.Children");
@@ -196,10 +197,10 @@ namespace doucumentDB
             foreach (var item in items.ToList())
             {
                 Console.WriteLine(item);
-            }*/
+            }
 
             // Query the documents using LINQ with one join.
-            var items = client.CreateDocumentQuery<Family>(documentCollection.DocumentsLink)
+            /*var items = client.CreateDocumentQuery<Family>(documentCollection.DocumentsLink)
                 .SelectMany(family => family.Parents
                     .Select(person => new
                     {
@@ -225,19 +226,26 @@ namespace doucumentDB
 
             {
                 Console.WriteLine(pet);
-            }
+            }*/
         }
 
 
         private static async Task GetData(DocumentClient client, DocumentCollection documentCollection)
         {
+            var t = (long)(DateTime.UtcNow.AddHours(-4).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+
             var families =
                 from f in client.CreateDocumentQuery(documentCollection.DocumentsLink)
                 select f;
 
+
+
             foreach (var family in families)
             {
-                await client.DeleteDocumentAsync(family.SelfLink);
+                //if (Int64.Parse(family.Info.timestamp)>t)
+                var res=await client.DeleteDocumentAsync(family.SelfLink);
+                //Console.WriteLine(family._self);
+
             }
             // Create the Andersen family document.
             Family AndersenFamily = new Family
@@ -266,7 +274,7 @@ namespace doucumentDB
                 IsRegistered = true
             };
 
-            //await client.CreateDocumentAsync(documentCollection.DocumentsLink, AndersenFamily);
+            await client.CreateDocumentAsync(documentCollection.DocumentsLink, AndersenFamily);
 
             // Create the WakeField family document.
             Family WakefieldFamily = new Family
@@ -303,7 +311,7 @@ namespace doucumentDB
                 IsRegistered = false
             };
 
-            //await client.CreateDocumentAsync(documentCollection.DocumentsLink, WakefieldFamily);
+            await client.CreateDocumentAsync(documentCollection.DocumentsLink, WakefieldFamily);
         }
     }
 }
