@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="EventProcessor" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="ReceiverRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=elsaotuo;AccountKey=AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://azrenweb-ns.servicebus.windows.net/;SharedAccessKeyName=get;SharedAccessKey=+mmaMKj+RjrCUMqC7bK1q4juLrxThN8FKnej026iEus=" />
+      <Setting name="AzureStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=elsaotuo;AccountKey=AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==" />
+      <Setting name="eventHubName" value="eventhub1" />
+      <Setting name="consumerGroupName" value="consumerGroup" />
+      <Setting name="numberOfPartitions" value="8" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="aotuo" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEBxoH2Lu3bOWRLRMuF+DeDUwDQYJKoZIhvcNAQEBBQAEggEAMp3zk1CJji+gu8BygLnLgRnyYeKlMsSzpyee+IwIUHcFn9dyHhSpQuEet2SiDnvl9FwUUaMJx9l8cQEedglN4j+p07SAQmj1eXmo88heMoFIM9CEb+pqGDVCYHPUB+tRAA4TMhve6q17i4GjtCQ5RJ9eQ82we3MS1M3a9C/qepiccwzVjkuEslmOlBOqkstuBeA06gjpTE5WGNgCnUrpbkogI0MFedcZ2PTdTJ6U59n5PJZpZvfa3XLWw8YfzYeUb+8YLCjv2QiqTNTTIWoG50iqvXOj3MughJGaK15AI91RTunnAMVNFjaEkgesdptj6zf9vecqgGMNEyeBejPzdjAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECCmjbJBMG3XOgBC1rKEqDllEEdQLfwPlYpeT" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2016-10-08T23:59:59.0000000-05:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+      <Setting name="DocumentDBUrl" value="https://tstaz.documents.azure.com:443/" />
+      <Setting name="DocumentDBAuthorizationKey" value="6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==" />
+      <Setting name="Database" value="LMSRegistry" />
+      <Setting name="Collection" value="LMSCollection" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="012204AB181B97957AE3E4AD5FC39F654BCD5A60" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

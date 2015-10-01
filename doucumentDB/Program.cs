@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
 using MessageHandleApi.Models;
@@ -10,7 +14,13 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Microsoft.ServiceBus.Messaging;
+using System.Diagnostics;
+using FireSharp.Interfaces;
+using FireSharp.Response;
+using MessageHandleApi.Service;
+using Microsoft.ServiceBus;
+
 
 namespace doucumentDB
 {
@@ -21,19 +31,15 @@ namespace doucumentDB
         private static string AuthorizationKey =
             "6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==";
 
-        public static IPerson _p;
-
+        static string eventHubName = "eventhub1";
+        static string eventHubConnectionString = "Endpoint=sb://azrenweb-ns.servicebus.windows.net/;SharedAccessKeyName=get;SharedAccessKey=+mmaMKj+RjrCUMqC7bK1q4juLrxThN8FKnej026iEus=";
         private static void Main(string[] args)
         {
             try
             {
-                Console.WriteLine("haha");
-                
-                var builder = new ContainerBuilder();
-                builder.RegisterType<Person>().As<IPerson>().InstancePerLifetimeScope();
-                GetStartedDemo().Wait();
-                //_p.Say("haha");
-                //Console.ReadLine();
+                GetStartedDemo();         
+                //Receive();               
+                Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -43,25 +49,29 @@ namespace doucumentDB
             }
         }
 
-        internal class tst
+        private static void Receive()
         {
-            public tst(IPerson p)
-            {
-                _p = p;
-            }
-        }
-        internal class Person:IPerson
-        {
-            public void Say(string m)
-            {
-                Console.WriteLine(m);
-            }
-        }
+            
+            string storageAccountName = "elsaotuo";
+            string storageAccountKey = "AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==";
+            string storageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}",
+                storageAccountName, storageAccountKey);
+          
+            string eventProcessorHostName = Guid.NewGuid().ToString();
+            EventProcessorHost eventProcessorHost = new EventProcessorHost("1", eventHubName, EventHubConsumerGroup.DefaultGroupName, eventHubConnectionString, storageConnectionString);
+            Console.WriteLine("Registering EventProcessor...");
+            eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(new EventProcessorOptions()
+            {    
+                InitialOffsetProvider = (partitionId) => DateTime.UtcNow
+            }).Wait();
+ 
 
-        internal interface IPerson
-        {
-            void Say(string m);
+            Console.WriteLine("Receiving. Press enter key to stop worker.");
+            Console.ReadLine();
+            eventProcessorHost.UnregisterEventProcessorAsync().Wait();
         }
+       
+         
 
         private static async Task<Database> GetDB(DocumentClient client)
         {
@@ -106,7 +116,8 @@ namespace doucumentDB
 
             await GetData(client, documentCollection);
             //ReadData(client, documentCollection);
-
+            //await WriteData(client, documentCollection);
+            Console.ReadLine();
 
 
             /*await client.DeleteDatabaseAsync(database.SelfLink);
@@ -230,6 +241,46 @@ namespace doucumentDB
         }
 
 
+        private static async Task WriteData(DocumentClient client, DocumentCollection documentCollection)
+        {
+           /* var z=new Random();
+            var topic=new Topic
+            {
+                Type = "Topic",
+                Path = new PostPath
+                {
+                    District = "tst-azhang1",
+                    School = "JP",
+                    Classes = "Math",
+                    Unit = "Calculus"
+                },
+                Info =new InfoPost
+                {
+                    teacher = "Newton",
+                    start = "2015-4-1",
+                    due = DateTime.Now.AddDays(z.Next(1,4)).ToString(CultureInfo.CurrentCulture),
+                    description = "homework"
+                }
+            };
+           var res= await client.CreateDocumentAsync(documentCollection.DocumentsLink, topic);*/
+          
+            
+               var families =
+               from f in client.CreateDocumentQuery<Topic>(documentCollection.DocumentsLink)
+               where f.Type=="Topic"
+               select f;
+            foreach (var family in families)
+            {
+
+                var s = JsonConvert.SerializeObject(family);
+                dynamic d = JsonConvert.DeserializeObject(s);
+                var res = await client.DeleteDocumentAsync(family._self);
+                Console.Write(d);
+                //}
+            }
+        }
+
+
         private static async Task GetData(DocumentClient client, DocumentCollection documentCollection)
         {
             var t = (long)(DateTime.UtcNow.AddHours(-4).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
@@ -245,8 +296,9 @@ namespace doucumentDB
                 //if (Int64.Parse(family.Info.timestamp)>t)
                 var res=await client.DeleteDocumentAsync(family.SelfLink);
                 //Console.WriteLine(family._self);
-
+                Console.WriteLine(family.SelfLink);
             }
+
             // Create the Andersen family document.
             Family AndersenFamily = new Family
             {

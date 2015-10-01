@@ -44,4 +44,6 @@ namespace doucumentDB
         public Address Address { get; set; }
         public bool IsRegistered { get; set; }
     }
+
+ 
 }

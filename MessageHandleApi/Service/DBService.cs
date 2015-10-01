@@ -27,39 +27,83 @@ namespace MessageHandleApi.Service
             "6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==";
 
         private readonly DocumentClient _documentClient;
-
+        private const int MaxMonthTime = 1;
 
         public DBService()
         {
             _documentClient = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
         }
 
-        public List<dynamic> GetList(string m)
+        public List<Topic> GetCalendar()
         {
-            var time = (long) (DateTime.UtcNow.AddHours(-6).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
+            var item =
+              from f in _documentClient.CreateDocumentQuery<Topic>(documentCollection.DocumentsLink)
+              where f.Type == "Topic"
+              select f;
+            return item.ToList();
+        }
+
+        public LMSresult GetList(string m)
+        {
+           /* var time = (long) (DateTime.UtcNow.AddHours(-6).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
             var path = m.Split('/');
             var items = _documentClient.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
                 "SELECT d AS data " +
                 "FROM Doc d " +
                 "Where d.Type='Post' And d.Info.timestamp > '" + time + "'");
-
-            return items.ToList();
-        }
-
-        public List<dynamic> GetMoreList(string m, int start, int end)
-        {            
-            var t1 = (long) (DateTime.UtcNow.AddHours(-6*start).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-            var t2 = (long) (DateTime.UtcNow.AddHours(-6*end).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-            var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
-            var path = m.Split('/');
-            var items = _documentClient.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
+*/
+            var end = 1;
+            var n = 0;
+            List<dynamic> items = new List<dynamic>();
+            while (items.Count < 5 && end < 5)
+            {
+                end = end + n;
+                var time = (long)(DateTime.UtcNow.AddHours(-6 * end).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
+                var path = m.Split('/');
+                items = _documentClient.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
                 "SELECT d AS data " +
                 "FROM Doc d " +
-                "Where d.Type='Post' And d.Info.timestamp > '" + t2 + "'" +
-                "And d.Info.timestamp < '" + t1 + "'");
+                "Where d.Type='Post' And d.Info.timestamp > '" + time + "'").ToList();
+                n++;
+            }
 
-            return items.ToList();
+
+            var res = new LMSresult
+            {
+                time = end,
+                list = items
+            };
+            return res;
+        }
+
+        public LMSresult GetMoreList(string m, int start)
+        {
+            var t1 = (long) (DateTime.UtcNow.AddHours(-6*start).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            List<dynamic> items = new List<dynamic>();
+            var end = start + 1;
+            var n = 0;
+            while (items.Count < 5 && end < (MaxMonthTime*4*30))
+            {
+                end = end + n;
+                var t2 = (long) (DateTime.UtcNow.AddHours(-6*end).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
+                var path = m.Split('/');
+                items = _documentClient.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
+                    "SELECT d AS data " +
+                    "FROM Doc d " +
+                    "Where d.Type='Post' And d.Info.timestamp > '" + t2 + "'" +
+                    "And d.Info.timestamp < '" + t1 + "'").ToList();
+                n++;
+            }
+            var res = new LMSresult
+            {
+                time = end,
+                list = items
+            };
+            return res;
         }
 
 
@@ -82,11 +126,11 @@ namespace MessageHandleApi.Service
             return documentCollection;
         }
 
-        public StoredProcedure GetSp(DocumentClient client, DocumentCollection documentCollection,string spName)
+        public StoredProcedure GetSp(DocumentClient client, DocumentCollection documentCollection, string spName)
         {
             var sp = client.CreateStoredProcedureQuery(documentCollection.SelfLink).Where(c => c.Id == spName)
-                  .AsEnumerable()
-                  .FirstOrDefault();
+                .AsEnumerable()
+                .FirstOrDefault();
             return sp;
         }
 
@@ -108,6 +152,5 @@ namespace MessageHandleApi.Service
             var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
             return client;
         }
-
     }
 }

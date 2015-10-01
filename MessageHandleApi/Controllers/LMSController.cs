@@ -31,11 +31,11 @@ namespace MessageHandleApi.Controllers
 
 
         [HttpGet]
-        public IHttpActionResult Get([FromUri] string url, int start, int end)
+        public IHttpActionResult Get([FromUri] string url, int start)
         {
             try
             {
-                var res = (start == 0) ? _iDbService.GetList(url) : _iDbService.GetMoreList(url,start,end);
+                var res = (start == 0) ? _iDbService.GetList(url) : _iDbService.GetMoreList(url,start);
                 //FirebaseResponse response = await _client.GetAsync(url);
                 //dynamic ds = JsonConvert.DeserializeObject(response.Body);
                 //return Ok(ds);
@@ -46,6 +46,22 @@ namespace MessageHandleApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("calendar")]
+        public IHttpActionResult GetCalendar([FromUri] string url)
+        {
+            try
+            {
+                var res = _iDbService.GetCalendar();
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
 
         [HttpPost]

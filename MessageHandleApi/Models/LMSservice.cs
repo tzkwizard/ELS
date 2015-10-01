@@ -1,4 +1,7 @@
-﻿namespace MessageHandleApi.Models
+﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
+
+namespace MessageHandleApi.Models
 {
     public class ChatMessage
     {
@@ -28,6 +31,7 @@
         public string District { get; set; }
         public string School { get; set; }
         public string Classes { get; set; }
+        public string Unit { get; set; }
     }
     public class Info
     {
@@ -37,6 +41,30 @@
         public string uid { get; set; }
     }
 
+    public class Topic
+    {
+        public string Type { get; set; }
+        public PostPath Path { get; set; }
+        public InfoPost Info { get; set; }
+        public string _self { get; set; }
+    }
 
-
+    public class InfoPost
+    {
+        public string teacher { get; set; }
+        public string description { get; set; }
+        public string start { get; set; }
+        public string due { get; set; }
+    }
+    public class LMSresult
+    {
+        public int time { get; set; }
+        public List<dynamic> list { get; set; } 
+    }
+    public class EHdata
+    {
+        public string offset { get; set; }
+        public string body { get; set; }
+        public string partitionId { get; set; }
+    }
 }

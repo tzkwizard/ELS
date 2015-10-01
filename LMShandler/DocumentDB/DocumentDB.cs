@@ -21,7 +21,7 @@ namespace LMShandler.DocumentDB
         private static StoredProcedure _sp;
         private readonly long _start;
         private readonly long _end;
-        private const int RecordRemained = 10;
+        private const int RecordRemained = 5;
 
         public DocumentDB(IDBService iDbService)
         {

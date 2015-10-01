@@ -39,6 +39,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\System.Web.WebPages.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Antlr3.Runtime.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\MessageHandleApi.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Autofac.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Azure.KeyVault.Core.xml
@@ -112,4 +113,3 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\obj\Debug\LMSqueue.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\obj\Debug\LMSqueue.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\obj\Debug\LMSqueue.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\MessageHandleApi.pdb

@@ -39,6 +39,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Deb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\System.Web.WebPages.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Antlr3.Runtime.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\MessageHandleApi.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Microsoft.Azure.KeyVault.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Microsoft.Azure.WebJobs.xml
@@ -112,4 +113,3 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Deb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\MessageHandleApi.pdb
