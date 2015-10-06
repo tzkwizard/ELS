@@ -9,7 +9,7 @@
     <AzureEnableRemoteDesktop>True</AzureEnableRemoteDesktop>
     <AzureEnableWebDeploy>False</AzureEnableWebDeploy>
     <AzureFallbackToDeleteAndRecreateIfUpgradeFails>False</AzureFallbackToDeleteAndRecreateIfUpgradeFails>
-    <AzureHostedServiceLabel>AZeventHub</AzureHostedServiceLabel>
+    <AzureHostedServiceLabel>azeventhub</AzureHostedServiceLabel>
     <AzureHostedServiceName>azeventhub</AzureHostedServiceName>
     <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
     <AzureEnableProfiling>False</AzureEnableProfiling>

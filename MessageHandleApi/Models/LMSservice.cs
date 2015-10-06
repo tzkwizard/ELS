@@ -3,6 +3,21 @@ using System.ComponentModel.Design;
 
 namespace MessageHandleApi.Models
 {
+
+    public class DcAllocate
+    {
+        public string Type { get; set; }
+        public string DcName { get; set; }
+        public string DcSelfLink { get; set; }
+        public List<string> District { get; set; }
+        public string _self { get; set; }
+    }
+    public class DClist
+    {
+        public string Name { get; set; }
+        public int Number { get; set; }
+    }
+
     public class ChatMessage
     {
         public string Type { get; set; }
@@ -23,7 +38,7 @@ namespace MessageHandleApi.Models
         public string Type { get; set; }
         public PostPath Path { get; set; }
         public Info Info { get; set; }
-      
+        public string _self { get; set; }
     }
 
     public class PostPath

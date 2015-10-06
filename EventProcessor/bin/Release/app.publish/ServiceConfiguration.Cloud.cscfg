@@ -25,6 +25,8 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
       <Setting name="DocumentDBUrl" value="https://tstaz.documents.azure.com:443/" />
       <Setting name="DocumentDBAuthorizationKey" value="6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==" />
+      <Setting name="Database" value="LMSRegistry" />
+      <Setting name="Collection" value="LMSCollection" />
     </ConfigurationSettings>
     <Certificates>
       <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="012204AB181B97957AE3E4AD5FC39F654BCD5A60" thumbprintAlgorithm="sha1" />

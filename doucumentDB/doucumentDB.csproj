@@ -113,6 +113,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dichotomy.cs" />
     <Compile Include="model.cs" />
     <Compile Include="EventHubHost.cs" />
     <Compile Include="Program.cs" />

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using FireSharp.Interfaces;
 using FireSharp.Response;
@@ -34,8 +35,8 @@ namespace ReceiverRole
         public Task OpenAsync(PartitionContext context)
         {
             Init();
-            Trace.TraceInformation(string.Format("SimpleEventProcessor OpenAsync.  Partition: '{0}', Offset: '{1}'",
-                context.Lease.PartitionId, context.Lease.Offset));
+            Trace.TraceInformation("SimpleEventProcessor OpenAsync.  Partition: '{0}', Offset: '{1}'",
+                context.Lease.PartitionId, context.Lease.Offset);
             this.partitionContext = context;
             return Task.FromResult<object>(null);
         }
@@ -62,17 +63,18 @@ namespace ReceiverRole
             {
                 foreach (EventData eventData in events)
                 {
+                    string dataString = Encoding.UTF8.GetString(eventData.GetBytes());
+                    Trace.TraceInformation("Message received.  Partition: '{0}', Data: '{1}', Offset: '{2}'",
+                        context.Lease.PartitionId, dataString, eventData.Offset);
                     try
                     {
-                        string dataString = Encoding.UTF8.GetString(eventData.GetBytes());
-                        Trace.TraceInformation("Message received.  Partition: '{0}', Data: '{1}', Offset: '{2}'",
-                            context.Lease.PartitionId, dataString, eventData.Offset);
-
                         await SendToDB(dataString);
                     }
-                    catch (Exception oops)
+                    catch (Exception e)
                     {
-                        Trace.TraceError(oops.Message);
+                        Trace.TraceError("Error in sending: "+e.Message);
+                        Thread.Sleep(200);
+                        SendToDB(dataString).Wait();
                     }
                 }
                 await context.CheckpointAsync();
@@ -99,12 +101,14 @@ namespace ReceiverRole
             //var z = JsonConvert.DeserializeObject<MetricEvent>(dataString);
             var path = x.url.ToString().Split('/');
             x.body.timestamp = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            Random r = new Random();
+
             PostMessage mess = new PostMessage
             {
                 Type = "Post",
                 Path = new PostPath()
                 {
-                    District = path[1],
+                    District = path[1] + r.Next(1, 15),
                     School = path[2],
                     Classes = path[3]
                 },
@@ -117,7 +121,7 @@ namespace ReceiverRole
                 }
             };
 
-            //Send to DB
+            //Send to DB         
             var res = await _documentClient.ExecuteStoredProcedureAsync<Document>(
                 _sp.SelfLink, mess, _documentCollection.SelfLink);
 

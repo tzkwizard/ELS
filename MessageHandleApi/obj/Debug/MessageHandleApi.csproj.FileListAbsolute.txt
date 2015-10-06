@@ -216,3 +216,4 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.csproj.App.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.csprojResolveAssemblyReference.cache

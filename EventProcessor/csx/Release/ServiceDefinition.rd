@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EventProcessor" generation="1" functional="0" release="0" Id="0636d2e2-dafe-4c27-875a-76c9d12514c6" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EventProcessor" generation="1" functional="0" release="0" Id="c71e96b6-f6f7-42a4-9f26-dedca19d2db7" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="EventProcessorGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -20,9 +20,19 @@
             <mapMoniker name="/EventProcessor/EventProcessorGroup/MapReceiverRole:AzureStorageConnectionString" />
           </maps>
         </aCS>
+        <aCS name="ReceiverRole:Collection" defaultValue="">
+          <maps>
+            <mapMoniker name="/EventProcessor/EventProcessorGroup/MapReceiverRole:Collection" />
+          </maps>
+        </aCS>
         <aCS name="ReceiverRole:consumerGroupName" defaultValue="">
           <maps>
             <mapMoniker name="/EventProcessor/EventProcessorGroup/MapReceiverRole:consumerGroupName" />
+          </maps>
+        </aCS>
+        <aCS name="ReceiverRole:Database" defaultValue="">
+          <maps>
+            <mapMoniker name="/EventProcessor/EventProcessorGroup/MapReceiverRole:Database" />
           </maps>
         </aCS>
         <aCS name="ReceiverRole:DocumentDBAuthorizationKey" defaultValue="">
@@ -109,9 +119,19 @@
             <aCSMoniker name="/EventProcessor/EventProcessorGroup/ReceiverRole/AzureStorageConnectionString" />
           </setting>
         </map>
+        <map name="MapReceiverRole:Collection" kind="Identity">
+          <setting>
+            <aCSMoniker name="/EventProcessor/EventProcessorGroup/ReceiverRole/Collection" />
+          </setting>
+        </map>
         <map name="MapReceiverRole:consumerGroupName" kind="Identity">
           <setting>
             <aCSMoniker name="/EventProcessor/EventProcessorGroup/ReceiverRole/consumerGroupName" />
+          </setting>
+        </map>
+        <map name="MapReceiverRole:Database" kind="Identity">
+          <setting>
+            <aCSMoniker name="/EventProcessor/EventProcessorGroup/ReceiverRole/Database" />
           </setting>
         </map>
         <map name="MapReceiverRole:DocumentDBAuthorizationKey" kind="Identity">
@@ -189,7 +209,9 @@
             </componentports>
             <settings>
               <aCS name="AzureStorageConnectionString" defaultValue="" />
+              <aCS name="Collection" defaultValue="" />
               <aCS name="consumerGroupName" defaultValue="" />
+              <aCS name="Database" defaultValue="" />
               <aCS name="DocumentDBAuthorizationKey" defaultValue="" />
               <aCS name="DocumentDBUrl" defaultValue="" />
               <aCS name="eventHubName" defaultValue="" />
@@ -233,9 +255,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="89625cd5-4902-46e9-99d9-383554d23671" ref="Microsoft.RedDog.Contract\ServiceContract\EventProcessorContract@ServiceDefinition">
+    <implementation Id="29726651-f777-42c1-8896-f748e4c4fd7e" ref="Microsoft.RedDog.Contract\ServiceContract\EventProcessorContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="ee6c5654-a89e-4f86-8279-72ce700dd70d" ref="Microsoft.RedDog.Contract\Interface\ReceiverRole:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
+        <interfaceReference Id="73d0f7c9-f97c-4e98-a71c-d873bbe4bab6" ref="Microsoft.RedDog.Contract\Interface\ReceiverRole:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/EventProcessor/EventProcessorGroup/ReceiverRole:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>
