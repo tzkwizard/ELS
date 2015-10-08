@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
-using Autofac;
-using Elasticsearch.Net.ConnectionPool;
-using MessageHandleApi.Models;
-using MessageHandleApi.Service;
-using Nest;
-using RenWeb.Framework.Handlers;
-using RenWeb.Framework.Interfaces;
 
 namespace MessageHandleApi
 {

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using MessageHandleApi.Models;
-using MessageHandleApi.Service;
+using LMS.model.Models;
+using LMS.service.Service;
+
 
 namespace MessageHandleApi.Controllers
 {

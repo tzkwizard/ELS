@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
+using LMS.service.Service;
 using LMShandler.DocumentDB;
-using MessageHandleApi.Service;
 using Microsoft.Azure.WebJobs;
 
 namespace LMShandler

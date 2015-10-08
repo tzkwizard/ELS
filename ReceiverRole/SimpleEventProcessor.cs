@@ -10,11 +10,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using FireSharp.Interfaces;
 using FireSharp.Response;
+using LMS.model.Models;
+using LMS.service.Service;
 using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
-using ReceiverRole.model;
-using ReceiverRole.service;
+
 
 
 namespace ReceiverRole
@@ -108,7 +109,7 @@ namespace ReceiverRole
                 Type = "Post",
                 Path = new PostPath()
                 {
-                    District = path[1] + r.Next(1, 15),
+                    District = path[1] + r.Next(1, 51),
                     School = path[2],
                     Classes = path[3]
                 },

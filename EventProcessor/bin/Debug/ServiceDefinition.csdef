@@ -25,14 +25,10 @@
     <Imports>
       <Import moduleName="RemoteAccess" />
       <Import moduleName="RemoteForwarder" />
-      <Import moduleName="Diagnostics" />
     </Imports>
     <Contents>
       <Content destination=".\">
         <SourceDirectory path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\rcf\Debug\ReceiverRoleContent\" />
-      </Content>
-      <Content destination=".\">
-        <SourceDirectory path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\ecf\ReceiverRoleContent\" />
       </Content>
     </Contents>
   </WorkerRole>

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using Elasticsearch.Net.ConnectionPool;
-using MessageHandleApi.Models;
+using LMS.model.Models;
 using Nest;
 
 

@@ -6,8 +6,7 @@ using Microsoft.ServiceBus.Messaging;
 using System.Diagnostics;
 using FireSharp.Interfaces;
 using FireSharp.Response;
-using MessageHandleApi.Models;
-using MessageHandleApi.Service;
+using LMS.service.Service;
 using Microsoft.ServiceBus;
 
 

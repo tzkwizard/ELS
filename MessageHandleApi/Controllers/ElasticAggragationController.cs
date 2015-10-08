@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using MessageHandleApi.Models;
+using LMS.model.Models;
 using Nest;
 using System.Web.Http;
 using Elasticsearch.Net.ConnectionPool;

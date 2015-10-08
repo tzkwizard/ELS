@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MessageHandleApi.Models;
+
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
@@ -17,7 +17,7 @@ namespace doucumentDB
         public static async Task UpdateDcAll(string endpointUrl, string authorizationKey)
         {
             DocumentClient client = new DocumentClient(new Uri(endpointUrl), authorizationKey);
-            var database = await Program.GetDB(client);
+            var database = await DocumentDB.GetDB(client);
 
             IEnumerable<DocumentCollection> dz = client.CreateDocumentCollectionQuery(database.SelfLink)
                 .AsEnumerable();

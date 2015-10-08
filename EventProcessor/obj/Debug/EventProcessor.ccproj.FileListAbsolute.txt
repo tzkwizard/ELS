@@ -4,6 +4,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\de\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\de\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\de\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Elasticsearch.Net.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Elasticsearch.Net.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\es\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\es\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\es\Microsoft.Data.Services.Client.resources.dll
@@ -25,6 +27,11 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\ko\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\ko\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\ko\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\LMS.model.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\LMS.model.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\LMS.service.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Data.OData.dll
@@ -39,6 +46,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.WindowsAzure.Storage.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.WindowsAzure.Storage.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\MonAgentListener.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Nest.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Nest.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Newtonsoft.Json.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\ReceiverRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\ReceiverRole.dll.config
@@ -47,6 +56,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\ru\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\ru\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\ru\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\StackExchange.Redis.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\StackExchange.Redis.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\System.Net.Http.Extensions.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\System.Net.Http.Primitives.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\System.Spatial.dll
@@ -58,4 +69,3 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\zh-Hant\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Azure.Documents.Client.dll

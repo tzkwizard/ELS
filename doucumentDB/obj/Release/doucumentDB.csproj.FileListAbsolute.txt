@@ -103,3 +103,15 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Re
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Release\doucumentDB.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Release\doucumentDB.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\MessageHandleApi.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.ServiceBus.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.ServiceBus.Messaging.EventProcessorHost.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\System.Net.Http.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\System.Net.Http.Primitives.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.ServiceBus.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.ServiceBus.Messaging.EventProcessorHost.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\System.Net.Http.Extensions.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\System.Net.Http.Primitives.xml

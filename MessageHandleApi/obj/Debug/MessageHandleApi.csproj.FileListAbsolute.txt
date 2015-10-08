@@ -109,6 +109,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\FireSharp.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\JWT.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\LMS.model.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\LMS.service.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Azure.AppService.ApiApps.Service.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Azure.KeyVault.Core.dll
@@ -142,6 +144,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\System.Web.WebPages.Razor.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\WebActivatorEx.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\WebGrease.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\LMS.model.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\LMS.service.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Antlr3.Runtime.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Autofac.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Autofac.Integration.WebApi.xml
@@ -155,6 +159,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Threading.Tasks.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Threading.Tasks.Extensions.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.WindowsAzure.Storage.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.WindowsAzure.Storage.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Nest.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Nest.xml
@@ -214,6 +219,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.csproj.App.config
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.csprojResolveAssemblyReference.cache

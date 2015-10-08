@@ -4,12 +4,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using FireSharp;
-using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
-using MessageHandleApi.Models;
-using MessageHandleApi.Service;
+using LMS.model.Models;
+using LMS.service.Service;
 using Newtonsoft.Json;
 
 namespace MessageHandleApi.Controllers
