@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using FireSharp;
-using FireSharp.Config;
 using FireSharp.Interfaces;
+using FireSharp.Config;
 using LMS.model.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -20,81 +20,111 @@ namespace LMS.service.Service
 
         private readonly DocumentClient _documentClient;
         private const int MaxMonthTime = 1;
+        private string firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
 
         public DBService(string endpointUrl, string authorizationKey)
         {
             _documentClient = new DocumentClient(new Uri(endpointUrl), authorizationKey);
         }
+
         public DBService()
         {
             _documentClient = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
         }
+
         public List<Topic> GetCalendar()
         {
             var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
             var item =
-              from f in _documentClient.CreateDocumentQuery<Topic>(documentCollection.DocumentsLink)
-              where f.Type == "Topic"
-              select f;
+                from f in _documentClient.CreateDocumentQuery<Topic>(documentCollection.DocumentsLink)
+                where f.Type == "Topic"
+                select f;
             return item.ToList();
+        }
+
+        public string GetFirebaseToken(string user, string uid, string data)
+        {
+            var tokenGenerator = new Firebase.TokenGenerator(firebaseSecret);
+            var authPayload = new Dictionary<string, object>()
+            {
+                {"uid", uid},
+                {"user", user},
+                {"data", data}
+            };
+            string token = tokenGenerator.CreateToken(authPayload);
+            return token;
         }
 
         public LMSresult GetList(string m)
         {
-           /* var time = (long) (DateTime.UtcNow.AddHours(-6).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-            var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
-            var path = m.Split('/');
-            var items = _documentClient.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
-                "SELECT d AS data " +
-                "FROM Doc d " +
-                "Where d.Type='Post' And d.Info.timestamp > '" + time + "'");
-*/
-            var end = 1;
+            long end = 0;
             var n = 0;
-            List<dynamic> items = new List<dynamic>();
-            while (items.Count < 5 && end < 5)
+            List<PostMessage> items = new List<PostMessage>();
+            while (items.Count < 5 && n < 6)
             {
-                end = end + n;
-                var time = (long)(DateTime.UtcNow.AddHours(-6 * end).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                end =
+                    (long) (DateTime.UtcNow.AddMinutes(-30*n).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                 var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
                 var path = m.Split('/');
-                items = _documentClient.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
-                "SELECT d AS data " +
-                "FROM Doc d " +
-                "Where d.Type='Post' And d.Info.timestamp > '" + time + "'").ToList();
+             /*   items = _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
+                    "SELECT d AS data " +
+                    "FROM Doc d " +
+                    "Where d.Type='Post' And d.Info.timestamp > '" + time + "'").OrderBy(o=>o.Info.timestamp).ToList();*/
+               
+                    items =
+                        (from f in _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink)
+                            where f.Type == "Post" &&  f.Info.timestamp > end
+                            select f).OrderBy(o => o.Info.timestamp).ToList();
                 n++;
             }
 
-
             var res = new LMSresult
             {
+                moreData = true,
                 time = end,
                 list = items
             };
             return res;
         }
 
-        public LMSresult GetMoreList(string m, int start)
+        public LMSresult GetMoreList(string m, long start)
         {
-            var t1 = (long) (DateTime.UtcNow.AddHours(-6*start).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-            List<dynamic> items = new List<dynamic>();
-            var end = start + 1;
-            var n = 0;
-            while (items.Count < 5 && end < (MaxMonthTime*4*30))
+            var t = (long) (DateTime.UtcNow.AddMonths(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            List<PostMessage> items = new List<PostMessage>();
+            var t1=DateTime.Now;
+            var n = 1;
+            var i = 1;
+            var end = start;
+            while (items.Count < 5 && end >t)
             {
-                end = end + n;
-                var t2 = (long) (DateTime.UtcNow.AddHours(-6*end).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                i = i + n;
+                end = end-(long)TimeSpan.FromHours(i).TotalMilliseconds;
                 var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
                 var path = m.Split('/');
-                items = _documentClient.CreateDocumentQuery<dynamic>(documentCollection.DocumentsLink,
+              /*  items = _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
                     "SELECT d AS data " +
                     "FROM Doc d " +
                     "Where d.Type='Post' And d.Info.timestamp > '" + t2 + "'" +
-                    "And d.Info.timestamp < '" + t1 + "'").ToList();
+                    "And d.Info.timestamp < '" + t1 + "'").ToList();*/
+                items =
+                   (from f in _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink)
+                    where f.Type == "Post" && f.Info.timestamp < start && f.Info.timestamp >end
+                    select f).OrderBy(o => o.Info.timestamp).ToList();
+                var t2 = DateTime.Now;
+                if (t2 - t1 > TimeSpan.FromSeconds(10))
+                {
+                    return new LMSresult
+                    {
+                        moreData = true,
+                        time = end,
+                        list = items
+                    };
+                }
                 n++;
             }
             var res = new LMSresult
             {
+                moreData = false,
                 time = end,
                 list = items
             };
@@ -159,6 +189,66 @@ namespace LMS.service.Service
         {
             var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
             return client;
+        }
+
+
+        public DocumentCollection SearchCollection(string dis, DocumentCollection masterCollection, Database database)
+        {
+            var ds =
+                from d in _documentClient.CreateDocumentQuery<DcAllocate>(masterCollection.DocumentsLink)
+                where d.Type == "DisList"
+                select d;
+            foreach (var d in ds)
+            {
+                if (d.District.Contains(dis))
+                {
+                    DocumentCollection dc = _documentClient.CreateDocumentCollectionQuery(database.SelfLink)
+                        .Where(c => c.Id == d.DcName)
+                        .AsEnumerable()
+                        .FirstOrDefault();
+                    if (dc != null)
+                    {
+                        return dc;
+                    }
+                }
+            }
+            return masterCollection;
+        }
+
+        public PostMessage PostData(dynamic data, string[] path)
+        {
+            Random r = new Random();
+            PostMessage message = new PostMessage
+            {
+                Type = "Post",
+                Path = new PostPath()
+                {
+                    District = path[1] + r.Next(1, 51),
+                    School = path[2],
+                    Classes = path[3]
+                },
+                Info = new Info()
+                {
+                    user = data.body.user,
+                    uid = data.body.uid,
+                    timestamp = data.body.timestamp,
+                    message = data.body.message
+                }
+            };
+            return message;
+        }
+
+        public TableChat TableChatData(dynamic room, dynamic message)
+        {
+            TableChat item = new TableChat(room.Value.room.ID.ToString(), message.Name.ToString())
+            {
+                roomName = room.Value.room.Name,
+                timestamp = message.Value.timestamp,
+                user = message.Value.user,
+                uid = message.Value.uid,
+                message = message.Value.message
+            };
+            return item;
         }
     }
 }

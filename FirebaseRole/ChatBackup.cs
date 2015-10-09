@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using FireSharp.Interfaces;
 using FireSharp.Response;
@@ -21,14 +23,15 @@ namespace FirebaseRole
         private const int RecordRemained = 2;
         private static CloudTable _table;
         private static int reTry = 5;
+        private static IDBService _iDbService;
 
         public ChatBackup(CloudStorageAccount storageAccount)
         {
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _table = c.GetTableReference("Chat");
             _table.CreateIfNotExists();
-            IDBService i = new DBService();
-            _firebaseClient = i.GetFirebaseClient(CloudConfigurationManager.GetSetting("Firebasenode"));
+            _iDbService = new DBService();
+            _firebaseClient = _iDbService.GetFirebaseClient(CloudConfigurationManager.GetSetting("Firebasenode"));
         }
 
         public async Task BackupDocumentChat()
@@ -36,40 +39,41 @@ namespace FirebaseRole
             try
             {
                 FirebaseResponse chatResponse = _firebaseClient.Get("ChatRoom");
-                dynamic ds = JsonConvert.DeserializeObject(chatResponse.Body);
+                dynamic rooms = JsonConvert.DeserializeObject(chatResponse.Body);
 
-                foreach (var d in ds)
+                foreach (var room in rooms)
                 {
-                    dynamic t = d;
-                    await Backup(t, _table, 5);
+                    dynamic r = room;
+                    await Backup(r, _table, 5);
                 }
             }
             catch (Exception e)
             {
-                Trace.TraceError("Error in BackupChat " + e.Message);
+                //wait and retry 5 times
                 if (reTry > 0)
                 {
-                    Trace.TraceInformation("Retry...  " + reTry);
+                    reTry--;
+                    Trace.TraceInformation("Restart BackupFirebaseChat... in 1 min " + reTry);
+                    Thread.Sleep(60000);
                     BackupDocumentChat().Wait();
                 }
                 else
                 {
-                    Trace.TraceError("Run out of retry");
+                    Trace.TraceError("Error in BackupChat " + e.Message);
                 }
-                reTry--;
             }
         }
 
-        private async Task Backup(dynamic u, CloudTable table, int retry)
+        private async Task Backup(dynamic room, CloudTable table, int retry)
         {
             try
             {
-                if (u.Value.messages.Value != "")
+                if (room.Value.messages.Value != "")
                 {
                     var origin = new List<dynamic>();
-                    foreach (var s in u.Value.messages)
+                    foreach (var message in room.Value.messages)
                     {
-                        origin.Add(s);
+                        origin.Add(message);
                     }
 
                     var sorted = origin.OrderBy(o => o.Value.timestamp).ToList();
@@ -78,33 +82,37 @@ namespace FirebaseRole
 
                     for (int i = 0; i < sorted.Count - RecordRemained; i++)
                     {
-                        var s = sorted[i];
-                        TableChat c = new TableChat(u.Value.room.ID.ToString(), s.Name.ToString())
-                        {
-                            roomName = u.Value.room.Name,
-                            timestamp = s.Value.timestamp,
-                            user = s.Value.user,
-                            uid = s.Value.uid,
-                            message = s.Value.message
-                        };
+                        var message = sorted[i];
+                        TableChat c = _iDbService.TableChatData(room, message);
                         TableOperation insertOperation = TableOperation.Insert(c);
                         // Execute the insert operation.
                         var res = await table.ExecuteAsync(insertOperation);
                         if (res.HttpStatusCode == 204)
                         {
-                            string url = "ChatRoom/" + u.Name + "/messages/" + s.Name;
-                            await _firebaseClient.DeleteAsync(url);
+                            string url = "ChatRoom/" + room.Name + "/messages/" + message.Name;
+                            var response = await _firebaseClient.DeleteAsync(url);
+                            if (response.StatusCode != HttpStatusCode.OK)
+                            {
+                                Thread.Sleep(1000);
+                                await _firebaseClient.DeleteAsync(url);
+                            }
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                while (retry > 0)
+                //wait and retry 5 times
+                if (retry > 0)
                 {
-                    Backup(u, table, retry--);
+                    retry--;
+                    Thread.Sleep(1000);
+                    Backup(room, table, retry).Wait();
                 }
-                Trace.TraceError("Error in Room " + u + e.Message);
+                else
+                {
+                    Trace.TraceError("Error in Reading room message", e.Message);
+                }
             }
         }
     }

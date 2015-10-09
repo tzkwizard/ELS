@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 
 namespace LMS.model.Models
 {
@@ -35,7 +30,7 @@ namespace LMS.model.Models
          public string message { get; set; }
          public string user { get; set; }
          public string uid { get; set; }
-         public string timestamp { get; set; }
+         public long timestamp { get; set; }
 
     }
     public class TablePost : TableEntity
@@ -55,7 +50,7 @@ namespace LMS.model.Models
         public string message { get; set; }
         public string user { get; set; }
         public string uid { get; set; }
-        public string timestamp { get; set; }
+        public long timestamp { get; set; }
 
     }
 }

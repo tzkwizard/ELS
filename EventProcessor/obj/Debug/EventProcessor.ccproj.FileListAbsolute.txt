@@ -10,6 +10,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\es\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\es\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\es\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\FireSharp.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\fr\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\fr\Microsoft.Data.OData.resources.dll

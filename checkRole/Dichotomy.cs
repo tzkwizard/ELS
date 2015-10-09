@@ -151,6 +151,8 @@ namespace CheckRole
 
                     TransferDc(oldDc, newDc, client, newList).Wait();
                     await SaveDisList(newList, oldList, origin, oldDc, newDc, client);
+                    Trace.TraceInformation("Backup Collection End.  Name: '{0}'==>'{1}', Time: '{2}'", oldDc.Id, newDc.Id,
+                    DateTime.Now.ToString(CultureInfo.CurrentCulture));
                 }
             }
         }

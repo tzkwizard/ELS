@@ -98,46 +98,252 @@
             <param name="dictionary">The dictionary object.</param>
             <returns>The string, formatted into curly braces.</returns>
         </member>
-        <member name="T:Microsoft.Rest.TokenCredentials">
+        <member name="T:Microsoft.Rest.ITokenProvider">
             <summary>
-            Token based credentials for use with a REST Service Client.
+            Interface to a source of access tokens.
             </summary>
         </member>
-        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(System.String,System.String)">
+        <member name="M:Microsoft.Rest.ITokenProvider.GetAuthenticationHeaderAsync(System.Threading.CancellationToken)">
             <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Rest.TokenCredentials"/>
-            class with scheme.
-            </summary>
-            <param name="scheme">Scheme to use. If null, defaults to Bearer.</param>
-            <param name="token">Valid token.</param>
-        </member>
-        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.Rest.TokenCredentials"/>
-            and defaults to Bearer scheme.
-            </summary>
-            <param name="token">Valid token.</param>
-        </member>
-        <member name="M:Microsoft.Rest.TokenCredentials.ProcessHttpRequestAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
-            <summary>
-            Apply the credentials to the HTTP request.
-            </summary>
-            <param name="request">The HTTP request.</param>
-            <param name="cancellationToken">Cancellation token.</param>
-            <returns>
-            Task that will complete when processing has completed.
-            </returns>
-        </member>
-        <member name="P:Microsoft.Rest.TokenCredentials.Token">
-            <summary>
-            Gets or sets secure token. 
+            Gets the authentication header with token.
             </summary>
         </member>
-        <member name="P:Microsoft.Rest.TokenCredentials.Scheme">
+        <member name="T:Microsoft.Rest.RestException">
             <summary>
-            Gets or sets authentication scheme. 
-            Default is Bearer.
+            Generic exception for Microsoft Rest Client. 
             </summary>
+        </member>
+        <member name="M:Microsoft.Rest.RestException.#ctor">
+            <summary>
+            Initializes a new instance of the RestException class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.RestException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the RestException class.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Microsoft.Rest.RestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the RestException class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="M:Microsoft.Rest.RestException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the RestException class.
+            </summary>
+            <param name="info">Serialization info.</param>
+            <param name="context">Streaming context.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1">
+            <summary>
+            JsonConverter that handles deserialization for polymorphic objects
+            based on discriminator field.
+            </summary>
+            <typeparam name="T">The base type.</typeparam>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.PolymorphicJsonConverter">
+            <summary>
+            Base JSON converter for polymorphic objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicJsonConverter.GetDerivedType(System.Type,System.String)">
+            <summary>
+            Returns type that matches specified name.
+            </summary>
+            <param name="baseType">Base type.</param>
+            <param name="name">Derived type name</param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Rest.Serialization.PolymorphicJsonConverter.Discriminator">
+            <summary>
+            Discriminator property name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the PolymorphicDeserializeJsonConverter.
+            </summary>
+            <param name="discriminatorField">The JSON field used as a discriminator</param>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.CanConvert(System.Type)">
+            <summary>
+            Returns true if the object being deserialized is the base type. False otherwise.
+            </summary>
+            <param name="objectType">The type of the object to check.</param>
+            <returns>True if the object being deserialized is the base type. False otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads a JSON field and deserializes into an appropriate object based on discriminator
+            field and object name. If JsonObject attribute is available, its value is used instead.
+            </summary>
+            <param name="reader">The JSON reader.</param>
+            <param name="objectType">The type of the object.</param>
+            <param name="existingValue">The existing value.</param>
+            <param name="serializer">The JSON serializer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Throws NotSupportedException.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.CanWrite">
+            <summary>
+            Returns false.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.DateJsonConverter">
+            <summary>
+            JsonConverter that handles serialization for dates in yyyy-MM-dd format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.DateJsonConverter.#ctor">
+            <summary>
+            Initializes a new instance of DateJsonConverter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.JsonConverterHelper">
+            <summary>
+            Helper class for JsonConverters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.JsonConverterHelper.SerializeProperties(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Serializes properties of the value object into JsonWriter.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.JsonConverterHelper.SerializeProperties(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer,System.Predicate{Newtonsoft.Json.Serialization.JsonProperty})">
+            <summary>
+            Serializes properties of the value object into JsonWriter.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+            <param name="filter">If specified filters JsonProperties to be serialized.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1">
+            <summary>
+            JsonConverter that handles serialization for polymorphic objects
+            based on discriminator field.
+            </summary>
+            <typeparam name="T">The base type.</typeparam>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the PolymorphicSerializeJsonConverter.
+            </summary>
+            <param name="discriminatorField">The JSON field used as a discriminator</param>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.CanConvert(System.Type)">
+            <summary>
+            Returns true if the object being serialized is assignable from the base type. False otherwise.
+            </summary>
+            <param name="objectType">The type of the object to check.</param>
+            <returns>True if the object being serialized is assignable from the base type. False otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Throws NotSupportedException.
+            </summary>
+            <param name="reader">The JSON reader.</param>
+            <param name="objectType">The type of the object.</param>
+            <param name="existingValue">The existing value.</param>
+            <param name="serializer">The JSON serializer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Serializes an object into a JSON string based on discriminator
+            field and object name. If JsonObject attribute is available, its value is used instead.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+        </member>
+        <member name="P:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.CanRead">
+            <summary>
+            Returns false.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver">
+            <summary>
+            JSON contract resolver that ignores read-only properties during serialization.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver.CreateProperty(System.Reflection.MemberInfo,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            Creates a JsonProperty for the given MemberInfo.
+            </summary>
+            <param name="member">The member to create a JsonProperty for.</param>
+            <param name="memberSerialization">The member's parent MemberSerialization.</param>
+            <returns>A created JsonProperty for the given MemberInfo.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.CertificateCredentials">
+            <summary>
+            Certificate based credentials for use with a REST Service Client.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.CertificateCredentials.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.CertificateCredentials"/>
+            class with the given 'Bearer' token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.CertificateCredentials.InitializeServiceClient``1(Microsoft.Rest.ServiceClient{``0})">
+            <summary>
+            Initialize a ServiceClient instance to process credentials.
+            </summary>
+            <typeparam name="T">Type of ServiceClient.</typeparam>
+            <param name="client">The ServiceClient.</param>
+            <remarks>
+            This will add a certificate to the shared root WebRequestHandler in
+            the ServiceClient's HttpClient handler pipeline.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Rest.CertificateCredentials.ManagementCertificate">
+            <summary>
+            The Microsoft Azure Service Management API use mutual authentication
+            of management certificates over SSL to ensure that a request made
+            to the service is secure. No anonymous requests are allowed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.TransientErrorIgnoreStrategy">
+            <summary>
+            Retry strategy that ignores any transient errors.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy">
+            <summary>
+            Defines an interface that must be implemented by custom components responsible for 
+            detecting specific transient conditions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy.IsTransient(System.Exception)">
+            <summary>
+            Determines whether the specified exception represents a transient failure that 
+            can be compensated by a retry.
+            </summary>
+            <param name="ex">The exception object to be verified.</param>
+            <returns>true if the specified exception is considered as transient; otherwise, 
+            false.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.TransientErrorIgnoreStrategy.IsTransient(System.Exception)">
+            <summary>
+            Always returns false.
+            </summary>
+            <param name="ex">The exception.</param>
+            <returns>Always false.</returns>
         </member>
         <member name="T:Microsoft.Rest.TransientFaultHandling.RetryCondition">
             <summary>
@@ -149,14 +355,14 @@
             <param name="delay">The delay that indicates how long the current thread will be suspended before.
             the next iteration is invoked.</param>
         </member>
-        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryCondition.RetryAllowed">
-            <summary>
-            Gets or sets a value indicating whether retry attempt is allowed.
-            </summary>
-        </member>
         <member name="P:Microsoft.Rest.TransientFaultHandling.RetryCondition.DelayBeforeRetry">
             <summary>
             Gets or sets the retry interval value for retry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryCondition.RetryAllowed">
+            <summary>
+            Gets or sets a value indicating whether retry attempt is allowed.
             </summary>
         </member>
         <member name="T:Microsoft.Rest.TypeConversion">
@@ -178,299 +384,22 @@
             <param name="value">The string to parse.</param>
             <returns>Uri or null.</returns>
         </member>
-        <member name="T:Microsoft.Rest.ILazyCollection`1">
-            <summary>
-            Represents an object Collection that supports on-demand initialization.
-            </summary>
-            <typeparam name="T">The type elements in the collection.</typeparam>
-        </member>
-        <member name="P:Microsoft.Rest.ILazyCollection`1.IsInitialized">
-            <summary>
-            True if collection has been initialized.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Rest.LazyDictionary`2">
-            <summary>
-            Represents an IDictionary that supports ILazyCollection on-demand initialization.
-            </summary>
-            <typeparam name="TKey">Type parameter for Key.</typeparam>
-            <typeparam name="TValue">Type parameter for Value.</typeparam>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.#ctor">
-            <summary>
-            Default constructor without initializing the dictionary.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
-            <summary>
-            Initializes a new instance of the LazyDictionary class that contains elements copied from the specified IDictionary 
-            and uses the default equality comparer for the key type.      
-            </summary>
-            <param name="dictionary">The IDictionary whose elements are copied to the new LazyDictionary.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1},System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Initializes a new instance of the LazyDictionary class that contains elements copied from the 
-            specified IDictionary and uses the specified IEqualityComparer.
-            </summary>
-            <param name="dictionary">The IDictionary whose elements are copied to the new LazyDictionary.</param>
-            <param name="comparer">The IEqualityComparer implementation to use when comparing keys, or null to use 
-            the default EqualityComparer for the type of the key.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.#ctor(System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Initializes a new instance of the LazyDictionary class that is empty, has the default initial capacity, 
-            and uses the specified IEqualityComparer.
-            </summary>
-            <param name="comparer">The IEqualityComparer implementation to use when comparing keys, 
-            or null to use the default EqualityComparer for the type of the key.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.#ctor(System.Int32)">
-            <summary>
-            Initializes a new instance of the LazyDictionary class that is empty, has the specified initial capacity, 
-            and uses the default equality comparer for the key type.
-            </summary>
-            <param name="capacity">The initial number of elements that the LazyDictionary can contain.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.#ctor(System.Int32,System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Initializes a new instance of the LazyDictionary class that is empty, has the specified initial capacity, 
-            and uses the specified IEqualityComparer.
-            </summary>
-            <param name="capacity">The initial number of elements that the LazyDictionary can contain.</param>
-            <param name="comparer">The IEqualityComparer implementation to use when comparing keys, or null to use the default EqualityComparer for the type of the key.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.Add(`0,`1)">
-            <summary>
-            Adds the specified key and value to the dictionary.
-            </summary>
-            <param name="key">The key of the element to add.</param>
-            <param name="value">The value of the element to add. The value can be null for reference types.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.ContainsKey(`0)">
-            <summary>
-            Determines whether the LazyDictionary contains the specified key.
-            </summary>
-            <param name="key">The key to locate in the LazyDictionary.</param>
-            <returns>True if the LazyDictionary contains an element with the specified key; otherwise, false.</returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.Remove(`0)">
-            <summary>
-            Removes the value with the specified key from the LazyDictionary.
-            </summary>
-            <param name="key">The key of the element to remove.</param>
-            <returns>True if the element is successfully found and removed; otherwise, false. This method returns false if key is 
-            not found in the LazyDictionary.</returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.TryGetValue(`0,`1@)">
-            <summary>
-            Gets the value associated with the specified key.
-            </summary>
-            <param name="key">The key of the value to get.</param>
-            <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, 
-            the default value for the type of the value parameter. This parameter is passed uninitialized.</param>
-            <returns>True if the Dictionary contains an element with the specified key; otherwise, false.</returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Adds an item to the LazyDictionary.
-            </summary>
-            <param name="item">The KeyValuePair object to add to the LazyDictionary.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.Clear">
-            <summary>
-            Removes all keys and values from the LazyDictionary.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Determines whether the LazyDictionary contains a specific KeyValuePair.
-            </summary>
-            <param name="item">The object to locate in the LazyDictionary.</param>
-            <returns>True if item is found in the LazyDictionary; otherwise, false.</returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
-            <summary>
-            Copies the elements of the LazyDictionary to an Array, starting at a particular Array index.
-            </summary>
-            <param name="array">The one-dimensional Array that is the destination of the elements copied from LazyDictionary. 
-            The Array must have zero-based indexing.</param>
-            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Removes the first occurrence of a specific object from the LazyDictionary.
-            </summary>
-            <param name="item">The object to remove from the LazyDictionary.</param>
-            <returns>true if item was successfully removed from the LazyDictionary; 
-            otherwise, false. This method also returns false if item is not found in the original LazyDictionary.</returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through the LazyDictionary.
-            </summary>
-            <returns>A Dictionary.Enumerator for the LazyDictionary.</returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyDictionary`2.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through the LazyDictionary.
-            </summary>
-            <returns>A Dictionary.Enumerator for the LazyDictionary.</returns>
-        </member>
-        <member name="P:Microsoft.Rest.LazyDictionary`2.Keys">
-            <summary>
-            Gets a collection containing the keys in the LazyDictionary.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Rest.LazyDictionary`2.Values">
-            <summary>
-            Gets a collection containing the values in the LazyDictionary.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Rest.LazyDictionary`2.Item(`0)">
-            <summary>
-            Gets or sets the value associated with the specified key.
-            </summary>
-            <param name="key">The key of the value to get or set.</param>
-            <returns>The value associated with the specified key. If the specified key is not found, a get operation throws a KeyNotFoundException,
-            and a set operation creates a new element with the specified key.</returns>
-        </member>
-        <member name="P:Microsoft.Rest.LazyDictionary`2.Count">
-            <summary>
-            Gets the number of key/value pairs contained in the LazyDictionary.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Rest.LazyDictionary`2.IsReadOnly">
-            <summary>
-            Gets a value indicating whether the LazyDictionary is read-only.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Rest.LazyDictionary`2.IsInitialized">
-            <summary>
-            Get a value indicating whether the dictionary is initialized.
-            </summary>
-        </member>
-        <member name="T:Microsoft.Rest.LazyList`1">
-            <summary>
-            Represents an object list that supports on-demand initialization.
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.#ctor">
-            <summary>
-            Default constructor without initializing the list.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Constructor that Initializes a new instance of the LazyList that contains elements copied 
-            from the specified collection.
-            </summary>
-            <param name="collection">The collection whose elements are copied to the new list.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.#ctor(System.Int32)">
-            <summary>
-            Initializes a new instance of the LazyList that is empty and has the specified initial capacity.
-            </summary>
-            <param name="capacity">The number of elements that the new list can initially store.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.IndexOf(`0)">
-            <summary>
-            Searches for the specified item and returns the zero-based index of the first occurrence within the entire list.
-            </summary>
-            <param name="item">The item to locate in the LazyList.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.Insert(System.Int32,`0)">
-            <summary>
-            Inserts an element into the list at the specified index.
-            </summary>
-            <param name="index">The zero-based index at which item should be inserted.</param>
-            <param name="item">Item to insert.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.RemoveAt(System.Int32)">
-            <summary>
-            Removes the element at the specified index of the LazyList.
-            </summary>
-            <param name="index">The zero-based index of the element to remove.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.Add(`0)">
-            <summary>
-            Adds an object to the end of the LazyList.
-            </summary>
-            <param name="item">The object to be added to the end of the LazyList. The value can be null for reference types.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.Clear">
-            <summary>
-            Removes all elements from the LazyList.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.Contains(`0)">
-            <summary>
-            Determines whether an element is in the LazyList.
-            </summary>
-            <param name="item">The object to locate in the LazyList. The value can be null for reference types.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.CopyTo(`0[],System.Int32)">
-            <summary>
-            Copies the entire LazyList to a compatible one-dimensional array, starting at the specified index of the target array.
-            </summary>
-            <param name="array">The one-dimensional Array that is the destination of the elements copied from LazyList. The Array must have zero-based indexing.</param>
-            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.Remove(`0)">
-            <summary>
-            Removes the first occurrence of a specific object from the LazyList.
-            </summary>
-            <param name="item">The object to remove from the LazyList. The value can be null for reference types.</param>
-            <returns>true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the LazyList.</returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through the LazyList.
-            </summary>
-            <returns>A List.Enumerator for the LazyList.</returns>
-        </member>
-        <member name="M:Microsoft.Rest.LazyList`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through the LazyList.
-            </summary>
-            <returns>A List.Enumerator for the LazyList.</returns>
-        </member>
-        <member name="P:Microsoft.Rest.LazyList`1.IsInitialized">
-            <summary>
-            Get a value indicating whether the list is initialized.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Rest.LazyList`1.Item(System.Int32)">
-            <summary>
-            Gets or sets the element at the specified index.
-            </summary>
-            <param name="index">The zero-based index of the element.</param>
-            <returns>The element at the specified index of the LazyList.</returns>
-        </member>
-        <member name="P:Microsoft.Rest.LazyList`1.Count">
-            <summary>
-            Gets the number of elements contained in the List.
-            </summary>
-        </member>
-        <member name="P:Microsoft.Rest.LazyList`1.IsReadOnly">
-            <summary>
-            Gets a value indicating whether the LazyList is read-only.
-            </summary>
-        </member>
         <member name="T:Microsoft.Rest.HttpOperationResponse`1">
             <summary>
             Represents the base return type of all ServiceClient REST operations.
             </summary>
         </member>
-        <member name="P:Microsoft.Rest.HttpOperationResponse`1.Request">
+        <member name="T:Microsoft.Rest.HttpOperationResponse">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations without response body.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpOperationResponse.Request">
             <summary>
             Gets information about the associated HTTP request.
             </summary>
         </member>
-        <member name="P:Microsoft.Rest.HttpOperationResponse`1.Response">
+        <member name="P:Microsoft.Rest.HttpOperationResponse.Response">
             <summary>
             Gets information about the associated HTTP response.
             </summary>
@@ -530,13 +459,6 @@
             Provides a platform-neutral abstraction for Task and TaskEx.
             </summary>
         </member>
-        <member name="M:Microsoft.Rest.PlatformTask.FromResult(System.Object)">
-            <summary>
-            Creates an already completed Task from the specified result.
-            </summary>
-            <param name="result">The result from which to create the completed task.</param>
-            <returns>The completed Task.</returns>
-        </member>
         <member name="M:Microsoft.Rest.PlatformTask.Delay(System.TimeSpan)">
             <summary>
             Starts a Task that will complete after the specified time interval.
@@ -551,6 +473,13 @@
             <param name="millisecondsDelay">The delay in milliseconds before the returned task completes.</param>
             <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
             <returns>The timed Task.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.PlatformTask.FromResult``1(``0)">
+            <summary>
+            Creates an already completed Task from the specified result.
+            </summary>
+            <param name="result">The result from which to create the completed task.</param>
+            <returns>The completed Task.</returns>
         </member>
         <member name="T:Microsoft.Rest.ServiceClientTracing">
             <summary>
@@ -580,11 +509,6 @@
         <member name="F:Microsoft.Rest.ServiceClientTracing._nextInvocationId">
             <summary>
             The invocation identifier.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Rest.ServiceClientTracing._isEnabled">
-            <summary>
-            Value indicating whether tracing is enabled.
             </summary>
         </member>
         <member name="M:Microsoft.Rest.ServiceClientTracing.AddTracingInterceptor(Microsoft.Rest.IServiceClientTracingInterceptor)">
@@ -779,11 +703,6 @@
             Gets a reference to the ServiceClient.
             </summary>
         </member>
-        <member name="T:Microsoft.Rest.HttpOperationException`1">
-            <summary>
-            Exception thrown for an invalid response with custom error information.
-            </summary>
-        </member>
         <member name="T:Microsoft.Rest.HttpOperationException">
             <summary>
             Exception thrown for an invalid response with custom error information.
@@ -807,6 +726,20 @@
             <param name="message">The exception message.</param>
             <param name="innerException">Inner exception.</param>
         </member>
+        <member name="M:Microsoft.Rest.HttpOperationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the HttpOperationException class.
+            </summary>
+            <param name="info">Serialization info.</param>
+            <param name="context">Streaming context.</param>
+        </member>
+        <member name="M:Microsoft.Rest.HttpOperationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Serializes content of the exception.
+            </summary>
+            <param name="info">Serialization info.</param>
+            <param name="context">Streaming context.</param>
+        </member>
         <member name="P:Microsoft.Rest.HttpOperationException.Request">
             <summary>
             Gets information about the associated HTTP request.
@@ -817,25 +750,7 @@
             Gets information about the associated HTTP response.
             </summary>
         </member>
-        <member name="M:Microsoft.Rest.HttpOperationException`1.#ctor">
-            <summary>
-            Initializes a new instance of the HttpOperationException class.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Rest.HttpOperationException`1.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the HttpOperationException class.
-            </summary>
-            <param name="message">The exception message.</param>
-        </member>
-        <member name="M:Microsoft.Rest.HttpOperationException`1.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the HttpOperationException class.
-            </summary>
-            <param name="message">The exception message.</param>
-            <param name="innerException">Inner exception.</param>
-        </member>
-        <member name="P:Microsoft.Rest.HttpOperationException`1.Body">
+        <member name="P:Microsoft.Rest.HttpOperationException.Body">
             <summary>
             Gets or sets the response object.
             </summary>
@@ -846,12 +761,6 @@
             operations.  Interception is global and a tracing interceptor can be
             added via TracingAdapter.AddTracingInterceptor.
             </summary>
-        </member>
-        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.Information(System.String)">
-            <summary>
-            Trace information.
-            </summary>
-            <param name="message">The information to trace.</param>
         </member>
         <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.Configuration(System.String,System.String,System.String)">
             <summary>
@@ -870,12 +779,19 @@
             <param name="method">Name of the method.</param>
             <param name="parameters">Method parameters.</param>
         </member>
-        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.SendRequest(System.String,System.Net.Http.HttpRequestMessage)">
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.ExitMethod(System.String,System.Object)">
             <summary>
-            Send an HTTP request.
+            Exit a method.  Note: Exit will not be called in the event of an
+            error.
             </summary>
             <param name="invocationId">Method invocation identifier.</param>
-            <param name="request">The request about to be sent.</param>
+            <param name="returnValue">Method return value.</param>
+        </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.Information(System.String)">
+            <summary>
+            Trace information.
+            </summary>
+            <param name="message">The information to trace.</param>
         </member>
         <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.ReceiveResponse(System.String,System.Net.Http.HttpResponseMessage)">
             <summary>
@@ -884,20 +800,19 @@
             <param name="invocationId">Method invocation identifier.</param>
             <param name="response">The response instance.</param>
         </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.SendRequest(System.String,System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Send an HTTP request.
+            </summary>
+            <param name="invocationId">Method invocation identifier.</param>
+            <param name="request">The request about to be sent.</param>
+        </member>
         <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.TraceError(System.String,System.Exception)">
             <summary>
             Raise an error.
             </summary>
             <param name="invocationId">Method invocation identifier.</param>
             <param name="exception">The error.</param>
-        </member>
-        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.ExitMethod(System.String,System.Object)">
-            <summary>
-            Exit a method.  Note: Exit will not be called in the event of an
-            error.
-            </summary>
-            <param name="invocationId">Method invocation identifier.</param>
-            <param name="returnValue">Method return value.</param>
         </member>
         <member name="T:Microsoft.Rest.Properties.Resources">
             <summary>
@@ -985,6 +900,81 @@
               Looks up a localized string similar to The specified argument &apos;{0}&apos; must return a scheduled task (also known as &quot;hot&quot; task) when invoked..
             </summary>
         </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.TokenProviderCannotBeNull">
+            <summary>
+              Looks up a localized string similar to You must specify a token provider or raw access token before using token credentials..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationCannotBeNull">
+            <summary>
+              Looks up a localized string similar to cannot be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationEnum">
+            <summary>
+              Looks up a localized string similar to cannot have value other than.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationExclusiveMaximum">
+            <summary>
+              Looks up a localized string similar to is equal or exceeds maximum value of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationExclusiveMinimum">
+            <summary>
+              Looks up a localized string similar to is less than or equal minimum value of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationMaximum">
+            <summary>
+              Looks up a localized string similar to exceeds maximum value of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationMaximumItems">
+            <summary>
+              Looks up a localized string similar to exceeds maximum item count of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationMaximumLength">
+            <summary>
+              Looks up a localized string similar to exceeds maximum length of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationMinimum">
+            <summary>
+              Looks up a localized string similar to is less than minimum value of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationMinimumItems">
+            <summary>
+              Looks up a localized string similar to contains less items than.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationMinimumLength">
+            <summary>
+              Looks up a localized string similar to is less than minimum length of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationMultipleOf">
+            <summary>
+              Looks up a localized string similar to has to be multiple of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationPattern">
+            <summary>
+              Looks up a localized string similar to does not match expected pattern.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.ValidationUniqueItems">
+            <summary>
+              Looks up a localized string similar to collection contains duplicate items.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Properties.Resources.WebRequestHandlerNotFound">
+            <summary>
+              Looks up a localized string similar to The service client &apos;{0}&apos; did not contain an implementation of &apos;{1}&apos;..
+            </summary>
+        </member>
         <member name="T:Microsoft.Rest.TransientFaultHandling.AsyncExecution`1">
             <summary>
             Handles the execution and retries of the user-initiated task.
@@ -1008,21 +998,6 @@
             <summary>
             Default Http error detection strategy based on Http Status Code.
             </summary>
-        </member>
-        <member name="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy">
-            <summary>
-            Defines an interface that must be implemented by custom components responsible for 
-            detecting specific transient conditions.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy.IsTransient(System.Exception)">
-            <summary>
-            Determines whether the specified exception represents a transient failure that 
-            can be compensated by a retry.
-            </summary>
-            <param name="ex">The exception object to be verified.</param>
-            <returns>true if the specified exception is considered as transient; otherwise, 
-            false.</returns>
         </member>
         <member name="M:Microsoft.Rest.TransientFaultHandling.HttpStatusCodeErrorDetectionStrategy.IsTransient(System.Exception)">
             <summary>
@@ -1592,30 +1567,6 @@
             Gets the instance of the error detection strategy.
             </summary>
         </member>
-        <member name="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy.TransientErrorIgnoreStrategy">
-            <summary>
-            Implements a strategy that ignores any transient errors.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.TransientErrorIgnoreStrategy.IsTransient(System.Exception)">
-            <summary>
-            Always returns false.
-            </summary>
-            <param name="ex">The exception.</param>
-            <returns>Always false.</returns>
-        </member>
-        <member name="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy.TransientErrorCatchAllStrategy">
-            <summary>
-            Implements a strategy that treats all exceptions as transient errors.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.TransientErrorCatchAllStrategy.IsTransient(System.Exception)">
-            <summary>
-            Always returns true.
-            </summary>
-            <param name="ex">The exception.</param>
-            <returns>Always true.</returns>
-        </member>
         <member name="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1">
             <summary>
             Provides a generic version of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy"/> class.
@@ -1673,6 +1624,151 @@
             <param name="retryCount">The current retry attempt count.</param>
             <param name="lastException">The exception that caused the retry conditions to occur.</param>
             <returns>A retry condition instance</returns>
+        </member>
+        <member name="T:Microsoft.Rest.ValidationException">
+            <summary>
+            Validation exception for Microsoft Rest Client. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="message">Exception message.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="rule">Validation rule.</param>
+            <param name="target">Target of the validation.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.String,System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="rule">Validation rule.</param>
+            <param name="target">Target of the validation.</param>
+            <param name="details">Validation details.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="info">Serialization info.</param>
+            <param name="context">Streaming context.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Serializes content of the exception.
+            </summary>
+            <param name="info">Serialization info.</param>
+            <param name="context">Streaming context.</param>
+        </member>
+        <member name="P:Microsoft.Rest.ValidationException.Rule">
+            <summary>
+            Gets validation rule. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ValidationException.Target">
+            <summary>
+            Gets validation target. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ValidationException.Details">
+            <summary>
+            Gets validation details.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.ValidationRules">
+            <summary>
+            Defines set of validation rules.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.StringTokenProvider">
+            <summary>
+            A simple token provider that always provides a static access token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.StringTokenProvider.#ctor(System.String,System.String)">
+            <summary>
+            Create a token provider for the given token type that returns the given 
+            access token.
+            </summary>
+            <param name="accessToken">The access token to return.</param>
+            <param name="tokenType">The token type of the given access token.</param>
+        </member>
+        <member name="M:Microsoft.Rest.StringTokenProvider.GetAuthenticationHeaderAsync(System.Threading.CancellationToken)">
+            <summary>
+            Returns the static access token.
+            </summary>
+            <param name="cancellationToken">The cancellation token for this action.  
+            This will not be used since the returned token is static.</param>
+            <returns>The access token.</returns>
+        </member>
+        <member name="P:Microsoft.Rest.StringTokenProvider.TokenType">
+            <summary>
+            Gets the token type of this access token.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.TokenCredentials">
+            <summary>
+            Token based credentials for use with a REST Service Client.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TokenCredentials.BearerTokenType">
+            <summary>
+            The bearer token type, as serialized in an http Authentication header.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TokenCredentials"/>
+            class with the given 'Bearer' token.
+            </summary>
+            <param name="token">Valid JSON Web Token (JWT).</param>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TokenCredentials"/>
+            class with the given token and token type.
+            </summary>
+            <param name="token">Valid JSON Web Token (JWT).</param>
+            <param name="tokenType">The token type of the given token.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(Microsoft.Rest.ITokenProvider)">
+            <summary>
+            Create an access token credentials object, given an interface to a token source.
+            </summary>
+            <param name="tokenProvider">The source of tokens for these credentials.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.ProcessHttpRequestAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Apply the credentials to the HTTP request.
+            </summary>
+            <param name="request">The HTTP request.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>
+            Task that will complete when processing has completed.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Rest.TokenCredentials.TokenProvider">
+            <summary>
+            Gets or sets secure token used to authenticate against Microsoft Azure API. 
+            No anonymous requests are allowed.
+            </summary>
         </member>
     </members>
 </doc>

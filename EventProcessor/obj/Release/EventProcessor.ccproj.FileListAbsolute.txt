@@ -69,3 +69,4 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\Nest.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\StackExchange.Redis.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\StackExchange.Redis.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\FirebaseTokenGenerator.dll

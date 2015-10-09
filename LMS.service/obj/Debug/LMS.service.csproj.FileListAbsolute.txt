@@ -2,7 +2,9 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\LMS.service.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\LMS.service.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\Elasticsearch.Net.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\FireSharp.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\JWT.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\LMS.model.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Debug\Microsoft.Azure.KeyVault.Core.dll

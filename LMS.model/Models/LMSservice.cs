@@ -52,7 +52,7 @@ namespace LMS.model.Models
     {
         public string message { get; set; }
         public string user { get; set; }
-        public string timestamp { get; set; }
+        public long timestamp { get; set; }
         public string uid { get; set; }
     }
 
@@ -73,9 +73,18 @@ namespace LMS.model.Models
     }
     public class LMSresult
     {
-        public int time { get; set; }
-        public List<dynamic> list { get; set; } 
+        public bool moreData { get; set; }
+        public long time { get; set; }
+        public List<PostMessage> list { get; set; } 
     }
+
+    public class LMSChatresult
+    {
+        public bool moreData { get; set; }
+        public long time { get; set; }
+        public List<TableChat> list { get; set; }
+    }
+
     public class EHdata
     {
         public string offset { get; set; }

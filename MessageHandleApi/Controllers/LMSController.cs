@@ -16,20 +16,20 @@ namespace MessageHandleApi.Controllers
     public class LMSController : ApiController
     {
         private readonly IFirebaseClient _client;
-        private readonly string _firebaseSecret;
         private IQueueService _iQueueService;
         private IDBService _iDbService;
-        public LMSController(IQueueService iQueueService,IDBService iDbService)
+        private IAzureStorageService _iAzureStorageService;
+        public LMSController(IQueueService iQueueService, IDBService iDbService, IAzureStorageService iAzureStorageService)
         {
-            _firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
             _iQueueService = iQueueService;
             _iDbService = iDbService;
+            _iAzureStorageService = iAzureStorageService;
             _client = _iDbService.GetFirebaseClient();
         }
 
 
         [HttpGet]
-        public IHttpActionResult Get([FromUri] string url, int start)
+        public IHttpActionResult Get([FromUri] string url, long start)
         {
             try
             {
@@ -70,7 +70,6 @@ namespace MessageHandleApi.Controllers
                 message.body.timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                 string m = JsonConvert.SerializeObject(message);
                 await _iQueueService.SendToQueue(m);
-                //FirebaseResponse response = await _client.PushAsync(message.url, message.body);
                 return Ok();
             }
             catch (Exception e)
@@ -89,7 +88,6 @@ namespace MessageHandleApi.Controllers
                 message.body.timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                 string m = JsonConvert.SerializeObject(message);
                 await _iQueueService.SendToQueue(m);
-                //FirebaseResponse response = await _client.PushAsync(message.url, message.body);
                 return Ok();
             }
             catch (Exception e)
@@ -138,14 +136,7 @@ namespace MessageHandleApi.Controllers
         {
             try
             {
-                var tokenGenerator = new Firebase.TokenGenerator(_firebaseSecret);
-                var authPayload = new Dictionary<string, object>()
-                {
-                        { "uid", u.uid },
-                        { "user", u.name },
-                        { "data", "here" }
-                 };
-                string token = tokenGenerator.CreateToken(authPayload);
+                string token = _iDbService.GetFirebaseToken(u.uid, u.name, "something");
                 return Ok(token);
             }
             catch (Exception e)
@@ -154,6 +145,19 @@ namespace MessageHandleApi.Controllers
             }
         }
 
-
+        [HttpGet]
+        [Route("chat")]
+        public IHttpActionResult GetChat([FromUri] string roomId, long start)
+        {
+            try
+            {
+                var res=_iAzureStorageService.SearchChat(roomId,start);
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

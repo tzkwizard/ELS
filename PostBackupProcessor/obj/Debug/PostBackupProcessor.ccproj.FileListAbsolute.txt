@@ -10,6 +10,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\es\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\es\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\es\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\FireSharp.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\fr\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\fr\Microsoft.Data.OData.resources.dll

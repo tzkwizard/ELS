@@ -30,7 +30,7 @@ namespace doucumentDB
 
             IDBService i = new DBService();
             _firebaseClient = i.GetFirebaseClient();
-            Search(table);
+            Search3(table);
             //Search2(table);
             //Search3(table);
             //Insert(table);
@@ -69,22 +69,18 @@ namespace doucumentDB
 
         private static void Search3(CloudTable table)
         {
-            TableQuery<CustomerEntity> rangeQuery = new TableQuery<CustomerEntity>().Where(
+            TableQuery<TableChat> rangeQuery = new TableQuery<TableChat>().Where(
                 TableQuery.CombineFilters(
-                    TableQuery.CombineFilters(
-                    TableQuery.GenerateFilterCondition("PartitionKey", "eq", "Harp"),
+                    TableQuery.GenerateFilterCondition("uid", "eq", "1201818"),
                     TableOperators.And,
-                    TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.LessThan, "E")
-                    ),
-                    TableOperators.And,
-                    TableQuery.GenerateFilterCondition("PartitionKey", "eq", "Harp")
+                    TableQuery.GenerateFilterCondition("timestamp", QueryComparisons.GreaterThan, "1444414477058")
                     ));
 
             // Loop through the results, displaying information about the entity.
-            foreach (CustomerEntity entity in table.ExecuteQuery(rangeQuery))
+            foreach (TableChat entity in table.ExecuteQuery(rangeQuery))
             {
-                Console.WriteLine("{0}, {1}\t{2}\t{3}", entity.PartitionKey, entity.RowKey,
-                    entity.Email, entity.PhoneNumber);
+                Console.WriteLine("{0}, {1} {2} {3} {4}", entity.PartitionKey, entity.RowKey,
+                    entity.roomName, entity.user,entity.message);
             }
         }
 

@@ -90,3 +90,4 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\R
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\StackExchange.Redis.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Elasticsearch.Net.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Elasticsearch.Net.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\FirebaseTokenGenerator.dll

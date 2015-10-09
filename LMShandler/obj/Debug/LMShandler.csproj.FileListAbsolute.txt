@@ -21,6 +21,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Deb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\System.Spatial.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\StackExchange.Redis.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\LMS.model.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\LMS.service.pdb

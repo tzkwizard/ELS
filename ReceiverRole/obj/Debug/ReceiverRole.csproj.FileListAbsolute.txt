@@ -23,6 +23,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\D
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Debug\System.Spatial.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Debug\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Debug\StackExchange.Redis.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Debug\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Debug\MonAgentListener.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Debug\LMS.model.pdb

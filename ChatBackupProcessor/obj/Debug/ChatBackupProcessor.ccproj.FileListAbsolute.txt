@@ -13,6 +13,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\FirebaseRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\FirebaseRole.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\FirebaseRole.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\FireSharp.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\fr\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\fr\Microsoft.Data.OData.resources.dll

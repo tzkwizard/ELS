@@ -18,6 +18,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.Azure.WebJobs.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.Azure.WebJobs.Host.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Ninject.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Newtonsoft.Json.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\QueueWebjob.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Elasticsearch.Net.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Elasticsearch.Net.xml
@@ -25,6 +26,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.Data.Edm.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.Data.OData.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.Data.Services.Client.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.WindowsAzure.Storage.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.WindowsAzure.Storage.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Nest.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Nest.xml
@@ -38,6 +40,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.Azure.WebJobs.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Microsoft.Azure.WebJobs.Host.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Ninject.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Newtonsoft.Json.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\de\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\es\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\fr\Microsoft.Data.Edm.resources.dll
@@ -78,5 +81,3 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\obj\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\obj\Debug\QueueWebjob.Test.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\obj\Debug\WebJob.Test.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\obj\Debug\WebJob.Test.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Newtonsoft.Json.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebJob.Test\bin\Debug\Newtonsoft.Json.xml

@@ -22,6 +22,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\D
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\StackExchange.Redis.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\MonAgentListener.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\LMS.model.pdb

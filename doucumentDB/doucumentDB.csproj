@@ -132,7 +132,6 @@
     <Compile Include="Dichotomy.cs" />
     <Compile Include="DocumentDB.cs" />
     <Compile Include="EventHub.cs" />
-    <Compile Include="LMSservice.cs" />
     <Compile Include="model.cs" />
     <Compile Include="EventHubHost.cs" />
     <Compile Include="Program.cs" />

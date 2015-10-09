@@ -27,6 +27,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\System.Spatial.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\StackExchange.Redis.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\LMS.model.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\LMS.service.pdb

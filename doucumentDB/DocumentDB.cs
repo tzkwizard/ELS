@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LMS.model.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
@@ -26,9 +27,9 @@ namespace doucumentDB
             var documentCollection = await GetDC(client, database);
 
 
-            await DeleteAll(client, database);
+            //await DeleteAll(client, database);
 
-            //await GetData(client, documentCollection);
+            await GetData(client, documentCollection);
             //ReadData(client, documentCollection);
             //await WriteData(client, documentCollection);
             Console.ReadLine();
@@ -85,6 +86,9 @@ namespace doucumentDB
                 {
                     foreach (var family in families)
                     {
+
+                        dynamic d = JsonConvert.DeserializeObject(family.ToString());
+                        //Console.WriteLine(d.Path.school);               
                         var res = await client.DeleteDocumentAsync(family.SelfLink);
                         Console.WriteLine(family.SelfLink);
                     }
@@ -92,7 +96,7 @@ namespace doucumentDB
                 catch (Exception e)
                 {
                     var zz = e.Message;
-                    DeleteAll(client, database).Wait();
+                    //DeleteAll(client, database).Wait();
                 }
             }
         }
@@ -243,12 +247,11 @@ namespace doucumentDB
                 where f.Type == "Topic"
                 select f;
             foreach (var family in families)
-            {
+            {              
                 var s = JsonConvert.SerializeObject(family);
                 dynamic d = JsonConvert.DeserializeObject(s);
                 var res = await client.DeleteDocumentAsync(family._self);
-                Console.Write(d);
-                //}
+                Console.Write(d);             
             }
         }
 
@@ -256,19 +259,6 @@ namespace doucumentDB
         private static async Task GetData(DocumentClient client, DocumentCollection documentCollection)
         {
             var t = (long) (DateTime.UtcNow.AddHours(-4).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-
-            var families =
-                from f in client.CreateDocumentQuery(documentCollection.DocumentsLink)
-                select f;
-
-
-            foreach (var family in families)
-            {
-                //if (Int64.Parse(family.Info.timestamp)>t)
-                var res = await client.DeleteDocumentAsync(family.SelfLink);
-                //Console.WriteLine(family._self);
-                Console.WriteLine(family.SelfLink);
-            }
 
             // Create the Andersen family document.
             Family AndersenFamily = new Family
@@ -296,45 +286,9 @@ namespace doucumentDB
                 Address = new Address {State = "WA", County = "King", City = "Seattle"},
                 IsRegistered = true
             };
-
-            await client.CreateDocumentAsync(documentCollection.DocumentsLink, AndersenFamily);
-
-            // Create the WakeField family document.
-            Family WakefieldFamily = new Family
-            {
-                Id = "WakefieldFamily",
-                Parents = new Parent[]
-                {
-                    new Parent {FamilyName = "Wakefield", FirstName = "Robin"},
-                    new Parent {FamilyName = "Miller", FirstName = "Ben"}
-                },
-                Children = new Child[]
-                {
-                    new Child
-                    {
-                        FamilyName = "Merriam",
-                        FirstName = "Jesse",
-                        Gender = "female",
-                        Grade = 8,
-                        Pets = new Pet[]
-                        {
-                            new Pet {GivenName = "Goofy"},
-                            new Pet {GivenName = "Shadow"}
-                        }
-                    },
-                    new Child
-                    {
-                        FamilyName = "Miller",
-                        FirstName = "Lisa",
-                        Gender = "female",
-                        Grade = 1
-                    }
-                },
-                Address = new Address {State = "NY", County = "Manhattan", City = "NY"},
-                IsRegistered = false
-            };
-
-            await client.CreateDocumentAsync(documentCollection.DocumentsLink, WakefieldFamily);
+           
+            var res=await client.CreateDocumentAsync(documentCollection.DocumentsLink, AndersenFamily);
+           
         }
     }
 }

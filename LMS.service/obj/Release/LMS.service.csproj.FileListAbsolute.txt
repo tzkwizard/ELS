@@ -82,3 +82,5 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\obj\Re
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\obj\Release\LMS.service.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\obj\Release\LMS.service.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\obj\Release\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Release\FirebaseTokenGenerator.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.service\bin\Release\JWT.dll

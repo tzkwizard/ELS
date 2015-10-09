@@ -17,6 +17,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\StorageRole\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\StorageRole\bin\Debug\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\StorageRole\bin\Debug\FireSharp.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\StorageRole\bin\Debug\StackExchange.Redis.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\StorageRole\bin\Debug\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\StorageRole\bin\Debug\MonAgentListener.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\StorageRole\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\StorageRole\bin\Debug\Microsoft.Threading.Tasks.dll

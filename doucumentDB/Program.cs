@@ -9,11 +9,11 @@ namespace doucumentDB
             try
             {
 
-                BackupPost.BackupPostAll().Wait();
+                //BackupPost.BackupPostAll().Wait();
                 //Batch.RunBatch(args);
                 //DocumentDB.GetStartedDemo().Wait();
                 //Dichotomy.UpdateDcAll(EndpointUrl,AuthorizationKey).Wait();
-                //ChatBackup.TableDemo();
+                ChatBackup.TableDemo();
                 //EventHub.Receive();               
                 //Console.ReadLine();
             }
