@@ -99,6 +99,10 @@
       <Project>{5b45cb68-ae03-4b59-92de-7b78a1b597ca}</Project>
       <Name>LMS.model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LMS.service\LMS.service.csproj">
+      <Project>{955f0dd0-2753-4c17-8beb-a9cb279224a6}</Project>
+      <Name>LMS.service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

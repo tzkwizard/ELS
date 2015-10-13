@@ -30,10 +30,10 @@ namespace doucumentDB
 
             IDBService i = new DBService();
             _firebaseClient = i.GetFirebaseClient();
-            Search3(table);
+            //Search3(table);
             //Search2(table);
             //Search3(table);
-            //Insert(table);
+            Insert(table).Wait();
             //BackupDocumentChat(table).Wait();
         }
 
@@ -73,8 +73,9 @@ namespace doucumentDB
                 TableQuery.CombineFilters(
                     TableQuery.GenerateFilterCondition("uid", "eq", "1201818"),
                     TableOperators.And,
-                    TableQuery.GenerateFilterCondition("timestamp", QueryComparisons.GreaterThan, "1444414477058")
+                    TableQuery.GenerateFilterConditionForLong("timestamp", QueryComparisons.GreaterThan, 1444414477058)
                     ));
+
 
             // Loop through the results, displaying information about the entity.
             foreach (TableChat entity in table.ExecuteQuery(rangeQuery))
@@ -84,7 +85,7 @@ namespace doucumentDB
             }
         }
 
-        private static void Insert(CloudTable table)
+        private static async Task Insert(CloudTable table)
         {
             // Create a new customer entity.
             CustomerEntity customer1 = new CustomerEntity("Harp", "Walters")
@@ -103,7 +104,23 @@ namespace doucumentDB
             batchOperation.Insert(customer1);
             batchOperation.Insert(customer2);
             // Execute the insert operation.
-            table.ExecuteBatch(batchOperation);
+            try
+            {
+                IList<TableResult> z = await table.ExecuteBatchAsync(batchOperation);
+                foreach (var i in z)
+                {
+                    CustomerEntity y = (CustomerEntity)i.Result;
+                    Console.WriteLine(y.PartitionKey);
+                }
+                var x = z;
+            }
+            catch (StorageException e)
+            {
+
+                var z = e.RequestInformation.HttpStatusCode;
+                var zz = 3;
+            }
+            
         }
         private static async Task BackupDocumentChat(CloudTable table)
         {

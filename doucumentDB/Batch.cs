@@ -25,11 +25,11 @@ namespace doucumentDB
             BatchSharedKeyCredentials cred = new BatchSharedKeyCredentials("https://testbatch.southcentralus.batch.azure.com", "testbatch", "O+w9Brj9NKnb2RXt13T0HaJLQ3v8HMf6RuojDkeAHVMTDQ/tdgjvim3pFiiH+ekqWiYppDDQ6M0rvAyqaIIUaw==");
             BatchClient client = BatchClient.Open(cred);
            // CreatePool(client);
-            //ListPools(client);
+            ListPools(client);
             //CreateJob(client);
-           // ListJobs(client);
-            DeleteTasks(client);
-            AddTasks(client);
+            ListJobs(client);
+            //DeleteTasks(client);
+           // AddTasks(client);
             ListTasks(client);
            // DeleteJob(client);
            // DeletePool(client);

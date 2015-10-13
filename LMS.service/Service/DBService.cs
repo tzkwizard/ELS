@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using FireSharp;
 using FireSharp.Interfaces;
 using FireSharp.Config;
@@ -66,21 +69,20 @@ namespace LMS.service.Service
                     (long) (DateTime.UtcNow.AddMinutes(-30*n).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                 var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
                 var path = m.Split('/');
-             /*   items = _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
+                /*   items = _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
                     "SELECT d AS data " +
                     "FROM Doc d " +
                     "Where d.Type='Post' And d.Info.timestamp > '" + time + "'").OrderBy(o=>o.Info.timestamp).ToList();*/
-               
-                    items =
-                        (from f in _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink)
-                            where f.Type == "Post" &&  f.Info.timestamp > end
-                            select f).OrderBy(o => o.Info.timestamp).ToList();
+
+                items =
+                    (from f in _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink)
+                        where f.Type == "Post" && f.Info.timestamp > end
+                        select f).OrderBy(o => o.Info.timestamp).ToList();
                 n++;
             }
 
             var res = new LMSresult
             {
-                moreData = true,
                 time = end,
                 list = items
             };
@@ -91,25 +93,25 @@ namespace LMS.service.Service
         {
             var t = (long) (DateTime.UtcNow.AddMonths(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             List<PostMessage> items = new List<PostMessage>();
-            var t1=DateTime.Now;
+            var t1 = DateTime.Now;
             var n = 1;
             var i = 1;
             var end = start;
-            while (items.Count < 5 && end >t)
+            while (items.Count < 5 && end > t)
             {
                 i = i + n;
-                end = end-(long)TimeSpan.FromHours(i).TotalMilliseconds;
+                end = end - (long) TimeSpan.FromHours(i).TotalMilliseconds;
                 var documentCollection = GetDc(_documentClient, "LMSCollection", "LMSRegistry");
                 var path = m.Split('/');
-              /*  items = _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
+                /*  items = _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
                     "SELECT d AS data " +
                     "FROM Doc d " +
                     "Where d.Type='Post' And d.Info.timestamp > '" + t2 + "'" +
                     "And d.Info.timestamp < '" + t1 + "'").ToList();*/
                 items =
-                   (from f in _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink)
-                    where f.Type == "Post" && f.Info.timestamp < start && f.Info.timestamp >end
-                    select f).OrderBy(o => o.Info.timestamp).ToList();
+                    (from f in _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink)
+                        where f.Type == "Post" && f.Info.timestamp < start && f.Info.timestamp > end
+                        select f).OrderBy(o => o.Info.timestamp).ToList();
                 var t2 = DateTime.Now;
                 if (t2 - t1 > TimeSpan.FromSeconds(10))
                 {
@@ -215,6 +217,38 @@ namespace LMS.service.Service
             return masterCollection;
         }
 
+
+        public async Task DeleteDocByIdList(DocumentClient client, DocumentCollection dc, List<string> idList,
+            int retryTimes)
+        {
+            foreach (var id in idList)
+            {
+                var id1 = id;
+                var ds =
+                    from d in client.CreateDocumentQuery(dc.DocumentsLink)
+                    where d.Id == id1
+                    select d;
+                foreach (var d in ds)
+                {
+                    //await client.DeleteDocumentAsync(d.SelfLink);
+                    await DeleteDocument(client, d.SelfLink, retryTimes);
+                }
+            }
+        }
+
+        public async Task DeleteDocById(DocumentClient client, DocumentCollection dc, string id, int retryTimes)
+        {
+            var ds =
+                from d in client.CreateDocumentQuery(dc.DocumentsLink)
+                where d.Id == id
+                select d;
+            foreach (var d in ds)
+            {
+                //await client.DeleteDocumentAsync(d.SelfLink);
+                await DeleteDocument(client, d.SelfLink, retryTimes);
+            }
+        }
+
         public PostMessage PostData(dynamic data, string[] path)
         {
             Random r = new Random();
@@ -249,6 +283,88 @@ namespace LMS.service.Service
                 message = message.Value.message
             };
             return item;
+        }
+
+
+        public TablePost TablePostData(dynamic post)
+        {
+            TablePost item = new TablePost(post.Type, post.id)
+            {
+                district = post.Path.District,
+                school = post.Path.School,
+                classes = post.Path.Classes,
+                timestamp = post.Info.timestamp,
+                user = post.Info.user,
+                uid = post.Info.uid,
+                message = post.Info.message
+            };
+            return item;
+        }
+
+
+        public async Task DeleteDocument(DocumentClient client, string selfLink, int retryTimes)
+        {
+            try
+            {
+                await client.DeleteDocumentAsync(selfLink);
+            }
+            catch (DocumentClientException e)
+            {
+                if (e.RetryAfter.TotalMilliseconds > 0)
+                {
+                    retryTimes--;
+                    Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
+                    DeleteDocument(client, selfLink, retryTimes).Wait();
+                }
+                else
+                {
+                    Trace.TraceError("Error in Delete Document" + e.Message);
+                }
+            }
+        }
+
+        public async Task ReplaceDocument(DocumentClient client, dynamic item, int retryTimes)
+        {
+            try
+            {
+                await client.ReplaceDocumentAsync(item);
+            }
+            catch (DocumentClientException e)
+            {
+                if (e.RetryAfter.TotalMilliseconds > 0)
+                {
+                    retryTimes--;
+                    Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
+                    ReplaceDocument(client, item, retryTimes).Wait();
+                }
+                else
+                {
+                    Trace.TraceError("Error in Replace Document" + e.Message);
+                }
+            }
+        }
+
+        public async Task<ResourceResponse<Document>> AddDocument(DocumentClient client, string dcSelfLink, dynamic item,
+            int retryTimes)
+        {
+            try
+            {
+                return await client.CreateDocumentAsync(dcSelfLink, item);
+            }
+            catch (DocumentClientException e)
+            {
+                if (e.RetryAfter.TotalMilliseconds > 0)
+                {
+                    retryTimes--;
+                    Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
+                    AddDocument(client, dcSelfLink, item, retryTimes).Wait();
+                }
+                else
+                {
+                    Trace.TraceError("Error in Add Document" + e.Message);
+                }
+                return null;
+            }
         }
     }
 }

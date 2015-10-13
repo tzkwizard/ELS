@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using FireSharp.Exceptions;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 using LMS.model.Models;
@@ -47,7 +48,7 @@ namespace FirebaseRole
                     await Backup(r, _table, 5);
                 }
             }
-            catch (Exception e)
+            catch (FirebaseException e)
             {
                 //wait and retry 5 times
                 if (reTry > 0)
@@ -79,31 +80,40 @@ namespace FirebaseRole
                     var sorted = origin.OrderBy(o => o.Value.timestamp).ToList();
 
                     if (sorted.Count <= RecordRemained) return;
+                    var docNumber = 0;
+                    TableBatchOperation batchOperation = new TableBatchOperation();
 
                     for (int i = 0; i < sorted.Count - RecordRemained; i++)
                     {
                         var message = sorted[i];
                         TableChat c = _iDbService.TableChatData(room, message);
-                        TableOperation insertOperation = TableOperation.Insert(c);
-                        // Execute the insert operation.
-                        var res = await table.ExecuteAsync(insertOperation);
-                        if (res.HttpStatusCode == 204)
+
+                        if (docNumber == 100)
                         {
-                            string url = "ChatRoom/" + room.Name + "/messages/" + message.Name;
-                            var response = await _firebaseClient.DeleteAsync(url);
-                            if (response.StatusCode != HttpStatusCode.OK)
-                            {
-                                Thread.Sleep(1000);
-                                await _firebaseClient.DeleteAsync(url);
-                            }
+                            var res = await _table.ExecuteBatchAsync(batchOperation);
+                            await DeleteFirebase(res);
+                            batchOperation = new TableBatchOperation();
+                            docNumber = 0;
                         }
+                        else
+                        {
+                            batchOperation.Insert(c);
+                            docNumber++;
+                        }
+                    }
+
+                    if (batchOperation.Count > 0)
+                    {
+                        var res = await _table.ExecuteBatchAsync(batchOperation);
+                        await DeleteFirebase(res);
                     }
                 }
             }
-            catch (Exception e)
+            catch (StorageException e)
             {
-                //wait and retry 5 times
-                if (retry > 0)
+                //retry is retryable
+                if (retry > 0 &&
+                    (e.RequestInformation.HttpStatusCode == 500 || e.RequestInformation.HttpStatusCode == 503))
                 {
                     retry--;
                     Thread.Sleep(1000);
@@ -111,7 +121,24 @@ namespace FirebaseRole
                 }
                 else
                 {
-                    Trace.TraceError("Error in Reading room message", e.Message);
+                    Trace.TraceError("Error in room : " + room.Name + e.Message);
+                }
+            }
+        }
+
+        private async Task DeleteFirebase(IList<TableResult> res)
+        {
+            foreach (var item in res)
+            {
+                try
+                {
+                    TableChat i = (TableChat) item.Result;
+                    string url = "ChatRoom/" + i.PartitionKey + "/messages/" + i.RowKey;
+                    await _firebaseClient.DeleteAsync(url);
+                }
+                catch (FirebaseException e)
+                {
+                    Trace.TraceError("Error in Firebase : " + e.Message);
                 }
             }
         }

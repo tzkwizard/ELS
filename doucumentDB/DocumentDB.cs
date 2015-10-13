@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using LMS.model.Models;
 using Microsoft.Azure.Documents;
@@ -27,9 +28,9 @@ namespace doucumentDB
             var documentCollection = await GetDC(client, database);
 
 
-            //await DeleteAll(client, database);
+            await DeleteAll(client, database);
 
-            await GetData(client, documentCollection);
+            //await GetData(client, documentCollection);
             //ReadData(client, documentCollection);
             //await WriteData(client, documentCollection);
             Console.ReadLine();
@@ -82,22 +83,32 @@ namespace doucumentDB
                     from f in client.CreateDocumentQuery(z.DocumentsLink)
                     select f;
 
-                try
-                {
+
                     foreach (var family in families)
                     {
 
                         dynamic d = JsonConvert.DeserializeObject(family.ToString());
-                        //Console.WriteLine(d.Path.school);               
-                        var res = await client.DeleteDocumentAsync(family.SelfLink);
+                        //Console.WriteLine(d.Path.school);  
+                        try
+                        {
+                            var res = await client.DeleteDocumentAsync(family.SelfLink);
+                        }
+                        catch (DocumentClientException e)
+                        {
+                            if (e.RetryAfter.TotalMilliseconds>0)
+                            {
+                                Console.WriteLine(e.RetryAfter.TotalMilliseconds);
+                                Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
+                                client.DeleteDocumentAsync(family.SelfLink).Wait();
+                            }
+                            else
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+
                         Console.WriteLine(family.SelfLink);
-                    }
-                }
-                catch (Exception e)
-                {
-                    var zz = e.Message;
-                    //DeleteAll(client, database).Wait();
-                }
+                    }    
             }
         }
 
@@ -286,9 +297,15 @@ namespace doucumentDB
                 Address = new Address {State = "WA", County = "King", City = "Seattle"},
                 IsRegistered = true
             };
-           
-            var res=await client.CreateDocumentAsync(documentCollection.DocumentsLink, AndersenFamily);
-           
+            try
+            {
+                var res = await client.CreateDocumentAsync(documentCollection.DocumentsLink, AndersenFamily);
+            }
+            catch (DocumentClientException e)
+            {
+                var z = e;
+            }
+
         }
     }
 }

@@ -71,3 +71,14 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\obj\Debug\CheckRole.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\obj\Debug\CheckRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\obj\Debug\CheckRole.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\LMS.service.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\FireSharp.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\StackExchange.Redis.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\FirebaseTokenGenerator.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\StackExchange.Redis.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\StackExchange.Redis.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml

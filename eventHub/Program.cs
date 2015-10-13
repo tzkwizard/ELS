@@ -83,7 +83,7 @@ namespace eventHub
             // Now launch 4 parallel actions to serve as 4 participants
             //Parallel.Invoke(z);
 
-            Parallel.For(1,100, i=>
+            Parallel.For(1,400, i=>
             {
 
                 SendingRandomMessages(n);

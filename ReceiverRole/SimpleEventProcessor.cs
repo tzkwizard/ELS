@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FireSharp.Exceptions;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 using LMS.model.Models;
@@ -98,7 +99,7 @@ namespace ReceiverRole
             {
                 dynamic data = JsonConvert.DeserializeObject(dataString);
                 var path = data.url.ToString().Split('/');
-                data.body.timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                data.body.timestamp = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                 PostMessage message = _iDbService.PostData(data, path);
 
                 DocumentCollection documentCollection = _iDbService.SearchCollection(path[1], _masterCollection,
@@ -107,7 +108,8 @@ namespace ReceiverRole
                 //Send to DB         
                 /*var res2 = await _documentClient.ExecuteStoredProcedureAsync<Document>(
                     _sp.SelfLink, mess, _masterCollection.SelfLink);*/
-                var res = await _documentClient.CreateDocumentAsync(documentCollection.SelfLink, message);
+                ResourceResponse<Document> res =
+                    await _documentClient.CreateDocumentAsync(documentCollection.SelfLink, message);
 
                 //Check response and notify Firebase
                 if (res.StatusCode == HttpStatusCode.Created)
@@ -121,19 +123,19 @@ namespace ReceiverRole
                             Trace.TraceInformation("Firebase received.  Message: '{0}'", response.Body);
                         }
                     }
-                    catch (Exception e)
+                    catch (FirebaseException e)
                     {
                         Trace.TraceError("Error in push to Firebase: " + e.Message);
                     }
                 }
             }
-            catch (Exception e)
+            catch (DocumentClientException e)
             {
                 //wait and retry 5 times to create document if collection request rate is large
-                if (tryTimes > 0)
+                if (tryTimes > 0 && e.RetryAfter.TotalMilliseconds > 0)
                 {
                     tryTimes--;
-                    Thread.Sleep(1000);
+                    Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
                     SendToDB(dataString, tryTimes).Wait();
                 }
                 else

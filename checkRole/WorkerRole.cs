@@ -45,10 +45,10 @@ namespace CheckRole
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
                     _flag = false;
                     //Task.Run(() => _dichotomy.UpdateDcAll());
-                    _dichotomy.UpdateDcAll().Wait();
-                    _flag = true;
+                    _dichotomy.UpdateDcAll().Wait();                    
                     Trace.TraceInformation("End Check Collection Usage.  Time: '{0}'",
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
+                    _flag = true;
                 }
                 Thread.Sleep(1000);
             }

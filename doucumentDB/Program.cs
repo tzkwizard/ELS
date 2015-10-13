@@ -11,9 +11,9 @@ namespace doucumentDB
 
                 //BackupPost.BackupPostAll().Wait();
                 //Batch.RunBatch(args);
-                //DocumentDB.GetStartedDemo().Wait();
+                DocumentDB.GetStartedDemo().Wait();
                 //Dichotomy.UpdateDcAll(EndpointUrl,AuthorizationKey).Wait();
-                ChatBackup.TableDemo();
+                //ChatBackup.TableDemo();
                 //EventHub.Receive();               
                 //Console.ReadLine();
             }

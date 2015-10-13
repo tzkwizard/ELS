@@ -58,3 +58,11 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\zh-Hant\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\zh-Hant\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\FirebaseTokenGenerator.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\FireSharp.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\LMS.service.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Threading.Tasks.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\StackExchange.Redis.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\StackExchange.Redis.pdb
