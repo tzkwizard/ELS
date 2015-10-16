@@ -144,6 +144,12 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\System.Web.WebPages.Razor.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\WebActivatorEx.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\WebGrease.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.TransientFaultHandling.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.Unity.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\LMS.model.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\LMS.service.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Antlr3.Runtime.pdb
@@ -182,6 +188,13 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\b
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\System.Net.Http.Formatting.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\System.Web.Http.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\System.Web.Http.WebHost.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.TransientFaultHandling.Core.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.ServiceLocation.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.Unity.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\Microsoft.Practices.Unity.Interception.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\de\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\es\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\fr\Microsoft.Data.Edm.resources.dll

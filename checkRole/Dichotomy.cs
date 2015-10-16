@@ -51,12 +51,13 @@ namespace CheckRole
                     {
                         if (x.Id == "LMSCollection")
                         {
-                            await UpdateDc(x, origin, 5);
+                            var x1 = x;
+                            await _iDbService.ExecuteWithRetries(() => UpdateDc(x1, origin));
                         }
                     }
                 }
             }
-            catch (DocumentClientException e)
+            catch (Exception e)
             {
                 if (reTry > 0)
                 {
@@ -72,61 +73,46 @@ namespace CheckRole
             }
         }
 
-        private static async Task UpdateDc(DocumentCollection oldDc, DocumentCollection origin, int retryTimes)
+        private static async Task UpdateDc(DocumentCollection oldDc, DocumentCollection origin)
         {
-            try
+            var run = await CheckSize(oldDc, origin);
+            if (run)
             {
-                var run = await CheckSize(oldDc, origin);
-                if (run)
+                Trace.TraceInformation("Backup Collection Start.  Name: '{0}', Time: '{1}'", oldDc.Id,
+                    DateTime.Now.ToString(CultureInfo.CurrentCulture));
+
+                var list = GenerateList(oldDc);
+                var newList = list[1];
+                var oldList = list[0];
+
+                if (newList.Count > 0)
                 {
-                    Trace.TraceInformation("Backup Collection Start.  Name: '{0}', Time: '{1}'", oldDc.Id,
-                        DateTime.Now.ToString(CultureInfo.CurrentCulture));
-
-                    var list = GenerateList(oldDc);
-                    var newList = list[1];
-                    var oldList = list[0];
-
-                    if (newList.Count > 0)
-                    {
-                        //create new collection
-                        /*var t = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                    //create new collection
+                    /*var t = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                   DocumentCollection newDc=await client.CreateDocumentCollectionAsync(database.CollectionsLink,
                                                         new DocumentCollection
                                                         {
                                                             Id = "LMSCollection"+t
                                                         });*/
 
-                        //search collection
-                        DocumentCollection newDc = _client.CreateDocumentCollectionQuery(_database.SelfLink)
-                            .Where(c => c.Id == "LMSCollection1444075919174")
-                            .AsEnumerable()
-                            .FirstOrDefault();
-                        if (newDc != null)
-                        {
-                            TransferDc(oldDc, newDc, newList).Wait();
-                            await SaveDisList(newList, oldList, origin, oldDc, newDc);
-                            Trace.TraceInformation("Backup Collection End.  Name: '{0}'==>'{1}', Time: '{2}'", oldDc.Id,
-                                newDc.Id,
-                                DateTime.Now.ToString(CultureInfo.CurrentCulture));
-                        }
+                    //search collection
+                    DocumentCollection newDc = _client.CreateDocumentCollectionQuery(_database.SelfLink)
+                        .Where(c => c.Id == "LMSCollection1444075919174")
+                        .AsEnumerable()
+                        .FirstOrDefault();
+                    if (newDc != null)
+                    {
+                        TransferDc(oldDc, newDc, newList).Wait();
+                        Trace.TraceInformation("Update District List.  Name: '{0}'==>'{1}'", oldDc.Id,
+                            newDc.Id);
+                        await SaveDisList(newList, oldList, origin, oldDc, newDc);
+                        Trace.TraceInformation("Backup Collection End.  Name: '{0}'==>'{1}', Time: '{2}'", oldDc.Id,
+                            newDc.Id,
+                            DateTime.Now.ToString(CultureInfo.CurrentCulture));
                     }
                 }
             }
-            catch (DocumentClientException e)
-            {
-                if (retryTimes > 0 && e.RetryAfter.TotalMilliseconds > 0)
-                {
-                    retryTimes--;
-                    Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
-                    UpdateDc(oldDc, origin, retryTimes).Wait();
-                }
-                else
-                {
-                    Trace.TraceError("Error in updateDc " + e.Message);
-                }
-            }
         }
-
 
 
         private static async Task<bool> CheckSize(DocumentCollection oldDc, DocumentCollection origin)
@@ -135,18 +121,18 @@ namespace CheckRole
             if (oldDc.Id == origin.Id)
             {
                 //backRate = 0.5;
-                backRate = (double)5 / 100000;
+                backRate = (double) 5/100000;
             }
             else
             {
-                backRate = (double)5 / 100000;
+                backRate = (double) 5/100000;
             }
 
             var res = await _client.ReadDocumentCollectionAsync(oldDc.SelfLink);
             var size = res.CollectionSizeUsage;
             var totalSize = res.CollectionSizeQuota;
 
-            return size > totalSize * backRate;
+            return size > totalSize*backRate;
         }
 
         private static List<Hashtable> GenerateList(DocumentCollection oldDc)
@@ -205,21 +191,20 @@ namespace CheckRole
             {
                 allow.District.Add(i.Key.ToString());
             }
-            //await _client.CreateDocumentAsync(origin.DocumentsLink, allow);
-            await _iDbService.AddDocument(_client, origin.SelfLink, allow, 5);
+            await _iDbService.ExecuteWithRetries(() => _client.CreateDocumentAsync(origin.DocumentsLink, allow));
 
             var ds =
                 from d in _client.CreateDocumentQuery<DcAllocate>(origin.DocumentsLink)
                 where d.Type == "DisList" && d.DcName == oldDc.Id
                 select d;
 
-            dynamic l = ds.AsEnumerable().FirstOrDefault();
+            DcAllocate l = ds.AsEnumerable().FirstOrDefault();
             List<string> disList = (from DictionaryEntry i in oldList select i.Key.ToString()).ToList();
 
             if (l != null)
             {
                 l.District = disList;
-                _iDbService.ReplaceDocument(_client, l, 5);
+                await _iDbService.ExecuteWithRetries(() => _client.ReplaceDocumentAsync(l));
             }
             else
             {
@@ -230,8 +215,7 @@ namespace CheckRole
                     DcSelfLink = oldDc.SelfLink,
                     District = disList
                 };
-                //await _client.CreateDocumentAsync(origin.DocumentsLink, allow2);
-                await _iDbService.AddDocument(_client, origin.SelfLink, allow2, 5);
+                await _iDbService.ExecuteWithRetries(() => _client.CreateDocumentAsync(origin.DocumentsLink, allow2));
             }
         }
 
@@ -248,15 +232,24 @@ namespace CheckRole
                         select d;
                     foreach (var item in items)
                     {
-                        var res = await _iDbService.AddDocument(_client, newDc.SelfLink, item, 5);
+                        var item1 = item;
+                        var res =
+                            await
+                                _iDbService.ExecuteWithRetries(() => _client.CreateDocumentAsync(newDc.SelfLink, item1));
                         if (res.StatusCode == HttpStatusCode.Created)
                         {
-                            await _iDbService.DeleteDocument(_client, item._self, 5);
+                            //await _iDbService.DeleteDocument(_client, item1._self, 5);
+                            var res2 =
+                                await _iDbService.ExecuteWithRetries(() => _client.DeleteDocumentAsync(item1._self));
+                            if (res2 == null)
+                            {
+                                Trace.TraceInformation("FFFFF");
+                            }
                         }
                     }
                 }
             }
-            catch (DocumentClientException e)
+            catch (Exception e)
             {
                 Trace.TraceError("Error in processing " + e.Message);
             }

@@ -2,6 +2,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\LMS.model.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\LMS.model.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Elasticsearch.Net.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Microsoft.Data.OData.dll
@@ -13,6 +14,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\System.Spatial.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Elasticsearch.Net.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Elasticsearch.Net.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Microsoft.Azure.KeyVault.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Microsoft.Data.Edm.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\Microsoft.Data.OData.xml

@@ -70,3 +70,10 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\StackExchange.Redis.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\StackExchange.Redis.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\FirebaseTokenGenerator.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\Microsoft.Practices.ServiceLocation.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\Microsoft.Practices.TransientFaultHandling.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\Microsoft.Practices.Unity.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Release\ReceiverRole\Microsoft.Practices.Unity.Interception.dll

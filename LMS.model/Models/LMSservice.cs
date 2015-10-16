@@ -1,9 +1,26 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Partitioning;
+using Newtonsoft.Json;
 
 namespace LMS.model.Models
 {
 
-    public class DcAllocate
+    public class CurrentCollection
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string _self { get; set; }
+    }
+
+    public class RangeResolver
+    {
+        public string id { get; set; }
+        public RangePartitionResolver<long> resolver { get; set; }
+        public string resolverString { get; set; }
+    }
+
+    public class DcAllocate : Document
     {
         public string Type { get; set; }
         public string DcName { get; set; }
@@ -58,6 +75,8 @@ namespace LMS.model.Models
 
     public class Topic
     {
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; set; }
         public string Type { get; set; }
         public PostPath Path { get; set; }
         public InfoPost Info { get; set; }

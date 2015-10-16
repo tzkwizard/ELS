@@ -15,6 +15,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\System.Net.Http.Extensions.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\System.Net.Http.Primitives.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\System.Spatial.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\LMS.model.pdb
@@ -32,6 +33,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\System.Net.Http.Extensions.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\System.Net.Http.Primitives.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\System.Spatial.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\Nest.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\Nest.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Debug\Elasticsearch.Net.pdb

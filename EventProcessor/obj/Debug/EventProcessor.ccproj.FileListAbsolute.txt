@@ -37,6 +37,13 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Data.OData.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Data.Services.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Practices.ServiceLocation.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Practices.TransientFaultHandling.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Practices.Unity.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.ServiceBus.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.ServiceBus.Messaging.EventProcessorHost.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\obj\Debug\ReceiverRole\Microsoft.Threading.Tasks.dll

@@ -37,6 +37,15 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Data.OData.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Data.Services.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.ServiceLocation.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.TransientFaultHandling.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.Unity.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.ServiceBus.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Threading.Tasks.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Threading.Tasks.Extensions.dll

@@ -20,6 +20,7 @@ namespace CheckRole
         // rather than recreating it on every request
         private CloudQueue _client;
         private Dichotomy _dichotomy;
+        private LoadBalance _loadBalance;
         private ManualResetEvent CompletedEvent = new ManualResetEvent(false);
         private bool _flag;
 
@@ -45,7 +46,8 @@ namespace CheckRole
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
                     _flag = false;
                     //Task.Run(() => _dichotomy.UpdateDcAll());
-                    _dichotomy.UpdateDcAll().Wait();                    
+                    //_dichotomy.UpdateDcAll().Wait();
+                    _loadBalance.CheckBalance().Wait();
                     Trace.TraceInformation("End Check Collection Usage.  Time: '{0}'",
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
                     _flag = true;
@@ -71,6 +73,7 @@ namespace CheckRole
             var url = CloudConfigurationManager.GetSetting("EndpointUrl");
             var key = CloudConfigurationManager.GetSetting("AuthorizationKey");
             _dichotomy = new Dichotomy(url, key);
+            _loadBalance = new LoadBalance(url, key);
             return base.OnStart();
         }
 

@@ -64,3 +64,5 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Rele
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Release\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Release\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Release\zh-Hant\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Release\Microsoft.Azure.Documents.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Release\Microsoft.Azure.Documents.Client.xml

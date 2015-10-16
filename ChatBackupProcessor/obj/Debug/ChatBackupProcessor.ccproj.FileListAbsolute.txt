@@ -40,6 +40,15 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Data.OData.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Data.Services.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.ServiceLocation.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.TransientFaultHandling.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.Unity.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.ServiceBus.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Threading.Tasks.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Debug\FirebaseRole\Microsoft.Threading.Tasks.Extensions.Desktop.dll

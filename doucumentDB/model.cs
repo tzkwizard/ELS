@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 
 namespace doucumentDB
 {
-    internal sealed class Parent
+    public class Parent
     {
         public string FamilyName { get; set; }
         public string FirstName { get; set; }
     }
 
-    internal sealed class Child
+    public class Child
     {
         public string FamilyName { get; set; }
         public string FirstName { get; set; }
@@ -22,26 +22,32 @@ namespace doucumentDB
         public Pet[] Pets { get; set; }
     }
 
-    internal sealed class Pet
+    public class Pet
     {
         public string GivenName { get; set; }
     }
 
-    internal sealed class Address
+    public class Address
     {
+        [JsonProperty(PropertyName = "State")]
         public string State { get; set; }
+        [JsonProperty(PropertyName = "County")]
         public string County { get; set; }
+        [JsonProperty(PropertyName = "City")]
         public string City { get; set; }
     }
 
-    internal sealed class Family
+    public class Family
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
+        [JsonProperty(PropertyName = "LastName")]
         public string LastName { get; set; }
         public Parent[] Parents { get; set; }
         public Child[] Children { get; set; }
+        [JsonProperty(PropertyName = "Address")]
         public Address Address { get; set; }
+        [JsonProperty(PropertyName = "IsRegistered")]
         public bool IsRegistered { get; set; }
     }
 

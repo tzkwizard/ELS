@@ -173,4 +173,8 @@ Global
 		{D295E80F-F775-495D-A58F-E9704428AC7D} = {3AD134C2-74BA-4B63-98AA-3BAEDAC6DDB0}
 		{A512780F-5382-4C44-9939-B7357E5195EA} = {3AD134C2-74BA-4B63-98AA-3BAEDAC6DDB0}
 	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4;packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.WindowsAzure.TransientFaultHandling.5.1.1212.0\lib\NET4;packages\EnterpriseLibrary.WindowsAzure.TransientFaultHandling.5.1.1212.0\DesignTime;packages\EnterpriseLibrary.WindowsAzure.TransientFaultHandling.5.0.1118.0\lib\NET4;packages\EnterpriseLibrary.WindowsAzure.TransientFaultHandling.5.0.1118.0\DesignTime;packages\EnterpriseLibrary.WindowsAzure.Configuration.5.0.1118.2\lib\NET4;packages\EnterpriseLibrary.WindowsAzure.Configuration.5.0.1118.2\DesignTime;packages\TransientFaultHandling.Core.5.1.1209.0\lib\NET4
+	EndGlobalSection
 EndGlobal

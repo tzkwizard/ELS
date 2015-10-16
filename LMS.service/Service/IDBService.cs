@@ -5,6 +5,9 @@ using FireSharp.Interfaces;
 using LMS.model.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Partitioning;
+using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.AzureStorage;
+using Microsoft.Practices.TransientFaultHandling;
 
 namespace LMS.service.Service
 {
@@ -32,5 +35,25 @@ namespace LMS.service.Service
 
         Task<ResourceResponse<Document>> AddDocument(DocumentClient client, string dcSelfLink, dynamic item,
             int retryTimes);
+
+        Task<ResourceResponse<Document>> ExecuteWithRetries(
+            Func<Task<ResourceResponse<Document>>> function);
+
+        Task ExecuteWithRetries(Func<Task> function);
+
+        Task<ResourceResponse<Document>> ExecuteWithRetries(int retryTimes,
+            Func<Task<ResourceResponse<Document>>> function);
+
+        Task ExecuteWithRetries(int retryTimes, Func<Task> function);
+        RetryPolicy<StorageTransientErrorDetectionStrategy> GetRetryPolicy();
+
+        Task<int> BatchTransfer(string sp1, string sp2, DocumentClient client, List<dynamic> docs);
+
+        Task CollectionTransfer(DocumentClient client, DocumentCollection dc1, DocumentCollection dc2);
+
+        RangePartitionResolver<long> GetResolver(DocumentClient client, DocumentCollection dc);
+
+        Task<bool> UpdateResolver(DocumentClient client, DocumentCollection dc, DocumentCollection newDc);
+        Task<bool> InitResolver(DocumentClient client, DocumentCollection dc);
     }
 }

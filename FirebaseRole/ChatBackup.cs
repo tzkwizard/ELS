@@ -12,6 +12,8 @@ using FireSharp.Response;
 using LMS.model.Models;
 using LMS.service.Service;
 using Microsoft.Azure;
+using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.AzureStorage;
+using Microsoft.Practices.TransientFaultHandling;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
@@ -25,6 +27,7 @@ namespace FirebaseRole
         private static CloudTable _table;
         private static int reTry = 5;
         private static IDBService _iDbService;
+        private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
 
         public ChatBackup(CloudStorageAccount storageAccount)
         {
@@ -32,6 +35,7 @@ namespace FirebaseRole
             _table = c.GetTableReference("Chat");
             _table.CreateIfNotExists();
             _iDbService = new DBService();
+            _retryPolicy = _iDbService.GetRetryPolicy();
             _firebaseClient = _iDbService.GetFirebaseClient(CloudConfigurationManager.GetSetting("Firebasenode"));
         }
 
@@ -48,7 +52,7 @@ namespace FirebaseRole
                     await Backup(r, _table, 5);
                 }
             }
-            catch (FirebaseException e)
+            catch (Exception e)
             {
                 //wait and retry 5 times
                 if (reTry > 0)
@@ -80,38 +84,38 @@ namespace FirebaseRole
                     var sorted = origin.OrderBy(o => o.Value.timestamp).ToList();
 
                     if (sorted.Count <= RecordRemained) return;
-                    var docNumber = 0;
                     TableBatchOperation batchOperation = new TableBatchOperation();
 
                     for (int i = 0; i < sorted.Count - RecordRemained; i++)
                     {
                         var message = sorted[i];
                         TableChat c = _iDbService.TableChatData(room, message);
-
-                        if (docNumber == 100)
+                        batchOperation.Insert(c);
+                        if (batchOperation.Count == 100)
                         {
-                            var res = await _table.ExecuteBatchAsync(batchOperation);
+                            //var res = await _table.ExecuteBatchAsync(batchOperation);
+                            var operation = batchOperation;
+                            var res = await _retryPolicy.ExecuteAsync(
+                                () => _table.ExecuteBatchAsync(operation));
+
                             await DeleteFirebase(res);
                             batchOperation = new TableBatchOperation();
-                            docNumber = 0;
-                        }
-                        else
-                        {
-                            batchOperation.Insert(c);
-                            docNumber++;
                         }
                     }
 
                     if (batchOperation.Count > 0)
                     {
-                        var res = await _table.ExecuteBatchAsync(batchOperation);
+                        //var res = await _table.ExecuteBatchAsync(batchOperation);
+                        var operation = batchOperation;
+                        var res = await _retryPolicy.ExecuteAsync(
+                            () => _table.ExecuteBatchAsync(operation));
                         await DeleteFirebase(res);
                     }
                 }
             }
-            catch (StorageException e)
+            catch (Exception e)
             {
-                //retry is retryable
+                /* //retry is retryable
                 if (retry > 0 &&
                     (e.RequestInformation.HttpStatusCode == 500 || e.RequestInformation.HttpStatusCode == 503))
                 {
@@ -120,9 +124,9 @@ namespace FirebaseRole
                     Backup(room, table, retry).Wait();
                 }
                 else
-                {
-                    Trace.TraceError("Error in room : " + room.Name + e.Message);
-                }
+                {*/
+                Trace.TraceError("Error in room : " + room.Name + e.Message);
+                //}
             }
         }
 

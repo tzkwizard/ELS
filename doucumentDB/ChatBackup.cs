@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,11 @@ using LMS.service.Service;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
+using Microsoft.Practices.TransientFaultHandling;
+using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.AzureStorage;
+using Microsoft.WindowsAzure.Storage.RetryPolicies;
+using Incremental = Microsoft.Practices.TransientFaultHandling.Incremental;
+
 
 namespace doucumentDB
 {
@@ -35,6 +41,8 @@ namespace doucumentDB
             //Search3(table);
             Insert(table).Wait();
             //BackupDocumentChat(table).Wait();
+
+           
         }
 
         private static void Search(CloudTable table)
@@ -85,9 +93,71 @@ namespace doucumentDB
             }
         }
 
-        private static async Task Insert(CloudTable table)
+        public static async Task Insert(CloudTable table)
         {
-            // Create a new customer entity.
+            CustomerEntity customer1 = new CustomerEntity("Harp", "Walters")
+            {
+                Email = "Walter@contoso.com",
+                PhoneNumber = "425-555-0101"
+            };
+            CustomerEntity customer2 = new CustomerEntity("Harp", "Ben")
+            {
+                Email = "Ben@contoso.com",
+                PhoneNumber = "425-555-0102"
+            };
+            TableBatchOperation batchOperation = new TableBatchOperation();
+            // Create the TableOperation object that inserts the customer entity.
+            TableOperation insertOperation = TableOperation.Insert(customer1);
+            batchOperation.Insert(customer1);
+            batchOperation.Insert(customer2);
+            // Execute the insert operation.
+
+            Incremental retryStrategy = new Incremental(5, TimeSpan.FromSeconds(1),
+   TimeSpan.FromSeconds(2));
+            ExponentialBackoff retryStrategy2=new ExponentialBackoff(5,TimeSpan.FromSeconds(1),TimeSpan.FromSeconds(5),TimeSpan.FromSeconds(2));
+            TimeSpan back = TimeSpan.FromSeconds(31);
+ 
+            // Define your retry policy using the retry strategy and the Azure storage
+            // transient fault detection strategy.
+            RetryPolicy<StorageTransientErrorDetectionStrategy> retryPolicy =
+              new RetryPolicy<StorageTransientErrorDetectionStrategy>(retryStrategy);
+
+            RetryPolicy<StorageTransientErrorDetectionStrategy> r =
+                new RetryPolicy<StorageTransientErrorDetectionStrategy>(retryStrategy2);
+            // Receive notifications about retries.
+            retryPolicy.Retrying += (sender, args) =>
+            {
+                Console.WriteLine("Information");
+                // Log details of the retry.
+                var msg = String.Format("Retry - Count:{0}, Delay:{1}, Exception:{2}",
+                    args.CurrentRetryCount, args.Delay, args.LastException);
+                Console.WriteLine(msg, "Information");
+            };
+
+            try
+            {
+                // Do some work that may result in a transient fault.
+              await retryPolicy.ExecuteAsync(
+                  () => table.ExecuteBatchAsync(batchOperation));
+            }
+            catch (Exception e)
+            {
+                var z = e;
+            }
+            Console.ReadLine();
+
+
+
+
+
+
+
+
+
+
+
+
+          /*  // Create a new customer entity.
             CustomerEntity customer1 = new CustomerEntity("Harp", "Walters")
             {
                 Email = "Walter@contoso.com",
@@ -119,7 +189,7 @@ namespace doucumentDB
 
                 var z = e.RequestInformation.HttpStatusCode;
                 var zz = 3;
-            }
+            }*/
             
         }
         private static async Task BackupDocumentChat(CloudTable table)

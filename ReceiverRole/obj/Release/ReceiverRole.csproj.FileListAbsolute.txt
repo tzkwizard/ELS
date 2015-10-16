@@ -91,3 +91,16 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\R
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Elasticsearch.Net.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Elasticsearch.Net.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\FirebaseTokenGenerator.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.TransientFaultHandling.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.ServiceLocation.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.Unity.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.Unity.Interception.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.TransientFaultHandling.Core.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.ServiceLocation.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.Unity.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ReceiverRole\bin\Release\Microsoft.Practices.Unity.Interception.xml

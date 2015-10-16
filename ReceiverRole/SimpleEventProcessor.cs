@@ -29,7 +29,7 @@ namespace ReceiverRole
         private static DocumentClient _documentClient;
         private static DocumentCollection _masterCollection;
         private static Database _database;
-        //private static StoredProcedure _sp;
+        private static StoredProcedure _sp;
         private static string _endpointUrl;
         private static string _authorizationKey;
         private static string _databaseName;
@@ -60,13 +60,14 @@ namespace ReceiverRole
             _database = _database ?? _iDbService.GetDd(_documentClient, _databaseName);
             _masterCollection = _masterCollection ??
                                 _iDbService.GetDc(_documentClient, _masterCollectionName, _databaseName);
-            //_sp = _sp ?? _iDbService.GetSp(_documentClient, _masterCollection, "Post");
+            _sp = _sp ?? _iDbService.GetSp(_documentClient, _masterCollection, "Post");
         }
 
         public async Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> events)
         {
             try
             {
+                CheckResolver();
                 foreach (EventData eventData in events)
                 {
                     string dataString = Encoding.UTF8.GetString(eventData.GetBytes());
@@ -82,7 +83,7 @@ namespace ReceiverRole
                 Trace.TraceError("Error in processing: " + exp.Message);
             }
         }
-
+        
         public async Task CloseAsync(PartitionContext context, CloseReason reason)
         {
             Trace.TraceWarning("SimpleEventProcessor CloseAsync.  Partition '{0}', Reason: '{1}'.",
@@ -93,54 +94,49 @@ namespace ReceiverRole
             }
         }
 
+        private void CheckResolver()
+        {
+            var resolver = _iDbService.GetResolver(_documentClient, _masterCollection);
+
+            _documentClient.PartitionResolvers[_database.SelfLink] = resolver;
+        }
         private async Task SendToDB(string dataString, int tryTimes)
         {
-            try
+            dynamic data = JsonConvert.DeserializeObject(dataString);
+            var path = data.url.ToString().Split('/');
+            data.body.timestamp = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            PostMessage message = _iDbService.PostData(data, path);
+
+            DocumentCollection documentCollection = _iDbService.SearchCollection(path[1], _masterCollection,
+                _database);
+
+            //Send to DB         
+            //var res2 = await _documentClient.ExecuteStoredProcedureAsync<Document>(
+            //       _sp.SelfLink, data, _masterCollection.SelfLink);
+
+           /* var res =
+                await
+                    _iDbService.ExecuteWithRetries(
+                        () => _documentClient.CreateDocumentAsync(documentCollection.SelfLink, message));*/
+
+            //create document with RangePartitionResolver
+            var res = await _iDbService.ExecuteWithRetries(() => _documentClient.CreateDocumentAsync(_database.SelfLink, message));
+
+            //Check response and notify Firebase
+            if (res.StatusCode == HttpStatusCode.Created)
             {
-                dynamic data = JsonConvert.DeserializeObject(dataString);
-                var path = data.url.ToString().Split('/');
-                data.body.timestamp = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-                PostMessage message = _iDbService.PostData(data, path);
-
-                DocumentCollection documentCollection = _iDbService.SearchCollection(path[1], _masterCollection,
-                    _database);
-
-                //Send to DB         
-                /*var res2 = await _documentClient.ExecuteStoredProcedureAsync<Document>(
-                    _sp.SelfLink, mess, _masterCollection.SelfLink);*/
-                ResourceResponse<Document> res =
-                    await _documentClient.CreateDocumentAsync(documentCollection.SelfLink, message);
-
-                //Check response and notify Firebase
-                if (res.StatusCode == HttpStatusCode.Created)
+                Trace.TraceInformation("DocumentDB received. Message: '{0}'", res.Resource.SelfLink);
+                try
                 {
-                    Trace.TraceInformation("DocumentDB received. Message: '{0}'", res.Resource.SelfLink);
-                    try
+                    FirebaseResponse response = await _client.PushAsync(data.url.ToString(), data.body);
+                    if (response.StatusCode == HttpStatusCode.OK)
                     {
-                        FirebaseResponse response = await _client.PushAsync(data.url.ToString(), data.body);
-                        if (response.StatusCode == HttpStatusCode.OK)
-                        {
-                            Trace.TraceInformation("Firebase received.  Message: '{0}'", response.Body);
-                        }
-                    }
-                    catch (FirebaseException e)
-                    {
-                        Trace.TraceError("Error in push to Firebase: " + e.Message);
+                        Trace.TraceInformation("Firebase received.  Message: '{0}'", response.Body);
                     }
                 }
-            }
-            catch (DocumentClientException e)
-            {
-                //wait and retry 5 times to create document if collection request rate is large
-                if (tryTimes > 0 && e.RetryAfter.TotalMilliseconds > 0)
+                catch (FirebaseException e)
                 {
-                    tryTimes--;
-                    Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
-                    SendToDB(dataString, tryTimes).Wait();
-                }
-                else
-                {
-                    Trace.TraceError("Error in push to DocumentDB: " + e.Message);
+                    Trace.TraceError("Error in push to Firebase: " + e.Message);
                 }
             }
         }

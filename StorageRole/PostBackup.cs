@@ -12,6 +12,9 @@ using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
+using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.AzureStorage;
+using Microsoft.Practices.TransientFaultHandling;
+using Microsoft.ServiceBus;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 
@@ -24,6 +27,7 @@ namespace StorageRole
         private static Database _database;
         private static IDBService _iDbService;
         private static int reTry = 5;
+        private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
 
         public PostBackup(CloudStorageAccount storageAccount, string endpointUrl, string authorizationKey)
         {
@@ -36,6 +40,7 @@ namespace StorageRole
             _database =
                 _client.CreateDatabaseQuery().Where(db => db.Id == CloudConfigurationManager.GetSetting("Database"))
                     .AsEnumerable().FirstOrDefault();
+            _retryPolicy = _iDbService.GetRetryPolicy();
         }
 
         public async Task BackupPostAll()
@@ -46,10 +51,10 @@ namespace StorageRole
                     .AsEnumerable();
                 foreach (var x in dz)
                 {
-                    await BackupPostCollection(x, 5);
+                    await BackupPostCollection(x);
                 }
             }
-            catch (DocumentClientException e)
+            catch (Exception e)
             {
                 Trace.TraceError("Error in updateDc " + e.Message);
                 if (reTry > 0)
@@ -66,7 +71,7 @@ namespace StorageRole
             }
         }
 
-        private static async Task BackupPostCollection(DocumentCollection dc, int retryTimes)
+        private static async Task BackupPostCollection(DocumentCollection dc)
         {
             Trace.TraceInformation("Collection '{0}' start.  Time: '{1}'", dc.Id,
                 DateTime.Now.ToString(CultureInfo.CurrentCulture));
@@ -77,59 +82,43 @@ namespace StorageRole
                     where d.Type == "Post"
                     select d;
 
-                var docNumber = 0;
                 TableBatchOperation batchOperation = new TableBatchOperation();
                 List<String> documentList = new List<string>();
                 foreach (var d in ds)
                 {
                     TablePost c = _iDbService.TablePostData(d);
-                    if (docNumber == 100)
+                    batchOperation.Insert(c);
+                    documentList.Add(d.id);
+
+                    if (batchOperation.Count == 100)
                     {
-                        await _table.ExecuteBatchAsync(batchOperation);
+                        var operation = batchOperation;
+                        var res = await _retryPolicy.ExecuteAsync(
+                            () => _table.ExecuteBatchAsync(operation));
                         batchOperation = new TableBatchOperation();
-                        docNumber = 0;
-                        await _iDbService.DeleteDocByIdList(_client, dc, documentList,5);
-                        documentList = new List<string>();
-                    }
-                    else
-                    {
-                        batchOperation.Insert(c);
-                        documentList.Add(d.id);
-                        docNumber++;
+                        if (res.Count == operation.Count)
+                        {
+                            await _iDbService.DeleteDocByIdList(_client, dc, documentList, 5);
+                            documentList = new List<string>();
+                            Trace.TraceInformation("inserted");
+                        }
                     }
                 }
                 if (batchOperation.Count > 0)
                 {
-                    await _table.ExecuteBatchAsync(batchOperation);
-                    await _iDbService.DeleteDocByIdList(_client, dc, documentList,5);
+                    var operation = batchOperation;
+                    var res = await _retryPolicy.ExecuteAsync(
+                        () => _table.ExecuteBatchAsync(operation));
+                    if (res.Count == operation.Count)
+                    {
+                        await _iDbService.DeleteDocByIdList(_client, dc, documentList, 5);
+                        Trace.TraceInformation("inserted");
+                    }
                 }
             }
-            catch (DocumentClientException e)
+            catch (Exception e)
             {
-                if (retryTimes > 0 && e.RetryAfter.TotalMilliseconds > 0)
-                {
-                    retryTimes--;
-                    Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
-                    BackupPostCollection(dc, retryTimes).Wait();
-                }
-                else
-                {
-                    Trace.TraceError("Error in BackupCollection " + e.Message);
-                }
-            }
-            catch (StorageException e)
-            {
-                if (retryTimes > 0 &&
-                    (e.RequestInformation.HttpStatusCode == 500 || e.RequestInformation.HttpStatusCode == 503))
-                {
-                    retryTimes--;
-                    Thread.Sleep(1000);
-                    BackupPostCollection(dc, retryTimes).Wait();
-                }
-                else
-                {
-                    Trace.TraceError("Error in BackupCollection " + e.Message);
-                }
+                Trace.TraceError("Error in BackupCollection " + e.Message);
             }
         }
     }

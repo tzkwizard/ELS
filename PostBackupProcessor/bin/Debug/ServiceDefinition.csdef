@@ -22,12 +22,6 @@
       <Content destination=".\">
         <SourceDirectory path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\rcf\Debug\StorageRoleContent\" />
       </Content>
-      <Content destination=".\">
-        <SourceDirectory path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\ecf\StorageRoleContent\" />
-      </Content>
     </Contents>
-    <Imports>
-      <Import moduleName="Diagnostics" />
-    </Imports>
   </WorkerRole>
 </ServiceDefinition>
