@@ -103,11 +103,21 @@ namespace doucumentDB
             //await _iDbService.CollectionTransfer(client, dc2, dc);
 
 
-            await client.CreateDocumentAsync(dc.SelfLink, new CurrentCollection
+          /*  await client.CreateDocumentAsync(dc.SelfLink, new CurrentCollection
             {
                 id = "CurrentCollection",
                 name=dc.Id
-            });
+            });*/
+            var resolver = _iDbService.GetResolver(client, dc);
+            foreach (var d in resolver.PartitionMap)
+            {
+                Console.WriteLine(d.Value);
+                Offer offer = client.CreateOfferQuery()
+                                      .Where(r => r.ResourceLink == d.Value)
+                                      .AsEnumerable()
+                                      .SingleOrDefault();
+            }
+
 
 
 
@@ -120,7 +130,7 @@ namespace doucumentDB
             var rangeResolver = _iDbService.GetResolver(client, dc);
             client.PartitionResolvers[database.SelfLink] = rangeResolver;
 
-         /*   var created = await _iDbService.InitResolver(client, dc);
+           /* var created = await _iDbService.InitResolver(client, dc);
            
             while (true)
             {

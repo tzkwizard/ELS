@@ -44,25 +44,15 @@ namespace CheckRole
                     var run = await CheckSize(_curDc);
                     if (run)
                     {
-                        //create new collection
-                        /*var t = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-                  DocumentCollection newDc=await client.CreateDocumentCollectionAsync(database.CollectionsLink,
-                                                        new DocumentCollection
-                                                        {
-                                                            Id = "LMSCollection"+t
-                                                        });*/
+                        var newDc = await GetNewCollection();
 
-                        //search collection
-                        DocumentCollection newDc = _client.CreateDocumentCollectionQuery(_database.SelfLink)
-                            .Where(c => c.Id == "LMSCollection1444075919174")
-                            .AsEnumerable()
-                            .FirstOrDefault();
                         if (newDc != null)
                         {
                             try
                             {
                                 await UpdateCurrentCollection(newDc);
                                 await _iDbService.UpdateResolver(_client, _originDc, newDc);
+                                await UpdatePerformanceLevel();
                             }
                             catch (Exception e)
                             {
@@ -90,6 +80,94 @@ namespace CheckRole
                     Trace.TraceError("Error in start " + e.Message);
                 }
             }
+        }
+
+        private static async Task UpdatePerformanceLevel()
+        {
+            var resolver = _iDbService.GetResolver(_client, _originDc);
+            if (resolver.PartitionMap.Count == 2)
+            {
+                Offer offer = _client.CreateOfferQuery()
+                    .Where(r => r.ResourceLink == resolver.PartitionMap.First().Value)
+                    .AsEnumerable()
+                    .SingleOrDefault();
+                if (offer != null)
+                {
+                    offer.OfferType = "S2";
+                    Offer updated = await _client.ReplaceOfferAsync(offer);
+                }
+                offer = _client.CreateOfferQuery()
+                    .Where(r => r.ResourceLink == resolver.PartitionMap.Last().Value)
+                    .AsEnumerable()
+                    .SingleOrDefault();
+                if (offer != null)
+                {
+                    offer.OfferType = "S3";
+                    Offer updated = await _client.ReplaceOfferAsync(offer);
+                }
+            }
+            else
+            {
+                var n = 1;
+                foreach (var d in resolver.PartitionMap)
+                {
+                    Offer offer = _client.CreateOfferQuery()
+                        .Where(r => r.ResourceLink == d.Value)
+                        .AsEnumerable()
+                        .SingleOrDefault();
+                    if (offer == null) continue;
+                    if (n == 1 && offer.OfferType != "S1")
+                    {
+                        offer.OfferType = "S1";
+                        Offer updated = await _client.ReplaceOfferAsync(offer);
+                    }
+                    else if (n == resolver.PartitionMap.Count && offer.OfferType != "S3")
+                    {
+                        offer.OfferType = "S3";
+                        Offer updated = await _client.ReplaceOfferAsync(offer);
+                    }
+                    else if (offer.OfferType != "S2")
+                    {
+                        offer.OfferType = "S2";
+                        Offer updated = await _client.ReplaceOfferAsync(offer);
+                    }
+                    n++;
+                }
+            }
+        }
+
+        private static async Task<DocumentCollection> GetNewCollection()
+        {
+            //create new collection
+            /*var t = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            DocumentCollection newDc=await _client.CreateDocumentCollectionAsync(_database.CollectionsLink,
+                                            new DocumentCollection
+                                            {
+                                                Id = "LMSCollection"+t
+                                            });
+            //Fetch the resource to be updated
+            Offer offer = _client.CreateOfferQuery()
+                                      .Where(r => r.ResourceLink == newDc.SelfLink)
+                                      .AsEnumerable()
+                                      .SingleOrDefault();
+
+            //Change the user mode to All
+            if (offer != null)
+            {
+                offer.OfferType = "S3";
+
+                //Now persist these changes to the database by replacing the original resource
+                Offer updated = await _client.ReplaceOfferAsync(offer);
+            }*/
+
+            //search collection
+            DocumentCollection newDc = _client.CreateDocumentCollectionQuery(_database.SelfLink)
+                .Where(c => c.Id == "LMSCollection1444075919174")
+                .AsEnumerable()
+                .FirstOrDefault();
+
+
+            return newDc;
         }
 
         private static async Task UpdateCurrentCollection(DocumentCollection newDc)

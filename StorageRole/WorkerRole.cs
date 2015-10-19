@@ -47,6 +47,9 @@ namespace StorageRole
                     _postBackup.BackupPostAll().Wait();
                     Trace.TraceInformation("End Backup Post.  Time: '{0}'",
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
+                    //_postBackup.CleanCollection().Wait();
+                    Trace.TraceInformation("End Clean Collection.  Time: '{0}'",
+                        DateTime.Now.ToString(CultureInfo.CurrentCulture));
                     _flag = true;
                 }
                 Thread.Sleep(1000);

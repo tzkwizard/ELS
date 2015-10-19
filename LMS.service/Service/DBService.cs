@@ -710,6 +710,36 @@ function bulkImport(docs) {
             return sp;
         }
 
+        public async Task BatchDelete(DocumentCollection dc, DocumentClient client, List<dynamic> docs)
+        {
+            var sp = client.CreateStoredProcedureQuery(dc.SelfLink).Where(c => c.Id == "BatchDelete")
+                .AsEnumerable()
+                .FirstOrDefault() ?? await client.CreateStoredProcedureAsync(dc.SelfLink, BatchDelete());
+            var res = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
+                sp.SelfLink, docs));
+
+
+            //Process if some delete fail in batchDelete 
+            if (res.Response.Count != docs.Count)
+            {
+                var cur = res.Response.Count;
+                while (cur < docs.Count)
+                {
+                    List<dynamic> s = new List<dynamic>();
+                    for (int i = cur; i < docs.Count; i++)
+                    {
+                        if (s.Count < docs.Count)
+                        {
+                            s.Add(docs[i]);
+                        }
+                    }
+                    var res2 = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
+                        sp.SelfLink, docs));
+                    cur = cur + res2.Response.Count;
+                }
+            }
+        }
+
         public async Task CollectionTransfer(DocumentClient client, DocumentCollection dc1, DocumentCollection dc2)
         {
             var sp = client.CreateStoredProcedureQuery(dc1.SelfLink).Where(c => c.Id == "BatchDelete")
@@ -823,7 +853,6 @@ function bulkImport(docs) {
 
         public async Task<bool> InitResolver(DocumentClient client, DocumentCollection dc)
         {
-
             var start = (long) (DateTime.UtcNow.AddDays(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             //var end = (long) (DateTime.UtcNow.AddDays(1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             long end = (long) (start + TimeSpan.FromDays(365).TotalMilliseconds);
@@ -833,6 +862,16 @@ function bulkImport(docs) {
                 {
                     {new Range<long>(start, end), dc.SelfLink}
                 });
+
+            var m =
+                client.CreateDocumentQuery(dc.DocumentsLink)
+                    .Where(x => x.Id == "AZresolver")
+                    .AsEnumerable()
+                    .FirstOrDefault();
+            if (m != null)
+            {
+                await ExecuteWithRetries(() => client.DeleteDocumentAsync(m.SelfLink));
+            }
             var res = await ExecuteWithRetries(() => client.CreateDocumentAsync(dc.SelfLink, new RangeResolver
             {
                 id = "AZresolver",

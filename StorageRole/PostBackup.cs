@@ -84,11 +84,12 @@ namespace StorageRole
 
                 TableBatchOperation batchOperation = new TableBatchOperation();
                 List<String> documentList = new List<string>();
+                List<dynamic> docList = new List<dynamic>();
                 foreach (var d in ds)
                 {
                     TablePost c = _iDbService.TablePostData(d);
                     batchOperation.Insert(c);
-                    documentList.Add(d.id);
+                    docList.Add(d);
 
                     if (batchOperation.Count == 100)
                     {
@@ -98,8 +99,8 @@ namespace StorageRole
                         batchOperation = new TableBatchOperation();
                         if (res.Count == operation.Count)
                         {
-                            await _iDbService.DeleteDocByIdList(_client, dc, documentList, 5);
-                            documentList = new List<string>();
+                            await _iDbService.BatchDelete(dc,_client,docList);
+                            docList = new List<dynamic>();
                             Trace.TraceInformation("inserted");
                         }
                     }
@@ -111,7 +112,7 @@ namespace StorageRole
                         () => _table.ExecuteBatchAsync(operation));
                     if (res.Count == operation.Count)
                     {
-                        await _iDbService.DeleteDocByIdList(_client, dc, documentList, 5);
+                        await _iDbService.BatchDelete(dc, _client, docList);
                         Trace.TraceInformation("inserted");
                     }
                 }
@@ -119,6 +120,33 @@ namespace StorageRole
             catch (Exception e)
             {
                 Trace.TraceError("Error in BackupCollection " + e.Message);
+            }
+        }
+
+
+        public async Task CleanCollection()
+        {
+            IEnumerable<DocumentCollection> dz = _client.CreateDocumentCollectionQuery(_database.SelfLink)
+                   .AsEnumerable();
+            foreach (var x in dz)
+            {
+                if (x.Id == CloudConfigurationManager.GetSetting("MasterCollection"))
+                {
+                    Offer offer = _client.CreateOfferQuery()
+                   .Where(r => r.ResourceLink == x.SelfLink)
+                   .AsEnumerable()
+                   .SingleOrDefault();
+                    if (offer != null)
+                    {
+                        offer.OfferType = "S3";
+                        Offer updated = await _client.ReplaceOfferAsync(offer);
+                        await _iDbService.InitResolver(_client,x);
+                    }
+                }
+                else
+                {
+                    await _client.DeleteDocumentCollectionAsync(x.SelfLink);
+                }
             }
         }
     }

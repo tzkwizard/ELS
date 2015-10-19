@@ -49,7 +49,7 @@ namespace FirebaseRole
                 foreach (var room in rooms)
                 {
                     dynamic r = room;
-                    await Backup(r, _table, 5);
+                    await Backup(r);
                 }
             }
             catch (Exception e)
@@ -69,7 +69,7 @@ namespace FirebaseRole
             }
         }
 
-        private async Task Backup(dynamic room, CloudTable table, int retry)
+        private async Task Backup(dynamic room)
         {
             try
             {
@@ -93,7 +93,6 @@ namespace FirebaseRole
                         batchOperation.Insert(c);
                         if (batchOperation.Count == 100)
                         {
-                            //var res = await _table.ExecuteBatchAsync(batchOperation);
                             var operation = batchOperation;
                             var res = await _retryPolicy.ExecuteAsync(
                                 () => _table.ExecuteBatchAsync(operation));
@@ -105,7 +104,6 @@ namespace FirebaseRole
 
                     if (batchOperation.Count > 0)
                     {
-                        //var res = await _table.ExecuteBatchAsync(batchOperation);
                         var operation = batchOperation;
                         var res = await _retryPolicy.ExecuteAsync(
                             () => _table.ExecuteBatchAsync(operation));

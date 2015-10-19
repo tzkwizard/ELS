@@ -48,7 +48,7 @@ namespace LMS.service.Service
         RetryPolicy<StorageTransientErrorDetectionStrategy> GetRetryPolicy();
 
         Task<int> BatchTransfer(string sp1, string sp2, DocumentClient client, List<dynamic> docs);
-
+        Task BatchDelete(DocumentCollection dc, DocumentClient client, List<dynamic> docs);
         Task CollectionTransfer(DocumentClient client, DocumentCollection dc1, DocumentCollection dc2);
 
         RangePartitionResolver<long> GetResolver(DocumentClient client, DocumentCollection dc);
