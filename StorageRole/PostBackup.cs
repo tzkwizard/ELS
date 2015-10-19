@@ -26,7 +26,7 @@ namespace StorageRole
         private static DocumentClient _client;
         private static Database _database;
         private static IDBService _iDbService;
-        private static int reTry = 5;
+        private static int _reTry = 5;
         private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
 
         public PostBackup(CloudStorageAccount storageAccount, string endpointUrl, string authorizationKey)
@@ -47,20 +47,21 @@ namespace StorageRole
         {
             try
             {
-                IEnumerable<DocumentCollection> dz = _client.CreateDocumentCollectionQuery(_database.SelfLink)
+                await _iDbService.OpenDB();
+                var collections = _client.CreateDocumentCollectionQuery(_database.SelfLink)
                     .AsEnumerable();
-                foreach (var x in dz)
+                foreach (var dc in collections)
                 {
-                    await BackupPostCollection(x);
+                    await BackupPostCollection(dc);
                 }
             }
             catch (Exception e)
             {
                 Trace.TraceError("Error in updateDc " + e.Message);
-                if (reTry > 0)
+                if (_reTry > 0)
                 {
-                    reTry--;
-                    Trace.TraceInformation("Restart BackupPost... in 1 min " + reTry);
+                    _reTry--;
+                    Trace.TraceInformation("Restart BackupPost... in 1 min " + _reTry);
                     Thread.Sleep(60000);
                     BackupPostAll().Wait();
                 }
@@ -83,7 +84,6 @@ namespace StorageRole
                     select d;
 
                 TableBatchOperation batchOperation = new TableBatchOperation();
-                List<String> documentList = new List<string>();
                 List<dynamic> docList = new List<dynamic>();
                 foreach (var d in ds)
                 {
@@ -99,7 +99,7 @@ namespace StorageRole
                         batchOperation = new TableBatchOperation();
                         if (res.Count == operation.Count)
                         {
-                            await _iDbService.BatchDelete(dc,_client,docList);
+                            await _iDbService.BatchDelete(dc,docList);
                             docList = new List<dynamic>();
                             Trace.TraceInformation("inserted");
                         }
@@ -112,7 +112,7 @@ namespace StorageRole
                         () => _table.ExecuteBatchAsync(operation));
                     if (res.Count == operation.Count)
                     {
-                        await _iDbService.BatchDelete(dc, _client, docList);
+                        await _iDbService.BatchDelete(dc,docList);
                         Trace.TraceInformation("inserted");
                     }
                 }
@@ -126,27 +126,35 @@ namespace StorageRole
 
         public async Task CleanCollection()
         {
-            IEnumerable<DocumentCollection> dz = _client.CreateDocumentCollectionQuery(_database.SelfLink)
-                   .AsEnumerable();
-            foreach (var x in dz)
+            try
             {
-                if (x.Id == CloudConfigurationManager.GetSetting("MasterCollection"))
+                var collections = _client.CreateDocumentCollectionQuery(_database.SelfLink)
+                    .AsEnumerable();
+                foreach (var dc in collections)
                 {
-                    Offer offer = _client.CreateOfferQuery()
-                   .Where(r => r.ResourceLink == x.SelfLink)
-                   .AsEnumerable()
-                   .SingleOrDefault();
-                    if (offer != null)
+                    if (dc.Id == CloudConfigurationManager.GetSetting("MasterCollection"))
                     {
-                        offer.OfferType = "S3";
-                        Offer updated = await _client.ReplaceOfferAsync(offer);
-                        await _iDbService.InitResolver(_client,x);
+                        Offer offer = _client.CreateOfferQuery()
+                            .Where(r => r.ResourceLink == dc.SelfLink)
+                            .AsEnumerable()
+                            .SingleOrDefault();
+                        if (offer != null)
+                        {
+                            offer.OfferType = "S3";
+                            Offer updated = await _client.ReplaceOfferAsync(offer);
+                            await _iDbService.InitResolver();
+                            await _iDbService.UpdateCurrentCollection(dc);
+                        }
+                    }
+                    else
+                    {
+                        await _client.DeleteDocumentCollectionAsync(dc.SelfLink);
                     }
                 }
-                else
-                {
-                    await _client.DeleteDocumentCollectionAsync(x.SelfLink);
-                }
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Error in Clean Collection" + e.Message);
             }
         }
     }

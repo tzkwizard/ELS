@@ -20,10 +20,8 @@ namespace CheckRole
         private static DocumentClient _client;
         private static Database _database;
         private static IDBService _iDbService;
-        private static int reTry = 5;
+        private static int _reTry = 5;
         private static DocumentCollection _curDc;
-        private static DocumentCollection _originDc;
-        private static CurrentCollection _curCol;
 
         public LoadBalance(string endpointUrl, string authorizationKey)
         {
@@ -38,7 +36,8 @@ namespace CheckRole
         {
             try
             {
-                _curDc = GetCurrentDc();
+                await _iDbService.OpenDB();
+                _curDc = _iDbService.GetCurrentDc();
                 if (_curDc != null)
                 {
                     var run = await CheckSize(_curDc);
@@ -50,8 +49,8 @@ namespace CheckRole
                         {
                             try
                             {
-                                await UpdateCurrentCollection(newDc);
-                                await _iDbService.UpdateResolver(_client, _originDc, newDc);
+                                await _iDbService.UpdateCurrentCollection(newDc);
+                                await _iDbService.UpdateResolver(newDc);
                                 await UpdatePerformanceLevel();
                             }
                             catch (Exception e)
@@ -68,11 +67,11 @@ namespace CheckRole
             }
             catch (Exception e)
             {
-                if (reTry > 0)
+                if (_reTry > 0)
                 {
-                    reTry--;
+                    _reTry--;
                     Thread.Sleep(60000);
-                    Trace.TraceInformation("Restart CheckBalance... in 1 min " + reTry);
+                    Trace.TraceInformation("Restart CheckBalance... in 1 min " + _reTry);
                     CheckBalance().Wait();
                 }
                 else
@@ -84,7 +83,7 @@ namespace CheckRole
 
         private static async Task UpdatePerformanceLevel()
         {
-            var resolver = _iDbService.GetResolver(_client, _originDc);
+            var resolver = _iDbService.GetResolver();
             if (resolver.PartitionMap.Count == 2)
             {
                 Offer offer = _client.CreateOfferQuery()
@@ -109,6 +108,7 @@ namespace CheckRole
             else
             {
                 var n = 1;
+                var count = resolver.PartitionMap.Count;
                 foreach (var d in resolver.PartitionMap)
                 {
                     Offer offer = _client.CreateOfferQuery()
@@ -116,12 +116,12 @@ namespace CheckRole
                         .AsEnumerable()
                         .SingleOrDefault();
                     if (offer == null) continue;
-                    if (n == 1 && offer.OfferType != "S1")
+                    if (n < count*0.5 && offer.OfferType != "S1")
                     {
                         offer.OfferType = "S1";
                         Offer updated = await _client.ReplaceOfferAsync(offer);
                     }
-                    else if (n == resolver.PartitionMap.Count && offer.OfferType != "S3")
+                    else if (n > 0.8*count && offer.OfferType != "S3")
                     {
                         offer.OfferType = "S3";
                         Offer updated = await _client.ReplaceOfferAsync(offer);
@@ -168,41 +168,6 @@ namespace CheckRole
 
 
             return newDc;
-        }
-
-        private static async Task UpdateCurrentCollection(DocumentCollection newDc)
-        {
-            await _iDbService.ExecuteWithRetries(() => _client.DeleteDocumentAsync(_curCol._self));
-            await _client.CreateDocumentAsync(_originDc.SelfLink, new CurrentCollection
-            {
-                id = "CurrentCollection",
-                name = newDc.Id
-            });
-        }
-
-        private static DocumentCollection GetCurrentDc()
-        {
-            _originDc = _client.CreateDocumentCollectionQuery(_database.SelfLink)
-                .Where(c => c.Id == CloudConfigurationManager.GetSetting("MasterCollection"))
-                .AsEnumerable()
-                .FirstOrDefault();
-
-            if (_originDc != null)
-            {
-                _curCol =
-                    _client.CreateDocumentQuery<CurrentCollection>(_originDc.SelfLink)
-                        .Where(x => x.id == "CurrentCollection")
-                        .AsEnumerable()
-                        .FirstOrDefault();
-                if (_curCol != null)
-                {
-                    return _client.CreateDocumentCollectionQuery(_database.SelfLink)
-                        .Where(c => c.Id == _curCol.name)
-                        .AsEnumerable()
-                        .FirstOrDefault();
-                }
-            }
-            return null;
         }
 
         private static async Task<bool> CheckSize(DocumentCollection dc)

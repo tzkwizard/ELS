@@ -27,14 +27,8 @@ namespace ReceiverRole
         private IDBService _iDbService;
         private static IFirebaseClient _client;
         private static DocumentClient _documentClient;
-        private static DocumentCollection _masterCollection;
         private static Database _database;
-        private static StoredProcedure _sp;
-        private static string _endpointUrl;
-        private static string _authorizationKey;
         private static string _databaseName;
-        private static string _masterCollectionName;
-        private static int _tryTimes = 5;
 
         public Task OpenAsync(PartitionContext context)
         {
@@ -48,19 +42,14 @@ namespace ReceiverRole
         private void Init()
         {
             //Get DBservice
-            _endpointUrl = _endpointUrl ?? CloudConfigurationManager.GetSetting("DocumentDBUrl");
-            _authorizationKey = _authorizationKey ?? CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
-            _iDbService = _iDbService ?? new DBService(_endpointUrl, _authorizationKey);
+            _iDbService = _iDbService ?? new DBService();
 
             //Init DB and Firebase
             _databaseName = _databaseName ?? CloudConfigurationManager.GetSetting("Database");
-            _masterCollectionName = _masterCollectionName ?? CloudConfigurationManager.GetSetting("Collection");
             _client = _client ?? _iDbService.GetFirebaseClient();
             _documentClient = _documentClient ?? _iDbService.GetDocumentClient();
-            _database = _database ?? _iDbService.GetDd(_documentClient, _databaseName);
-            _masterCollection = _masterCollection ??
-                                _iDbService.GetDc(_documentClient, _masterCollectionName, _databaseName);
-            _sp = _sp ?? _iDbService.GetSp(_documentClient, _masterCollection, "Post");
+            _database = _database ?? _iDbService.GetDd(_databaseName);
+            _documentClient.OpenAsync();
         }
 
         public async Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> events)
@@ -74,7 +63,7 @@ namespace ReceiverRole
                     Trace.TraceInformation("Message received.  Partition: '{0}', Data: '{1}', Offset: '{2}'",
                         context.Lease.PartitionId, dataString, eventData.Offset);
 
-                    await SendToDB(dataString, _tryTimes);
+                    await SendToDB(dataString);
                 }
                 await context.CheckpointAsync();
             }
@@ -83,7 +72,7 @@ namespace ReceiverRole
                 Trace.TraceError("Error in processing: " + exp.Message);
             }
         }
-        
+
         public async Task CloseAsync(PartitionContext context, CloseReason reason)
         {
             Trace.TraceWarning("SimpleEventProcessor CloseAsync.  Partition '{0}', Reason: '{1}'.",
@@ -96,31 +85,24 @@ namespace ReceiverRole
 
         private void CheckResolver()
         {
-            var resolver = _iDbService.GetResolver(_documentClient, _masterCollection);
+            var resolver = _iDbService.GetResolver();
 
             _documentClient.PartitionResolvers[_database.SelfLink] = resolver;
         }
-        private async Task SendToDB(string dataString, int tryTimes)
+
+        private async Task SendToDB(string dataString)
         {
             dynamic data = JsonConvert.DeserializeObject(dataString);
             var path = data.url.ToString().Split('/');
             data.body.timestamp = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             PostMessage message = _iDbService.PostData(data, path);
 
-            DocumentCollection documentCollection = _iDbService.SearchCollection(path[1], _masterCollection,
-                _database);
-
             //Send to DB         
-            //var res2 = await _documentClient.ExecuteStoredProcedureAsync<Document>(
-            //       _sp.SelfLink, data, _masterCollection.SelfLink);
-
-           /* var res =
+            //create document with RangePartitionResolver
+            var res =
                 await
                     _iDbService.ExecuteWithRetries(
-                        () => _documentClient.CreateDocumentAsync(documentCollection.SelfLink, message));*/
-
-            //create document with RangePartitionResolver
-            var res = await _iDbService.ExecuteWithRetries(() => _documentClient.CreateDocumentAsync(_database.SelfLink, message));
+                        () => _documentClient.CreateDocumentAsync(_database.SelfLink, message));
 
             //Check response and notify Firebase
             if (res.StatusCode == HttpStatusCode.Created)

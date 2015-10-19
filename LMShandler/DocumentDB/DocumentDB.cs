@@ -27,8 +27,8 @@ namespace LMShandler.DocumentDB
         {
             _client = iDbService.GetDocumentClient();
             _firebaseClient = iDbService.GetFirebaseClient();
-            _documentCollection = iDbService.GetDc(_client, "LMSCollection", "LMSRegistry");
-            _sp = iDbService.GetSp(_client, _documentCollection, "Post");
+            _documentCollection = iDbService.GetDc("LMSCollection", "LMSRegistry");
+            _sp = iDbService.GetSp(_documentCollection, "Post");
             _end = (long) (DateTime.UtcNow.AddMinutes(-15).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             _start = (long) (DateTime.UtcNow.AddHours(-25).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
         }

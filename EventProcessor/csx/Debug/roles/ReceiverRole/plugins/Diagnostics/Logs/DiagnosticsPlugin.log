@@ -1,0 +1,56 @@
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Starting DiagnosticPlugin.exe DiagnosticPlugin-ShutdownEvent DiagnosticPlugin-TotalShutdownEvent -wadVer1v4
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Successfully saved IIS Directory state
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Starting DiagnosticsPlugin
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Emulator config file set to C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\csx\Debug\roles\ReceiverRole\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] DiagnosticsStoreRootPath set to: C:\Users\24666\AppData\Local\dftmp\Resources\a5ee4e75-2926-44ce-bf92-3d6509b88952
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Loading config file: C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\csx\Debug\roles\ReceiverRole\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Checking VM Type
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Emulator config file set to C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventProcessor\csx\Debug\roles\ReceiverRole\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Extension set to Emulator Mode
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Reading XML configuration file
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Bypassing private config decryption
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] WadCfg is provided in initial configuration. Using that to initialize Diagnostics.
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+  <WadCfg>
+    <DiagnosticMonitorConfiguration overallQuotaInMB="4096">
+      <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter="Error" />
+      <Directories scheduledTransferPeriod="PT1M">
+        <IISLogs containerName="wad-iis-logfiles" />
+        <FailedRequestLogs containerName="wad-failedrequestlogs" />
+      </Directories>
+      <PerformanceCounters scheduledTransferPeriod="PT1M">
+        <PerformanceCounterConfiguration counterSpecifier="\Memory\Available MBytes" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\Web Service(_Total)\ISAPI Extension Requests/sec" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\Web Service(_Total)\Bytes Total/Sec" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\ASP.NET Applications(__Total__)\Requests/Sec" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\ASP.NET Applications(__Total__)\Errors Total/Sec" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\ASP.NET\Requests Queued" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\ASP.NET\Requests Rejected" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\Processor(_Total)\% Processor Time" sampleRate="PT3M" />
+      </PerformanceCounters>
+      <WindowsEventLog scheduledTransferPeriod="PT1M">
+        <DataSource name="Application!*" />
+      </WindowsEventLog>
+      <CrashDumps>
+        <CrashDumpConfiguration processName="WaIISHost.exe" />
+        <CrashDumpConfiguration processName="WaWorkerHost.exe" />
+        <CrashDumpConfiguration processName="w3wp.exe" />
+      </CrashDumps>
+      <Logs scheduledTransferPeriod="PT1M" scheduledTransferLogLevelFilter="Verbose" />
+    </DiagnosticMonitorConfiguration>
+  </WadCfg>
+  <StorageAccount>devstoreaccount1</StorageAccount>
+</PublicConfig>
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Private setting is loaded
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Successfully created checkpoint file C:\Users\24666\AppData\Local\dftmp\Resources\a5ee4e75-2926-44ce-bf92-3d6509b88952\WAD0104\Configuration\Checkpoint.txt
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Will use local resource directory C:\Users\24666\AppData\Local\dftmp\Resources\a5ee4e75-2926-44ce-bf92-3d6509b88952\WAD0104
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Will use endpoint https://core.windows.net for storage.
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Expanding path %SystemDrive%\inetpub\logs\LogFiles to C:\inetpub\logs\LogFiles
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Expanding path %SystemDrive%\inetpub\logs\FailedReqLogFiles to C:\inetpub\logs\FailedReqLogFiles
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Created IIS log watch item: "C:\inetpub\logs\LogFiles"
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Created IIS failed requests watch item: "C:\inetpub\logs\FailedReqLogFiles"
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] Running in emulator mode, crash dumps not enabled
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:13:42 PM] In emulator mode and using devstore updating XStoreAccount info, command line args: -LocalPath "C:\Users\24666\AppData\Local\dftmp\Resources\a5ee4e75-2926-44ce-bf92-3d6509b88952\WAD0104"  -ConfigFile "C:\Users\24666\AppData\Local\dftmp\Resources\a5ee4e75-2926-44ce-bf92-3d6509b88952\WAD0104\Configuration\MaConfig.xml" -ShutDownEvent WADDM-ShutDown-6e37c480046342a2ad04a6b0d3c04a43  -TotalShutDownEvent WADDM-TotalShutDown-6e37c480046342a2ad04a6b0d3c04a43 -InitializedEvent WADM-StartUp-6e37c480046342a2ad04a6b0d3c04a43 -parent 15772 -events -wadVer1v4 -UseProxyServer -XStoreAccounts WadAccount#true#devstoreaccount1#Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==#http://127.0.0.1:10002#http://127.0.0.1:10001#http://127.0.0.1:10000
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:14:42 PM] MonAgentHost.exe started
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:14:42 PM] DiagnoticsPlugin started.
+DiagnosticsPlugin.exe Information: 0 : [10/19/2015 10:14:42 PM] DiagnoticsPlugin now waiting on events "DiagnosticPlugin-ShutdownEvent", "DiagnosticPlugin-TotalShutdownEvent" or "DiagnosticPlugin-RestartEvent".

@@ -26,8 +26,8 @@ namespace LMSqueue.ProcessMessage
         {
             _documentClient = iDbService.GetDocumentClient();
             _client = iDbService.GetFirebaseClient();
-            _documentCollection = iDbService.GetDc(_documentClient, "LMSCollection", "LMSRegistry");
-            _sp = iDbService.GetSp(_documentClient, _documentCollection, "Post");
+            _documentCollection = iDbService.GetDc("LMSCollection", "LMSRegistry");
+            _sp = iDbService.GetSp(_documentCollection, "Post");
             _queue = iQueueService.GetQueue("queue");
         }
 

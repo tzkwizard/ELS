@@ -49,57 +49,13 @@ namespace doucumentDB
              client.Dispose();*/
         }
 
-        private static async Task<ResourceResponse<Document>> ExecuteWithRetries(int retryTimes,
-            Func<Task<ResourceResponse<Document>>> function)
-        {
-            TimeSpan sleepTime = TimeSpan.Zero;
-
-            while (retryTimes > 0)
-            {
-                try
-                {
-                    return await function();
-                }
-                catch (DocumentClientException de)
-                {
-                    if (de.StatusCode != null && (int) de.StatusCode != 429)
-                    {
-                        Console.WriteLine(de.Message);
-                    }
-                    sleepTime = de.RetryAfter;
-                }
-                catch (AggregateException ae)
-                {
-                    if (!(ae.InnerException is DocumentClientException))
-                    {
-                        Console.WriteLine(ae.Message);
-                    }
-
-                    DocumentClientException de = (DocumentClientException) ae.InnerException;
-                    if (de.StatusCode != null && (int) de.StatusCode != 429)
-                    {
-                        Console.WriteLine(de.Message);
-                    }
-                    sleepTime = de.RetryAfter;
-                }
-                if (sleepTime == TimeSpan.Zero)
-                {
-                    break;
-                }
-                retryTimes--;
-                Console.WriteLine(sleepTime);
-                await Task.Delay(sleepTime);
-            }
-            return null;
-        }
-
         private static async Task sp2(DocumentCollection dc, DocumentClient client, Database database)
         {
             DocumentCollection dc2 = client.CreateDocumentCollectionQuery(database.SelfLink)
                 .Where(c => c.Id == "LMSCollection1444075919174")
                 .AsEnumerable()
                 .FirstOrDefault();
-
+            await client.OpenAsync();
             //await _iDbService.CollectionTransfer(client, dc2, dc);
 
 
@@ -108,7 +64,7 @@ namespace doucumentDB
                 id = "CurrentCollection",
                 name=dc.Id
             });*/
-            var resolver = _iDbService.GetResolver(client, dc);
+          /*  var resolver = _iDbService.GetResolver(client, dc);
             foreach (var d in resolver.PartitionMap)
             {
                 Console.WriteLine(d.Value);
@@ -116,7 +72,7 @@ namespace doucumentDB
                                       .Where(r => r.ResourceLink == d.Value)
                                       .AsEnumerable()
                                       .SingleOrDefault();
-            }
+            }*/
 
 
 
@@ -127,7 +83,7 @@ namespace doucumentDB
 
             client.PartitionResolvers[database.SelfLink] = hashResolver;*/
 
-            var rangeResolver = _iDbService.GetResolver(client, dc);
+            var rangeResolver = _iDbService.GetResolver();
             client.PartitionResolvers[database.SelfLink] = rangeResolver;
 
            /* var created = await _iDbService.InitResolver(client, dc);
@@ -155,19 +111,44 @@ namespace doucumentDB
                         }
                     });
 
+            //search global
             IQueryable<PostMessage> query = client.CreateDocumentQuery<PostMessage>(database.SelfLink)
                 .Where(u => u.Info.timestamp>1);
 
             var now = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-            var query2 = client.CreateDocumentQuery<PostMessage>(database.SelfLink, null, now)
-              .Where(u => u.Path.District=="tst-azhang");
-          
 
+            //search on partition
+
+            var t1 = DateTime.Now;
+            var query2 = client.CreateDocumentQuery<PostMessage>(database.SelfLink, new FeedOptions
+            {
+                MaxItemCount = 1200
+            }, now);
+            var query3 = client.CreateDocumentQuery<PostMessage>(dc2.SelfLink).AsDocumentQuery();
+
+
+
+            var t2 = DateTime.Now;
+            Console.WriteLine(t2-t1);
+              //.Where(u => u.Path.District=="tst-azhang");
+          
             foreach (PostMessage a in query2)
             {
                 Console.WriteLine(a.Info.timestamp);
             }
 
+          /*  double totalRequestCharge = 0;
+            
+            while (query3.HasMoreResults)
+            {
+                FeedResponse<dynamic> queryResponse = await query3.ExecuteNextAsync<dynamic>();
+                Console.WriteLine("Query batch consumed {0} request units {1} doc", queryResponse.RequestCharge, queryResponse.Count);
+                totalRequestCharge += queryResponse.RequestCharge;
+            }
+            Console.WriteLine(DateTime.Now - t2);
+            Console.WriteLine("Query consumed {0} request units in total", totalRequestCharge);*/
+            Console.ReadLine();
+       
 
             int n = 19;
             try
@@ -256,7 +237,7 @@ namespace doucumentDB
                     {
                         //var res = await client.DeleteDocumentAsync(family.SelfLink);
                         var family1 = family;
-                        var response = await ExecuteWithRetries(5, () => client.DeleteDocumentAsync(family1.SelfLink));
+                        var response = await _iDbService.ExecuteWithRetries(5, () => client.DeleteDocumentAsync(family1.SelfLink));
                     }
                     catch (DocumentClientException e)
                     {
@@ -417,7 +398,7 @@ namespace doucumentDB
                 }
             };
             //var res = await client.CreateDocumentAsync(documentCollection.DocumentsLink, topic);
-            await ExecuteWithRetries(5, () => client.CreateDocumentAsync(documentCollection.DocumentsLink, topic));
+            await _iDbService.ExecuteWithRetries(5, () => client.CreateDocumentAsync(documentCollection.DocumentsLink, topic));
             var i = 3;
 
 

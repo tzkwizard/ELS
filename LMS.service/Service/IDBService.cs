@@ -13,13 +13,15 @@ namespace LMS.service.Service
 {
     public interface IDBService
     {
+        Task OpenDB();
         LMSresult GetList(string m);
         LMSresult GetMoreList(string m, long start);
         IFirebaseClient GetFirebaseClient();
         IFirebaseClient GetFirebaseClient(string node);
-        DocumentCollection GetDc(DocumentClient client, string cName, string dName);
-        Database GetDd(DocumentClient client, string dName);
-        StoredProcedure GetSp(DocumentClient client, DocumentCollection documentCollection, string spName);
+        DocumentCollection GetDc(string cName, string dName);
+        Database GetDd(string dName);
+        DocumentCollection GetCurrentDc();
+        StoredProcedure GetSp(DocumentCollection documentCollection, string spName);
         DocumentClient GetDocumentClient();
         List<Topic> GetCalendar();
         String GetFirebaseToken(string user, string uid, string data);
@@ -27,14 +29,11 @@ namespace LMS.service.Service
         PostMessage PostData(dynamic x, string[] path);
         TableChat TableChatData(dynamic u, dynamic s);
         TablePost TablePostData(dynamic post);
-        Task DeleteDocByIdList(DocumentClient client, DocumentCollection dc, List<string> idList, int retryTimes);
-        Task DeleteDocById(DocumentClient client, DocumentCollection dc, string id, int retryTimes);
+        Task DeleteDocByIdList(DocumentCollection dc, List<string> idList);
+        Task DeleteDocById(DocumentCollection dc, string id);
+        Task ReplaceDocument(dynamic item);
 
-        Task DeleteDocument(DocumentClient client, string selfLink, int retryTimes);
-        Task ReplaceDocument(DocumentClient client, dynamic item, int retryTimes);
-
-        Task<ResourceResponse<Document>> AddDocument(DocumentClient client, string dcSelfLink, dynamic item,
-            int retryTimes);
+        Task ExecuteWithRetries(Func<object> function);
 
         Task<ResourceResponse<Document>> ExecuteWithRetries(
             Func<Task<ResourceResponse<Document>>> function);
@@ -45,15 +44,15 @@ namespace LMS.service.Service
             Func<Task<ResourceResponse<Document>>> function);
 
         Task ExecuteWithRetries(int retryTimes, Func<Task> function);
+
+
         RetryPolicy<StorageTransientErrorDetectionStrategy> GetRetryPolicy();
-
-        Task<int> BatchTransfer(string sp1, string sp2, DocumentClient client, List<dynamic> docs);
-        Task BatchDelete(DocumentCollection dc, DocumentClient client, List<dynamic> docs);
-        Task CollectionTransfer(DocumentClient client, DocumentCollection dc1, DocumentCollection dc2);
-
-        RangePartitionResolver<long> GetResolver(DocumentClient client, DocumentCollection dc);
-
-        Task<bool> UpdateResolver(DocumentClient client, DocumentCollection dc, DocumentCollection newDc);
-        Task<bool> InitResolver(DocumentClient client, DocumentCollection dc);
+        Task<int> BatchTransfer(string sp1, string sp2, List<dynamic> docs);
+        Task BatchDelete(DocumentCollection dc, List<dynamic> docs);
+        Task CollectionTransfer(DocumentCollection dc1, DocumentCollection dc2);
+        RangePartitionResolver<long> GetResolver();
+        Task<bool> UpdateResolver(DocumentCollection newDc);
+        Task<bool> InitResolver();
+        Task UpdateCurrentCollection(DocumentCollection newDc);
     }
 }
