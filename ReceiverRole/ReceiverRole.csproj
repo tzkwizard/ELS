@@ -123,6 +123,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="ReceiverRole.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LMS.model\LMS.model.csproj">
