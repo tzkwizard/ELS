@@ -12,7 +12,8 @@
     <releaseNotes>This release contains the following changes...</releaseNotes>
   </metadata>
   <files>
-    <file src="EventProcessor\ServiceDefinition.csdef" />
-    <file src="ReceiverRole\bin\*.*" />
+    <file src="EventHubProcessor\ServiceConfiguration.Cloud.cscfg" />
+    <file src="EventHubProcessor\ServiceDefinition.csdef" />
+	<file src="EventHubProcessor.cspkg" />	
   </files>
 </package>

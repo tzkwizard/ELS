@@ -1,0 +1,3 @@
+cspack EventProcessor\ServiceDefinition.csdef  /role:ReceiverRole;ReceiverRole\bin\debug;ReceiverRole.dll  /out:EventHubProcessor.cspkg
+cspack EventHubProcessor\ServiceDefinition.csdef  /role:ReceiverRole;EventRole\bin\release;EventRole.dll  /out:EventHubProcessor.cspkg
+
