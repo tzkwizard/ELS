@@ -31,12 +31,12 @@ namespace StorageRole
 
         public PostBackup(CloudStorageAccount storageAccount, string endpointUrl, string authorizationKey)
         {
-            _iDbService = new DBService();
+            _iDbService = new DBService(endpointUrl,authorizationKey);
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _table = c.GetTableReference("Post");
             _table.CreateIfNotExists();
 
-            _client = new DocumentClient(new Uri(endpointUrl), authorizationKey);
+            _client = _iDbService.GetDocumentClient();
             _database =
                 _client.CreateDatabaseQuery().Where(db => db.Id == CloudConfigurationManager.GetSetting("Database"))
                     .AsEnumerable().FirstOrDefault();

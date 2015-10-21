@@ -26,7 +26,7 @@
           <CrashDumpConfiguration processName="WaWorkerHost.exe" />
           <CrashDumpConfiguration processName="w3wp.exe" />
         </CrashDumps>
-        <Logs scheduledTransferPeriod="PT1M" scheduledTransferLogLevelFilter="Verbose" />
+        <Logs scheduledTransferPeriod="PT1M" scheduledTransferLogLevelFilter="Error" />
       </DiagnosticMonitorConfiguration>
     </WadCfg>
     <StorageAccount>devstoreaccount1</StorageAccount>

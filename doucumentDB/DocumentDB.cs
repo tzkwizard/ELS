@@ -38,7 +38,7 @@ namespace doucumentDB
 
             //var response = await ExecuteWithRetries(5, () => client.CreateDocumentAsync("", new object()));
             //await DeleteAll(client, database, documentCollection);
-            _iDbService = new DBService();
+            _iDbService = new DBService(EndpointUrl,AuthorizationKey);
 
             await sp2(documentCollection, client, database);
             //await GetData(client, documentCollection);
@@ -86,14 +86,16 @@ namespace doucumentDB
             var rangeResolver = _iDbService.GetResolver();
             client.PartitionResolvers[database.SelfLink] = rangeResolver;
 
-           /* var created = await _iDbService.InitResolver(client, dc);
-           
+            
+            var created = await _iDbService.InitResolver();
+          
+            
             while (true)
             {
-                var re2 = await _iDbService.UpdateResolver(client, dc, dc2);
+                var re2 = await _iDbService.UpdateResolver(dc2);
                 var p = re2;
                 await Task.Delay(TimeSpan.FromSeconds(4));
-            }*/
+            }
 
             var z1 = rangeResolver.GetPartitionKey(new PostMessage
                     {

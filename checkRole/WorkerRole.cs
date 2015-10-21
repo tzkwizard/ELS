@@ -70,8 +70,8 @@ namespace CheckRole
 
             _client.CreateIfNotExists();
 
-            var url = CloudConfigurationManager.GetSetting("EndpointUrl");
-            var key = CloudConfigurationManager.GetSetting("AuthorizationKey");
+            var url = CloudConfigurationManager.GetSetting("DocumentDBUrl");
+            var key = CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
             _dichotomy = new Dichotomy(url, key);
             _loadBalance = new LoadBalance(url, key);
             return base.OnStart();

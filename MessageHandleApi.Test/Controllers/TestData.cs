@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.ConnectionPool;
-using MessageHandleApi.Models;
+using LMS.model.Models;
 using Nest;
 
 namespace MessageHandleApi.Test.Controllers
@@ -28,7 +28,7 @@ namespace MessageHandleApi.Test.Controllers
         {
             var testProducts = new List<QueryInfo>();
 
-            FilterInfo[] fd = new FilterInfo[]
+            LMS.model.Models.FilterInfo[] fd = new FilterInfo[]
             {
               new FilterInfo { Text = "Tzkwizard", Field = "ident.raw", Condition = "MUST" },
               new FilterInfo { Text = "POST", Field = "verb.raw", Condition = "MUST_NOT" },

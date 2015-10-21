@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EventProcessor" generation="1" functional="0" release="0" Id="067d0683-3e3e-40c7-b7e0-a90f97298cd4" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EventProcessor" generation="1" functional="0" release="0" Id="53043298-a4ba-473d-a6ed-5082eac5cb7a" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="EventProcessorGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -255,9 +255,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="bc52f6b2-c85f-4083-8def-250bf3694e27" ref="Microsoft.RedDog.Contract\ServiceContract\EventProcessorContract@ServiceDefinition">
+    <implementation Id="a463379a-49df-4cf7-add0-9a4175c41d63" ref="Microsoft.RedDog.Contract\ServiceContract\EventProcessorContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="d1f3afcb-97a8-4c11-bc1c-793b81fc9f8f" ref="Microsoft.RedDog.Contract\Interface\ReceiverRole:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
+        <interfaceReference Id="ea4ab24e-e46d-4702-be33-3a6d1665d738" ref="Microsoft.RedDog.Contract\Interface\ReceiverRole:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/EventProcessor/EventProcessorGroup/ReceiverRole:Microsoft.WindowsAzure.Plugins.RemoteForwarder.RdpInput" />
           </inPort>

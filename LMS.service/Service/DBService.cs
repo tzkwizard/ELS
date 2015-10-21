@@ -26,6 +26,8 @@ namespace LMS.service.Service
         private static string AuthorizationKey =
             "6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==";
 
+        private static string ReadOnlyKey = "UB1e7nFiZe9IDBiLBh0FCudsT9jqm2L1En5scCdYYRrHUYjgJixncuMfU3lVoOXoOfmsJZRRwYNTyM2Mwcti7w==";
+
         private readonly DocumentClient _documentClient;
         private const int MaxMonthTime = 1;
         private string firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
@@ -36,11 +38,17 @@ namespace LMS.service.Service
         public DBService(string endpointUrl, string authorizationKey)
         {
             _documentClient = new DocumentClient(new Uri(endpointUrl), authorizationKey);
+            Init();
         }
 
         public DBService()
         {
-            _documentClient = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
+            _documentClient = new DocumentClient(new Uri(EndpointUrl), ReadOnlyKey);
+            Init();
+        }
+
+        private void Init()
+        {
             _masterCollection = GetDc("LMSCollection", "LMSRegistry");
             var rangeResolver = GetResolver();
             _documentClient.PartitionResolvers[_database.SelfLink] = rangeResolver;
@@ -177,15 +185,15 @@ namespace LMS.service.Service
 
         public DocumentCollection GetCurrentDc()
         {
-            var curCol =
+            var curDoc =
                 _documentClient.CreateDocumentQuery<CurrentCollection>(_masterCollection.SelfLink)
                     .Where(x => x.id == "CurrentCollection")
                     .AsEnumerable()
                     .FirstOrDefault();
-            if (curCol != null)
+            if (curDoc != null)
             {
                 return _documentClient.CreateDocumentCollectionQuery(_database.SelfLink)
-                    .Where(c => c.Id == curCol.name)
+                    .Where(c => c.Id == curDoc.name)
                     .AsEnumerable()
                     .FirstOrDefault();
             }
@@ -229,8 +237,8 @@ namespace LMS.service.Service
 
         public DocumentClient GetDocumentClient()
         {
-            var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
-            return client;
+            //var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
+            return _documentClient;
         }
 
 
@@ -262,30 +270,21 @@ namespace LMS.service.Service
         {
             foreach (var id in idList)
             {
-                var id1 = id;
-                var ds =
-                    from d in _documentClient.CreateDocumentQuery(dc.DocumentsLink)
-                    where d.Id == id1
-                    select d;
-                foreach (var d in ds)
-                {
-                    var d1 = d;
-                    await ExecuteWithRetries(() => _documentClient.DeleteDocumentAsync(d1.SelfLink));
-                }
+                await DeleteDocById(dc, id);             
             }
         }
 
         public async Task DeleteDocById(DocumentCollection dc, string id)
         {
-            var ds =
-                from d in _documentClient.CreateDocumentQuery(dc.DocumentsLink)
+            var doc =
+                (from d in _documentClient.CreateDocumentQuery(dc.DocumentsLink)
                 where d.Id == id
-                select d;
-            foreach (var d in ds)
+                select d).AsEnumerable().FirstOrDefault();
+            if (doc != null)
             {
-                var d1 = d;
-                await ExecuteWithRetries(() => _documentClient.DeleteDocumentAsync(d1.SelfLink));
+                await ExecuteWithRetries(() => _documentClient.DeleteDocumentAsync(doc.SelfLink));
             }
+
         }
 
         public PostMessage PostData(dynamic data, string[] path)

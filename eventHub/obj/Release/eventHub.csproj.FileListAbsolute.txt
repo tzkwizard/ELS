@@ -1,6 +1,7 @@
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\eventHub.exe.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\eventHub.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\eventHub.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\LMS.model.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Microsoft.Data.OData.dll
@@ -14,6 +15,10 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Relea
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\System.Net.Http.Extensions.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\System.Net.Http.Primitives.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\System.Spatial.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Microsoft.Azure.Documents.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Nest.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Elasticsearch.Net.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\LMS.model.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Microsoft.Azure.KeyVault.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Microsoft.Data.Edm.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Microsoft.Data.OData.xml
@@ -28,6 +33,11 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Relea
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\System.Net.Http.Extensions.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\System.Net.Http.Primitives.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\System.Spatial.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Microsoft.Azure.Documents.Client.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Nest.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Nest.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Elasticsearch.Net.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\Elasticsearch.Net.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\de\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\es\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\fr\Microsoft.Data.Edm.resources.dll
@@ -64,7 +74,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Relea
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\bin\Release\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\obj\Release\eventHub.csproj.App.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\obj\Release\eventHub.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\obj\Release\eventHub.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\eventHub\obj\Release\eventHub.pdb

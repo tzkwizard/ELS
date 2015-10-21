@@ -25,11 +25,11 @@ namespace CheckRole
 
         public LoadBalance(string endpointUrl, string authorizationKey)
         {
-            _client = new DocumentClient(new Uri(endpointUrl), authorizationKey);
+            _iDbService = _iDbService ?? new DBService(endpointUrl, authorizationKey);
+            _client = _iDbService.GetDocumentClient();
             _database =
                 _client.CreateDatabaseQuery().Where(db => db.Id == CloudConfigurationManager.GetSetting("Database"))
                     .AsEnumerable().FirstOrDefault();
-            _iDbService = new DBService();
         }
 
         public async Task CheckBalance()

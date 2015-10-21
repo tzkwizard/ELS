@@ -83,6 +83,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LMS.model\LMS.model.csproj">
+      <Project>{5b45cb68-ae03-4b59-92de-7b78a1b597ca}</Project>
+      <Name>LMS.model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MessageHandleApi\MessageHandleApi.csproj">
       <Project>{99cbe051-b241-4e14-a301-a879ca9394ae}</Project>
       <Name>MessageHandleApi</Name>

@@ -17,6 +17,7 @@ using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
+using Microsoft.Azure.Documents.Partitioning;
 
 
 namespace ReceiverRole
@@ -29,6 +30,9 @@ namespace ReceiverRole
         private static DocumentClient _documentClient;
         private static Database _database;
         private static string _databaseName;
+        private static string _endpointUrl;
+        private static string _authorizationKey;
+        private static RangePartitionResolver<long> _resolver;
 
         public Task OpenAsync(PartitionContext context)
         {
@@ -42,7 +46,9 @@ namespace ReceiverRole
         private void Init()
         {
             //Get DBservice
-            _iDbService = _iDbService ?? new DBService();
+            _endpointUrl = _endpointUrl ?? CloudConfigurationManager.GetSetting("DocumentDBUrl");
+            _authorizationKey = _authorizationKey ?? CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
+            _iDbService = _iDbService ?? new DBService(_endpointUrl, _authorizationKey);
 
             //Init DB and Firebase
             _databaseName = _databaseName ?? CloudConfigurationManager.GetSetting("Database");
@@ -50,13 +56,13 @@ namespace ReceiverRole
             _documentClient = _documentClient ?? _iDbService.GetDocumentClient();
             _database = _database ?? _iDbService.GetDd(_databaseName);
             _documentClient.OpenAsync();
+            Task.Run(() => CheckResolver());
         }
 
         public async Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> events)
         {
             try
             {
-                CheckResolver();
                 foreach (EventData eventData in events)
                 {
                     string dataString = Encoding.UTF8.GetString(eventData.GetBytes());
@@ -83,11 +89,26 @@ namespace ReceiverRole
             }
         }
 
-        private void CheckResolver()
+        private async Task CheckResolver()
         {
-            var resolver = _iDbService.GetResolver();
+            while (true)
+            {
+                if (_documentClient.PartitionResolvers.Count == 0 && _resolver.PartitionMap.Count != 0)
+                {
+                    _documentClient.PartitionResolvers[_database.SelfLink] = _resolver;
+                }
+                else
+                {
+                    var resolver = _iDbService.GetResolver();
+                    if (_resolver.PartitionMap.Count != resolver.PartitionMap.Count)
+                    {
+                        _documentClient.PartitionResolvers[_database.SelfLink] = resolver;
+                        _resolver = resolver;
+                    }
 
-            _documentClient.PartitionResolvers[_database.SelfLink] = resolver;
+                    await Task.Delay(TimeSpan.FromSeconds(10));
+                }
+            }
         }
 
         private async Task SendToDB(string dataString)
@@ -97,8 +118,7 @@ namespace ReceiverRole
             data.body.timestamp = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             PostMessage message = _iDbService.PostData(data, path);
 
-            //Send to DB         
-            //create document with RangePartitionResolver
+            //create document on DB with RangePartitionResolver
             var res =
                 await
                     _iDbService.ExecuteWithRetries(

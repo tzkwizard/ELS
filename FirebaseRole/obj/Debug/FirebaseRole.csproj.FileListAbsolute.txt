@@ -103,6 +103,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\D
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\zh-Hant\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\obj\Debug\FirebaseRole.csproj.App.config
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\obj\Debug\FirebaseRole.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\obj\Debug\FirebaseRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\obj\Debug\FirebaseRole.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\obj\Debug\FirebaseRole.csprojResolveAssemblyReference.cache

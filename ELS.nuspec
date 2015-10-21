@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata> 
+    <id>EvrntHubProcessor</id>
+    <title>RenWeb</title>
+    <version>1.0.0</version>
+    <authors>RW Devs</authors>
+    <owners>RenWeb Inc.</owners>
+    <projectUrl>https://github.com/tzkwizard/ELS.git</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description> test </description>
+    <releaseNotes>This release contains the following changes...</releaseNotes>
+  </metadata>
+  <files>
+    <file src="EventProcessor\ServiceDefinition.csdef" />
+    <file src="ReceiverRole\bin\*.*" />
+  </files>
+</package>

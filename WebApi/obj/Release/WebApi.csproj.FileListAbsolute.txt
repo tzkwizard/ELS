@@ -201,6 +201,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.WindowsAzure.Configuration.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.WindowsAzure.Mobile.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.WindowsAzure.Mobile.Ext.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.WindowsAzure.Storage.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Microsoft.WindowsAzure.Storage.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\Newtonsoft.Json.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\StackExchange.Redis.pdb
