@@ -57,7 +57,7 @@ namespace doucumentDB
                 .FirstOrDefault();
             await client.OpenAsync();
             //await _iDbService.CollectionTransfer(client, dc2, dc);
-
+            var mn=await client.ReadDatabaseAsync(database.SelfLink);
 
           /*  await client.CreateDocumentAsync(dc.SelfLink, new CurrentCollection
             {

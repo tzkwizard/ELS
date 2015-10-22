@@ -16,19 +16,20 @@ namespace EventRole
 
         public override void Run()
         {
-            Trace.TraceInformation("ReceiverRole is running");
+            Trace.TraceInformation("EventRole is running");
 
             //Get settings from configuration
             var eventHubName = CloudConfigurationManager.GetSetting("eventHubName");
             //var consumerGroupName = CloudConfigurationManager.GetSetting("consumerGroupName");
             //var numberOfPartitions = int.Parse(CloudConfigurationManager.GetSetting("numberOfPartitions"));
-            var blobConnectionString = CloudConfigurationManager.GetSetting("AzureStorageConnectionString"); // Required for checkpoint/state
+            var blobConnectionString = CloudConfigurationManager.GetSetting("AzureStorageConnectionString");
+                // Required for checkpoint/state
 
             //Get AMQP connection string
             var connectionString = EventHubManager.GetServiceBusConnectionString();
 
             //Create event hub if it does not exist
-           /* var namespaceManager = EventHubManager.GetNamespaceManager(connectionString);
+            /* var namespaceManager = EventHubManager.GetNamespaceManager(connectionString);
             EventHubManager.CreateEventHubIfNotExists(eventHubName, numberOfPartitions, namespaceManager);*/
 
             //Create consumer group if it does not exist
@@ -36,11 +37,12 @@ namespace EventRole
 
             //Start processing messages
             receiver = new Receiver(eventHubName, connectionString);
-            ConsumerGroupDescription group = null;
+            //ConsumerGroupDescription group = null;
             //Get host name of worker role instance.  This is used for each environment to obtain
             //a lease, and to renew the same lease in case of a restart.
             string hostName = RoleEnvironment.CurrentRoleInstance.Id;
-            receiver.RegisterEventProcessor(group, blobConnectionString, hostName);
+            //receiver.RegisterEventProcessor(group, blobConnectionString, hostName);
+            receiver.RegisterEventProcessor(blobConnectionString, hostName);
 
             //Wait for shutdown to be called, else the role will recycle
             this.runCompleteEvent.WaitOne();
@@ -63,7 +65,7 @@ namespace EventRole
 
         public override void OnStop()
         {
-            Trace.TraceInformation("ReceiverRole is stopping");
+            Trace.TraceInformation("EventRole is stopping");
 
             this.runCompleteEvent.Set();
             try
@@ -79,8 +81,7 @@ namespace EventRole
 
             base.OnStop();
 
-            Trace.TraceInformation("ReceiverRole has stopped");
+            Trace.TraceInformation("EventRole has stopped");
         }
-
     }
 }

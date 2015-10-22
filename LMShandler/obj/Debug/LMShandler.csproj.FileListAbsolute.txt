@@ -96,6 +96,5 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Deb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\bin\Debug\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMShandler\obj\Debug\LMShandler.pdb

@@ -18,7 +18,7 @@
       <Setting name="DocumentDBUrl" />
       <Setting name="DocumentDBAuthorizationKey" />
       <Setting name="Database" />
-      <Setting name="Collection" />
+      <Setting name="MasterCollection" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
     </ConfigurationSettings>
     <Contents>
