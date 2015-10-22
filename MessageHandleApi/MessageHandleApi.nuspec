@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>AppApi</id>
+    <version>1.0.0.0</version>
+    <title>AppApi</title>
+    <authors>aotuo</authors>
+    <owners>renweb</owners>
+    <projectUrl>https://github.com/tzkwizard/ELS.git</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Api with WebJobs</description>
+    <copyright>Copyright 2015</copyright>
+  </metadata>
+  <files>
+  <file src="apiapp.json" />
+  <file src="Global.asax" />
+	<file src="Web.config" />
+	<file src="packages.config" />
+	<file src="bin\**\*.*" target="bin" />
+	<file src="Content\*.*" target="Content" />
+	<file src="fonts\*.*" target="fonts" />
+	<file src="Metadata\**\*.*" target="Metadata" />
+	<file src="Properties\*.*" target="Properties" />
+	<file src="Scripts\*.*"  target="Scripts" />
+	<file src="Views" target="Views" />
+  <file src="..\QueueWebjob\bin\Debug\*.*" target="app_data\jobs\continuous\QueueWebjob" />
+ <!-- <file src="..\LMSqueue\bin\Debug\*.*" target="app_data\jobs\continuous\LMSqueue" />
+  <file src="..\LMShandler\bin\Debug\*.*" target="app_data\jobs\triggered\LMShandler" />-->
+  </files>
+</package>
