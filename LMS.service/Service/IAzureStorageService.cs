@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using LMS.model.Models;
+using LMS.model.Models.Api;
 using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace LMS.service.Service

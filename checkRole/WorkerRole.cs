@@ -23,6 +23,7 @@ namespace CheckRole
         private LoadBalance _loadBalance;
         private ManualResetEvent CompletedEvent = new ManualResetEvent(false);
         private bool _flag;
+        private static string _database;
 
         public override void Run()
         {
@@ -47,7 +48,7 @@ namespace CheckRole
                     _flag = false;
                     //Task.Run(() => _dichotomy.UpdateDcAll());
                     //_dichotomy.UpdateDcAll().Wait();
-                    _loadBalance.CheckBalance().Wait();
+                    _loadBalance.CheckBalance(_database).Wait();
                     Trace.TraceInformation("End Check Collection Usage.  Time: '{0}'",
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
                     _flag = true;
@@ -69,7 +70,7 @@ namespace CheckRole
             _client = queueClient.GetQueueReference("azqueue");
 
             _client.CreateIfNotExists();
-
+            _database = CloudConfigurationManager.GetSetting("DBSelfLink");
             var url = CloudConfigurationManager.GetSetting("DocumentDBUrl");
             var key = CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
             _dichotomy = new Dichotomy(url, key);

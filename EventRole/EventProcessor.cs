@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using FireSharp.Exceptions;
 using FireSharp.Interfaces;
@@ -13,7 +14,7 @@ using LMS.service.Service;
 using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
-using Microsoft.Azure.Documents.Linq;
+using Microsoft.ApplicationServer.Caching;
 using Microsoft.Azure.Documents.Partitioning;
 using Microsoft.ServiceBus.Messaging;
 using Newtonsoft.Json;
@@ -25,12 +26,13 @@ namespace EventRole
         private PartitionContext partitionContext;
         private IDBService _iDbService;
         private static IFirebaseClient _client;
-        private static DocumentClient _documentClient;
-        private static Database _database;
-        private static string _databaseName;
+        private static string _databaseSelfLink;
         private static string _endpointUrl;
         private static string _authorizationKey;
         private static RangePartitionResolver<long> _resolver;
+        private static int n = 1;
+        private static readonly object _object = new object();
+        private static bool _run = false;
 
         public Task OpenAsync(PartitionContext context)
         {
@@ -43,32 +45,41 @@ namespace EventRole
 
         private void Init()
         {
+            _run = true;
             //Get DBservice
             _endpointUrl = _endpointUrl ?? CloudConfigurationManager.GetSetting("DocumentDBUrl");
             _authorizationKey = _authorizationKey ?? CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
+            _databaseSelfLink = _databaseSelfLink ?? CloudConfigurationManager.GetSetting("DBSelfLink");
             _iDbService = _iDbService ?? new DBService(_endpointUrl, _authorizationKey);
 
             //Init DB and Firebase
-            _databaseName = _databaseName ?? CloudConfigurationManager.GetSetting("Database");
             _client = _client ?? _iDbService.GetFirebaseClient();
-            _documentClient = _documentClient ?? _iDbService.GetDocumentClient();
-            _database = _database ?? _iDbService.GetDd(_databaseName);
-            _documentClient.OpenAsync();
-            _resolver = _resolver ?? _iDbService.GetResolver();
-            Task.Run(() => CheckResolver());
+
+            //check resolver state
+            lock (_object)
+            {
+                if (n <= 0) return;
+                n--;
+                Task.Run(() => CheckResolver());
+            }
         }
 
         public async Task ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> events)
         {
             try
             {
+                var client = _iDbService.GetDocumentClient();
+                if (client.PartitionResolvers.Count == 0)
+                {
+                    client = _iDbService.GetDocumentClient("");
+                }
                 foreach (EventData eventData in events)
                 {
                     string dataString = Encoding.UTF8.GetString(eventData.GetBytes());
                     Trace.TraceInformation("Message received.  Partition: '{0}', Data: '{1}', Offset: '{2}'",
                         context.Lease.PartitionId, dataString, eventData.Offset);
 
-                    await SendToDB(dataString);
+                    await SendToDB(client, dataString);
                 }
                 await context.CheckpointAsync();
             }
@@ -82,6 +93,7 @@ namespace EventRole
         {
             Trace.TraceWarning("SimpleEventProcessor CloseAsync.  Partition '{0}', Reason: '{1}'.",
                 this.partitionContext.Lease.PartitionId, reason.ToString());
+            _run = false;
             if (reason == CloseReason.Shutdown)
             {
                 await context.CheckpointAsync();
@@ -90,24 +102,28 @@ namespace EventRole
 
         private async Task CheckResolver()
         {
-            while (true)
+            while (_run)
             {
-                if (_documentClient.PartitionResolvers.Count == 0)
+                var client = _iDbService.GetDocumentClient();
+                if (client.PartitionResolvers.Count == 0)
                 {
-                    _documentClient.PartitionResolvers[_database.SelfLink] = _resolver;
+                    _resolver = _resolver ?? _iDbService.GetResolver(client);
+                    client.PartitionResolvers[_databaseSelfLink] = _resolver;
+                    await _iDbService.OpenDB(client);
                 }
                 else
                 {
                     long rate = 0;
-                    var resolver = _iDbService.GetResolver();
+                    var resolver = _iDbService.GetResolver(client);
                     if (_resolver.PartitionMap.Count != resolver.PartitionMap.Count)
                     {
-                        _documentClient.PartitionResolvers[_database.SelfLink] = resolver;
+                        client.PartitionResolvers[_databaseSelfLink] = resolver;
+                        await _iDbService.OpenDB(client);
                         _resolver = resolver;
                     }
 
                     var curdc = _resolver.PartitionMap.LastOrDefault().Value;
-                    var res = await _documentClient.ReadDocumentCollectionAsync(curdc);
+                    var res = await client.ReadDocumentCollectionAsync(curdc);
                     rate = res.CollectionSizeUsage/res.CollectionSizeQuota;
 
                     if (rate < 0.8)
@@ -122,7 +138,7 @@ namespace EventRole
             }
         }
 
-        private async Task SendToDB(string dataString)
+        private async Task SendToDB(DocumentClient client, string dataString)
         {
             dynamic data = JsonConvert.DeserializeObject(dataString);
             var path = data.url.ToString().Split('/');
@@ -133,7 +149,7 @@ namespace EventRole
             var res =
                 await
                     _iDbService.ExecuteWithRetries(
-                        () => _documentClient.CreateDocumentAsync(_database.SelfLink, message));
+                        () => client.CreateDocumentAsync(_databaseSelfLink, message));
 
             //Check response and notify Firebase
             if (res.StatusCode == HttpStatusCode.Created)

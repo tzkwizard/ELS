@@ -86,16 +86,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\chat.cs" />
-    <Compile Include="Models\ELSLog.cs" />
-    <Compile Include="Models\ELSmap.cs" />
-    <Compile Include="Models\ELSresult.cs" />
-    <Compile Include="Models\EsNest.cs" />
-    <Compile Include="Models\LMSapi.cs" />
-    <Compile Include="Models\LMSservice.cs" />
-    <Compile Include="Models\logs.cs" />
+    <Compile Include="Models\AzureDocumentDB.cs" />
+    <Compile Include="Models\AzureTable.cs" />
+    <Compile Include="Models\ELS\ELSLog.cs" />
+    <Compile Include="Models\ELS\ELSmap.cs" />
+    <Compile Include="Models\ELS\ELSresult.cs" />
+    <Compile Include="Models\Api\LMSapi.cs" />
+    <Compile Include="Models\CloudService.cs" />
+    <Compile Include="Models\ELS\logs.cs" />
     <Compile Include="Models\MetricEvent.cs" />
-    <Compile Include="Models\QueryInfo.cs" />
+    <Compile Include="Models\ELS\QueryInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,18 +31,18 @@ namespace FirebaseRole
 
         public ChatBackup(CloudStorageAccount storageAccount)
         {
-            CloudTableClient c = storageAccount.CreateCloudTableClient();
-            _table = c.GetTableReference("Chat");
+            var client = storageAccount.CreateCloudTableClient();
+            _table = client.GetTableReference("Chat");
             _table.CreateIfNotExists();
             _iDbService = new DBService();
             _retryPolicy = _iDbService.GetRetryPolicy();
-            _firebaseClient = _iDbService.GetFirebaseClient(CloudConfigurationManager.GetSetting("Firebasenode"));
         }
 
         public async Task BackupDocumentChat()
         {
             try
             {
+                _firebaseClient = _iDbService.GetFirebaseClient(CloudConfigurationManager.GetSetting("Firebasenode"));
                 FirebaseResponse chatResponse = _firebaseClient.Get("ChatRoom");
                 dynamic rooms = JsonConvert.DeserializeObject(chatResponse.Body);
 

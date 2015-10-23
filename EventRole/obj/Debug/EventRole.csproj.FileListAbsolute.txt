@@ -4,6 +4,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\FireSharp.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.model.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.service.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Data.Edm.dll
@@ -14,9 +16,12 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Threading.Tasks.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Web.DistributedCache.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.WindowsAzure.Configuration.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.WindowsAzure.Diagnostics.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.WindowsAzure.Storage.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.WindowsFabric.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.WindowsFabric.Data.Common.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Newtonsoft.Json.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\System.Net.Http.Extensions.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\System.Net.Http.Primitives.dll
@@ -34,6 +39,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.model.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Client.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Azure.KeyVault.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Data.Edm.xml

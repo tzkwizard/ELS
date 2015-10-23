@@ -17,33 +17,27 @@ namespace CheckRole
 {
     public class LoadBalance
     {
-        private static DocumentClient _client;
-        private static Database _database;
         private static IDBService _iDbService;
         private static int _reTry = 5;
-        private static DocumentCollection _curDc;
 
         public LoadBalance(string endpointUrl, string authorizationKey)
         {
             _iDbService = _iDbService ?? new DBService(endpointUrl, authorizationKey);
-            _client = _iDbService.GetDocumentClient();
-            _database =
-                _client.CreateDatabaseQuery().Where(db => db.Id == CloudConfigurationManager.GetSetting("Database"))
-                    .AsEnumerable().FirstOrDefault();
         }
 
-        public async Task CheckBalance()
+        public async Task CheckBalance(string databaseSelfLink)
         {
             try
             {
-                await _iDbService.OpenDB();
-                _curDc = _iDbService.GetCurrentDc();
-                if (_curDc != null)
+                var client = _iDbService.GetDocumentClient();
+                await _iDbService.OpenDB(client);
+                var curDc = _iDbService.GetCurrentDc();
+                if (curDc != null)
                 {
-                    var run = await CheckSize(_curDc);
+                    var run = await CheckSize(curDc, client);
                     if (run)
                     {
-                        var newDc = await GetNewCollection();
+                        var newDc = await GetNewCollection(client, databaseSelfLink);
 
                         if (newDc != null)
                         {
@@ -51,7 +45,7 @@ namespace CheckRole
                             {
                                 await _iDbService.UpdateCurrentCollection(newDc);
                                 await _iDbService.UpdateResolver(newDc);
-                                await UpdatePerformanceLevel();
+                                await UpdatePerformanceLevel(client);
                             }
                             catch (Exception e)
                             {
@@ -72,7 +66,7 @@ namespace CheckRole
                     _reTry--;
                     Thread.Sleep(60000);
                     Trace.TraceInformation("Restart CheckBalance... in 1 min " + _reTry);
-                    CheckBalance().Wait();
+                    CheckBalance(databaseSelfLink).Wait();
                 }
                 else
                 {
@@ -81,28 +75,28 @@ namespace CheckRole
             }
         }
 
-        private static async Task UpdatePerformanceLevel()
+        private static async Task UpdatePerformanceLevel(DocumentClient client)
         {
-            var resolver = _iDbService.GetResolver();
+            var resolver = _iDbService.GetResolver(client);
             if (resolver.PartitionMap.Count == 2)
             {
-                Offer offer = _client.CreateOfferQuery()
+                Offer offer = client.CreateOfferQuery()
                     .Where(r => r.ResourceLink == resolver.PartitionMap.First().Value)
                     .AsEnumerable()
                     .SingleOrDefault();
                 if (offer != null)
                 {
                     offer.OfferType = "S2";
-                    Offer updated = await _client.ReplaceOfferAsync(offer);
+                    Offer updated = await client.ReplaceOfferAsync(offer);
                 }
-                offer = _client.CreateOfferQuery()
+                offer = client.CreateOfferQuery()
                     .Where(r => r.ResourceLink == resolver.PartitionMap.Last().Value)
                     .AsEnumerable()
                     .SingleOrDefault();
                 if (offer != null)
                 {
                     offer.OfferType = "S3";
-                    Offer updated = await _client.ReplaceOfferAsync(offer);
+                    Offer updated = await client.ReplaceOfferAsync(offer);
                 }
             }
             else
@@ -111,7 +105,7 @@ namespace CheckRole
                 var count = resolver.PartitionMap.Count;
                 foreach (var d in resolver.PartitionMap)
                 {
-                    Offer offer = _client.CreateOfferQuery()
+                    Offer offer = client.CreateOfferQuery()
                         .Where(r => r.ResourceLink == d.Value)
                         .AsEnumerable()
                         .SingleOrDefault();
@@ -119,24 +113,24 @@ namespace CheckRole
                     if (n < count*0.5 && offer.OfferType != "S1")
                     {
                         offer.OfferType = "S1";
-                        Offer updated = await _client.ReplaceOfferAsync(offer);
+                        Offer updated = await client.ReplaceOfferAsync(offer);
                     }
                     else if (n > 0.8*count && offer.OfferType != "S3")
                     {
                         offer.OfferType = "S3";
-                        Offer updated = await _client.ReplaceOfferAsync(offer);
+                        Offer updated = await client.ReplaceOfferAsync(offer);
                     }
                     else if (offer.OfferType != "S2")
                     {
                         offer.OfferType = "S2";
-                        Offer updated = await _client.ReplaceOfferAsync(offer);
+                        Offer updated = await client.ReplaceOfferAsync(offer);
                     }
                     n++;
                 }
             }
         }
 
-        private static async Task<DocumentCollection> GetNewCollection()
+        private static async Task<DocumentCollection> GetNewCollection(DocumentClient client, string databaseSelfLink)
         {
             //create new collection
             /*var t = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
@@ -161,7 +155,7 @@ namespace CheckRole
             }*/
 
             //search collection
-            DocumentCollection newDc = _client.CreateDocumentCollectionQuery(_database.SelfLink)
+            DocumentCollection newDc = client.CreateDocumentCollectionQuery(databaseSelfLink)
                 .Where(c => c.Id == "LMSCollection1444075919174")
                 .AsEnumerable()
                 .FirstOrDefault();
@@ -170,10 +164,10 @@ namespace CheckRole
             return newDc;
         }
 
-        private static async Task<bool> CheckSize(DocumentCollection dc)
+        private static async Task<bool> CheckSize(DocumentCollection dc, DocumentClient client)
         {
             double backRate = (double) 2/100000;
-            var res = await _client.ReadDocumentCollectionAsync(dc.SelfLink);
+            var res = await client.ReadDocumentCollectionAsync(dc.SelfLink);
             var size = res.CollectionSizeUsage;
             var totalSize = res.CollectionSizeQuota;
 

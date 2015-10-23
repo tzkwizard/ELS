@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,7 @@ using FireSharp;
 using FireSharp.Interfaces;
 using FireSharp.Config;
 using LMS.model.Models;
+using LMS.model.Models.Api;
 using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -21,49 +23,43 @@ namespace LMS.service.Service
 {
     public class DBService : IDBService
     {
-        private static string EndpointUrl = "https://tstaz.documents.azure.com:443/";
-
-        private static string AuthorizationKey =
-            "6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==";
-
-        private static string ReadOnlyKey = "UB1e7nFiZe9IDBiLBh0FCudsT9jqm2L1En5scCdYYRrHUYjgJixncuMfU3lVoOXoOfmsJZRRwYNTyM2Mwcti7w==";
-
-        private readonly DocumentClient _documentClient;
-        private const int MaxMonthTime = 1;
+        private static DocumentClient _documentClient;
         private string firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
+
         private const int RetryTimes = 5;
-        private static Database _database;
-        private static DocumentCollection _masterCollection;
+        private static string _endpointUrl;
+        private static string _authorizationKey;
+        private static string _dataSelfLink;
+        private static string _masterCollectionSelfLink;
 
         public DBService(string endpointUrl, string authorizationKey)
         {
-            _documentClient = new DocumentClient(new Uri(endpointUrl), authorizationKey);
-            Init();
+            _endpointUrl = endpointUrl;
+            _authorizationKey = authorizationKey;
+            _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
+            _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
         }
 
         public DBService()
         {
-            _documentClient = new DocumentClient(new Uri(EndpointUrl), ReadOnlyKey);
-            Init();
+            _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
+            _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
+            _endpointUrl = ConfigurationManager.AppSettings["DBEndpointUrl"];
+            _authorizationKey = ConfigurationManager.AppSettings["DBReadOnlyKey"];
         }
 
-        private void Init()
+        public async Task OpenDB(DocumentClient client)
         {
-            _masterCollection = GetDc("LMSCollection", "LMSRegistry");
-            var rangeResolver = GetResolver();
-            _documentClient.PartitionResolvers[_database.SelfLink] = rangeResolver;
-        }
-
-        public async Task OpenDB()
-        {
-            await _documentClient.OpenAsync();
+            _documentClient = client;
+            await client.OpenAsync();
         }
 
         public List<Topic> GetCalendar()
         {
+            var client = GetDocumentClient();
             var documentCollection = GetDc("LMSCollection", "LMSRegistry");
             var item =
-                from f in _documentClient.CreateDocumentQuery<Topic>(documentCollection.DocumentsLink)
+                from f in client.CreateDocumentQuery<Topic>(documentCollection.DocumentsLink)
                 where f.Type == "Topic"
                 select f;
             return item.ToList();
@@ -84,6 +80,7 @@ namespace LMS.service.Service
 
         public LMSresult GetList(string m)
         {
+            var client = GetDocumentClient("");
             long end = 0;
             var n = 0;
             List<PostMessage> items = new List<PostMessage>();
@@ -92,16 +89,16 @@ namespace LMS.service.Service
                 end =
                     (long) (DateTime.UtcNow.AddMinutes(-30*n).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                 var path = m.Split('/');
-                /*   items = _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
+                /*   items = client.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
                     "SELECT d AS data " +
                     "FROM Doc d " +
                     "Where d.Type='Post' And d.Info.timestamp > '" + time + "'").OrderBy(o=>o.Info.timestamp).ToList();*/
                 /*  items =
-                    (from f in _documentClient.CreateDocumentQuery<PostMessage>(_database.SelfLink)
+                    (from f in client.CreateDocumentQuery<PostMessage>(_database.SelfLink)
                         where f.Type == "Post" && f.Info.timestamp > end
                         select f).OrderBy(o => o.Info.timestamp).ToList();*/
                 items =
-                    _documentClient.CreateDocumentQuery<PostMessage>(_database.SelfLink,
+                    client.CreateDocumentQuery<PostMessage>(_dataSelfLink,
                         new FeedOptions {MaxItemCount = 2000})
                         .Where(f => f.Type == "Post" && f.Info.timestamp > end)
                         .OrderBy(o => o.Info.timestamp).ToList();
@@ -118,6 +115,7 @@ namespace LMS.service.Service
 
         public LMSresult GetMoreList(string m, long start)
         {
+            var client = GetDocumentClient("");
             var t = (long) (DateTime.UtcNow.AddMonths(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             List<PostMessage> items = new List<PostMessage>();
             var t1 = DateTime.Now;
@@ -129,17 +127,17 @@ namespace LMS.service.Service
                 i = i + n;
                 end = end - (long) TimeSpan.FromHours(i).TotalMilliseconds;
                 var path = m.Split('/');
-                /*  items = _documentClient.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
+                /*  items = client.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
                     "SELECT d AS data " +
                     "FROM Doc d " +
                     "Where d.Type='Post' And d.Info.timestamp > '" + t2 + "'" +
                     "And d.Info.timestamp < '" + t1 + "'").ToList();*/
                 /*  items =
-                    (from f in _documentClient.CreateDocumentQuery<PostMessage>(_database.SelfLink)
+                    (from f in client.CreateDocumentQuery<PostMessage>(_database.SelfLink)
                         where f.Type == "Post" && f.Info.timestamp < start && f.Info.timestamp > end
                         select f).OrderBy(o => o.Info.timestamp).ToList();*/
 
-                items = _documentClient.CreateDocumentQuery<PostMessage>(_database.SelfLink)
+                items = client.CreateDocumentQuery<PostMessage>(_dataSelfLink)
                     .Where(f => f.Type == "Post" && f.Info.timestamp < start && f.Info.timestamp > end)
                     .OrderBy(o => o.Info.timestamp).ToList();
                 var t2 = DateTime.Now;
@@ -166,16 +164,18 @@ namespace LMS.service.Service
 
         public Database GetDd(string dName)
         {
-            _database = _documentClient.CreateDatabaseQuery().Where(db => db.Id == dName)
+            var client = GetDocumentClient();
+            var database = client.CreateDatabaseQuery().Where(db => db.Id == dName)
                 .AsEnumerable().FirstOrDefault();
 
-            return _database;
+            return database;
         }
 
         public DocumentCollection GetDc(string cName, string dName)
         {
+            var client = GetDocumentClient();
             var database = GetDd(dName);
-            DocumentCollection documentCollection = _documentClient.CreateDocumentCollectionQuery(database.SelfLink)
+            DocumentCollection documentCollection = client.CreateDocumentCollectionQuery(database.SelfLink)
                 .Where(c => c.Id == cName)
                 .AsEnumerable()
                 .FirstOrDefault();
@@ -185,14 +185,15 @@ namespace LMS.service.Service
 
         public DocumentCollection GetCurrentDc()
         {
+            var client = GetDocumentClient();
             var curDoc =
-                _documentClient.CreateDocumentQuery<CurrentCollection>(_masterCollection.SelfLink)
+                client.CreateDocumentQuery<CurrentCollection>(_masterCollectionSelfLink)
                     .Where(x => x.id == "CurrentCollection")
                     .AsEnumerable()
                     .FirstOrDefault();
             if (curDoc != null)
             {
-                return _documentClient.CreateDocumentCollectionQuery(_database.SelfLink)
+                return client.CreateDocumentCollectionQuery(_dataSelfLink)
                     .Where(c => c.Id == curDoc.name)
                     .AsEnumerable()
                     .FirstOrDefault();
@@ -203,7 +204,8 @@ namespace LMS.service.Service
 
         public StoredProcedure GetSp(DocumentCollection documentCollection, string spName)
         {
-            var sp = _documentClient.CreateStoredProcedureQuery(documentCollection.SelfLink).Where(c => c.Id == spName)
+            var client = GetDocumentClient();
+            var sp = client.CreateStoredProcedureQuery(documentCollection.SelfLink).Where(c => c.Id == spName)
                 .AsEnumerable()
                 .FirstOrDefault();
             return sp;
@@ -237,22 +239,34 @@ namespace LMS.service.Service
 
         public DocumentClient GetDocumentClient()
         {
-            //var client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
-            return _documentClient;
+            if (_documentClient != null) return _documentClient;
+            var client = new DocumentClient(new Uri(_endpointUrl), _authorizationKey);
+            return client;
         }
+        public DocumentClient GetDocumentClient(string n)
+        {
+            var client = _documentClient ?? new DocumentClient(new Uri(_endpointUrl), _authorizationKey);
+            var rangeResolver = GetResolver(client);
+            client.PartitionResolvers[_dataSelfLink] = rangeResolver;
+            _documentClient = client;
+            return client;
+        }
+
+
 
 
         public DocumentCollection SearchCollection(string dis, DocumentCollection masterCollection, Database database)
         {
+            var client = GetDocumentClient();
             var ds =
-                from d in _documentClient.CreateDocumentQuery<DcAllocate>(masterCollection.DocumentsLink)
+                from d in client.CreateDocumentQuery<DcAllocate>(masterCollection.DocumentsLink)
                 where d.Type == "DisList"
                 select d;
             foreach (var d in ds)
             {
                 if (d.District.Contains(dis))
                 {
-                    DocumentCollection dc = _documentClient.CreateDocumentCollectionQuery(database.SelfLink)
+                    DocumentCollection dc = client.CreateDocumentCollectionQuery(database.SelfLink)
                         .Where(c => c.Id == d.DcName)
                         .AsEnumerable()
                         .FirstOrDefault();
@@ -270,21 +284,21 @@ namespace LMS.service.Service
         {
             foreach (var id in idList)
             {
-                await DeleteDocById(dc, id);             
+                await DeleteDocById(dc, id);
             }
         }
 
         public async Task DeleteDocById(DocumentCollection dc, string id)
         {
+            var client = GetDocumentClient();
             var doc =
-                (from d in _documentClient.CreateDocumentQuery(dc.DocumentsLink)
-                where d.Id == id
-                select d).AsEnumerable().FirstOrDefault();
+                (from d in client.CreateDocumentQuery(dc.DocumentsLink)
+                    where d.Id == id
+                    select d).AsEnumerable().FirstOrDefault();
             if (doc != null)
             {
-                await ExecuteWithRetries(() => _documentClient.DeleteDocumentAsync(doc.SelfLink));
+                await ExecuteWithRetries(() => client.DeleteDocumentAsync(doc.SelfLink));
             }
-
         }
 
         public PostMessage PostData(dynamic data, string[] path)
@@ -342,7 +356,8 @@ namespace LMS.service.Service
 
         public async Task ReplaceDocument(dynamic item)
         {
-            await ExecuteWithRetries(() => _documentClient.ReplaceDocumentAsync(item));
+            var client = GetDocumentClient();
+            await ExecuteWithRetries(() => client.ReplaceDocumentAsync(item));
         }
 
         public async Task ExecuteWithRetries(Func<object> function)
@@ -598,12 +613,13 @@ namespace LMS.service.Service
 
         public async Task<int> BatchTransfer(string sp1, string sp2, List<dynamic> docs)
         {
+            var client = GetDocumentClient();
             try
             {
-                var res = await ExecuteWithRetries(() => _documentClient.ExecuteStoredProcedureAsync<List<Document>>(
+                var res = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
                     sp1, docs));
 
-                var res2 = await ExecuteWithRetries(() => _documentClient.ExecuteStoredProcedureAsync<List<Document>>(
+                var res2 = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
                     sp2, res.Response));
 
                 return res2.Response.Count;
@@ -720,10 +736,11 @@ function bulkImport(docs) {
 
         public async Task BatchDelete(DocumentCollection dc, List<dynamic> docs)
         {
-            var sp = _documentClient.CreateStoredProcedureQuery(dc.SelfLink).Where(c => c.Id == "BatchDelete")
+            var client = GetDocumentClient();
+            var sp = client.CreateStoredProcedureQuery(dc.SelfLink).Where(c => c.Id == "BatchDelete")
                 .AsEnumerable()
-                .FirstOrDefault() ?? await _documentClient.CreateStoredProcedureAsync(dc.SelfLink, BatchDelete());
-            var res = await ExecuteWithRetries(() => _documentClient.ExecuteStoredProcedureAsync<List<Document>>(
+                .FirstOrDefault() ?? await client.CreateStoredProcedureAsync(dc.SelfLink, BatchDelete());
+            var res = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
                 sp.SelfLink, docs));
 
 
@@ -742,7 +759,7 @@ function bulkImport(docs) {
                         }
                     }
                     var res2 =
-                        await ExecuteWithRetries(() => _documentClient.ExecuteStoredProcedureAsync<List<Document>>(
+                        await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
                             sp.SelfLink, docs));
                     cur = cur + res2.Response.Count;
                 }
@@ -751,16 +768,17 @@ function bulkImport(docs) {
 
         public async Task CollectionTransfer(DocumentCollection dc1, DocumentCollection dc2)
         {
-            var sp = _documentClient.CreateStoredProcedureQuery(dc1.SelfLink).Where(c => c.Id == "BatchDelete")
+            var client = GetDocumentClient();
+            var sp = client.CreateStoredProcedureQuery(dc1.SelfLink).Where(c => c.Id == "BatchDelete")
                 .AsEnumerable()
-                .FirstOrDefault() ?? await _documentClient.CreateStoredProcedureAsync(dc1.SelfLink, BatchDelete());
+                .FirstOrDefault() ?? await client.CreateStoredProcedureAsync(dc1.SelfLink, BatchDelete());
 
-            var sp2 = _documentClient.CreateStoredProcedureQuery(dc2.SelfLink).Where(c => c.Id == "BatchInsert")
+            var sp2 = client.CreateStoredProcedureQuery(dc2.SelfLink).Where(c => c.Id == "BatchInsert")
                 .AsEnumerable()
-                .FirstOrDefault() ?? await _documentClient.CreateStoredProcedureAsync(dc2.SelfLink, BatchInsert());
+                .FirstOrDefault() ?? await client.CreateStoredProcedureAsync(dc2.SelfLink, BatchInsert());
 
             var families =
-                from f in _documentClient.CreateDocumentQuery<PostMessage>(dc1.DocumentsLink)
+                from f in client.CreateDocumentQuery<PostMessage>(dc1.DocumentsLink)
                 where f.Type == "Post"
                 select f;
 
@@ -784,10 +802,10 @@ function bulkImport(docs) {
             }
         }
 
-        public RangePartitionResolver<long> GetResolver()
+        public RangePartitionResolver<long> GetResolver(DocumentClient client)
         {
             var q =
-                _documentClient.CreateDocumentQuery(_masterCollection.SelfLink)
+                client.CreateDocumentQuery(_masterCollectionSelfLink)
                     .Where(x => x.Id == "AZresolver")
                     .AsEnumerable()
                     .FirstOrDefault();
@@ -807,7 +825,8 @@ function bulkImport(docs) {
 
         public async Task<bool> UpdateResolver(DocumentCollection newDc)
         {
-            var oldResolver = GetResolver();
+            var client = GetDocumentClient();
+            var oldResolver = GetResolver(client);
             if (oldResolver == null) return false;
 
             var map = new Dictionary<Range<long>, string>();
@@ -833,16 +852,16 @@ function bulkImport(docs) {
 
 
             var m =
-                _documentClient.CreateDocumentQuery(_masterCollection.DocumentsLink)
+                client.CreateDocumentQuery(_masterCollectionSelfLink)
                     .Where(x => x.Id == "AZresolver")
                     .AsEnumerable()
                     .FirstOrDefault();
             if (m == null) return false;
-            await ExecuteWithRetries(() => _documentClient.DeleteDocumentAsync(m.SelfLink));
+            await ExecuteWithRetries(() => client.DeleteDocumentAsync(m.SelfLink));
             var res =
                 await
                     ExecuteWithRetries(
-                        () => _documentClient.CreateDocumentAsync(_masterCollection.SelfLink, new RangeResolver
+                        () => client.CreateDocumentAsync(_masterCollectionSelfLink, new RangeResolver
                         {
                             id = "AZresolver",
                             resolver = newResolver
@@ -851,30 +870,37 @@ function bulkImport(docs) {
             return res.StatusCode == HttpStatusCode.Created;
         }
 
-        public async Task<bool> InitResolver()
+        public async Task<bool> InitResolver(string selfLink)
         {
+            var masterCollectionSelfLink = _masterCollectionSelfLink;
+            if (selfLink != "")
+            {
+                masterCollectionSelfLink = selfLink;
+            }
+        
+            var client = GetDocumentClient();
             var start = (long) (DateTime.UtcNow.AddDays(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             var end = (long) (start + TimeSpan.FromDays(365).TotalMilliseconds);
             var rangeResolver = new RangePartitionResolver<long>(
                 u => ((PostMessage) u).Info.timestamp,
                 new Dictionary<Range<long>, string>()
                 {
-                    {new Range<long>(start, end), _masterCollection.SelfLink}
+                    {new Range<long>(start, end), masterCollectionSelfLink}
                 });
 
             var m =
-                _documentClient.CreateDocumentQuery(_masterCollection.DocumentsLink)
+                client.CreateDocumentQuery(masterCollectionSelfLink)
                     .Where(x => x.Id == "AZresolver")
                     .AsEnumerable()
                     .FirstOrDefault();
             if (m != null)
             {
-                await ExecuteWithRetries(() => _documentClient.DeleteDocumentAsync(m.SelfLink));
+                await ExecuteWithRetries(() => client.DeleteDocumentAsync(m.SelfLink));
             }
             var res =
                 await
                     ExecuteWithRetries(
-                        () => _documentClient.CreateDocumentAsync(_masterCollection.SelfLink, new RangeResolver
+                        () => client.CreateDocumentAsync(masterCollectionSelfLink, new RangeResolver
                         {
                             id = "AZresolver",
                             resolver = rangeResolver
@@ -885,10 +911,11 @@ function bulkImport(docs) {
 
         public async Task UpdateCurrentCollection(DocumentCollection newDc)
         {
-            await ExecuteWithRetries(() => _documentClient.DeleteDocumentAsync(_masterCollection.SelfLink));
+            var client = GetDocumentClient();
+            await ExecuteWithRetries(() => client.DeleteDocumentAsync(_masterCollectionSelfLink));
             await
                 ExecuteWithRetries(
-                    () => _documentClient.CreateDocumentAsync(_masterCollection.SelfLink, new CurrentCollection
+                    () => client.CreateDocumentAsync(_masterCollectionSelfLink, new CurrentCollection
                     {
                         id = "CurrentCollection",
                         name = newDc.Id

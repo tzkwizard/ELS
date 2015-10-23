@@ -23,8 +23,6 @@ namespace StorageRole
     public class PostBackup
     {
         private static CloudTable _table;
-        private static DocumentClient _client;
-        private static Database _database;
         private static IDBService _iDbService;
         private static int _reTry = 5;
         private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
@@ -35,24 +33,20 @@ namespace StorageRole
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _table = c.GetTableReference("Post");
             _table.CreateIfNotExists();
-
-            _client = _iDbService.GetDocumentClient();
-            _database =
-                _client.CreateDatabaseQuery().Where(db => db.Id == CloudConfigurationManager.GetSetting("Database"))
-                    .AsEnumerable().FirstOrDefault();
             _retryPolicy = _iDbService.GetRetryPolicy();
         }
 
-        public async Task BackupPostAll()
+        public async Task BackupPostAll(string databaseSelfLink)
         {
             try
             {
-                await _iDbService.OpenDB();
-                var collections = _client.CreateDocumentCollectionQuery(_database.SelfLink)
+                var client = _iDbService.GetDocumentClient();
+                await _iDbService.OpenDB(client);
+                var collections = client.CreateDocumentCollectionQuery(databaseSelfLink)
                     .AsEnumerable();
                 foreach (var dc in collections)
                 {
-                    await BackupPostCollection(dc);
+                    await BackupPostCollection(dc,client);
                 }
             }
             catch (Exception e)
@@ -63,7 +57,7 @@ namespace StorageRole
                     _reTry--;
                     Trace.TraceInformation("Restart BackupPost... in 1 min " + _reTry);
                     Thread.Sleep(60000);
-                    BackupPostAll().Wait();
+                    BackupPostAll(databaseSelfLink).Wait();
                 }
                 else
                 {
@@ -72,14 +66,14 @@ namespace StorageRole
             }
         }
 
-        private static async Task BackupPostCollection(DocumentCollection dc)
+        private static async Task BackupPostCollection(DocumentCollection dc,DocumentClient client)
         {
             Trace.TraceInformation("Collection '{0}' start.  Time: '{1}'", dc.Id,
                 DateTime.Now.ToString(CultureInfo.CurrentCulture));
             try
             {
                 var ds =
-                    from d in _client.CreateDocumentQuery<PostMessage>(dc.DocumentsLink)
+                    from d in client.CreateDocumentQuery<PostMessage>(dc.DocumentsLink)
                     where d.Type == "Post"
                     select d;
 
@@ -124,31 +118,32 @@ namespace StorageRole
         }
 
 
-        public async Task CleanCollection()
+        public async Task CleanCollection(string databaseSelfLink, string masterCollectionSelfLink)
         {
             try
             {
-                var collections = _client.CreateDocumentCollectionQuery(_database.SelfLink)
+                var client = _iDbService.GetDocumentClient();
+                var collections = client.CreateDocumentCollectionQuery(databaseSelfLink)
                     .AsEnumerable();
                 foreach (var dc in collections)
                 {
                     if (dc.Id == CloudConfigurationManager.GetSetting("MasterCollection"))
                     {
-                        Offer offer = _client.CreateOfferQuery()
+                        Offer offer = client.CreateOfferQuery()
                             .Where(r => r.ResourceLink == dc.SelfLink)
                             .AsEnumerable()
                             .SingleOrDefault();
                         if (offer != null)
                         {
                             offer.OfferType = "S3";
-                            Offer updated = await _client.ReplaceOfferAsync(offer);
-                            await _iDbService.InitResolver();
+                            Offer updated = await client.ReplaceOfferAsync(offer);
+                            await _iDbService.InitResolver(masterCollectionSelfLink);
                             await _iDbService.UpdateCurrentCollection(dc);
                         }
                     }
                     else
                     {
-                        await _client.DeleteDocumentCollectionAsync(dc.SelfLink);
+                        await client.DeleteDocumentCollectionAsync(dc.SelfLink);
                     }
                 }
             }

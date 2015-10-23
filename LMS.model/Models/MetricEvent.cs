@@ -26,4 +26,10 @@ namespace LMS.model.Models
           public string timestamp { get; set; }
 
     }
+    public class EHdata
+    {
+        public string offset { get; set; }
+        public string body { get; set; }
+        public string partitionId { get; set; }
+    }
 }

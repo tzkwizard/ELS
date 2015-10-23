@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Threading.Tasks;
 using LMS.model.Models;
+using LMS.model.Models.ELS;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
 using StackExchange.Redis;

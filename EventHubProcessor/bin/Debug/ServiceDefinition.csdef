@@ -20,7 +20,14 @@
       <Setting name="Database" />
       <Setting name="MasterCollection" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DBSelfLink" />
     </ConfigurationSettings>
+    <Imports>
+      <Import moduleName="Caching" />
+    </Imports>
+    <LocalResources>
+      <LocalStorage name="DiagnosticStore" sizeInMB="20000" cleanOnRoleRecycle="false" />
+    </LocalResources>
     <Contents>
       <Content destination=".\">
         <SourceDirectory path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\rcf\Debug\EventRoleContent\" />

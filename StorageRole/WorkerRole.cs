@@ -24,7 +24,8 @@ namespace StorageRole
         private CloudQueue _client;
         private ManualResetEvent CompletedEvent = new ManualResetEvent(false);
         private bool _flag;
-
+        private static string _database;
+        private static string _collection;
         public override void Run()
         {
             Trace.WriteLine("Starting processing");
@@ -44,10 +45,10 @@ namespace StorageRole
                     Trace.TraceInformation("Start Backup Post.  Time: '{0}'",
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
                     _flag = false;
-                    _postBackup.BackupPostAll().Wait();
+                    _postBackup.BackupPostAll(_database).Wait();
                     Trace.TraceInformation("End Backup Post.  Time: '{0}'",
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
-                    //_postBackup.CleanCollection().Wait();
+                    //_postBackup.CleanCollection(_database,_collection).Wait();
                     Trace.TraceInformation("End Clean Collection.  Time: '{0}'",
                         DateTime.Now.ToString(CultureInfo.CurrentCulture));
                     _flag = true;
@@ -70,7 +71,8 @@ namespace StorageRole
             _client.CreateIfNotExists();
             var url = CloudConfigurationManager.GetSetting("EndpointUrl");
             var key = CloudConfigurationManager.GetSetting("AuthorizationKey");
-
+            _database = CloudConfigurationManager.GetSetting("DBSelfLink");
+            _collection = CloudConfigurationManager.GetSetting("MasterCollectionSelfLink");
             _postBackup = new PostBackup(storageAccount, url, key);
 
             return base.OnStart();

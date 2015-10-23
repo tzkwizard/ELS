@@ -35,6 +35,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\LMS.model.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\LMS.service.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.ApplicationServer.Caching.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.ApplicationServer.Caching.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.Data.Edm.dll
@@ -52,10 +54,13 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.Threading.Tasks.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.Threading.Tasks.Extensions.Desktop.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.Web.DistributedCache.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.WindowsAzure.Configuration.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.WindowsAzure.Diagnostics.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.WindowsAzure.Storage.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.WindowsAzure.Storage.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.WindowsFabric.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Microsoft.WindowsFabric.Data.Common.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\MonAgentListener.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Debug\EventRole\Nest.pdb

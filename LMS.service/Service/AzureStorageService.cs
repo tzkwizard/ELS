@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using LMS.model.Models;
+using LMS.model.Models.Api;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -13,13 +14,13 @@ namespace LMS.service.Service
 {
     public class AzureStorageService : IAzureStorageService
     {
-        private static string storageConnectionString =
-            "DefaultEndpointsProtocol=https;AccountName=elsaotuo;AccountKey=AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==";
+        private static string storageConnectionString;
 
-        private CloudTable _cloudTable;
+        private readonly CloudTable _cloudTable;
 
         public AzureStorageService()
         {
+            storageConnectionString = ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"].ToString();
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _cloudTable = c.GetTableReference("Chat");

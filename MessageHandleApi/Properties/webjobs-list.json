@@ -6,9 +6,6 @@
     },
     {
       "filePath": "../LMSqueue/LMSqueue.csproj"
-    },
-    {
-      "filePath": "../LMShandler/LMShandler.csproj"
     }
   ]
 }

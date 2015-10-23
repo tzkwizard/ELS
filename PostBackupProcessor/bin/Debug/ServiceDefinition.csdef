@@ -17,6 +17,8 @@
       <Setting name="AuthorizationKey" />
       <Setting name="Database" />
       <Setting name="MasterCollection" />
+      <Setting name="DBSelfLink" />
+      <Setting name="MasterCollectionSelfLink" />
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">

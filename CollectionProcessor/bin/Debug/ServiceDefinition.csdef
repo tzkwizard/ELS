@@ -17,6 +17,7 @@
       <Setting name="DocumentDBAuthorizationKey" />
       <Setting name="Database" />
       <Setting name="MasterCollection" />
+      <Setting name="DBSelfLink" />
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">

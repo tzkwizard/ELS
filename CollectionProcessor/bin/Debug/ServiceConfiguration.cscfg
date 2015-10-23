@@ -18,6 +18,7 @@
       <Setting name="DocumentDBAuthorizationKey" value="6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==" />
       <Setting name="Database" value="LMSRegistry" />
       <Setting name="MasterCollection" value="LMSCollection" />
+      <Setting name="DBSelfLink" value="dbs/HMJ9AA==/" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

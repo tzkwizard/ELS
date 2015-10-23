@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
-using LMS.model.Models;
+using LMS.model.Models.ELS;
 using MessageHandleApi.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -83,11 +83,11 @@ namespace doucumentDB
 
             client.PartitionResolvers[database.SelfLink] = hashResolver;*/
 
-            var rangeResolver = _iDbService.GetResolver();
+            var rangeResolver = _iDbService.GetResolver(client);
             client.PartitionResolvers[database.SelfLink] = rangeResolver;
 
             
-            var created = await _iDbService.InitResolver();
+            var created = await _iDbService.InitResolver("");
           
             
             while (true)

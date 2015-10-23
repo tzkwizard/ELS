@@ -11,6 +11,13 @@
       <Setting name="Database" />
       <Setting name="MasterCollection" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DBSelfLink" />
     </ConfigurationSettings>
+    <Imports>
+      <Import moduleName="Caching" />
+    </Imports>
+    <LocalResources>
+      <LocalStorage name="DiagnosticStore" sizeInMB="20000" cleanOnRoleRecycle="false" />
+    </LocalResources>
   </WorkerRole>
 </ServiceDefinition>

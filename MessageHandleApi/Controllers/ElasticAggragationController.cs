@@ -6,6 +6,8 @@ using Nest;
 using System.Web.Http;
 using Elasticsearch.Net.ConnectionPool;
 using System.Threading.Tasks;
+using LMS.model.Models.Api;
+using LMS.model.Models.ELS;
 
 
 namespace MessageHandleApi.Controllers

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using LMS.model.Models;
+using LMS.model.Models.ELS;
 
 namespace LMS.service.Service
 {
