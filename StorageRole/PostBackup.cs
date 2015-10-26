@@ -23,13 +23,13 @@ namespace StorageRole
     public class PostBackup
     {
         private static CloudTable _table;
-        private static IDBService _iDbService;
+        private static IDbService _iDbService;
         private static int _reTry = 5;
         private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
 
         public PostBackup(CloudStorageAccount storageAccount, string endpointUrl, string authorizationKey)
         {
-            _iDbService = new DBService(endpointUrl,authorizationKey);
+            _iDbService = new DbService(endpointUrl,authorizationKey);
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _table = c.GetTableReference("Post");
             _table.CreateIfNotExists();
@@ -41,7 +41,7 @@ namespace StorageRole
             try
             {
                 var client = _iDbService.GetDocumentClient();
-                await _iDbService.OpenDB(client);
+                await client.OpenAsync();
                 var collections = client.CreateDocumentCollectionQuery(databaseSelfLink)
                     .AsEnumerable();
                 foreach (var dc in collections)

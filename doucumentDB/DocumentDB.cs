@@ -26,7 +26,7 @@ namespace doucumentDB
         private static string AuthorizationKey =
             "6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==";
 
-        private static IDBService _iDbService;
+        private static IDbService _iDbService;
 
         public static async Task GetStartedDemo()
         {
@@ -38,7 +38,7 @@ namespace doucumentDB
 
             //var response = await ExecuteWithRetries(5, () => client.CreateDocumentAsync("", new object()));
             //await DeleteAll(client, database, documentCollection);
-            _iDbService = new DBService(EndpointUrl,AuthorizationKey);
+            _iDbService = new DbService(EndpointUrl,AuthorizationKey);
 
             await sp2(documentCollection, client, database);
             //await GetData(client, documentCollection);

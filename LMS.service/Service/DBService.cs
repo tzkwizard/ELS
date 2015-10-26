@@ -21,37 +21,32 @@ using Microsoft.Practices.TransientFaultHandling;
 
 namespace LMS.service.Service
 {
-    public class DBService : IDBService
+    public class DbService : IDbService
     {
         private static DocumentClient _documentClient;
-        private string firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
 
         private const int RetryTimes = 5;
         private static string _endpointUrl;
         private static string _authorizationKey;
         private static string _dataSelfLink;
         private static string _masterCollectionSelfLink;
-
-        public DBService(string endpointUrl, string authorizationKey)
+        private static string _firebaseSecret;
+        public DbService(string endpointUrl, string authorizationKey)
         {
             _endpointUrl = endpointUrl;
             _authorizationKey = authorizationKey;
             _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
             _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
+            _firebaseSecret = ConfigurationManager.AppSettings["FirebaseSecret"];
         }
 
-        public DBService()
+        public DbService()
         {
             _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
             _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
             _endpointUrl = ConfigurationManager.AppSettings["DBEndpointUrl"];
             _authorizationKey = ConfigurationManager.AppSettings["DBReadOnlyKey"];
-        }
-
-        public async Task OpenDB(DocumentClient client)
-        {
-            _documentClient = client;
-            await client.OpenAsync();
+            _firebaseSecret = ConfigurationManager.AppSettings["FirebaseSecret"];
         }
 
         public List<Topic> GetCalendar()
@@ -67,7 +62,7 @@ namespace LMS.service.Service
 
         public string GetFirebaseToken(string user, string uid, string data)
         {
-            var tokenGenerator = new Firebase.TokenGenerator(firebaseSecret);
+            var tokenGenerator = new Firebase.TokenGenerator(_firebaseSecret);
             var authPayload = new Dictionary<string, object>()
             {
                 {"uid", uid},
@@ -80,7 +75,7 @@ namespace LMS.service.Service
 
         public LMSresult GetList(string m)
         {
-            var client = GetDocumentClient("");
+            var client = GetDocumentClient(true);
             long end = 0;
             var n = 0;
             List<PostMessage> items = new List<PostMessage>();
@@ -115,7 +110,7 @@ namespace LMS.service.Service
 
         public LMSresult GetMoreList(string m, long start)
         {
-            var client = GetDocumentClient("");
+            var client = GetDocumentClient(true);
             var t = (long) (DateTime.UtcNow.AddMonths(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             List<PostMessage> items = new List<PostMessage>();
             var t1 = DateTime.Now;
@@ -214,10 +209,9 @@ namespace LMS.service.Service
         public IFirebaseClient GetFirebaseClient()
         {
             var node = "https://dazzling-inferno-4653.firebaseio.com/";
-            var firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
             IFirebaseConfig config = new FirebaseConfig
             {
-                AuthSecret = firebaseSecret,
+                AuthSecret = _firebaseSecret,
                 BasePath = node
             };
             IFirebaseClient client = new FirebaseClient(config);
@@ -226,10 +220,9 @@ namespace LMS.service.Service
 
         public IFirebaseClient GetFirebaseClient(string node)
         {
-            var firebaseSecret = "F1EIaYtnYgfkVVI7sSBe3WDyUMlz4xV6jOrxIuxO";
             IFirebaseConfig config = new FirebaseConfig
             {
-                AuthSecret = firebaseSecret,
+                AuthSecret = _firebaseSecret,
                 BasePath = node
             };
             IFirebaseClient client = new FirebaseClient(config);
@@ -239,21 +232,21 @@ namespace LMS.service.Service
 
         public DocumentClient GetDocumentClient()
         {
-            if (_documentClient != null) return _documentClient;
-            var client = new DocumentClient(new Uri(_endpointUrl), _authorizationKey);
-            return client;
+            return _documentClient ?? (_documentClient = new DocumentClient(new Uri(_endpointUrl), _authorizationKey));
         }
-        public DocumentClient GetDocumentClient(string n)
+
+        public DocumentClient GetDocumentClient(bool t)
         {
-            var client = _documentClient ?? new DocumentClient(new Uri(_endpointUrl), _authorizationKey);
-            var rangeResolver = GetResolver(client);
-            client.PartitionResolvers[_dataSelfLink] = rangeResolver;
-            _documentClient = client;
-            return client;
+            UpdateDocumentClient();
+            return _documentClient ?? (_documentClient = new DocumentClient(new Uri(_endpointUrl), _authorizationKey));
         }
 
-
-
+        public void UpdateDocumentClient()
+        {
+            _documentClient = _documentClient ?? new DocumentClient(new Uri(_endpointUrl), _authorizationKey);
+            var rangeResolver = GetResolver(_documentClient);
+            _documentClient.PartitionResolvers[_dataSelfLink] = rangeResolver;
+        }
 
         public DocumentCollection SearchCollection(string dis, DocumentCollection masterCollection, Database database)
         {

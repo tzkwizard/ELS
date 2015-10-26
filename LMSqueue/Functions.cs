@@ -19,7 +19,7 @@ namespace LMSqueue
         // on an Azure Queue called queue.
         static Functions()
         {
-            var iDbService = new DBService();
+            var iDbService = new DbService();
             var iQueueService=new QueueService();
             _iProcessMessage = new ProcessMessage.ProcessMessage(iDbService, iQueueService);
         }

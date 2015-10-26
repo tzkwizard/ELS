@@ -12,9 +12,8 @@ using Microsoft.Practices.TransientFaultHandling;
 
 namespace LMS.service.Service
 {
-    public interface IDBService
+    public interface IDbService
     {
-        Task OpenDB(DocumentClient client);
         LMSresult GetList(string m);
         LMSresult GetMoreList(string m, long start);
         IFirebaseClient GetFirebaseClient();
@@ -24,7 +23,8 @@ namespace LMS.service.Service
         DocumentCollection GetCurrentDc();
         StoredProcedure GetSp(DocumentCollection documentCollection, string spName);
         DocumentClient GetDocumentClient();
-        DocumentClient GetDocumentClient(string n);
+        DocumentClient GetDocumentClient(bool t);
+        void UpdateDocumentClient();
         List<Topic> GetCalendar();
         String GetFirebaseToken(string user, string uid, string data);
         DocumentCollection SearchCollection(string dis, DocumentCollection masterCollection, Database database);

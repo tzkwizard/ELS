@@ -22,7 +22,7 @@ namespace CheckRole
     {
         private static DocumentClient _client;
         private static Database _database;
-        private static IDBService _iDbService;
+        private static IDbService _iDbService;
         private static int reTry = 5;
 
         public Dichotomy(string endpointUrl, string authorizationKey)
@@ -31,7 +31,7 @@ namespace CheckRole
             _database =
                 _client.CreateDatabaseQuery().Where(db => db.Id == CloudConfigurationManager.GetSetting("Database"))
                     .AsEnumerable().FirstOrDefault();
-            _iDbService = new DBService();
+            _iDbService = new DbService();
         }
 
         public async Task UpdateDcAll()

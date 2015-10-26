@@ -22,7 +22,7 @@ namespace LMSqueue.ProcessMessage
         private readonly DocumentClient _documentClient;
         private static DocumentCollection _documentCollection;
         private static StoredProcedure _sp;
-        public ProcessMessage(DBService iDbService, QueueService iQueueService)
+        public ProcessMessage(DbService iDbService, QueueService iQueueService)
         {
             _documentClient = iDbService.GetDocumentClient();
             _client = iDbService.GetFirebaseClient();

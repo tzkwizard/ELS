@@ -17,12 +17,12 @@ namespace CheckRole
 {
     public class LoadBalance
     {
-        private static IDBService _iDbService;
+        private static IDbService _iDbService;
         private static int _reTry = 5;
 
         public LoadBalance(string endpointUrl, string authorizationKey)
         {
-            _iDbService = _iDbService ?? new DBService(endpointUrl, authorizationKey);
+            _iDbService = _iDbService ?? new DbService(endpointUrl, authorizationKey);
         }
 
         public async Task CheckBalance(string databaseSelfLink)
@@ -30,7 +30,7 @@ namespace CheckRole
             try
             {
                 var client = _iDbService.GetDocumentClient();
-                await _iDbService.OpenDB(client);
+                await client.OpenAsync();
                 var curDc = _iDbService.GetCurrentDc();
                 if (curDc != null)
                 {

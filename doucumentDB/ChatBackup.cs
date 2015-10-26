@@ -34,7 +34,7 @@ namespace doucumentDB
             CloudTable table = c.GetTableReference("Chat");
             table.CreateIfNotExists();
 
-            IDBService i = new DBService();
+            IDbService i = new DbService();
             _firebaseClient = i.GetFirebaseClient();
             //Search3(table);
             //Search2(table);

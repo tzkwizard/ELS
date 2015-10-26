@@ -25,15 +25,7 @@ namespace QueueWebjob.QueueAndRedis
         }
         public void InsertData(string message)
         {
-           /*
-            //Send the raw message to elasticsearch
-            Node = new Uri("http://localhost:9200/");
-            var connectionPool = new SniffingConnectionPool(new[] { Node });
-            Settings = new ConnectionSettings(Node, defaultIndex: "azure");
-            Client = new ElasticClient(Settings);
-            string date = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-            var newPost = new ActivityLog(message, date, "");*/
-
+            //send message to redis cache
             Redis(message);
         }
 

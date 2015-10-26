@@ -16,16 +16,14 @@ namespace MessageHandleApi.Controllers
     [RoutePrefix("api/LMS")]
     public class LMSController : ApiController
     {
-        private readonly IFirebaseClient _client;
         private IQueueService _iQueueService;
-        private IDBService _iDbService;
+        private IDbService _iDbService;
         private IAzureStorageService _iAzureStorageService;
-        public LMSController(IQueueService iQueueService, IDBService iDbService, IAzureStorageService iAzureStorageService)
+        public LMSController(IQueueService iQueueService, IDbService iDbService, IAzureStorageService iAzureStorageService)
         {
             _iQueueService = iQueueService;
             _iDbService = iDbService;
             _iAzureStorageService = iAzureStorageService;
-            _client = _iDbService.GetFirebaseClient();
         }
 
 
@@ -102,8 +100,9 @@ namespace MessageHandleApi.Controllers
         public async Task<IHttpActionResult> Delete([FromUri] string url)
         {
             try
-            {               
-                FirebaseResponse response = await _client.DeleteAsync(url);
+            {
+                var client = _iDbService.GetFirebaseClient();
+                FirebaseResponse response = await client.DeleteAsync(url);
                 return Ok(response);
             }
             catch (Exception e)
@@ -120,7 +119,8 @@ namespace MessageHandleApi.Controllers
         {
             try
             {
-                FirebaseResponse response = await _client.DeleteAsync(url);
+                var client = _iDbService.GetFirebaseClient();
+                FirebaseResponse response = await client.DeleteAsync(url);
 
                 return Ok(response);
             }

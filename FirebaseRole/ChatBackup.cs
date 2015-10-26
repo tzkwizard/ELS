@@ -26,7 +26,7 @@ namespace FirebaseRole
         private const int RecordRemained = 2;
         private static CloudTable _table;
         private static int reTry = 5;
-        private static IDBService _iDbService;
+        private static IDbService _iDbService;
         private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
 
         public ChatBackup(CloudStorageAccount storageAccount)
@@ -34,7 +34,7 @@ namespace FirebaseRole
             var client = storageAccount.CreateCloudTableClient();
             _table = client.GetTableReference("Chat");
             _table.CreateIfNotExists();
-            _iDbService = new DBService();
+            _iDbService = new DbService();
             _retryPolicy = _iDbService.GetRetryPolicy();
         }
 

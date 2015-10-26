@@ -19,16 +19,13 @@ namespace QueueWebjob
     public class Functions
     {
         private static IQueueAndredis _iqueueandredis;
-        private static CloudQueue _queue;
         public Functions(IQueueAndredis iqueueandredis)
         {
 
             _iqueueandredis = iqueueandredis;
 
         }
-
-
-
+       
         // This function will get triggered/executed when a new message is written 
         // on an Azure Queue called queue.
         public static void ProcessQueueMessage([QueueTrigger("elsqueue")] string message, TextWriter log,

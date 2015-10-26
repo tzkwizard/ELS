@@ -40,7 +40,7 @@ namespace doucumentDB
 
         async Task IEventProcessor.ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
         {
-            var iDbService = new DBService();
+            var iDbService = new DbService();
             _client = iDbService.GetFirebaseClient();
             foreach (EventData eventData in messages)
             {

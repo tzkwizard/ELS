@@ -24,7 +24,7 @@ namespace EventRole
     internal class EventProcessor : IEventProcessor
     {
         private PartitionContext partitionContext;
-        private IDBService _iDbService;
+        private IDbService _iDbService;
         private static IFirebaseClient _client;
         private static string _databaseSelfLink;
         private static string _endpointUrl;
@@ -33,6 +33,7 @@ namespace EventRole
         private static int n = 1;
         private static readonly object _object = new object();
         private static bool _run = false;
+        private static bool _start = false;
 
         public Task OpenAsync(PartitionContext context)
         {
@@ -50,7 +51,7 @@ namespace EventRole
             _endpointUrl = _endpointUrl ?? CloudConfigurationManager.GetSetting("DocumentDBUrl");
             _authorizationKey = _authorizationKey ?? CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
             _databaseSelfLink = _databaseSelfLink ?? CloudConfigurationManager.GetSetting("DBSelfLink");
-            _iDbService = _iDbService ?? new DBService(_endpointUrl, _authorizationKey);
+            _iDbService = _iDbService ?? new DbService(_endpointUrl, _authorizationKey);
 
             //Init DB and Firebase
             _client = _client ?? _iDbService.GetFirebaseClient();
@@ -68,19 +69,16 @@ namespace EventRole
         {
             try
             {
-                var client = _iDbService.GetDocumentClient();
-                if (client.PartitionResolvers.Count == 0)
-                {
-                    client = _iDbService.GetDocumentClient("");
-                }
+                var client = await GetDocumentClient();
                 foreach (EventData eventData in events)
                 {
                     string dataString = Encoding.UTF8.GetString(eventData.GetBytes());
                     Trace.TraceInformation("Message received.  Partition: '{0}', Data: '{1}', Offset: '{2}'",
                         context.Lease.PartitionId, dataString, eventData.Offset);
 
-                    await SendToDB(client, dataString);
+                    await SendToDb(client, dataString);
                 }
+
                 await context.CheckpointAsync();
             }
             catch (Exception exp)
@@ -100,45 +98,46 @@ namespace EventRole
             }
         }
 
+        private async Task<DocumentClient> GetDocumentClient()
+        {
+            var client = _iDbService.GetDocumentClient();
+            while (client.PartitionResolvers.Count == 0)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                client = _iDbService.GetDocumentClient();
+            }
+            return client;
+        }
+
         private async Task CheckResolver()
         {
+            _iDbService.UpdateDocumentClient();
             while (_run)
             {
                 var client = _iDbService.GetDocumentClient();
-                if (client.PartitionResolvers.Count == 0)
+                var resolver = _iDbService.GetResolver(client);
+                if (_resolver.PartitionMap.Count != resolver.PartitionMap.Count)
                 {
-                    _resolver = _resolver ?? _iDbService.GetResolver(client);
-                    client.PartitionResolvers[_databaseSelfLink] = _resolver;
-                    await _iDbService.OpenDB(client);
+                    _iDbService.UpdateDocumentClient();
+                    _resolver = resolver;
+                }
+
+                var curdc = _resolver.PartitionMap.LastOrDefault().Value;
+                var res = await client.ReadDocumentCollectionAsync(curdc);
+                var rate = res.CollectionSizeUsage/res.CollectionSizeQuota;
+
+                if (rate > 0.8)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(10));
                 }
                 else
                 {
-                    long rate = 0;
-                    var resolver = _iDbService.GetResolver(client);
-                    if (_resolver.PartitionMap.Count != resolver.PartitionMap.Count)
-                    {
-                        client.PartitionResolvers[_databaseSelfLink] = resolver;
-                        await _iDbService.OpenDB(client);
-                        _resolver = resolver;
-                    }
-
-                    var curdc = _resolver.PartitionMap.LastOrDefault().Value;
-                    var res = await client.ReadDocumentCollectionAsync(curdc);
-                    rate = res.CollectionSizeUsage/res.CollectionSizeQuota;
-
-                    if (rate < 0.8)
-                    {
-                        await Task.Delay(TimeSpan.FromSeconds(10));
-                    }
-                    else
-                    {
-                        await Task.Delay(TimeSpan.FromDays(1));
-                    }
+                    await Task.Delay(TimeSpan.FromDays(1));
                 }
             }
         }
 
-        private async Task SendToDB(DocumentClient client, string dataString)
+        private async Task SendToDb(DocumentClient client, string dataString)
         {
             dynamic data = JsonConvert.DeserializeObject(dataString);
             var path = data.url.ToString().Split('/');
