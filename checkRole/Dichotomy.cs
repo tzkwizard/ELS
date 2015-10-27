@@ -23,7 +23,7 @@ namespace CheckRole
         private static DocumentClient _client;
         private static Database _database;
         private static IDbService _iDbService;
-        private static int reTry = 5;
+        private static int reTry = 4;
 
         public Dichotomy(string endpointUrl, string authorizationKey)
         {
