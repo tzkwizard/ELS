@@ -9,4 +9,10 @@
   <parameter name="AzureRedis-Web.config Connection String" description="AzureRedis Connection String used in web.config by the application to access the database." defaultValue="elsazure.redis.cache.windows.net,password=JL2ATsoHzQ8PHw4LSj/VgpgcEPlCkKKT3Qfvr69yrCA=" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AzureRedis']/@connectionString" />
   </parameter>
+  <parameter name="DBReadOnlyKey-Web.config Connection String" description="DBReadOnlyKey Connection String used in web.config by the application to access the database." defaultValue="UB1e7nFiZe9IDBiLBh0FCudsT9jqm2L1En5scCdYYRrHUYjgJixncuMfU3lVoOXoOfmsJZRRwYNTyM2Mwcti7w==" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DBReadOnlyKey']/@connectionString" />
+  </parameter>
+  <parameter name="DBEndpointUrl-Web.config Connection String" description="DBEndpointUrl Connection String used in web.config by the application to access the database." defaultValue="https://tstaz.documents.azure.com:443/" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\24666\\Documents\\Visual\ Studio\ 2013\\Projects\\self\\ELS\\MessageHandleApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DBEndpointUrl']/@connectionString" />
+  </parameter>
 </parameters>

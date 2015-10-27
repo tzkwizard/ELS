@@ -19,16 +19,13 @@ namespace QueueWebjob
     public class Functions
     {
         private static IQueueAndredis _iqueueandredis;
-        private static CloudQueue _queue;
         public Functions(IQueueAndredis iqueueandredis)
         {
 
             _iqueueandredis = iqueueandredis;
 
         }
-
-
-
+       
         // This function will get triggered/executed when a new message is written 
         // on an Azure Queue called queue.
         public static void ProcessQueueMessage([QueueTrigger("elsqueue")] string message, TextWriter log,
@@ -45,48 +42,38 @@ namespace QueueWebjob
 
             Console.WriteLine("From: " + cloudStorageAccount.QueueEndpoint);
 
-
+            //ioc
             if (_iqueueandredis == null)
             {
                 var kernel = new StandardKernel();
-
                 kernel.Bind<IQueueAndredis>().To<QueueAndredis>();
                 _iqueueandredis = kernel.Get<QueueAndredis>();
-            }
-
-            //Task.Run(() => q.ProcessAsync("qqwwss")); 
-            if (_queue == null)
-            {
-                _queue = _iqueueandredis.GetQueue();
-            }
+            }           
 
             _iqueueandredis.InsertData(message);
-            _iqueueandredis.ProcessMessageAsync(_queue);
+            _iqueueandredis.ProcessMessageAsync();
         }
 
         // This function will get triggered/executed when poison-message(message fail to function will become poison) is written. 
         public static void ProcessPoisonMessage(
-        [QueueTrigger("elsqueue-poison")] string blobName, TextWriter logger)
+        [QueueTrigger("elsqueue-poison")] string message, TextWriter logger)
         {
-            logger.WriteLine("Failed to copy blob, name=" + blobName);
+            logger.WriteLine("Failed to Process message=" + message);
         }
 
 
 
 
-        // dummy function for ProcessQueueMessage, only used for test
+        #region dummy function for ProcessQueueMessage, only used for test
         public void ProcessQueueMessage(String message)
         {
             //IQueueAndredis iqueueandredis = new QueueAndredis();
-            if (_queue == null)
-            {
-                _queue = _iqueueandredis.GetQueue();
-            }
             _iqueueandredis.InsertData(message);
-            _iqueueandredis.ProcessMessageAsync(_queue);
+            _iqueueandredis.ProcessMessageAsync();
         }
+        #endregion
 
-
+        #region redis test
         public static void Redis()
         {
 
@@ -116,6 +103,6 @@ namespace QueueWebjob
              }*/
         }
 
-
+        #endregion
     }
 }

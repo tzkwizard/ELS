@@ -3,6 +3,9 @@
   "WebJobs": [
     {
       "filePath": "../QueueWebjob/QueueWebjob.csproj"
+    },
+    {
+      "filePath": "../LMSqueue/LMSqueue.csproj"
     }
   ]
 }

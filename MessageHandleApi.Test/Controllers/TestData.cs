@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.ConnectionPool;
-using MessageHandleApi.Models;
+using LMS.model.Models;
+using LMS.model.Models.Api;
+using LMS.model.Models.ELS;
 using Nest;
 
 namespace MessageHandleApi.Test.Controllers

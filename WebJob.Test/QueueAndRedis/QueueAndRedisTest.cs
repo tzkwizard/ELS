@@ -1,8 +1,9 @@
 ﻿using Microsoft.WindowsAzure.Storage.Queue;
 using NSubstitute;
 using NUnit.Framework;
+using QueueWebjob;
+using QueueWebjob.QueueAndRedis;
 using StackExchange.Redis;
-using WebJob.QueueAndRedis;
 
 namespace WebJob.Test.QueueAndRedis
 {
@@ -19,12 +20,12 @@ namespace WebJob.Test.QueueAndRedis
             f.ProcessQueueMessage("haha");
             f.ProcessQueueMessage("hasdaha");
             f.ProcessQueueMessage("hasdha");
-            CloudQueue queue = iqueueandredis.GetQueue();
+            //CloudQueue queue = iqueueandredis.GetQueue();
 
-            iqueueandredis.Received(4).GetQueue();            
+            //iqueueandredis.Received(4).GetQueue();            
             iqueueandredis.Received().InsertData("haha");
             iqueueandredis.Received(3).InsertData(Arg.Any<string>());
-            iqueueandredis.Received(3).ProcessMessageAsync(queue);
+            iqueueandredis.Received(3).ProcessMessageAsync();
 
         }
         [Test]

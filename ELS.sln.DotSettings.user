@@ -11,6 +11,10 @@
   &lt;Assembly Path="C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\packages\NEST.1.4.3\lib\net45\Nest.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\WebApi\Bin\RenWeb.Framework.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Web.Extensions.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\packages\WindowsAzure.ServiceBus.3.0.3\lib\net45-full\Microsoft.ServiceBus.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\packages\Microsoft.WindowsAzure.ConfigurationManager.3.1.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\packages\FirebaseTokenGenerator.2.0.0.0\lib\net35\FirebaseTokenGenerator.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	
 	
