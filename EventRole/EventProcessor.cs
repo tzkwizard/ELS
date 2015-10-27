@@ -34,6 +34,7 @@ namespace EventRole
         private static readonly object _object = new object();
         private static bool _run = false;
         private static bool _start = false;
+        private static int m = 4;
 
         public Task OpenAsync(PartitionContext context)
         {
