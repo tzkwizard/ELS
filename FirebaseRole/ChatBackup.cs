@@ -25,7 +25,7 @@ namespace FirebaseRole
         private static IFirebaseClient _firebaseClient;
         private const int RecordRemained = 2;
         private static CloudTable _table;
-        private static int reTry = 5;
+        private static int reTry = 4;
         private static IDbService _iDbService;
         private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
 
