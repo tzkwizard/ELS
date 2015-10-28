@@ -38,7 +38,9 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.model.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.model.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.service.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Azure.Documents.Client.xml

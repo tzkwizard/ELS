@@ -15,6 +15,7 @@
   <file src="apiapp.json" />
   <file src="Global.asax" />
 	<file src="Web.config" />
+  <file src="Web.*.config" />
 	<file src="packages.config" />
 	<file src="bin\**\*.*" target="bin" />
 	<file src="Content\*.*" target="Content" />

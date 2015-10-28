@@ -63,5 +63,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Cloud1' ">
     <OutputPath>bin\Cloud1\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Test' ">
+    <OutputPath>bin\Test\</OutputPath>
+  </PropertyGroup>
   <Import Project="$(CloudExtensionsDir)Microsoft.WindowsAzure.targets" />
 </Project>

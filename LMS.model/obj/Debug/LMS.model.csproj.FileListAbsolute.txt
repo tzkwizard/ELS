@@ -63,6 +63,5 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\bin\Debug\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\obj\Debug\LMS.model.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\obj\Debug\LMS.model.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.model\obj\Debug\LMS.model.pdb

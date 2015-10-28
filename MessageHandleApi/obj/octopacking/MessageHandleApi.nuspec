@@ -14,6 +14,7 @@
     <file src="apiapp.json" />
     <file src="Global.asax" />
     <file src="Web.config" />
+    <file src="Web.*.config" />
     <file src="packages.config" />
     <file src="bin\**\*.*" target="bin" />
     <file src="Content\*.*" target="Content" />
@@ -21,7 +22,7 @@
     <file src="Metadata\**\*.*" target="Metadata" />
     <file src="Properties\*.*" target="Properties" />
     <file src="Scripts\*.*" target="Scripts" />
-    <file src="Views" target="Views" />
+    <file src="Views\*.*" target="Views" />
     <file src="..\QueueWebjob\bin\Debug\*.*" target="app_data\jobs\continuous\QueueWebjob" />
     <!-- <file src="..\LMSqueue\bin\Debug\*.*" target="app_data\jobs\continuous\LMSqueue" />
   <file src="..\LMShandler\bin\Debug\*.*" target="app_data\jobs\triggered\LMShandler" />-->

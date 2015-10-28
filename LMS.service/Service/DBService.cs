@@ -25,7 +25,7 @@ namespace LMS.service.Service
     {
         private static DocumentClient _documentClient;
 
-        private const int RetryTimes = 5;
+        private const int RetryTimes = 4;
         private static string _endpointUrl;
         private static string _authorizationKey;
         private static string _dataSelfLink;
@@ -38,6 +38,7 @@ namespace LMS.service.Service
             _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
             _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
             _firebaseSecret = ConfigurationManager.AppSettings["FirebaseSecret"];
+            var t = ConfigurationManager.ConnectionStrings["AzureRedis"].ToString();
         }
 
         public DbService()

@@ -34,7 +34,9 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\D
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\MonAgentListener.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\LMS.model.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\LMS.model.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\LMS.service.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Microsoft.Azure.KeyVault.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Microsoft.Data.Edm.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Microsoft.Data.OData.xml

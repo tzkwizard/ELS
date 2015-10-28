@@ -52,6 +52,5 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ProcessTaskData\bi
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ProcessTaskData\bin\Debug\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ProcessTaskData\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ProcessTaskData\bin\Debug\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ProcessTaskData\obj\Debug\ProcessTaskData.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ProcessTaskData\obj\Debug\ProcessTaskData.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ProcessTaskData\obj\Debug\ProcessTaskData.pdb
