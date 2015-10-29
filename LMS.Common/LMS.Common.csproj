@@ -135,7 +135,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Models\Api\LMSapi.cs" />
     <Compile Include="Models\AzureDocumentDB.cs" />
     <Compile Include="Models\AzureTable.cs" />

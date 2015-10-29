@@ -1,5 +1,3 @@
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\obj\Debug\LMS.Common.csproj.App.config
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\obj\Debug\LMS.Common.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\bin\Debug\LMS.Common.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\bin\Debug\LMS.Common.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\bin\Debug\LMS.Common.pdb
@@ -97,5 +95,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\bin\Deb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\bin\Debug\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\bin\Debug\zh-Hant\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\obj\Debug\LMS.Common.csproj.App.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\obj\Debug\LMS.Common.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMS.Common\obj\Debug\LMS.Common.pdb

@@ -67,5 +67,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Debug\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Debug\zh-Hant\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\obj\Debug\QueueWebjob.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\obj\Debug\QueueWebjob.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\obj\Debug\QueueWebjob.pdb
