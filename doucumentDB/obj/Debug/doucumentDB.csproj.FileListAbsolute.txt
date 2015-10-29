@@ -40,7 +40,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\LMS.service.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Autofac.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\EntityFramework.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\EntityFramework.SqlServer.xml
@@ -119,3 +118,4 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\JWT.dll
