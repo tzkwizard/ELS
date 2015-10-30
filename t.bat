@@ -2,7 +2,7 @@
 SETLOCAL
 Set  n=1
 echo %n%
-set /a n=n+1
+set /a n=n+2
 echo %n%
-echo %cloud.minor%
+echo %az%
 ENDLOCAL
