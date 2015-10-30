@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
-using LMS.service.Service;
+using LMS.Common.Service;
 //using MessageHandleApi.Service;
 
 namespace MessageHandleApi

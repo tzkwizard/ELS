@@ -31,10 +31,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\ko\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\ko\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\ko\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\LMS.model.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\LMS.service.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\LMS.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\LMS.Common.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Data.Edm.dll
@@ -49,6 +47,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.ServiceBus.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Threading.Tasks.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Threading.Tasks.Extensions.Desktop.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.Threading.Tasks.Extensions.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.WindowsAzure.Configuration.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\Microsoft.WindowsAzure.Diagnostics.dll
@@ -64,6 +63,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\StackExchange.Redis.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\StackExchange.Redis.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\System.Net.Http.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\System.Net.Http.Primitives.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\System.Spatial.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\zh-Hans\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Debug\CheckRole\zh-Hans\Microsoft.Data.OData.resources.dll

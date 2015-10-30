@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LMS.service.Service;
+using LMS.Common.Service;
 using LMSqueue.ProcessMessage;
 using Microsoft.Azure.WebJobs;
 using Microsoft.WindowsAzure.Storage;

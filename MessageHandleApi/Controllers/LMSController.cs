@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using FireSharp.Interfaces;
 using FireSharp.Response;
-using LMS.model.Models;
-using LMS.model.Models.Api;
-using LMS.service.Service;
+using LMS.Common.Models.Api;
+using LMS.Common.Service;
 using Newtonsoft.Json;
 
 namespace MessageHandleApi.Controllers

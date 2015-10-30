@@ -44,6 +44,16 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Rc|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Rc\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
@@ -125,13 +135,9 @@
     <None Include="Properties\webjob-publish-settings.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LMS.model\LMS.model.csproj">
-      <Project>{5b45cb68-ae03-4b59-92de-7b78a1b597ca}</Project>
-      <Name>LMS.model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LMS.service\LMS.service.csproj">
-      <Project>{955f0dd0-2753-4c17-8beb-a9cb279224a6}</Project>
-      <Name>LMS.service</Name>
+    <ProjectReference Include="..\LMS.Common\LMS.Common.csproj">
+      <Project>{41ff630b-bd0b-4322-a312-e0780eb82ad5}</Project>
+      <Name>LMS.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

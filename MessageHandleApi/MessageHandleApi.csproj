@@ -257,6 +257,9 @@
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+    <None Include="Web.Rc.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -298,13 +301,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LMS.model\LMS.model.csproj">
-      <Project>{5b45cb68-ae03-4b59-92de-7b78a1b597ca}</Project>
-      <Name>LMS.model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LMS.service\LMS.service.csproj">
-      <Project>{955f0dd0-2753-4c17-8beb-a9cb279224a6}</Project>
-      <Name>LMS.service</Name>
+    <ProjectReference Include="..\LMS.Common\LMS.Common.csproj">
+      <Project>{41ff630b-bd0b-4322-a312-e0780eb82ad5}</Project>
+      <Name>LMS.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -312,6 +311,15 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Rc|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>

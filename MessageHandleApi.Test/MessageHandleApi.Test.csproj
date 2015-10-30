@@ -46,6 +46,15 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Rc|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Rc\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Elasticsearch.Net">
       <HintPath>..\packages\Elasticsearch.Net.1.7.1\lib\net45\Elasticsearch.Net.dll</HintPath>
@@ -92,9 +101,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LMS.model\LMS.model.csproj">
-      <Project>{5b45cb68-ae03-4b59-92de-7b78a1b597ca}</Project>
-      <Name>LMS.model</Name>
+    <ProjectReference Include="..\LMS.Common\LMS.Common.csproj">
+      <Project>{41ff630b-bd0b-4322-a312-e0780eb82ad5}</Project>
+      <Name>LMS.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\MessageHandleApi\MessageHandleApi.csproj">
       <Project>{99cbe051-b241-4e14-a301-a879ca9394ae}</Project>

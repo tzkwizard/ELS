@@ -6,8 +6,8 @@ using Microsoft.ServiceBus.Messaging;
 using System.Diagnostics;
 using FireSharp.Interfaces;
 using FireSharp.Response;
-using LMS.model.Models;
-using LMS.service.Service;
+using LMS.Common.Models;
+using LMS.Common.Service;
 using Microsoft.ServiceBus;
 
 

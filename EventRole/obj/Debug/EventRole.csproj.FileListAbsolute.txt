@@ -2,8 +2,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\EventRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\EventRole.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\FireSharp.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.model.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.service.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.Common.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Azure.Documents.Client.dll
@@ -37,10 +36,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Practices.Unity.Interception.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.model.dll.config
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.service.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.service.dll.config
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.Common.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\LMS.Common.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.ApplicationServer.Caching.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\Microsoft.Azure.Documents.Client.xml

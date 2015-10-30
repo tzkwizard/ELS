@@ -28,10 +28,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\ko\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\ko\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\ko\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\LMS.model.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\LMS.service.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\LMS.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\LMS.Common.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Data.Edm.dll
@@ -48,6 +46,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.ServiceBus.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Threading.Tasks.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Threading.Tasks.Extensions.Desktop.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.Threading.Tasks.Extensions.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.WindowsAzure.Configuration.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\Microsoft.WindowsAzure.Diagnostics.dll
@@ -66,6 +65,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\StorageRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\StorageRole.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\StorageRole.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\System.Net.Http.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\System.Net.Http.Primitives.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\System.Spatial.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\zh-Hans\Microsoft.Data.Edm.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\PostBackupProcessor\obj\Debug\StorageRole\zh-Hans\Microsoft.Data.OData.resources.dll

@@ -3,8 +3,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\LMSqueue.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Autofac.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\FireSharp.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\LMS.model.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\LMS.service.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\LMS.Common.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Azure.WebJobs.dll
@@ -30,8 +29,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Practices.Unity.Interception.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\LMS.service.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\LMS.Common.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Autofac.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\Microsoft.Azure.KeyVault.Core.xml

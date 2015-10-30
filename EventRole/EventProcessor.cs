@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -9,8 +10,8 @@ using System.Threading.Tasks;
 using FireSharp.Exceptions;
 using FireSharp.Interfaces;
 using FireSharp.Response;
-using LMS.model.Models;
-using LMS.service.Service;
+using LMS.Common.Models;
+using LMS.Common.Service;
 using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -47,6 +48,10 @@ namespace EventRole
 
         private void Init()
         {
+
+            ConfigurationManager.AppSettings["java"] = "java";
+            var z = ConfigurationManager.AppSettings["java"];
+
             _run = true;
             //Get DBservice
             _endpointUrl = _endpointUrl ?? CloudConfigurationManager.GetSetting("DocumentDBUrl");
