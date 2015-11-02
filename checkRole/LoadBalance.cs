@@ -19,9 +19,9 @@ namespace CheckRole
         private static IDbService _iDbService;
         private static int _reTry = 5;
 
-        public LoadBalance(string endpointUrl, string authorizationKey)
+        public LoadBalance()
         {
-            _iDbService = _iDbService ?? new DbService(endpointUrl, authorizationKey);
+            _iDbService = _iDbService ?? new DbService();
         }
 
         public async Task CheckBalance(string databaseSelfLink)

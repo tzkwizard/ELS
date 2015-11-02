@@ -28,8 +28,6 @@ namespace EventRole
         private IDbService _iDbService;
         private static IFirebaseClient _client;
         private static string _databaseSelfLink;
-        private static string _endpointUrl;
-        private static string _authorizationKey;
         private static RangePartitionResolver<long> _resolver;
         private static int n = 1;
         private static readonly object _object = new object();
@@ -50,10 +48,8 @@ namespace EventRole
         {
             _run = true;
             //Get DBservice
-            _endpointUrl = _endpointUrl ?? ConfigurationManager.AppSettings["DocumentDBUrl"];
-            _authorizationKey = _authorizationKey ?? ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"];
             _databaseSelfLink = _databaseSelfLink ?? ConfigurationManager.AppSettings["DBSelfLink"];
-            _iDbService = _iDbService ?? new DbService(_endpointUrl, _authorizationKey);
+            _iDbService = _iDbService ?? new DbService();
 
             //Init DB and Firebase
             _client = _client ?? _iDbService.GetFirebaseClient();

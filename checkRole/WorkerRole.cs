@@ -72,10 +72,8 @@ namespace CheckRole
 
             _client.CreateIfNotExists();
             _database = ConfigurationManager.AppSettings["DBSelfLink"];
-            var url = ConfigurationManager.AppSettings["DocumentDBUrl"];
-            var key = ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"];
-            _dichotomy = new Dichotomy(url, key);
-            _loadBalance = new LoadBalance(url, key);
+            //_dichotomy = new Dichotomy(url, key);
+            _loadBalance = new LoadBalance();
             return base.OnStart();
         }
 

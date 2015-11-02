@@ -28,9 +28,9 @@ namespace StorageRole
         private static int _reTry = 5;
         private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
 
-        public PostBackup(CloudStorageAccount storageAccount, string endpointUrl, string authorizationKey)
+        public PostBackup(CloudStorageAccount storageAccount)
         {
-            _iDbService = new DbService(endpointUrl,authorizationKey);
+            _iDbService = new DbService();
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _table = c.GetTableReference("Post");
             _table.CreateIfNotExists();

@@ -36,15 +36,14 @@ namespace LMS.Common.Service
             _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
             _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
             _firebaseSecret = ConfigurationManager.AppSettings["FirebaseSecret"];
-            //var t = ConfigurationManager.ConnectionStrings["AzureRedis"].ToString();
         }
 
         public DbService()
         {
             _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
             _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
-            _endpointUrl = ConfigurationManager.AppSettings["DBEndpointUrl"];
-            _authorizationKey = ConfigurationManager.AppSettings["DBReadOnlyKey"];
+            _endpointUrl = ConfigurationManager.AppSettings["DocumentDBUrl"];
+            _authorizationKey = ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"];
             _firebaseSecret = ConfigurationManager.AppSettings["FirebaseSecret"];
         }
 

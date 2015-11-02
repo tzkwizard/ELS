@@ -70,11 +70,9 @@ namespace StorageRole
             _client = queueClient.GetQueueReference("azqueue");
 
             _client.CreateIfNotExists();
-            var url = ConfigurationManager.AppSettings["DocumentDBUrl"];
-            var key = ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"];
             _database = ConfigurationManager.AppSettings["DBSelfLink"];
             _collection = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
-            _postBackup = new PostBackup(storageAccount, url, key);
+            _postBackup = new PostBackup(storageAccount);
 
             return base.OnStart();
         }
