@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -127,7 +128,7 @@ namespace StorageRole
                     .AsEnumerable();
                 foreach (var dc in collections)
                 {
-                    if (dc.Id == CloudConfigurationManager.GetSetting("MasterCollection"))
+                    if (dc.SelfLink == ConfigurationManager.AppSettings["MasterCollectionSelfLink"])
                     {
                         Offer offer = client.CreateOfferQuery()
                             .Where(r => r.ResourceLink == dc.SelfLink)

@@ -3,12 +3,6 @@
   <WorkerRole name="CheckRole" vmsize="Small">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
-      <Setting name="Microsoft.ServiceBus.ConnectionString" />
-      <Setting name="DocumentDBUrl" />
-      <Setting name="DocumentDBAuthorizationKey" />
-      <Setting name="Database" />
-      <Setting name="MasterCollection" />
-      <Setting name="DBSelfLink" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>

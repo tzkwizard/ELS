@@ -5,15 +5,7 @@
       <LocalStorage name="DiagnosticStore" sizeInMB="20000" cleanOnRoleRecycle="false" />
     </LocalResources>
     <ConfigurationSettings>
-      <Setting name="AzureStorageConnectionString" />
       <Setting name="consumerGroupName" />
-      <Setting name="Database" />
-      <Setting name="DBSelfLink" />
-      <Setting name="DocumentDBAuthorizationKey" />
-      <Setting name="DocumentDBUrl" />
-      <Setting name="eventHubName" />
-      <Setting name="MasterCollection" />
-      <Setting name="Microsoft.ServiceBus.ConnectionString" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Caching.CacheSizePercentage" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Caching.ConfigStoreConnectionString" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Caching.DiagnosticLevel" />

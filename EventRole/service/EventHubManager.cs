@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using Microsoft.Azure;
 using Microsoft.ServiceBus;
@@ -11,7 +12,7 @@ namespace EventRole.service
     {
         public static string GetServiceBusConnectionString()
         {
-            string connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
+            string connectionString = ConfigurationManager.AppSettings["Microsoft.ServiceBus.ConnectionString"];
 
             if (string.IsNullOrEmpty(connectionString))
             {

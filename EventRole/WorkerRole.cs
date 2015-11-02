@@ -20,12 +20,11 @@ namespace EventRole
             Trace.TraceInformation("EventRole is running");
 
             //Get settings from configuration
-            var eventHubName = CloudConfigurationManager.GetSetting("eventHubName");
+            var eventHubName = ConfigurationManager.AppSettings["eventHubName"];
             //var consumerGroupName = CloudConfigurationManager.GetSetting("consumerGroupName");
             //var numberOfPartitions = int.Parse(CloudConfigurationManager.GetSetting("numberOfPartitions"));
-            var blobConnectionString = CloudConfigurationManager.GetSetting("AzureStorageConnectionString");
-                // Required for checkpoint/state
-
+            var blobConnectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+  
             //Get AMQP connection string
             var connectionString = EventHubManager.GetServiceBusConnectionString();
 

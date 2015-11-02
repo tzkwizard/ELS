@@ -1,14 +1,14 @@
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] Emulator config file set to C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Rc\roles\EventRole\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] DiagnosticsStoreRootPath set to: C:\Users\24666\AppData\Local\dftmp\Resources\a3adf2f0-40fd-402d-a604-80daacbafd65
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] Loading config file: C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Rc\roles\EventRole\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] Checking VM Type
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] Emulator config file set to C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Rc\roles\EventRole\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] Extension set to Emulator Mode
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] Reading XML configuration file
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] Bypassing private config decryption
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:24 PM] Stopping the running plugin, if any
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:25 PM] No DiagnosticsPlugin is running.
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:25 PM] Killing any DiagnosticsPlugin that might remain.
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:25 PM] Killing any MonAgentHost that might remain.
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:25 PM] Diagnostics plugin stopped successfully
-DiagnosticsPluginLauncher.exe Information: 0 : [10/29/2015 7:21:25 PM] Resetting DiagnosticPlugin
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Emulator config file set to C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Rc\roles\EventRole\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] DiagnosticsStoreRootPath set to: C:\Users\24666\AppData\Local\dftmp\Resources\0da9ffec-0fe5-4a04-9434-a01ce514d8e5
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Loading config file: C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Rc\roles\EventRole\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Checking VM Type
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Emulator config file set to C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Rc\roles\EventRole\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Extension set to Emulator Mode
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Reading XML configuration file
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Bypassing private config decryption
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Stopping the running plugin, if any
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] No DiagnosticsPlugin is running.
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Killing any DiagnosticsPlugin that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Killing any MonAgentHost that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Diagnostics plugin stopped successfully
+DiagnosticsPluginLauncher.exe Information: 0 : [11/02/2015 10:51:02 PM] Resetting DiagnosticPlugin

@@ -39,6 +39,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\System.Net.Http.Extensions.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\System.Net.Http.Primitives.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\System.Spatial.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\LMS.Common.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Autofac.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Elasticsearch.Net.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\Elasticsearch.Net.xml
@@ -114,6 +115,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\De
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\ru\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.csprojResolveAssemblyReference.cache
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\DoucumentDB.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Debug\doucumentDB.pdb

@@ -12,8 +12,6 @@
   <WorkerRole name="FirebaseRole" vmsize="Small">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
-      <Setting name="Microsoft.Storage.ConnectionString" />
-      <Setting name="Firebasenode" />
     </ConfigurationSettings>
     <Contents>
       <Content destination=".\">

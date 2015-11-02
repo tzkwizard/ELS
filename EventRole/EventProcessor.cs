@@ -48,15 +48,11 @@ namespace EventRole
 
         private void Init()
         {
-
-            ConfigurationManager.AppSettings["java"] = "java";
-            var z = ConfigurationManager.AppSettings["java"];
-
             _run = true;
             //Get DBservice
-            _endpointUrl = _endpointUrl ?? CloudConfigurationManager.GetSetting("DocumentDBUrl");
-            _authorizationKey = _authorizationKey ?? CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
-            _databaseSelfLink = _databaseSelfLink ?? CloudConfigurationManager.GetSetting("DBSelfLink");
+            _endpointUrl = _endpointUrl ?? ConfigurationManager.AppSettings["DocumentDBUrl"];
+            _authorizationKey = _authorizationKey ?? ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"];
+            _databaseSelfLink = _databaseSelfLink ?? ConfigurationManager.AppSettings["DBSelfLink"];
             _iDbService = _iDbService ?? new DbService(_endpointUrl, _authorizationKey);
 
             //Init DB and Firebase

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net;
@@ -63,16 +64,16 @@ namespace CheckRole
             ServicePointManager.DefaultConnectionLimit = 12;
 
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString"));
+                ConfigurationManager.AppSettings["AzureStorageConnectionString"]);
 
             CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
 
             _client = queueClient.GetQueueReference("azqueue");
 
             _client.CreateIfNotExists();
-            _database = CloudConfigurationManager.GetSetting("DBSelfLink");
-            var url = CloudConfigurationManager.GetSetting("DocumentDBUrl");
-            var key = CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
+            _database = ConfigurationManager.AppSettings["DBSelfLink"];
+            var url = ConfigurationManager.AppSettings["DocumentDBUrl"];
+            var key = ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"];
             _dichotomy = new Dichotomy(url, key);
             _loadBalance = new LoadBalance(url, key);
             return base.OnStart();

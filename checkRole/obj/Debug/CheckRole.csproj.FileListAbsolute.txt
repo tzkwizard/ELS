@@ -31,6 +31,7 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debu
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\LMS.Common.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\LMS.Common.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Azure.KeyVault.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Debug\Microsoft.Data.Edm.xml

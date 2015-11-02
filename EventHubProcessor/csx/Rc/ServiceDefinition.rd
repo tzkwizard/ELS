@@ -1,51 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EventHubProcessor" generation="1" functional="0" release="0" Id="aef36744-55b2-4e5c-8d3a-c5c19bed2b72" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EventHubProcessor" generation="1" functional="0" release="0" Id="86e683f4-cd66-440f-b73e-fe3bf114352e" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="EventHubProcessorGroup" generation="1" functional="0" release="0">
       <settings>
-        <aCS name="EventRole:AzureStorageConnectionString" defaultValue="">
-          <maps>
-            <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:AzureStorageConnectionString" />
-          </maps>
-        </aCS>
         <aCS name="EventRole:consumerGroupName" defaultValue="">
           <maps>
             <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:consumerGroupName" />
-          </maps>
-        </aCS>
-        <aCS name="EventRole:Database" defaultValue="">
-          <maps>
-            <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:Database" />
-          </maps>
-        </aCS>
-        <aCS name="EventRole:DBSelfLink" defaultValue="">
-          <maps>
-            <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:DBSelfLink" />
-          </maps>
-        </aCS>
-        <aCS name="EventRole:DocumentDBAuthorizationKey" defaultValue="">
-          <maps>
-            <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:DocumentDBAuthorizationKey" />
-          </maps>
-        </aCS>
-        <aCS name="EventRole:DocumentDBUrl" defaultValue="">
-          <maps>
-            <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:DocumentDBUrl" />
-          </maps>
-        </aCS>
-        <aCS name="EventRole:eventHubName" defaultValue="">
-          <maps>
-            <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:eventHubName" />
-          </maps>
-        </aCS>
-        <aCS name="EventRole:MasterCollection" defaultValue="">
-          <maps>
-            <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:MasterCollection" />
-          </maps>
-        </aCS>
-        <aCS name="EventRole:Microsoft.ServiceBus.ConnectionString" defaultValue="">
-          <maps>
-            <mapMoniker name="/EventHubProcessor/EventHubProcessorGroup/MapEventRole:Microsoft.ServiceBus.ConnectionString" />
           </maps>
         </aCS>
         <aCS name="EventRole:Microsoft.WindowsAzure.Plugins.Caching.CacheSizePercentage" defaultValue="">
@@ -107,49 +67,9 @@
         </sFSwitchChannel>
       </channels>
       <maps>
-        <map name="MapEventRole:AzureStorageConnectionString" kind="Identity">
-          <setting>
-            <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/AzureStorageConnectionString" />
-          </setting>
-        </map>
         <map name="MapEventRole:consumerGroupName" kind="Identity">
           <setting>
             <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/consumerGroupName" />
-          </setting>
-        </map>
-        <map name="MapEventRole:Database" kind="Identity">
-          <setting>
-            <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/Database" />
-          </setting>
-        </map>
-        <map name="MapEventRole:DBSelfLink" kind="Identity">
-          <setting>
-            <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/DBSelfLink" />
-          </setting>
-        </map>
-        <map name="MapEventRole:DocumentDBAuthorizationKey" kind="Identity">
-          <setting>
-            <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/DocumentDBAuthorizationKey" />
-          </setting>
-        </map>
-        <map name="MapEventRole:DocumentDBUrl" kind="Identity">
-          <setting>
-            <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/DocumentDBUrl" />
-          </setting>
-        </map>
-        <map name="MapEventRole:eventHubName" kind="Identity">
-          <setting>
-            <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/eventHubName" />
-          </setting>
-        </map>
-        <map name="MapEventRole:MasterCollection" kind="Identity">
-          <setting>
-            <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/MasterCollection" />
-          </setting>
-        </map>
-        <map name="MapEventRole:Microsoft.ServiceBus.ConnectionString" kind="Identity">
-          <setting>
-            <aCSMoniker name="/EventHubProcessor/EventHubProcessorGroup/EventRole/Microsoft.ServiceBus.ConnectionString" />
           </setting>
         </map>
         <map name="MapEventRole:Microsoft.WindowsAzure.Plugins.Caching.CacheSizePercentage" kind="Identity">
@@ -219,15 +139,7 @@
               </outPort>
             </componentports>
             <settings>
-              <aCS name="AzureStorageConnectionString" defaultValue="" />
               <aCS name="consumerGroupName" defaultValue="" />
-              <aCS name="Database" defaultValue="" />
-              <aCS name="DBSelfLink" defaultValue="" />
-              <aCS name="DocumentDBAuthorizationKey" defaultValue="" />
-              <aCS name="DocumentDBUrl" defaultValue="" />
-              <aCS name="eventHubName" defaultValue="" />
-              <aCS name="MasterCollection" defaultValue="" />
-              <aCS name="Microsoft.ServiceBus.ConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Caching.CacheSizePercentage" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Caching.ConfigStoreConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Caching.DiagnosticLevel" defaultValue="" />

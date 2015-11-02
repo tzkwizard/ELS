@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -62,17 +63,17 @@ namespace StorageRole
             ServicePointManager.DefaultConnectionLimit = 12;
 
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting("Microsoft.Storage.ConnectionString"));
+                ConfigurationManager.AppSettings["AzureStorageConnectionString"]);
 
             CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
 
             _client = queueClient.GetQueueReference("azqueue");
 
             _client.CreateIfNotExists();
-            var url = CloudConfigurationManager.GetSetting("EndpointUrl");
-            var key = CloudConfigurationManager.GetSetting("AuthorizationKey");
-            _database = CloudConfigurationManager.GetSetting("DBSelfLink");
-            _collection = CloudConfigurationManager.GetSetting("MasterCollectionSelfLink");
+            var url = ConfigurationManager.AppSettings["DocumentDBUrl"];
+            var key = ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"];
+            _database = ConfigurationManager.AppSettings["DBSelfLink"];
+            _collection = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
             _postBackup = new PostBackup(storageAccount, url, key);
 
             return base.OnStart();

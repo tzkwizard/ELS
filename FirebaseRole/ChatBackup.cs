@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -42,7 +43,7 @@ namespace FirebaseRole
         {
             try
             {
-                _firebaseClient = _iDbService.GetFirebaseClient(CloudConfigurationManager.GetSetting("Firebasenode"));
+                _firebaseClient = _iDbService.GetFirebaseClient(ConfigurationManager.AppSettings["Firebasenode"]);
                 FirebaseResponse chatResponse = _firebaseClient.Get("ChatRoom");
                 dynamic rooms = JsonConvert.DeserializeObject(chatResponse.Body);
 

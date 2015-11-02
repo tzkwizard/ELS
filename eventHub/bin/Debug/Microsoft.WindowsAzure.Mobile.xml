@@ -1149,10 +1149,14 @@
             call to MobileServiceClient(...).
             </summary>
         </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.IMobileServiceClient.ApplicationUri">
+        <member name="P:Microsoft.WindowsAzure.MobileServices.IMobileServiceClient.MobileAppUri">
             <summary>
-            Gets the Uri to the Mobile Services application that is provided by
-            the call to MobileServiceClient(...).
+            Absolute URI of the Microsoft Azure Mobile App.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.MobileServices.IMobileServiceClient.GatewayUri">
+            <summary>
+            Absolute URI of the Azure App Service Gateway.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.MobileServices.IMobileServiceClient.CurrentUser">
@@ -1164,6 +1168,11 @@
         <member name="P:Microsoft.WindowsAzure.MobileServices.IMobileServiceClient.SyncContext">
             <summary>
             Returns a <see cref="T:Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncContext"/> instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.MobileServices.IMobileServiceClient.InstallationId">
+            <summary>
+            Returns the application's installation id.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.MobileServices.IMobileServiceClient.SerializerSettings">
@@ -1222,59 +1231,57 @@
             Default empty array of HttpMessageHandlers.
             </summary>
         </member>
-        <member name="F:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.applicationInstallationId">
-            <summary>
-            The id used to identify this installation of the application to 
-            provide telemetry data.
-            </summary>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.String)">
+        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.String,System.Net.Http.HttpMessageHandler[])">
             <summary>
             Initializes a new instance of the MobileServiceClient class.
             </summary>
-            <param name="applicationUrl">
-            The URI for the Microsoft Azure Mobile Service.
+            <param name="mobileAppUri">
+            Absolute URI of the Microsoft Azure Mobile App.
             </param>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.Uri)">
-            <summary>
-            Initializes a new instance of the MobileServiceClient class.
-            </summary>
-            <param name="applicationUri">
-            The URI for the Microsoft Azure Mobile Service.
+            <param name="handlers">
+            Chain of <see cref="T:System.Net.Http.HttpMessageHandler"/> instances. 
+            All but the last should be <see cref="T:System.Net.Http.DelegatingHandler"/>s. 
             </param>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the MobileServiceClient class.
-            </summary>
-            <param name="applicationUrl">
-            The URI for the Microsoft Azure Mobile Service.
-            </param>
-            <param name="applicationKey">
-            The application key for the Microsoft Azure Mobile Service.
-            </param>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.Uri,System.String)">
-            <summary>
-            Initializes a new instance of the MobileServiceClient class.
-            </summary>
-            <param name="applicationUri">
-            The URI for the Microsoft Azure Mobile Service.
-            </param>
-            <param name="applicationKey">
-            The application key for the Microsoft Azure Mobile Service.
-            </param> 
         </member>
         <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.String,System.String,System.Net.Http.HttpMessageHandler[])">
             <summary>
             Initializes a new instance of the MobileServiceClient class.
             </summary>
-            <param name="applicationUrl">
-            The URI for the Microsoft Azure Mobile Service.
+            <param name="mobileAppUri">
+            Absolute URI of the Microsoft Azure Mobile App.
             </param>
             <param name="applicationKey">
-            The application key for the Microsoft Azure Mobile Service.
+            The application key for the Microsoft Azure Mobile App.
+            </param> 
+            <param name="handlers">
+            Chain of <see cref="T:System.Net.Http.HttpMessageHandler"/> instances. 
+            All but the last should be <see cref="T:System.Net.Http.DelegatingHandler"/>s. 
+            </param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.String,System.String,System.String,System.Net.Http.HttpMessageHandler[])">
+            <summary>
+            Initializes a new instance of the MobileServiceClient class.
+            </summary>
+            <param name="mobileAppUri">
+            Absolute URI of the Microsoft Azure Mobile App.
+            </param>
+            <param name="gatewayUri">
+            Absolute URI of the gateway of the Microsoft Azure Mobile App.
+            </param>
+            <param name="applicationKey">
+            The application key for the Microsoft Azure Mobile App.
+            </param> 
+            <param name="handlers">
+            Chain of <see cref="T:System.Net.Http.HttpMessageHandler"/> instances. 
+            All but the last should be <see cref="T:System.Net.Http.DelegatingHandler"/>s. 
+            </param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.Uri,System.Net.Http.HttpMessageHandler[])">
+            <summary>
+            Initializes a new instance of the MobileServiceClient class.
+            </summary>
+            <param name="mobileAppUri">
+            Absolute URI of the Microsoft Azure Mobile App.
             </param>
             <param name="handlers">
             Chain of <see cref="T:System.Net.Http.HttpMessageHandler"/> instances. 
@@ -1285,11 +1292,29 @@
             <summary>
             Initializes a new instance of the MobileServiceClient class.
             </summary>
-            <param name="applicationUri">
-            The URI for the Microsoft Azure Mobile Service.
+            <param name="mobileAppUri">
+            Absolute URI of the Microsoft Azure Mobile App.
             </param>
             <param name="applicationKey">
-            The application key for the Microsoft Azure Mobile Service.
+            The application key for the Microsoft Azure Mobile App.
+            </param> 
+            <param name="handlers">
+            Chain of <see cref="T:System.Net.Http.HttpMessageHandler"/> instances. 
+            All but the last should be <see cref="T:System.Net.Http.DelegatingHandler"/>s. 
+            </param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.#ctor(System.Uri,System.Uri,System.String,System.Net.Http.HttpMessageHandler[])">
+            <summary>
+            Initializes a new instance of the MobileServiceClient class.
+            </summary>
+            <param name="mobileAppUri">
+            Absolute URI of the Microsoft Azure Mobile App.
+            </param>
+            <param name="gatewayUri">
+            Absolute URI of the gateway of the Microsoft Azure Mobile App.
+            </param>
+            <param name="applicationKey">
+            The application key for the Microsoft Azure Mobile App.
             </param> 
             <param name="handlers">
             Chain of <see cref="T:System.Net.Http.HttpMessageHandler"/> instances. 
@@ -1566,10 +1591,14 @@
             An installation ID.
             </returns>
         </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.ApplicationUri">
+        <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.MobileAppUri">
             <summary>
-            Gets the Uri to the Mobile Services application that is provided by
-            the call to MobileServiceClient(...).
+            Absolute URI of the Microsoft Azure Mobile App.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.GatewayUri">
+            <summary>
+            Absolute URI of the Azure App Service Gateway.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.ApplicationKey">
@@ -1582,6 +1611,12 @@
             <summary>
             The current authenticated user provided after a successful call to
             MobileServiceClient.Login().
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.InstallationId">
+            <summary>
+            The id used to identify this installation of the application to 
+            provide telemetry data.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.SerializerSettings">
@@ -1599,9 +1634,14 @@
             Gets the serializer that is used with the table.
             </summary>
         </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.HttpClient">
+        <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.MobileAppHttpClient">
             <summary>
-            Gets the <see cref="T:Microsoft.WindowsAzure.MobileServices.MobileServiceHttpClient"/> associated with this client.
+            Gets the <see cref="T:Microsoft.WindowsAzure.MobileServices.MobileServiceHttpClient"/> associated with the Azure Mobile App.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.MobileServices.MobileServiceClient.AuthenticationHttpClient">
+            <summary>
+            Gets the <see cref="T:Microsoft.WindowsAzure.MobileServices.MobileServiceHttpClient"/> associated with the Authentication endpoint.
             </summary>
         </member>
         <member name="T:Microsoft.WindowsAzure.MobileServices.MobileServiceFeatures">
@@ -1680,7 +1720,7 @@
             included in all requests made to the Microsoft Azure Mobile Service, allowing 
             the client to perform all actions on the Microsoft Azure Mobile Service that 
             require authenticated-user level permissions.
-            </summary>
+            </summary>        
         </member>
         <member name="T:Microsoft.WindowsAzure.MobileServices.IApplicationStorage">
             <summary>
@@ -1738,22 +1778,6 @@
             An interface for platform-specific assemblies to provide utility functions
             regarding Push capabilities.
             </summary>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.IPushUtility.GetNewNativeRegistration">
-            <summary>
-            Return a new, strongly typed native registration instance
-            </summary>        
-            <returns>
-            An object to JSON deserialize into
-            </returns>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.IPushUtility.GetNewTemplateRegistration">
-            <summary>
-            Return a new, strongly typed template registration instance
-            </summary>        
-            <returns>
-            An object to JSON deserialize into
-            </returns>
         </member>
         <member name="M:Microsoft.WindowsAzure.MobileServices.IPushUtility.GetPlatform">
             <summary>
@@ -2253,133 +2277,6 @@
             Gets the current platform. If none is loaded yet, accessing this property triggers platform resolution.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager">
-            <summary>
-            Provides a platform-specific implementation to allow storage of registrationId to registrationName mapping
-            </summary>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.GetRegistration(System.String)">
-            <summary>
-            Get the registration from local storage
-            </summary>
-            <param name="registrationName">The name of the registration mapping to search for</param>
-            <returns>The StoredRegistrationEntry if it exists or null if it does not.</returns>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.DeleteRegistrationByName(System.String)">
-            <summary>
-            Delete a registration from local storage by name
-            </summary>
-            <param name="registrationName">The name of the registration mapping to delete.</param>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.DeleteRegistrationByRegistrationId(System.String)">
-            <summary>
-            Delete a registration from local storage by registrationId
-            </summary>
-            <param name="registrationId">The registrationId of the registration mapping to delete.</param>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.UpdateRegistrationByName(System.String,System.String,System.String)">
-            <summary>
-            Update a registration mapping and the deviceId in local storage by registrationName
-            </summary>
-            <param name="registrationName">The name of the registration mapping to update.</param>
-            <param name="registrationId">The registrationId to update.</param>
-            <param name="registrationDeviceId">The device Id to update the ILocalStorageManager to.</param>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.UpdateRegistrationByRegistrationId(System.String,System.String,System.String)">
-            <summary>
-            Update a registration mapping and the deviceId in local storage by registrationId
-            </summary>
-            <param name="registrationId">The registrationId of the registration mapping to update.</param>
-            <param name="registrationName">The registration name to update.</param>
-            <param name="registrationDeviceId">The device Id to update the ILocalStorageManager to.</param>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.ClearRegistrations">
-            <summary>
-            Clear all registrations from local storage.
-            </summary>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.RefreshFinished(System.String)">
-            <summary>
-            Ensure that the ILocalStorageManager instance has the updated DeviceId
-            </summary>
-            <param name="refreshedDeviceId">The deviceId to update</param>
-        </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.IsRefreshNeeded">
-            <summary>
-            Gets a value indicating whether local storage data needs to be refreshed.
-            </summary>
-        </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.ILocalStorageManager.PushHandle">
-            <summary>
-            Gets the DeviceId of all registrations in this instance of ILocalStorageManager
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.MobileServices.LocalStorageManager">
-            <summary>
-            The value will be stored in the following keys:
-                Version: the storage version
-                DeviceId: the latest deviceId used for creation.
-                Registrations: Json representation of Dictionary of StoredRegistrationEntry. (Registration name and RegistrationId)
-            When create/delete is called, deviceId will be updated.
-            When create/update/get/delete registrations, registrations value will be updated.
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.MobileServices.Registration">
-            <summary>
-            RegistrationBase is used as the base class for common properties existing in all Registration types to define a target that is registered for notifications.
-            </summary>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.Registration.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Common Registration constructor for common properties
-            </summary>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.Registration.ShouldSerializeRegistrationId">
-            <summary>
-            Internal--Helper method hinting to Json.Net that RegistrationId should not be serialized
-            </summary>
-            <returns>false</returns>
-        </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.Registration.Platform">
-            <summary>
-            The platform's name for its push notifcation system.
-            </summary>
-        </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.Registration.Tags">
-            <summary>
-            If specified, restricts the notifications that the registration will receive to only those that
-            are annotated with one of the specified tags. Note that a tag with a comma in it will be split into two tags.
-            </summary>
-        </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.Registration.PushHandle">
-            <summary>
-            The push handle used to address the device by the push notification service (Possibly nonunique)
-            </summary>
-        </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.Registration.RegistrationId">
-            <summary>
-            The registration id.
-            </summary>
-        </member>
-        <member name="P:Microsoft.WindowsAzure.MobileServices.Registration.Name">
-            <summary>
-            The name of the registration is stored locally with the registrationId
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.MobileServices.RegistrationManager">
-            <summary>
-            Help to do registrationManagement and convert the exceptions
-            </summary>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.MobileServices.RegistrationManager.RegisterAsync(Microsoft.WindowsAzure.MobileServices.Registration)">
-            <summary>
-            If local storage does not have this registrationName, we will create a new one.
-            If local storage has this name, we will call update.
-            If update failed with 404(not found), we will create a new one.
-            </summary>
-            <param name="registration"></param>
-            <returns></returns>
-        </member>
         <member name="T:Microsoft.WindowsAzure.MobileServices.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -2476,6 +2373,11 @@
               Looks up a localized string similar to The server did not provide a response with the expected content..
             </summary>
         </member>
+        <member name="P:Microsoft.WindowsAzure.MobileServices.Resources.MobileServiceClient_NotAnAbsoluteURI">
+            <summary>
+              Looks up a localized string similar to {0} is not an absolute URI..
+            </summary>
+        </member>
         <member name="P:Microsoft.WindowsAzure.MobileServices.Resources.MobileServiceCollection_IncrementalLoadingFailed">
             <summary>
               Looks up a localized string similar to Failed to incrementally load more items of type &apos;{0}&apos;. See the inner exception for details..
@@ -2534,6 +2436,11 @@
         <member name="P:Microsoft.WindowsAzure.MobileServices.Resources.MobileServicesAuthentication_LoginAlreadyInProgress">
             <summary>
               Looks up a localized string similar to Cannot start a login operation because login is already in progress..
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.MobileServices.Resources.MobileServicesAuthentication_MobileServiceClientDefinesNoGateway">
+            <summary>
+              Looks up a localized string similar to Cannot work with a MobileServiceClient that does not specify a gateway URI..
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.MobileServices.Resources.MobileServiceSerializer_IdCasingIncorrect">
@@ -6512,6 +6419,16 @@
             A static helper class for building URLs for Mobile Service tables.
             </summary>
         </member>
+        <member name="F:Microsoft.WindowsAzure.MobileServices.MobileServiceUrlBuilder.SchemeDelimiter">
+            <summary>
+            Delimiter following the scheme in a URI.
+            </summary>
+        </member>
+        <member name="F:Microsoft.WindowsAzure.MobileServices.MobileServiceUrlBuilder.Slash">
+            <summary>
+            A constant variable that defines the character '/'.
+            </summary>
+        </member>
         <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceUrlBuilder.GetQueryString(System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean)">
             <summary>
             Converts a dictionary of string key-value pairs into a URI query string.
@@ -6559,6 +6476,21 @@
             <returns>
             
             </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.MobileServices.MobileServiceUrlBuilder.AddTrailingSlash(System.String)">
+            <summary>
+            Appends a slash ('/') to <paramref name="uri"/> if it is missing a trailing slash.
+            </summary>
+            <param name="uri">
+            URI to add a trailing slash to.
+            </param>
+            <returns>
+            Uri with a slash appended to <paramref name="uri"/> if it is missing one.
+            Else, <paramref name="uri"/> is returned unchanged.
+            </returns>
+            <remarks>
+            No validation of the uri is performed.
+            </remarks>
         </member>
         <member name="T:Microsoft.WindowsAzure.MobileServices.Query.MobileServiceTableQueryDescription">
             <summary>

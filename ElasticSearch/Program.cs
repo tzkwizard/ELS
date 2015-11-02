@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
 using Nest;
@@ -130,7 +125,7 @@ namespace ElasticSearch
             foreach (var x in result.Documents)
             {
                 n++;
-                Console.WriteLine(x.clientip+n);
+                //Console.WriteLine((int) (x.clientip+n));
             }
             
         }

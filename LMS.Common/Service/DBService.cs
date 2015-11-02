@@ -36,7 +36,7 @@ namespace LMS.Common.Service
             _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
             _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
             _firebaseSecret = ConfigurationManager.AppSettings["FirebaseSecret"];
-            var t = ConfigurationManager.ConnectionStrings["AzureRedis"].ToString();
+            //var t = ConfigurationManager.ConnectionStrings["AzureRedis"].ToString();
         }
 
         public DbService()

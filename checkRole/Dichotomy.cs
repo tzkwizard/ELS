@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace CheckRole
         {
             _client = new DocumentClient(new Uri(endpointUrl), authorizationKey);
             _database =
-                _client.CreateDatabaseQuery().Where(db => db.Id == CloudConfigurationManager.GetSetting("Database"))
+                _client.CreateDatabaseQuery().Where(db => db.SelfLink == ConfigurationManager.AppSettings["DBSelfLink"])
                     .AsEnumerable().FirstOrDefault();
             _iDbService = new DbService();
         }
@@ -42,7 +43,7 @@ namespace CheckRole
                     .AsEnumerable();
 
                 DocumentCollection origin = _client.CreateDocumentCollectionQuery(_database.SelfLink)
-                    .Where(c => c.Id == CloudConfigurationManager.GetSetting("MasterCollection"))
+                    .Where(c => c.SelfLink == ConfigurationManager.AppSettings["MasterCollectionSelfLink"])
                     .AsEnumerable()
                     .FirstOrDefault();
                 if (origin != null)
