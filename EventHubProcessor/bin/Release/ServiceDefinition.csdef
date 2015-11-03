@@ -18,6 +18,7 @@
     </ConfigurationSettings>
     <Imports>
       <Import moduleName="Caching" />
+      <Import moduleName="Diagnostics" />
     </Imports>
     <LocalResources>
       <LocalStorage name="DiagnosticStore" sizeInMB="20000" cleanOnRoleRecycle="false" />
@@ -25,6 +26,9 @@
     <Contents>
       <Content destination=".\">
         <SourceDirectory path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\rcf\Release\EventRoleContent\" />
+      </Content>
+      <Content destination=".\">
+        <SourceDirectory path="C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\ecf\EventRoleContent\" />
       </Content>
     </Contents>
   </WorkerRole>
