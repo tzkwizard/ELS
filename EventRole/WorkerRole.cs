@@ -20,24 +20,23 @@ namespace EventRole
             Trace.TraceInformation("EventRole is running");
 
             //Get settings from configuration
-            var eventHubName = ConfigurationManager.AppSettings["eventHubName"];
-            //var consumerGroupName = CloudConfigurationManager.GetSetting("consumerGroupName");
-            //var numberOfPartitions = int.Parse(CloudConfigurationManager.GetSetting("numberOfPartitions"));
+            var eventHubName = ConfigurationManager.AppSettings["eventHubName"];          
             var blobConnectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
-  
+
             //Get AMQP connection string
             var connectionString = EventHubManager.GetServiceBusConnectionString();
 
+            /*var consumerGroupName = CloudConfigurationManager.GetSetting("consumerGroupName");
+            var numberOfPartitions = int.Parse(CloudConfigurationManager.GetSetting("numberOfPartitions"));
             //Create event hub if it does not exist
-            /* var namespaceManager = EventHubManager.GetNamespaceManager(connectionString);
-            EventHubManager.CreateEventHubIfNotExists(eventHubName, numberOfPartitions, namespaceManager);*/
-
+             var namespaceManager = EventHubManager.GetNamespaceManager(connectionString);
+            EventHubManager.CreateEventHubIfNotExists(eventHubName, numberOfPartitions, namespaceManager);
             //Create consumer group if it does not exist
-            /*var group = namespaceManager.CreateConsumerGroupIfNotExists(eventHubName, consumerGroupName);*/
+            var group = namespaceManager.CreateConsumerGroupIfNotExists(eventHubName, consumerGroupName);*/
 
             //Start processing messages
             receiver = new Receiver(eventHubName, connectionString);
-            //ConsumerGroupDescription group = null;
+
             //Get host name of worker role instance.  This is used for each environment to obtain
             //a lease, and to renew the same lease in case of a restart.
             string hostName = RoleEnvironment.CurrentRoleInstance.Id;

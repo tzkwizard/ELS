@@ -47,7 +47,7 @@ namespace StorageRole
                     .AsEnumerable();
                 foreach (var dc in collections)
                 {
-                    await BackupPostCollection(dc,client);
+                    await BackupPostCollection(dc, client);
                 }
             }
             catch (Exception e)
@@ -67,7 +67,7 @@ namespace StorageRole
             }
         }
 
-        private static async Task BackupPostCollection(DocumentCollection dc,DocumentClient client)
+        private static async Task BackupPostCollection(DocumentCollection dc, DocumentClient client)
         {
             Trace.TraceInformation("Collection '{0}' start.  Time: '{1}'", dc.Id,
                 DateTime.Now.ToString(CultureInfo.CurrentCulture));
@@ -94,7 +94,7 @@ namespace StorageRole
                         batchOperation = new TableBatchOperation();
                         if (res.Count == operation.Count)
                         {
-                            await _iDbService.BatchDelete(dc,docList);
+                            await _iDbService.BatchDelete(dc, docList);
                             docList = new List<dynamic>();
                             Trace.TraceInformation("inserted");
                         }
@@ -107,7 +107,7 @@ namespace StorageRole
                         () => _table.ExecuteBatchAsync(operation));
                     if (res.Count == operation.Count)
                     {
-                        await _iDbService.BatchDelete(dc,docList);
+                        await _iDbService.BatchDelete(dc, docList);
                         Trace.TraceInformation("inserted");
                     }
                 }

@@ -27,7 +27,6 @@ namespace LMS.Common.Service
         void UpdateDocumentClient();
         List<Topic> GetCalendar();
         String GetFirebaseToken(string user, string uid, string data);
-        DocumentCollection SearchCollection(string dis, DocumentCollection masterCollection, Database database);
         PostMessage PostData(dynamic x, string[] path);
         TableChat TableChatData(dynamic u, dynamic s);
         TablePost TablePostData(dynamic post);
@@ -49,7 +48,6 @@ namespace LMS.Common.Service
 
 
         RetryPolicy<StorageTransientErrorDetectionStrategy> GetRetryPolicy();
-        Task<int> BatchTransfer(string sp1, string sp2, List<dynamic> docs);
         Task BatchDelete(DocumentCollection dc, List<dynamic> docs);
         Task CollectionTransfer(DocumentCollection dc1, DocumentCollection dc2);
         RangePartitionResolver<long> GetResolver(DocumentClient client);

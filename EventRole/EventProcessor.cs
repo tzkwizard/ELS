@@ -29,11 +29,9 @@ namespace EventRole
         private static IFirebaseClient _client;
         private static string _databaseSelfLink;
         private static RangePartitionResolver<long> _resolver;
-        private static int n = 1;
-        private static readonly object _object = new object();
-        private static bool _run = false;
-        private static bool _start = false;
-        private static int m = 4;
+        private static int _n = 1;
+        private static readonly object Object = new object();
+        private static bool _run;
 
         public Task OpenAsync(PartitionContext context)
         {
@@ -53,12 +51,11 @@ namespace EventRole
 
             //Init DB and Firebase
             _client = _client ?? _iDbService.GetFirebaseClient();
-
             //check resolver state
-            lock (_object)
+            lock (Object)
             {
-                if (n <= 0) return;
-                n--;
+                if (_n <= 0) return;
+                _n--;
                 Task.Run(() => CheckResolver());
             }
         }
@@ -97,7 +94,7 @@ namespace EventRole
         }
 
         private async Task<DocumentClient> GetDocumentClient()
-        {
+        {           
             var client = _iDbService.GetDocumentClient();
             while (client.PartitionResolvers.Count == 0)
             {
@@ -114,6 +111,10 @@ namespace EventRole
             {
                 var client = _iDbService.GetDocumentClient();
                 var resolver = _iDbService.GetResolver(client);
+                if (_resolver == null)
+                {
+                    _resolver = resolver;
+                }
                 if (_resolver.PartitionMap.Count != resolver.PartitionMap.Count)
                 {
                     _iDbService.UpdateDocumentClient();
@@ -124,6 +125,7 @@ namespace EventRole
                 var res = await client.ReadDocumentCollectionAsync(curdc);
                 var rate = res.CollectionSizeUsage/res.CollectionSizeQuota;
 
+                //Timespan based on Current Collection Usage
                 if (rate > 0.8)
                 {
                     await Task.Delay(TimeSpan.FromSeconds(10));

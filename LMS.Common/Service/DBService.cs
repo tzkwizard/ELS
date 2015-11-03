@@ -246,31 +246,6 @@ namespace LMS.Common.Service
             _documentClient.PartitionResolvers[_dataSelfLink] = rangeResolver;
         }
 
-        public DocumentCollection SearchCollection(string dis, DocumentCollection masterCollection, Database database)
-        {
-            var client = GetDocumentClient();
-            var ds =
-                from d in client.CreateDocumentQuery<DcAllocate>(masterCollection.DocumentsLink)
-                where d.Type == "DisList"
-                select d;
-            foreach (var d in ds)
-            {
-                if (d.District.Contains(dis))
-                {
-                    DocumentCollection dc = client.CreateDocumentCollectionQuery(database.SelfLink)
-                        .Where(c => c.Id == d.DcName)
-                        .AsEnumerable()
-                        .FirstOrDefault();
-                    if (dc != null)
-                    {
-                        return dc;
-                    }
-                }
-            }
-            return masterCollection;
-        }
-
-
         public async Task DeleteDocByIdList(DocumentCollection dc, List<string> idList)
         {
             foreach (var id in idList)
@@ -545,7 +520,7 @@ namespace LMS.Common.Service
             }
         }
 
-        public async Task<StoredProcedureResponse<List<Document>>> ExecuteWithRetries(
+        private async Task<StoredProcedureResponse<List<Document>>> ExecuteWithRetries(
             Func<Task<StoredProcedureResponse<List<Document>>>> function)
         {
             TimeSpan sleepTime = TimeSpan.FromMilliseconds(100);
@@ -601,26 +576,6 @@ namespace LMS.Common.Service
             return retryPolicy;
         }
 
-
-        public async Task<int> BatchTransfer(string sp1, string sp2, List<dynamic> docs)
-        {
-            var client = GetDocumentClient();
-            try
-            {
-                var res = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
-                    sp1, docs));
-
-                var res2 = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
-                    sp2, res.Response));
-
-                return res2.Response.Count;
-            }
-            catch (Exception e)
-            {
-                var ee = e;
-            }
-            return 0;
-        }
 
         private static StoredProcedure BatchDelete()
         {
@@ -791,6 +746,26 @@ function bulkImport(docs) {
                 Console.WriteLine(n + "----" + l.Count);
                 cur = cur + n;
             }
+        }
+
+        private async Task<int> BatchTransfer(string sp1, string sp2, List<dynamic> docs)
+        {
+            var client = GetDocumentClient();
+            try
+            {
+                var res = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
+                    sp1, docs));
+
+                var res2 = await ExecuteWithRetries(() => client.ExecuteStoredProcedureAsync<List<Document>>(
+                    sp2, res.Response));
+
+                return res2.Response.Count;
+            }
+            catch (Exception e)
+            {
+                var ee = e;
+            }
+            return 0;
         }
 
         public RangePartitionResolver<long> GetResolver(DocumentClient client)

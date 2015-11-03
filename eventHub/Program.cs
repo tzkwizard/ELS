@@ -23,7 +23,7 @@ namespace eventHub
 
         static void Main(string[] args)
         {
-            //var z = SharedAccessSignatureTokenProvider.GetSharedAccessSignature("post", sasKey , eventHubUrl, TimeSpan.FromHours(1));
+           //var z = SharedAccessSignatureTokenProvider.GetSharedAccessSignature("post", sasKey , eventHubUrl, TimeSpan.FromHours(1));
            //ReceivePartitionMessage();
             //SendingRandomMessages(1);
          

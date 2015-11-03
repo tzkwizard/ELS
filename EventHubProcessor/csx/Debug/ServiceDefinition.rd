@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EventHubProcessor" generation="1" functional="0" release="0" Id="1fafcc6d-8c99-400b-a826-415937e829b7" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EventHubProcessor" generation="1" functional="0" release="0" Id="665db4e6-d46c-4c3d-9487-49f6235206c0" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="EventHubProcessorGroup" generation="1" functional="0" release="0">
       <settings>

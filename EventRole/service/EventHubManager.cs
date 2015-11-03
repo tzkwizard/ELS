@@ -41,8 +41,10 @@ namespace EventRole.service
             {
                 // Create the Event Hub
                 Trace.WriteLine("Creating Event Hub...");
-                EventHubDescription ehd = new EventHubDescription(eventHubName);
-                ehd.PartitionCount = numberOfPartitions;
+                EventHubDescription ehd = new EventHubDescription(eventHubName)
+                {
+                    PartitionCount = numberOfPartitions
+                };
                 manager.CreateEventHubIfNotExistsAsync(ehd).Wait();
             }
             catch (AggregateException agexp)
