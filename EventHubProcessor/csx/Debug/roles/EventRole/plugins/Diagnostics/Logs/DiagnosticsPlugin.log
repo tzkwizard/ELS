@@ -1,0 +1,53 @@
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Starting DiagnosticPlugin.exe DiagnosticPlugin-ShutdownEvent DiagnosticPlugin-TotalShutdownEvent -wadVer1v4
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Successfully saved IIS Directory state
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Starting DiagnosticsPlugin
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Emulator config file set to C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Debug\roles\EventRole\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] DiagnosticsStoreRootPath set to: C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Debug\roles\EventRole\approot
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Loading config file: C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Debug\roles\EventRole\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Checking VM Type
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Emulator config file set to C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Debug\roles\EventRole\approot\diagnostics.wadcfgx
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Extension set to Emulator Mode
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Reading XML configuration file
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Bypassing private config decryption
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] WadCfg is provided in initial configuration. Using that to initialize Diagnostics.
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+  <WadCfg>
+    <DiagnosticMonitorConfiguration overallQuotaInMB="4096">
+      <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter="Error" />
+      <Directories scheduledTransferPeriod="PT1M">
+        <IISLogs containerName="wad-iis-logfiles" />
+        <FailedRequestLogs containerName="wad-failedrequestlogs" />
+      </Directories>
+      <PerformanceCounters scheduledTransferPeriod="PT1M">
+        <PerformanceCounterConfiguration counterSpecifier="\Memory\Available MBytes" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\Web Service(_Total)\ISAPI Extension Requests/sec" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\Web Service(_Total)\Bytes Total/Sec" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\ASP.NET Applications(__Total__)\Requests/Sec" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\ASP.NET Applications(__Total__)\Errors Total/Sec" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\ASP.NET\Requests Queued" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\ASP.NET\Requests Rejected" sampleRate="PT3M" />
+        <PerformanceCounterConfiguration counterSpecifier="\Processor(_Total)\% Processor Time" sampleRate="PT3M" />
+      </PerformanceCounters>
+      <WindowsEventLog scheduledTransferPeriod="PT1M">
+        <DataSource name="Application!*" />
+      </WindowsEventLog>
+      <CrashDumps>
+        <CrashDumpConfiguration processName="WaIISHost.exe" />
+        <CrashDumpConfiguration processName="WaWorkerHost.exe" />
+        <CrashDumpConfiguration processName="w3wp.exe" />
+      </CrashDumps>
+      <Logs scheduledTransferPeriod="PT1M" scheduledTransferLogLevelFilter="Verbose" />
+    </DiagnosticMonitorConfiguration>
+  </WadCfg>
+  <StorageAccount>elsaotuo</StorageAccount>
+</PublicConfig>
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Private setting is loaded
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Deleting directory C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Debug\roles\EventRole\approot\WAD0104\Tables
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Successfully created checkpoint file C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Debug\roles\EventRole\approot\WAD0104\Configuration\Checkpoint.txt
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Will use local resource directory C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\csx\Debug\roles\EventRole\approot\WAD0104
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Will use endpoint https://core.windows.net for storage.
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Expanding path %SystemDrive%\inetpub\logs\LogFiles to C:\inetpub\logs\LogFiles
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Expanding path %SystemDrive%\inetpub\logs\FailedReqLogFiles to C:\inetpub\logs\FailedReqLogFiles
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Created IIS log watch item: "C:\inetpub\logs\LogFiles"
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Created IIS failed requests watch item: "C:\inetpub\logs\FailedReqLogFiles"
+DiagnosticsPlugin.exe Information: 0 : [11/03/2015 10:58:35 PM] Running in emulator mode, crash dumps not enabled
