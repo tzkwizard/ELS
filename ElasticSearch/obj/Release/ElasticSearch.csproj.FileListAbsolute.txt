@@ -27,6 +27,5 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Release\Nest.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Release\Nest.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Release\nunit.framework.xml
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\obj\Release\ElasticSearch.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\obj\Release\ElasticSearch.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\obj\Release\ElasticSearch.pdb

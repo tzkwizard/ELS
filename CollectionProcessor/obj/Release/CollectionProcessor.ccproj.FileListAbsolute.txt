@@ -31,10 +31,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\ko\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\ko\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\ko\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\LMS.model.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\LMS.service.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\LMS.service.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\Microsoft.Data.Edm.dll
@@ -73,3 +69,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\zh-Hant\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\zh-Hant\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\LMS.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\LMS.Common.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\System.Net.Http.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\CollectionProcessor\obj\Release\CheckRole\System.Net.Http.Primitives.dll

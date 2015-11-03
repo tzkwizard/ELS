@@ -4,6 +4,8 @@
     <ConfigurationSettings>
       <Setting name="consumerGroupName" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="Setting1" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" />
     </ConfigurationSettings>
     <Imports>
       <Import moduleName="Caching" />

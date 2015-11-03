@@ -6,8 +6,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Re
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\EntityFramework.SqlServer.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\FireSharp.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Hyak.Common.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\LMS.model.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\LMS.service.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.Azure.Batch.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.Azure.Common.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Microsoft.Azure.Common.NetFramework.dll
@@ -39,8 +37,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Re
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\StackExchange.Redis.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Elasticsearch.Net.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\LMS.service.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\Autofac.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\EntityFramework.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\EntityFramework.SqlServer.xml
@@ -119,3 +115,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Re
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Release\doucumentDB.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Release\doucumentDB.exe
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\obj\Release\doucumentDB.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\JWT.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\LMS.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Release\LMS.Common.pdb

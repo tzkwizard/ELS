@@ -1,8 +1,6 @@
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\CheckRole.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\CheckRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\CheckRole.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\LMS.model.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\LMS.service.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Data.Edm.dll
@@ -28,8 +26,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Rele
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Practices.ServiceLocation.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Practices.Unity.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Practices.Unity.Interception.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\LMS.service.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Azure.KeyVault.Core.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Data.Edm.xml
@@ -95,3 +91,13 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Rele
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\obj\Release\CheckRole.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\obj\Release\CheckRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\obj\Release\CheckRole.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\LMS.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\System.Net.Http.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\System.Net.Http.Primitives.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\LMS.Common.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\LMS.Common.dll.config
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\System.Net.Http.Extensions.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\bin\Release\System.Net.Http.Primitives.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\checkRole\obj\Release\CheckRole.csproj.App.config
