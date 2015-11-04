@@ -257,6 +257,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\ru\Syst
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\obj\Debug\WebApi.csproj.App.config
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\obj\Debug\WebApi.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\obj\Debug\WebApi.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache

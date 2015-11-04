@@ -45,7 +45,7 @@ namespace EventRole
         {
             EventHubClient eventHubClient = EventHubClient.CreateFromConnectionString(eventHubConnectionString,
                 this.eventHubName);
-
+            Trace.TraceInformation("register string :" + eventHubConnectionString+ blobConnectionString);
             //Use custom consumer group
             eventProcessorHost = new EventProcessorHost(hostName, eventHubClient.Path,
                 EventHubConsumerGroup.DefaultGroupName, this.eventHubConnectionString, blobConnectionString);

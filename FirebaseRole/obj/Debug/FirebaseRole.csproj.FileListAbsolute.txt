@@ -1,3 +1,4 @@
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\FirebaseRole.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\FirebaseRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\FirebaseRole.pdb
@@ -31,7 +32,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\D
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\StackExchange.Redis.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\FirebaseTokenGenerator.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\MonAgentListener.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Elasticsearch.Net.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\LMS.Common.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\LMS.Common.dll.config
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Microsoft.Azure.KeyVault.Core.xml

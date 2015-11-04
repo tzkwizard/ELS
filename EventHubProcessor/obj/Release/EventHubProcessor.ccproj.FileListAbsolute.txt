@@ -31,6 +31,10 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\ko\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\ko\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\ko\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\LMS.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\LMS.Common.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.ApplicationServer.Caching.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.ApplicationServer.Caching.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.Data.Edm.dll
@@ -48,9 +52,13 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.Threading.Tasks.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.Threading.Tasks.Extensions.Desktop.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.Web.DistributedCache.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsAzure.Configuration.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsAzure.Diagnostics.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsAzure.Storage.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsAzure.Storage.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsFabric.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsFabric.Data.Common.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\MonAgentListener.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Nest.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Nest.pdb
@@ -72,11 +80,3 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\zh-Hant\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsAzure.Storage.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\LMS.Common.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\LMS.Common.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.ApplicationServer.Caching.Client.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.ApplicationServer.Caching.Core.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.Web.DistributedCache.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsFabric.Common.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventHubProcessor\obj\Release\EventRole\Microsoft.WindowsFabric.Data.Common.dll

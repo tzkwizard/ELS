@@ -2,8 +2,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Rele
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\EventRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\EventRole.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\FireSharp.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\LMS.model.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\LMS.service.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Data.Edm.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Data.OData.dll
@@ -32,8 +30,6 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Rele
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Practices.ServiceLocation.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Practices.Unity.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Practices.Unity.Interception.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\LMS.model.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\LMS.service.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Azure.Documents.Client.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Data.Edm.xml
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Data.OData.xml
@@ -104,3 +100,13 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\obj\Rele
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\obj\Release\EventRole.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\obj\Release\EventRole.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.WindowsAzure.Storage.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\LMS.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.ApplicationServer.Caching.Client.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.ApplicationServer.Caching.Core.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.Web.DistributedCache.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.WindowsFabric.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.WindowsFabric.Data.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\LMS.Common.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\LMS.Common.dll.config
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.ApplicationServer.Caching.Client.xml
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Release\Microsoft.ApplicationServer.Caching.Core.xml

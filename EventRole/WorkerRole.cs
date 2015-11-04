@@ -25,7 +25,7 @@ namespace EventRole
 
             //Get AMQP connection string
             var connectionString = EventHubManager.GetServiceBusConnectionString();
-
+            Trace.TraceInformation("connectionString : "+connectionString);
             /*var consumerGroupName = CloudConfigurationManager.GetSetting("consumerGroupName");
             var numberOfPartitions = int.Parse(CloudConfigurationManager.GetSetting("numberOfPartitions"));
             //Create event hub if it does not exist

@@ -31,6 +31,8 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\ko\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\ko\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\ko\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\LMS.Common.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\LMS.Common.pdb
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\Microsoft.Azure.Documents.Client.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\Microsoft.Azure.KeyVault.Core.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\Microsoft.Data.Edm.dll
@@ -74,5 +76,3 @@ C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcesso
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\zh-Hant\Microsoft.Data.OData.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\zh-Hant\System.Spatial.resources.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\LMS.Common.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ChatBackupProcessor\obj\Release\FirebaseRole\LMS.Common.pdb
