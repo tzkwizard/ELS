@@ -99,3 +99,4 @@ C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\MessageHan
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.csprojResolveAssemblyReference.cache
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.dll
 C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\Renweb\ELS\MessageHandleApi\obj\Debug\MessageHandleApi.pdb
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi\bin\zh-Hans\System.Spatial.resources.dll

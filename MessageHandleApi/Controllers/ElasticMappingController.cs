@@ -49,7 +49,7 @@ namespace MessageHandleApi.Controllers
                 _settings = new ConnectionSettings(_node).SetBasicAuthentication(id, pass);
                 _client = new ElasticClient(_settings);
                 //if (_client.RootNodeInfo().Status != 200) return BadRequest("error identity");
-                if (id != "aotuo" && pass != "123456") return BadRequest("error identity"); //temporary check
+                if (id != "aotuo" || pass != "123456") return BadRequest("error identity"); //temporary check
                 var res = EsCipher.Encrypt("binggo", "Elastic");
                 return Ok(res);
             }
