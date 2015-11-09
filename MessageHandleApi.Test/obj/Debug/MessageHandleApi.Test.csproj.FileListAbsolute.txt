@@ -1,1 +1,0 @@
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\MessageHandleApi.Test\bin\Debug\fr\Microsoft.Data.Edm.resources.dll

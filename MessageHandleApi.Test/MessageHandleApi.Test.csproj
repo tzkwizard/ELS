@@ -76,6 +76,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\LMSController_Test.cs" />
     <Compile Include="Controllers\ElasticSearchController_Test.cs" />
     <Compile Include="Controllers\ElasticAggragationController_Test.cs" />
     <Compile Include="Controllers\TestData.cs" />

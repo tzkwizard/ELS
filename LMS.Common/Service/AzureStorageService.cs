@@ -17,7 +17,8 @@ namespace LMS.Common.Service
 
         public AzureStorageService()
         {
-            storageConnectionString = ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"].ToString();
+            //storageConnectionString = ConfigurationManager.ConnectionStrings["AzureWebJobsStorage"].ToString();
+            storageConnectionString = ConfigurationManager.AppSettings["AzureWebJobsStorage"];
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _cloudTable = c.GetTableReference("Chat");

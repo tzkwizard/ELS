@@ -1,1 +1,0 @@
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\LMSqueue\bin\Debug\zh-Hant\Microsoft.Data.Services.Client.resources.dll
