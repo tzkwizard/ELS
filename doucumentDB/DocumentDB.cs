@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,20 +27,23 @@ namespace doucumentDB
         private static string AuthorizationKey =
             "6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==";
 
+        private static string EndpointUrl2 = "https://azurelmsdb.documents.azure.com:443/";
+
+        private static string AuthorizationKey2 =
+            "mlc6CIPF4GKaz7KekD+fAjcB/k6AkUh7chjKham+WuM2qHFrAg1Untll5g/x5uBEJTu6fBZ+7bifvpWZl1Xj6g==";
+
         private static IDbService _iDbService;
 
         public static async Task GetStartedDemo()
         {
             // Create a new instance of the DocumentClient.
-            DocumentClient client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
+            DocumentClient client = new DocumentClient(new Uri(EndpointUrl2), AuthorizationKey2);
 
-            var database = await GetDB(client);
+            var database = await GetDB(client, "LMS");
             var documentCollection = await GetDC(client, database);
 
-            //var response = await ExecuteWithRetries(5, () => client.CreateDocumentAsync("", new object()));
-            //await DeleteAll(client, database, documentCollection);
-            _iDbService = new DbService(EndpointUrl,AuthorizationKey);
-
+            _iDbService = new DbService(EndpointUrl2, AuthorizationKey2);
+            // await DeleteAll(client, database, documentCollection);
             await sp2(documentCollection, client, database);
             //await GetData(client, documentCollection);
             //ReadData(client, documentCollection);
@@ -51,7 +55,9 @@ namespace doucumentDB
 
         private static async Task sp2(DocumentCollection dc, DocumentClient client, Database database)
         {
-            DocumentCollection dc2 = client.CreateDocumentCollectionQuery(database.SelfLink)
+
+            //transfer collection data
+             DocumentCollection dc2 = client.CreateDocumentCollectionQuery(database.SelfLink)
                 .Where(c => c.Id == "LMSCollection1444075919174")
                 .AsEnumerable()
                 .FirstOrDefault();
@@ -59,45 +65,37 @@ namespace doucumentDB
             //await _iDbService.CollectionTransfer(client, dc2, dc);
             var mn=await client.ReadDatabaseAsync(database.SelfLink);
 
-          /*  await client.CreateDocumentAsync(dc.SelfLink, new CurrentCollection
+
+
+
+            /*  await client.CreateDocumentAsync(dc.SelfLink, new CurrentCollection
             {
                 id = "CurrentCollection",
                 name=dc.Id
             });*/
-          /*  var resolver = _iDbService.GetResolver(client, dc);
-            foreach (var d in resolver.PartitionMap)
-            {
-                Console.WriteLine(d.Value);
-                Offer offer = client.CreateOfferQuery()
-                                      .Where(r => r.ResourceLink == d.Value)
-                                      .AsEnumerable()
-                                      .SingleOrDefault();
-            }*/
+            //var resolver = _iDbService.GetResolver(client);
 
-
-
-
-           /* HashPartitionResolver hashResolver = new HashPartitionResolver(
+            /* HashPartitionResolver hashResolver = new HashPartitionResolver(
                 u => ((PostMessage) u).Path.District,
                 new string[] {dc.SelfLink, dc2.SelfLink});
 
             client.PartitionResolvers[database.SelfLink] = hashResolver;*/
 
-            var rangeResolver = _iDbService.GetResolver(client);
-            client.PartitionResolvers[database.SelfLink] = rangeResolver;
+            /* var rangeResolver = _iDbService.GetResolver(client);
+            client.PartitionResolvers[database.SelfLink] = rangeResolver;*/
 
-            
+
             var created = await _iDbService.InitResolver("");
-          
-            
-            while (true)
+
+
+             while (true)
             {
                 var re2 = await _iDbService.UpdateResolver(dc2);
                 var p = re2;
                 await Task.Delay(TimeSpan.FromSeconds(4));
             }
 
-            var z1 = rangeResolver.GetPartitionKey(new PostMessage
+            /*  var z1 = rangeResolver.GetPartitionKey(new PostMessage
                     {
                         Type = "Post",
                         Info = new Info
@@ -111,54 +109,52 @@ namespace doucumentDB
                         {
                             District = "tst-azhang" 
                         }
-                    });
+                    });*/
 
             //search global
             IQueryable<PostMessage> query = client.CreateDocumentQuery<PostMessage>(database.SelfLink)
-                .Where(u => u.Info.timestamp>1);
+                .Where(u => u.Info.timestamp > 1);
 
-            var now = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-
+           
             //search on partition
-
-            var t1 = DateTime.Now;
+            var partitionKey = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             var query2 = client.CreateDocumentQuery<PostMessage>(database.SelfLink, new FeedOptions
             {
                 MaxItemCount = 1200
-            }, now);
-            var query3 = client.CreateDocumentQuery<PostMessage>(dc2.SelfLink).AsDocumentQuery();
-
-
-
-            var t2 = DateTime.Now;
-            Console.WriteLine(t2-t1);
-              //.Where(u => u.Path.District=="tst-azhang");
-          
+            }, partitionKey);
+           
             foreach (PostMessage a in query2)
             {
                 Console.WriteLine(a.Info.timestamp);
             }
 
-          /*  double totalRequestCharge = 0;
-            
+
+            //check search RU
+            /*  double totalRequestCharge = 0;
+            var query3 = client.CreateDocumentQuery<PostMessage>(dc2.SelfLink).AsDocumentQuery();
             while (query3.HasMoreResults)
             {
                 FeedResponse<dynamic> queryResponse = await query3.ExecuteNextAsync<dynamic>();
                 Console.WriteLine("Query batch consumed {0} request units {1} doc", queryResponse.RequestCharge, queryResponse.Count);
                 totalRequestCharge += queryResponse.RequestCharge;
             }
-            Console.WriteLine(DateTime.Now - t2);
             Console.WriteLine("Query consumed {0} request units in total", totalRequestCharge);*/
-            Console.ReadLine();
-       
+    
+            //await AddTestData(client,database,5);
 
-            int n = 19;
+            Console.ReadLine();
+        }
+
+        private static async Task AddTestData(DocumentClient client, Database database, int number)
+        {
+            int n = 0;
             try
             {
-                while (n < 10)
+                while (n < number)
                 {
                     n++;
-                    var timestamp=(long) (DateTime.UtcNow.AddHours(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                    var timestamp =
+                        (long) (DateTime.UtcNow.AddHours(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
                     PostMessage x = new PostMessage
                     {
                         Type = "Post",
@@ -171,7 +167,7 @@ namespace doucumentDB
                         },
                         Path = new PostPath
                         {
-                            District = "tst-azhang" 
+                            District = "tst-azhang"
                         }
                     };
 
@@ -182,19 +178,17 @@ namespace doucumentDB
             {
                 var t = e;
             }
-
-            var z = 4;
         }
 
-        public static async Task<Database> GetDB(DocumentClient client)
+        public static async Task<Database> GetDB(DocumentClient client, string name)
         {
-            Database database = client.CreateDatabaseQuery().Where(db => db.Id == "LMSRegistry")
-                .AsEnumerable().FirstOrDefault()
-                                ?? await client.CreateDatabaseAsync(
+            Database database = client.CreateDatabaseQuery().Where(db => db.Id == name)
+                .AsEnumerable().FirstOrDefault();
+            /*?? await client.CreateDatabaseAsync(
                                     new Database
                                     {
                                         Id = "LMSRegistry"
-                                    });
+                                    });*/
 
             Console.WriteLine(database.SelfLink);
             return database;
@@ -219,45 +213,65 @@ namespace doucumentDB
 
 
         private static async Task DeleteAll(DocumentClient client, Database database,
-            DocumentCollection documentCollection)
+            DocumentCollection dc)
         {
             IEnumerable<DocumentCollection> dz = client.CreateDocumentCollectionQuery(database.SelfLink)
                 .AsEnumerable();
-
+            var nnn = 0;
             foreach (var z in dz)
             {
                 var families =
-                    from f in client.CreateDocumentQuery(z.DocumentsLink)
+                    from f in client.CreateDocumentQuery(z.SelfLink)
                     select f;
 
-
-                foreach (var family in families)
+                try
                 {
-                    dynamic d = JsonConvert.DeserializeObject(family.ToString());
-                    //Console.WriteLine(d.Path.school);  
-                    try
-                    {
-                        //var res = await client.DeleteDocumentAsync(family.SelfLink);
-                        var family1 = family;
-                        var response = await _iDbService.ExecuteWithRetries(5, () => client.DeleteDocumentAsync(family1.SelfLink));
-                    }
-                    catch (DocumentClientException e)
-                    {
-                        /* if (e.RetryAfter.TotalMilliseconds>0)
-                            {
-                                Console.WriteLine(e.RetryAfter.TotalMilliseconds);
-                                Thread.Sleep((int) e.RetryAfter.TotalMilliseconds);
-                                client.DeleteDocumentAsync(family.SelfLink).Wait();
-                            }
-                            else
-                            {*/
-                        Console.WriteLine(e.Message);
-                        // }
-                    }
+                    var mn = 0;
+                    List<dynamic> batch = new List<dynamic>();
 
-                    Console.WriteLine(family.SelfLink);
+                    foreach (var family in families)
+                    {
+                        nnn++;
+
+                        if (mn < 100)
+                        {
+                            batch.Add(family);
+                            mn++;
+                        }
+                        else
+                        {
+                            await _iDbService.BatchDelete(z, batch);
+                            mn = 0;
+                            batch = new List<dynamic>();
+                        }
+
+                        /* dynamic d = JsonConvert.DeserializeObject(family.ToString());
+                            //Console.WriteLine(d.Path.school);  
+                            try
+                            {
+                                //var res = await client.DeleteDocumentAsync(family.SelfLink);
+                                var family1 = family;
+                                var response =
+                                    await
+                                        _iDbService.ExecuteWithRetries(5,
+                                            () => client.DeleteDocumentAsync(family1.SelfLink));
+                            }
+                            catch (DocumentClientException e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+
+                            Console.WriteLine(family.SelfLink);*/
+                    }
+                    await _iDbService.BatchDelete(z, batch);
+                }
+                catch (Exception eee)
+                {
+                    Console.WriteLine(eee.Message);
                 }
             }
+
+            Console.WriteLine(nnn);
         }
 
         private static void sp()
@@ -400,7 +414,9 @@ namespace doucumentDB
                 }
             };
             //var res = await client.CreateDocumentAsync(documentCollection.DocumentsLink, topic);
-            await _iDbService.ExecuteWithRetries(5, () => client.CreateDocumentAsync(documentCollection.DocumentsLink, topic));
+            await
+                _iDbService.ExecuteWithRetries(5,
+                    () => client.CreateDocumentAsync(documentCollection.DocumentsLink, topic));
             var i = 3;
 
 

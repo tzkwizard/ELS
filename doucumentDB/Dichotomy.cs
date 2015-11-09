@@ -17,7 +17,7 @@ namespace doucumentDB
         public static async Task UpdateDcAll(string endpointUrl, string authorizationKey)
         {
             DocumentClient client = new DocumentClient(new Uri(endpointUrl), authorizationKey);
-            var database = await DocumentDB.GetDB(client);
+            var database = await DocumentDB.GetDB(client, "LMSRegistry");
 
             IEnumerable<DocumentCollection> dz = client.CreateDocumentCollectionQuery(database.SelfLink)
                 .AsEnumerable();

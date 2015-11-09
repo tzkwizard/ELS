@@ -3,6 +3,11 @@
   <WorkerRole name="StorageRole" vmsize="Small">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DBSelfLink" />
+      <Setting name="MasterCollectionSelfLink" />
+      <Setting name="DocumentDBUrl" />
+      <Setting name="DocumentDBAuthorizationKey" />
+      <Setting name="AzureStorageConnectionString" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>

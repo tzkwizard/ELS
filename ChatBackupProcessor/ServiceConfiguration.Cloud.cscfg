@@ -4,6 +4,9 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=elsaotuo;AccountKey=AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==" />
+      <Setting name="AzureStorageConnectionString" value="" />
+      <Setting name="FirebaseUrl" value="" />
+      <Setting name="FirebaseSecret" value="" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

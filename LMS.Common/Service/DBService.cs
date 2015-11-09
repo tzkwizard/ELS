@@ -10,6 +10,7 @@ using FireSharp.Config;
 using FireSharp.Interfaces;
 using LMS.Common.Models;
 using LMS.Common.Models.Api;
+using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
@@ -33,9 +34,13 @@ namespace LMS.Common.Service
         {
             _endpointUrl = endpointUrl;
             _authorizationKey = authorizationKey;
-            _dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
-            _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];
+            /*_dataSelfLink = ConfigurationManager.AppSettings["DBSelfLink"];
+            _masterCollectionSelfLink = ConfigurationManager.AppSettings["MasterCollectionSelfLink"];*/
             _firebaseSecret = ConfigurationManager.AppSettings["FirebaseSecret"];
+
+            //
+            _dataSelfLink = "dbs/uLp-AA==/";
+            _masterCollectionSelfLink = "dbs/uLp-AA==/colls/uLp-AM46HwA=/";
         }
 
         public DbService()
@@ -46,7 +51,14 @@ namespace LMS.Common.Service
             _authorizationKey = ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"];
             _firebaseSecret = ConfigurationManager.AppSettings["FirebaseSecret"];
         }
-
+        public DbService(bool cloud)
+        {
+            _masterCollectionSelfLink = CloudConfigurationManager.GetSetting("MasterCollectionSelfLink");
+            _dataSelfLink = CloudConfigurationManager.GetSetting("DBSelfLink");
+            _endpointUrl = CloudConfigurationManager.GetSetting("DocumentDBUrl");
+            _authorizationKey = CloudConfigurationManager.GetSetting("DocumentDBAuthorizationKey");
+            _firebaseSecret = CloudConfigurationManager.GetSetting("FirebaseSecret");
+        }
         public List<Topic> GetCalendar()
         {
             var client = GetDocumentClient();
@@ -206,7 +218,8 @@ namespace LMS.Common.Service
 
         public IFirebaseClient GetFirebaseClient()
         {
-            var node = "https://dazzling-inferno-4653.firebaseio.com/";
+            //var node = "https://dazzling-inferno-4653.firebaseio.com/";
+            var node = CloudConfigurationManager.GetSetting("FirebaseUrl") ?? ConfigurationManager.AppSettings["FirebaseUrl"];
             IFirebaseConfig config = new FirebaseConfig
             {
                 AuthSecret = _firebaseSecret,

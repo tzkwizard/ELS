@@ -29,17 +29,3 @@ C:\Users\aotuo.zhang\Documents\Visual Studio 2013\Projects\ELS\ElasticSearch\bin
 C:\Users\aotuo.zhang\documents\visual studio 2013\Projects\ELS\ElasticSearch\bin\Debug\nunit.framework.dll
 C:\Users\aotuo.zhang\documents\visual studio 2013\Projects\ELS\ElasticSearch\bin\Debug\TechTalk.SpecFlow.dll
 C:\Users\aotuo.zhang\documents\visual studio 2013\Projects\ELS\ElasticSearch\bin\Debug\nunit.framework.xml
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\ElasticSearch.exe.config
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\ElasticSearch.exe
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\ElasticSearch.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\Elasticsearch.Net.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\Nest.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\nunit.framework.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\TechTalk.SpecFlow.dll
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\Elasticsearch.Net.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\Elasticsearch.Net.xml
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\Nest.pdb
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\Nest.xml
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\bin\Debug\nunit.framework.xml
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\obj\Debug\ElasticSearch.exe
-C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\ElasticSearch\obj\Debug\ElasticSearch.pdb

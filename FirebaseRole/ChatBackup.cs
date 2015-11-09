@@ -35,7 +35,7 @@ namespace FirebaseRole
             var client = storageAccount.CreateCloudTableClient();
             _table = client.GetTableReference("Chat");
             _table.CreateIfNotExists();
-            _iDbService = new DbService();
+            _iDbService = new DbService(true);
             _retryPolicy = _iDbService.GetRetryPolicy();
         }
 
@@ -43,7 +43,7 @@ namespace FirebaseRole
         {
             try
             {
-                _firebaseClient = _iDbService.GetFirebaseClient(ConfigurationManager.AppSettings["Firebasenode"]);
+                _firebaseClient = _iDbService.GetFirebaseClient();
                 FirebaseResponse chatResponse = _firebaseClient.Get("ChatRoom");
                 dynamic rooms = JsonConvert.DeserializeObject(chatResponse.Body);
 

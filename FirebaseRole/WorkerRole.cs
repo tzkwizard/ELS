@@ -57,7 +57,7 @@ namespace FirebaseRole
             ServicePointManager.DefaultConnectionLimit = 12;
 
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                ConfigurationManager.AppSettings["AzureStorageConnectionString"]);
+                CloudConfigurationManager.GetSetting("AzureStorageConnectionString"));
 
 
             CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();

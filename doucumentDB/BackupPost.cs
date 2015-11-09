@@ -35,7 +35,7 @@ namespace doucumentDB
             _table.CreateIfNotExists();
 
             _client = new DocumentClient(new Uri(EndpointUrl), AuthorizationKey);
-            var database = await DocumentDB.GetDB(_client);
+            var database = await DocumentDB.GetDB(_client, "LMSRegistry");
 
             IEnumerable<DocumentCollection> dz = _client.CreateDocumentCollectionQuery(database.SelfLink)
                .AsEnumerable();

@@ -4,6 +4,11 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=elsaotuo;AccountKey=AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==" />
+      <Setting name="DBSelfLink" value="" />
+      <Setting name="MasterCollectionSelfLink" value="" />
+      <Setting name="DocumentDBUrl" value="" />
+      <Setting name="DocumentDBAuthorizationKey" value="" />
+      <Setting name="AzureStorageConnectionString" value="" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

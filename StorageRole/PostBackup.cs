@@ -30,7 +30,7 @@ namespace StorageRole
 
         public PostBackup(CloudStorageAccount storageAccount)
         {
-            _iDbService = new DbService();
+            _iDbService = new DbService(true);
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _table = c.GetTableReference("Post");
             _table.CreateIfNotExists();

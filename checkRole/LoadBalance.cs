@@ -21,7 +21,7 @@ namespace CheckRole
 
         public LoadBalance()
         {
-            _iDbService = _iDbService ?? new DbService();
+            _iDbService = _iDbService ?? new DbService(true);
         }
 
         public async Task CheckBalance(string databaseSelfLink)

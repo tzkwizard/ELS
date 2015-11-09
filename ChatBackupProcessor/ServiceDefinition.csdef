@@ -3,6 +3,9 @@
   <WorkerRole name="FirebaseRole" vmsize="Small">
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="AzureStorageConnectionString" />
+      <Setting name="FirebaseUrl" />
+      <Setting name="FirebaseSecret" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
