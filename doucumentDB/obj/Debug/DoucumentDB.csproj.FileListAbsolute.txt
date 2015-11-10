@@ -1,0 +1,2 @@
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\ko\Microsoft.Data.Edm.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\doucumentDB\bin\Debug\ko\Microsoft.Data.Services.Client.resources.dll

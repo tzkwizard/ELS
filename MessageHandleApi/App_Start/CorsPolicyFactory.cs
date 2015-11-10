@@ -1,8 +1,8 @@
-﻿namespace MessageHandleApi.App_Start
-{
-    using System.Net.Http;
-    using System.Web.Http.Cors;
+﻿using System.Net.Http;
+using System.Web.Http.Cors;
 
+namespace MessageHandleApi
+{
     public class CorsPolicyFactory : ICorsPolicyProviderFactory
     {
         private ICorsPolicyProvider _provider = new MyCorsPolicyAttribute();

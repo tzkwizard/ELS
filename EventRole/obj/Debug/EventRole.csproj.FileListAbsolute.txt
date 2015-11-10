@@ -1,0 +1,2 @@
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\bin\Debug\fr\System.Spatial.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\EventRole\obj\Debug\EventRole.pdb

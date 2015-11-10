@@ -1,14 +1,14 @@
-﻿namespace MessageHandleApi.App_Start
-{
-    using System;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Text.RegularExpressions;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Web.Cors;
-    using System.Web.Http.Cors;
+﻿using System;
+using System.Linq;
+using System.Net.Http;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Cors;
+using System.Web.Http.Cors;
 
+namespace MessageHandleApi
+{
     /// <summary>
     /// This is used to setup the default cors policy for our site
     /// </summary>
