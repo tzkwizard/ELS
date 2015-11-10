@@ -47,6 +47,9 @@
     <Reference Include="NSubstitute">
       <HintPath>..\packages\NSubstitute.1.8.2.0\lib\net45\NSubstitute.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -62,6 +65,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="TechTalk.SpecFlow">
+      <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -76,11 +82,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Calculator.cs" />
     <Compile Include="Controllers\LMSController_Test.cs" />
     <Compile Include="Controllers\ElasticSearchController_Test.cs" />
     <Compile Include="Controllers\ElasticAggragationController_Test.cs" />
     <Compile Include="Controllers\TestData.cs" />
     <Compile Include="Controllers\ElasticMappingController_Test.cs" />
+    <Compile Include="lms.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lms.feature</DependentUpon>
+    </Compile>
+    <Compile Include="LmsSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="lms.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>lms.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

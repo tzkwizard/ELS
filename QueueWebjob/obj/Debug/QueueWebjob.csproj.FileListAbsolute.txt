@@ -1,0 +1,4 @@
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Debug\fr\Microsoft.Data.Edm.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Debug\fr\Microsoft.Data.OData.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Debug\fr\Microsoft.Data.Services.Client.resources.dll
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\QueueWebjob\bin\Debug\ko\System.Spatial.resources.dll

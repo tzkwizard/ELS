@@ -9,9 +9,6 @@ using Nest;
 
 namespace MessageHandleApi.Test.Controllers
 {
-    /// <summary>
-    /// Summary description for UnitTest1
-    /// </summary>
     [TestClass]
     public class ElasticAggragationControllerTest
     {
@@ -24,12 +21,12 @@ namespace MessageHandleApi.Test.Controllers
             foreach (var item in testProducts)
             {
                 IHttpActionResult result = await controller.TermAggragation(item);
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ELSresult>));
+                Assert.IsInstanceOfType(result, typeof (OkNegotiatedContentResult<ELSresult>));
                 IHttpActionResult result2 = await controller.TermAggragation(null);
-                Assert.IsInstanceOfType(result2, typeof(BadRequestErrorMessageResult));
+                Assert.IsInstanceOfType(result2, typeof (BadRequestErrorMessageResult));
             }
-
         }
+
         [TestMethod]
         public async Task TermAggragationwithQuery_Test()
         {
@@ -39,12 +36,12 @@ namespace MessageHandleApi.Test.Controllers
             foreach (var item in testProducts)
             {
                 IHttpActionResult result = await controller.TermAggragationwithQuery(item);
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ELSresult>));
+                Assert.IsInstanceOfType(result, typeof (OkNegotiatedContentResult<ELSresult>));
                 IHttpActionResult result2 = await controller.TermAggragationwithQuery(null);
-                Assert.IsInstanceOfType(result2, typeof(BadRequestErrorMessageResult));
+                Assert.IsInstanceOfType(result2, typeof (BadRequestErrorMessageResult));
             }
-
         }
+
         [TestMethod]
         public async Task TermQueryAggragation_Test()
         {
@@ -54,12 +51,12 @@ namespace MessageHandleApi.Test.Controllers
             foreach (var item in testProducts)
             {
                 IHttpActionResult result = await controller.TermQueryAggragation(item);
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ELSresult>));
+                Assert.IsInstanceOfType(result, typeof (OkNegotiatedContentResult<ELSresult>));
                 IHttpActionResult result2 = await controller.TermQueryAggragation(null);
-                Assert.IsInstanceOfType(result2, typeof(BadRequestErrorMessageResult));
+                Assert.IsInstanceOfType(result2, typeof (BadRequestErrorMessageResult));
             }
-
         }
+
         [TestMethod]
         public async Task DashboardPieAggregation_Test()
         {
@@ -70,12 +67,12 @@ namespace MessageHandleApi.Test.Controllers
             {
                 var res = new Dictionary<int, IList<KeyItem>>();
                 IHttpActionResult result = await controller.DashboardPieAggregation(item);
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Dictionary<int, IList<KeyItem>>>));
+                Assert.IsInstanceOfType(result, typeof (OkNegotiatedContentResult<Dictionary<int, IList<KeyItem>>>));
                 IHttpActionResult result2 = await controller.DashboardPieAggregation(null);
-                Assert.IsInstanceOfType(result2, typeof(BadRequestErrorMessageResult));
+                Assert.IsInstanceOfType(result2, typeof (BadRequestErrorMessageResult));
             }
-
         }
+
         [TestMethod]
         public async Task DateHistogramAggregation_Test()
         {
@@ -85,12 +82,12 @@ namespace MessageHandleApi.Test.Controllers
             foreach (var item in testProducts)
             {
                 IHttpActionResult result = await controller.DateHistogramAggregation(item);
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ELSresult>));
+                Assert.IsInstanceOfType(result, typeof (OkNegotiatedContentResult<ELSresult>));
                 IHttpActionResult result2 = await controller.DateHistogramAggregation(null);
-                Assert.IsInstanceOfType(result2, typeof(BadRequestErrorMessageResult));
+                Assert.IsInstanceOfType(result2, typeof (BadRequestErrorMessageResult));
             }
-
         }
+
         [TestMethod]
         public async Task GeoDistanceAggragation_Test()
         {
@@ -100,14 +97,10 @@ namespace MessageHandleApi.Test.Controllers
             foreach (var item in testProducts)
             {
                 IHttpActionResult result = await controller.GeoDistanceAggragation(item);
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ELSresult>));
+                Assert.IsInstanceOfType(result, typeof (OkNegotiatedContentResult<ELSresult>));
                 IHttpActionResult result2 = await controller.GeoDistanceAggragation(null);
-                Assert.IsInstanceOfType(result2, typeof(BadRequestErrorMessageResult));
+                Assert.IsInstanceOfType(result2, typeof (BadRequestErrorMessageResult));
             }
-
         }
-
-
-
     }
 }

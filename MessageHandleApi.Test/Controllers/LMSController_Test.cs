@@ -1,40 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
+using LMS.Common.Models;
 using LMS.Common.Models.Api;
-using LMS.Common.Models.ELS;
 using LMS.Common.Service;
 using MessageHandleApi.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Nest;
+using NSubstitute;
 
 namespace MessageHandleApi.Test.Controllers
 {
-    /// <summary>
-    /// Summary description for UnitTest1
-    /// </summary>
     [TestClass]
     public class LMSControllerTest
     {
-        private static IQueueService _iQueueService;
-        private static IDbService _iDbService;
-        private static IAzureStorageService _iAzureStorageService;
         private static LMSController _controller;
-
+        private static IDbService _iDbService;
         public LMSControllerTest()
         {
-            _iQueueService = new QueueService();
-            _iDbService = new DbService();
-            _iAzureStorageService = new AzureStorageService();
-            _controller = new LMSController(_iQueueService, _iDbService, _iAzureStorageService);
+            IQueueService iQueueService = new QueueService();
+            //IDbService iDbService = new DbService();
+            _iDbService = Substitute.For<IDbService>();
+            IAzureStorageService iAzureStorageService = new AzureStorageService();
+            _controller = new LMSController(iQueueService, _iDbService, iAzureStorageService);
         }
 
         [TestMethod]
         public void Get_Test()
         {
             var time = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+
+            _iDbService.GetMoreList("LMS/tst-azhang1/HS/Java/-K2hf2hPR4FZNk6ipEyn", time).Returns(new LMSresult
+            {
+                time = 12,
+                list = new List<PostMessage>(),
+                moreData = true
+            });
+    
 
             IHttpActionResult result = _controller.Get("LMS/tst-azhang1/HS/Java/-K2hf2hPR4FZNk6ipEyn", time);
             Assert.IsInstanceOfType(result, typeof (OkNegotiatedContentResult<LMSresult>));
