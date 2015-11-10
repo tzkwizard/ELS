@@ -1,0 +1,1 @@
+C:\Users\24666\Documents\Visual Studio 2013\Projects\self\ELS\FirebaseRole\bin\Debug\Elasticsearch.Net.pdb

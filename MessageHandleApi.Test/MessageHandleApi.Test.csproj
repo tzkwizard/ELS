@@ -82,18 +82,24 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LMS\Cal.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cal.feature</DependentUpon>
+    </Compile>
     <Compile Include="Calculator.cs" />
+    <Compile Include="LMS\CalSteps.cs" />
     <Compile Include="Controllers\LMSController_Test.cs" />
     <Compile Include="Controllers\ElasticSearchController_Test.cs" />
     <Compile Include="Controllers\ElasticAggragationController_Test.cs" />
     <Compile Include="Controllers\TestData.cs" />
     <Compile Include="Controllers\ElasticMappingController_Test.cs" />
-    <Compile Include="lms.feature.cs">
+    <Compile Include="LMS\lms.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>lms.feature</DependentUpon>
     </Compile>
-    <Compile Include="LmsSteps.cs" />
+    <Compile Include="LMS\LmsSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +114,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="lms.feature">
+    <None Include="LMS\Cal.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Cal.feature.cs</LastGenOutput>
+    </None>
+    <None Include="LMS\lms.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>lms.feature.cs</LastGenOutput>
     </None>

@@ -15,5 +15,10 @@ namespace MessageHandleApi.Test
         {
             return FirstNumber + SecondNumber;
         }
+        public int Minus()
+        {
+            return FirstNumber - SecondNumber;
+        }
+
     }
 }
