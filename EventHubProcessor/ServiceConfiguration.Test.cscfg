@@ -3,14 +3,16 @@
   <Role name="EventRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="consumerGroupName" value="consumerGroup" />
+      <Setting name="DBSelfLink" value="dbs/uLp-AA==/" />
+      <Setting name="MasterCollectionSelfLink" value="dbs/uLp-AA==/colls/uLp-AM46HwA=/" />
+      <Setting name="DocumentDBUrl" value="https://azurelmsdb.documents.azure.com:443/" />
+      <Setting name="DocumentDBAuthorizationKey" value="mlc6CIPF4GKaz7KekD+fAjcB/k6AkUh7chjKham+WuM2qHFrAg1Untll5g/x5uBEJTu6fBZ+7bifvpWZl1Xj6g==" />
+      <Setting name="AzureStorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=azstorages;AccountKey=BVqYLTdRjzEo/xoDuWwSqlKhbpxOj2y92Gvk4eRvtSsmLVOJtP5V4Py4KsMMyG1HUCT2SipQYslDN2j5Yt1DKw==" />
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=elsaotuo;AccountKey=AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==" />
-      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.NamedCaches" value="{&quot;caches&quot;:[{&quot;name&quot;:&quot;default&quot;,&quot;policy&quot;:{&quot;eviction&quot;:{&quot;type&quot;:0},&quot;expiration&quot;:{&quot;defaultTTL&quot;:10,&quot;isExpirable&quot;:true,&quot;type&quot;:1},&quot;serverNotification&quot;:{&quot;isEnabled&quot;:false}},&quot;secondaries&quot;:0}]}" />
-      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.DiagnosticLevel" value="1" />
-      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.CacheSizePercentage" value="" />
-      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.ConfigStoreConnectionString" value="DefaultEndpointsProtocol=https;AccountName=elsaotuo;AccountKey=AV49N0PZ1Qlz42b0w47EPoPbNLULgxYOWxsO4IvFmrAkZPzkdGCKKOJqyiHVGfAPex6HhkDSWpNQAIuPmBHBMA==" />
-      <Setting name="Setting1" value="" />
-      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://azrenweb-ns.servicebus.windows.net/;SharedAccessKeyName=get;SharedAccessKey=+mmaMKj+RjrCUMqC7bK1q4juLrxThN8FKnej026iEus=" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://azrenweb2-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=PU9vimRlubdwnLwCk9St65Pjp24rk3F9PyAawEJm0BA=" />
+      <Setting name="eventHubName" value="eventhub1" />
+      <Setting name="FirebaseSecret" value="DgOppmLZMxm0N1lrqwqAKYXy3HC34jEfKQqwwmQO" />
+      <Setting name="FirebaseUrl" value="https://tst-azhang1.firebaseio.com/" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

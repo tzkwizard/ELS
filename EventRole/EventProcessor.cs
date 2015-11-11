@@ -12,6 +12,7 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using LMS.Common.Models;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -46,9 +47,8 @@ namespace EventRole
         {
             _run = true;
             //Get DBservice
-            _databaseSelfLink = _databaseSelfLink ?? ConfigurationManager.AppSettings["DBSelfLink"];
+            _databaseSelfLink = _databaseSelfLink ?? CloudConfigurationManager.GetSetting("DBSelfLink");
             _iDbService = _iDbService ?? new DbService();
-
             //Init DB and Firebase
             _client = _client ?? _iDbService.GetFirebaseClient();
             //check resolver state
@@ -110,7 +110,7 @@ namespace EventRole
             while (_run)
             {
                 var client = _iDbService.GetDocumentClient();
-                var resolver = _iDbService.GetResolver(client);
+                var resolver = _iDbService.RangePartitionResolver().GetResolver();
                 if (_resolver == null)
                 {
                     _resolver = resolver;
@@ -142,13 +142,20 @@ namespace EventRole
             dynamic data = JsonConvert.DeserializeObject(dataString);
             var path = data.url.ToString().Split('/');
             data.body.timestamp = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-            PostMessage message = _iDbService.PostData(data, path);
+            PostMessage message = ModelService.PostData(data, path);
 
             //create document on DB with RangePartitionResolver
             var res =
                 await
-                    _iDbService.ExecuteWithRetries(
+                    RetryService.ExecuteWithRetries(
                         () => client.CreateDocumentAsync(_databaseSelfLink, message));
+
+            //if not found collection, update RangePartitionResolver
+            if (res == null)
+            {
+                _iDbService.UpdateDocumentClient();
+                return;
+            }
 
             //Check response and notify Firebase
             if (res.StatusCode == HttpStatusCode.Created)

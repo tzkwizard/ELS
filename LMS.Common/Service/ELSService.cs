@@ -2,13 +2,14 @@
 using System.Configuration;
 using System.Threading.Tasks;
 using LMS.Common.Models.ELS;
+using LMS.Common.Service.Interface;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
 using StackExchange.Redis;
 
 namespace LMS.Common.Service
 {
-    public class ELSService : IELSService
+    public class ElsService : IElsService
     {
 
         private readonly CloudQueue _queue;
@@ -17,7 +18,7 @@ namespace LMS.Common.Service
         private bool _queueError;
 
 
-        public ELSService()
+        public ElsService()
         {
             _queue = GetQueue();
         }

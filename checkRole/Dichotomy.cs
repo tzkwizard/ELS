@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using LMS.Common.Models;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
@@ -53,7 +54,7 @@ namespace CheckRole
                         if (x.Id == "LMSCollection")
                         {
                             var x1 = x;
-                            await _iDbService.ExecuteWithRetries(() => UpdateDc(x1, origin));
+                            await RetryService.ExecuteWithRetries(() => UpdateDc(x1, origin));
                         }
                     }
                 }
@@ -192,7 +193,7 @@ namespace CheckRole
             {
                 allow.District.Add(i.Key.ToString());
             }
-            await _iDbService.ExecuteWithRetries(() => _client.CreateDocumentAsync(origin.DocumentsLink, allow));
+            await RetryService.ExecuteWithRetries(() => _client.CreateDocumentAsync(origin.DocumentsLink, allow));
 
             var ds =
                 from d in _client.CreateDocumentQuery<DcAllocate>(origin.DocumentsLink)
@@ -205,7 +206,7 @@ namespace CheckRole
             if (l != null)
             {
                 l.District = disList;
-                await _iDbService.ExecuteWithRetries(() => _client.ReplaceDocumentAsync(l));
+                await RetryService.ExecuteWithRetries(() => _client.ReplaceDocumentAsync(l));
             }
             else
             {
@@ -216,7 +217,7 @@ namespace CheckRole
                     DcSelfLink = oldDc.SelfLink,
                     District = disList
                 };
-                await _iDbService.ExecuteWithRetries(() => _client.CreateDocumentAsync(origin.DocumentsLink, allow2));
+                await RetryService.ExecuteWithRetries(() => _client.CreateDocumentAsync(origin.DocumentsLink, allow2));
             }
         }
 
@@ -236,12 +237,12 @@ namespace CheckRole
                         var item1 = item;
                         var res =
                             await
-                                _iDbService.ExecuteWithRetries(() => _client.CreateDocumentAsync(newDc.SelfLink, item1));
+                                RetryService.ExecuteWithRetries(() => _client.CreateDocumentAsync(newDc.SelfLink, item1));
                         if (res.StatusCode == HttpStatusCode.Created)
                         {
                             //await _iDbService.DeleteDocument(_client, item1._self, 5);
                             var res2 =
-                                await _iDbService.ExecuteWithRetries(() => _client.DeleteDocumentAsync(item1._self));
+                                await RetryService.ExecuteWithRetries(() => _client.DeleteDocumentAsync(item1._self));
                             if (res2 == null)
                             {
                                 Trace.TraceInformation("FFFFF");

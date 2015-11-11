@@ -8,6 +8,7 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using LMS.Common.Models;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;

@@ -8,6 +8,7 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using LMS.Common.Models.Api;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using Newtonsoft.Json;
 
 namespace MessageHandleApi.Controllers
@@ -136,7 +137,7 @@ namespace MessageHandleApi.Controllers
         {
             try
             {
-                string token = _iDbService.GetFirebaseToken(u.uid, u.name, "something");
+                string token = _iDbService.FBoperation().GetFirebaseToken(u.uid, u.name, "something");
                 return Ok(token);
             }
             catch (Exception e)

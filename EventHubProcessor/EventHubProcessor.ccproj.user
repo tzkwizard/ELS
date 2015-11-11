@@ -3,5 +3,6 @@
   <PropertyGroup>
     <ActivePublishProfile>azlmsProduction</ActivePublishProfile>
     <UseEmulatorExpress>False</UseEmulatorExpress>
+    <LocalProfile>Local</LocalProfile>
   </PropertyGroup>
 </Project>

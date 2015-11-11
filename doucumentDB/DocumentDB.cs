@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
@@ -9,6 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using LMS.Common.Models;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
+using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
@@ -38,11 +41,15 @@ namespace doucumentDB
         {
             // Create a new instance of the DocumentClient.
             DocumentClient client = new DocumentClient(new Uri(EndpointUrl2), AuthorizationKey2);
-
+            ConfigurationManager.AppSettings["DocumentDBUrl"] = EndpointUrl2;
+            ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"] = AuthorizationKey2;
             var database = await GetDB(client, "LMS");
             var documentCollection = await GetDC(client, database);
+            _iDbService = new DbService();
 
-            _iDbService = new DbService(EndpointUrl2, AuthorizationKey2);
+
+
+
             // await DeleteAll(client, database, documentCollection);
             await sp2(documentCollection, client, database);
             //await GetData(client, documentCollection);
@@ -85,12 +92,12 @@ namespace doucumentDB
             client.PartitionResolvers[database.SelfLink] = rangeResolver;*/
 
 
-            var created = await _iDbService.InitResolver("");
+            var created = await _iDbService.RangePartitionResolver().InitResolver();
 
 
              while (true)
             {
-                var re2 = await _iDbService.UpdateResolver(dc2);
+                var re2 = await _iDbService.RangePartitionResolver().UpdateResolver(dc2);
                 var p = re2;
                 await Task.Delay(TimeSpan.FromSeconds(4));
             }
@@ -240,7 +247,7 @@ namespace doucumentDB
                         }
                         else
                         {
-                            await _iDbService.BatchDelete(z, batch);
+                            await _iDbService.DBoperation().BatchDelete(z, batch);
                             mn = 0;
                             batch = new List<dynamic>();
                         }
@@ -263,7 +270,7 @@ namespace doucumentDB
 
                             Console.WriteLine(family.SelfLink);*/
                     }
-                    await _iDbService.BatchDelete(z, batch);
+                    await _iDbService.DBoperation().BatchDelete(z, batch);
                 }
                 catch (Exception eee)
                 {
@@ -415,7 +422,7 @@ namespace doucumentDB
             };
             //var res = await client.CreateDocumentAsync(documentCollection.DocumentsLink, topic);
             await
-                _iDbService.ExecuteWithRetries(5,
+                RetryService.ExecuteWithRetries(5,
                     () => client.CreateDocumentAsync(documentCollection.DocumentsLink, topic));
             var i = 3;
 

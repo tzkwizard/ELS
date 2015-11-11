@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Web.Http;
 using System.Web.Http.Results;
 using LMS.Common.Models;
 using LMS.Common.Models.Api;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using MessageHandleApi.Controllers;
 using NSubstitute;
 using NUnit.Framework;
@@ -61,5 +63,21 @@ namespace MessageHandleApi.Test
               IHttpActionResult result3 = _controller.GetChat("", time);
               Assert.IsInstanceOf<OkNegotiatedContentResult<LMSChatresult>>(result3);
         }
+
+        [Test]
+        public void Eventhub_Test()
+        {
+            ConfigurationManager.AppSettings["LMS1"] = "";
+            ConfigurationManager.AppSettings["LMS2"] = "";
+            ConfigurationManager.AppSettings["LMS3"] = "";
+            LmsSupport.SendingRandomMessages(1);
+            //LmsSupport.ReceivePartitionMessage();
+
+            /*Assert.AreEqual("true",ConfigurationManager.AppSettings["LMS1"]);
+            Assert.AreEqual("true",ConfigurationManager.AppSettings["LMS2"]);
+            Assert.AreEqual("true",ConfigurationManager.AppSettings["LMS3"]);*/
+        }
+
+
     }
 }

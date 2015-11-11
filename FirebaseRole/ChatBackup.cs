@@ -12,6 +12,7 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using LMS.Common.Models;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using Microsoft.Azure;
 using Microsoft.Practices.EnterpriseLibrary.WindowsAzure.TransientFaultHandling.AzureStorage;
 using Microsoft.Practices.TransientFaultHandling;
@@ -35,8 +36,8 @@ namespace FirebaseRole
             var client = storageAccount.CreateCloudTableClient();
             _table = client.GetTableReference("Chat");
             _table.CreateIfNotExists();
-            _iDbService = new DbService(true);
-            _retryPolicy = _iDbService.GetRetryPolicy();
+            _iDbService = new DbService();
+            _retryPolicy = RetryService.GetRetryPolicy();
         }
 
         public async Task BackupDocumentChat()
@@ -90,7 +91,7 @@ namespace FirebaseRole
                     for (int i = 0; i < sorted.Count - RecordRemained; i++)
                     {
                         var message = sorted[i];
-                        TableChat c = _iDbService.TableChatData(room, message);
+                        TableChat c = ModelService.TableChatData(room, message);
                         batchOperation.Insert(c);
                         if (batchOperation.Count == 100)
                         {

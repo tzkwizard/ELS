@@ -1,11 +1,9 @@
 using System;
-using System.Configuration;
 using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using EventRole.service;
 using Microsoft.Azure;
-using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace EventRole
@@ -20,12 +18,12 @@ namespace EventRole
             Trace.TraceInformation("EventRole is running");
 
             //Get settings from configuration
-            var eventHubName = ConfigurationManager.AppSettings["eventHubName"];          
-            var blobConnectionString = ConfigurationManager.AppSettings["AzureStorageConnectionString"];
+            var eventHubName = CloudConfigurationManager.GetSetting("eventHubName");
+            var blobConnectionString = CloudConfigurationManager.GetSetting("AzureStorageConnectionString");
 
             //Get AMQP connection string
             var connectionString = EventHubManager.GetServiceBusConnectionString();
-            Trace.TraceInformation("connectionString : "+connectionString);
+            Trace.TraceInformation("connectionString : " + connectionString);
             /*var consumerGroupName = CloudConfigurationManager.GetSetting("consumerGroupName");
             var numberOfPartitions = int.Parse(CloudConfigurationManager.GetSetting("numberOfPartitions"));
             //Create event hub if it does not exist

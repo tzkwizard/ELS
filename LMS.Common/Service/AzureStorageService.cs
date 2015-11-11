@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using LMS.Common.Models;
 using LMS.Common.Models.Api;
+using LMS.Common.Service.Interface;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 

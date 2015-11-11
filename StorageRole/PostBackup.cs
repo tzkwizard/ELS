@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using LMS.Common.Models;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -27,14 +28,13 @@ namespace StorageRole
         private static IDbService _iDbService;
         private static int _reTry = 5;
         private static RetryPolicy<StorageTransientErrorDetectionStrategy> _retryPolicy;
-
         public PostBackup(CloudStorageAccount storageAccount)
         {
-            _iDbService = new DbService(true);
+            _iDbService = new DbService();
             CloudTableClient c = storageAccount.CreateCloudTableClient();
             _table = c.GetTableReference("Post");
             _table.CreateIfNotExists();
-            _retryPolicy = _iDbService.GetRetryPolicy();
+            _retryPolicy = RetryService.GetRetryPolicy();
         }
 
         public async Task BackupPostAll(string databaseSelfLink)
@@ -82,7 +82,7 @@ namespace StorageRole
                 List<dynamic> docList = new List<dynamic>();
                 foreach (var d in ds)
                 {
-                    TablePost c = _iDbService.TablePostData(d);
+                    TablePost c = ModelService.TablePostData(d);
                     batchOperation.Insert(c);
                     docList.Add(d);
 
@@ -94,7 +94,7 @@ namespace StorageRole
                         batchOperation = new TableBatchOperation();
                         if (res.Count == operation.Count)
                         {
-                            await _iDbService.BatchDelete(dc, docList);
+                            await _iDbService.DBoperation().BatchDelete(dc, docList);
                             docList = new List<dynamic>();
                             Trace.TraceInformation("inserted");
                         }
@@ -107,7 +107,7 @@ namespace StorageRole
                         () => _table.ExecuteBatchAsync(operation));
                     if (res.Count == operation.Count)
                     {
-                        await _iDbService.BatchDelete(dc, docList);
+                        await _iDbService.DBoperation().BatchDelete(dc, docList);
                         Trace.TraceInformation("inserted");
                     }
                 }
@@ -138,7 +138,7 @@ namespace StorageRole
                         {
                             offer.OfferType = "S3";
                             Offer updated = await client.ReplaceOfferAsync(offer);
-                            await _iDbService.InitResolver(masterCollectionSelfLink);
+                            await _iDbService.RangePartitionResolver().InitResolver();
                             await _iDbService.UpdateCurrentCollection(dc);
                         }
                     }

@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using LMS.Common.Models.ELS;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 
 
 namespace MessageHandleApi.Controllers
@@ -10,9 +11,9 @@ namespace MessageHandleApi.Controllers
     [EnableCors("*", "*", "*")]
     public class LogMessageController : ApiController
     {
-        private IELSService _iElsService;
+        private IElsService _iElsService;
 
-        public LogMessageController(IELSService iElsService)
+        public LogMessageController(IElsService iElsService)
         {
             _iElsService = iElsService;
         }

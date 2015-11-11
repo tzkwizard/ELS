@@ -139,6 +139,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\FBoperation.cs" />
+    <Compile Include="DAL\IFBoperation.cs" />
     <Compile Include="Models\Api\LMSapi.cs" />
     <Compile Include="Models\AzureDocumentDB.cs" />
     <Compile Include="Models\AzureTable.cs" />
@@ -151,12 +153,19 @@
     <Compile Include="Models\MetricEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AzureStorageService.cs" />
+    <Compile Include="DAL\DBoperation.cs" />
+    <Compile Include="Service\ResolverService.cs" />
+    <Compile Include="Service\Interface\IResolverService.cs" />
+    <Compile Include="Service\ModelService.cs" />
     <Compile Include="Service\DBService.cs" />
+    <Compile Include="Service\RetryService.cs" />
+    <Compile Include="Service\Interface\IRetryService.cs" />
     <Compile Include="Service\ELSService.cs" />
-    <Compile Include="Service\IAzureStorageService.cs" />
-    <Compile Include="Service\IDBService.cs" />
-    <Compile Include="Service\IELSService.cs" />
-    <Compile Include="Service\IQueueService.cs" />
+    <Compile Include="Service\Interface\IAzureStorageService.cs" />
+    <Compile Include="DAL\IDBoperation.cs" />
+    <Compile Include="Service\Interface\IDBService.cs" />
+    <Compile Include="Service\Interface\IELSService.cs" />
+    <Compile Include="Service\Interface\IQueueService.cs" />
     <Compile Include="Service\QueueService.cs" />
   </ItemGroup>
   <ItemGroup>

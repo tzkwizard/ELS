@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -21,7 +22,7 @@ namespace CheckRole
 
         public LoadBalance()
         {
-            _iDbService = _iDbService ?? new DbService(true);
+            _iDbService = _iDbService ?? new DbService();
         }
 
         public async Task CheckBalance(string databaseSelfLink)
@@ -30,7 +31,7 @@ namespace CheckRole
             {
                 var client = _iDbService.GetDocumentClient();
                 await client.OpenAsync();
-                var curDc = _iDbService.GetCurrentDc();
+                var curDc = _iDbService.DBoperation().GetCurrentDc();
                 if (curDc != null)
                 {
                     var run = await CheckSize(curDc, client);
@@ -43,8 +44,8 @@ namespace CheckRole
                             try
                             {
                                 await _iDbService.UpdateCurrentCollection(newDc);
-                                await _iDbService.UpdateResolver(newDc);
-                                await UpdatePerformanceLevel(client);
+                                await _iDbService.RangePartitionResolver().UpdateResolver(newDc);
+                                await  UpdatePerformanceLevel(client);
                             }
                             catch (Exception e)
                             {
@@ -76,7 +77,7 @@ namespace CheckRole
 
         private static async Task UpdatePerformanceLevel(DocumentClient client)
         {
-            var resolver = _iDbService.GetResolver(client);
+            var resolver = _iDbService.RangePartitionResolver().GetResolver();
             if (resolver.PartitionMap.Count == 2)
             {
                 Offer offer = client.CreateOfferQuery()
