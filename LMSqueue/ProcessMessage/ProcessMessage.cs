@@ -7,6 +7,7 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using LMS.Common.Models;
 using LMS.Common.Service;
+using LMS.Common.Service.Interface;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Newtonsoft.Json;
 using Microsoft.Azure.Documents;
@@ -22,19 +23,21 @@ namespace LMSqueue.ProcessMessage
         private readonly DocumentClient _documentClient;
         private static DocumentCollection _documentCollection;
         private static StoredProcedure _sp;
+        private static IDbService _iDbService;
         public ProcessMessage(DbService iDbService, QueueService iQueueService)
         {
             _documentClient = iDbService.GetDocumentClient();
             _client = iDbService.GetFirebaseClient();
             //_documentCollection = iDbService.GetDc("LMSCollection", "LMSRegistry");
             _documentCollection = null;
-            _sp = iDbService.DBoperation().GetSp(_documentCollection, "Post");
+            _iDbService = iDbService;
             _queue = iQueueService.GetQueue("queue");
         }
 
 
         public async Task SendMessageAsync()
         {
+            _sp = _sp ?? await _iDbService.DBoperation().GetStoreProcedure(_documentCollection.SelfLink, "Post");
             foreach (CloudQueueMessage message in _queue.GetMessages(20, TimeSpan.FromSeconds(30), null, null))
             {
                 // Process all messages in less than 30s, deleting each message after processing.

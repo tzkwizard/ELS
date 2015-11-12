@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using Nest;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Elasticsearch.Net.ConnectionPool;
-using System.Threading.Tasks;
 using LMS.Common.Models.ELS;
-
+using Nest;
 
 namespace MessageHandleApi.Controllers
 {

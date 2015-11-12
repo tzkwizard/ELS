@@ -72,7 +72,8 @@ namespace LMS.Common.Service
         }
 
 
-        private RangePartitionResolver<long> GenerateResolver(Document q)
+
+        private static RangePartitionResolver<long> GenerateResolver(Document q)
         {
             var map = new Dictionary<Range<long>, string>();
             dynamic d = q;
@@ -87,7 +88,7 @@ namespace LMS.Common.Service
             return rangeResolver;
         }
 
-        private RangePartitionResolver<long> GetUpdateResolver(RangePartitionResolver<long> oldResolver,
+        private static RangePartitionResolver<long> GetUpdateResolver(RangePartitionResolver<long> oldResolver,
             DocumentCollection newDc)
         {
             var map = new Dictionary<Range<long>, string>();
@@ -102,6 +103,7 @@ namespace LMS.Common.Service
                     }
                 }
             }
+            //Check Resolver
             var now = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             if (now < vs.LastOrDefault().Key.Low || now > vs.LastOrDefault().Key.High) return null;
 
@@ -112,7 +114,7 @@ namespace LMS.Common.Service
                 map);
         }
 
-        private RangePartitionResolver<long> GenerateInitResolver()
+        private static RangePartitionResolver<long> GenerateInitResolver()
         {
             var start = (long) (DateTime.UtcNow.AddDays(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             var end = (long) (start + TimeSpan.FromDays(365).TotalMilliseconds);

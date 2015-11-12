@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using FireSharp.Interfaces;
 using FireSharp.Response;
 using LMS.Common.Models.Api;
-using LMS.Common.Service;
 using LMS.Common.Service.Interface;
 using Newtonsoft.Json;
 
@@ -16,9 +11,9 @@ namespace MessageHandleApi.Controllers
     [RoutePrefix("api/LMS")]
     public class LMSController : ApiController
     {
-        private IQueueService _iQueueService;
-        private IDbService _iDbService;
-        private IAzureStorageService _iAzureStorageService;
+        private readonly IQueueService _iQueueService;
+        private readonly IDbService _iDbService;
+        private readonly IAzureStorageService _iAzureStorageService;
         public LMSController(IQueueService iQueueService, IDbService iDbService, IAzureStorageService iAzureStorageService)
         {
             _iQueueService = iQueueService;

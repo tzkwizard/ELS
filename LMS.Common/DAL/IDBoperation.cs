@@ -13,11 +13,9 @@ namespace LMS.Common.DAL
         DocumentCollection GetDc(string cName, string dName);
         Database GetDd(string dName);
         DocumentCollection GetCurrentDc();
-        StoredProcedure GetSp(DocumentCollection documentCollection, string spName);
         DocumentClient GetDocumentClient();
-        void UpdateDocumentClient(RangePartitionResolver<long> rangeResolver);
+        void UpdateDbClientResolver(RangePartitionResolver<long> rangeResolver);
         Task DeleteDocByIdList(DocumentCollection dc, List<string> idList);
-        Task DeleteDocById(DocumentCollection dc, string id);
         Task DeleteDocById(string selfLink, string id);
         Task<bool> CreateDocument(object doc);
         Task<bool> CreateDocument(string selfLink, object doc);
@@ -26,5 +24,8 @@ namespace LMS.Common.DAL
         Task BatchDelete(DocumentCollection dc, List<dynamic> docs);
         Document GetDocumentById(string dcLink, string id);
         dynamic GetDocumentByType(string dcLink, string type);
+
+        List<PostMessage> GetPostMessages(long start, long end);
+        List<PostMessage> GetPostMessages(long end);
     }
 }

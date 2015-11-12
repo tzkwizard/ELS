@@ -171,45 +171,6 @@ namespace LMS.Common.Service
             return null;
         }
 
-        public static async Task ExecuteWithRetries(int retryTimes,
-            Func<Task> function)
-        {
-            TimeSpan sleepTime = TimeSpan.FromMilliseconds(100);
-
-            while (retryTimes > 0 && sleepTime != TimeSpan.Zero)
-            {
-                try
-                {
-                    await function();
-                    break;
-                }
-                catch (DocumentClientException e)
-                {
-                    if (e.StatusCode != null && (int) e.StatusCode != 429)
-                    {
-                        Trace.TraceInformation(e.Message);
-                    }
-                    sleepTime = e.RetryAfter;
-                }
-                catch (AggregateException ae)
-                {
-                    if (!(ae.InnerException is DocumentClientException))
-                    {
-                        Trace.TraceInformation(ae.Message);
-                    }
-
-                    DocumentClientException e = (DocumentClientException) ae.InnerException;
-                    if (e.StatusCode != null && (int) e.StatusCode != 429)
-                    {
-                        Trace.TraceInformation(e.Message);
-                    }
-                    sleepTime = e.RetryAfter;
-                }
-                retryTimes--;
-                await Task.Delay(sleepTime);
-            }
-        }
-
         public static async Task<StoredProcedureResponse<List<Document>>> ExecuteWithRetries(
             Func<Task<StoredProcedureResponse<List<Document>>>> function)
         {
@@ -251,7 +212,7 @@ namespace LMS.Common.Service
 
         public static RetryPolicy<StorageTransientErrorDetectionStrategy> GetRetryPolicy()
         {
-            ExponentialBackoff retryStrategy = new ExponentialBackoff(5, TimeSpan.FromSeconds(1),
+            ExponentialBackoff retryStrategy = new ExponentialBackoff(RetryTimes, TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(2));
 
             RetryPolicy<StorageTransientErrorDetectionStrategy> retryPolicy =

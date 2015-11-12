@@ -64,30 +64,14 @@ namespace LMS.Common.Service
 
         public LMSresult GetList(string m)
         {
-            var client = GetDocumentClient(true);
-            long end = 0;
+            var end = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             var n = 0;
-            List<PostMessage> items = new List<PostMessage>();
+            var items = new List<PostMessage>();
             while (items.Count < 5 && n < 6)
             {
-                end =
-                    (long) (DateTime.UtcNow.AddMinutes(-30*n).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                end = end - (long) TimeSpan.FromMinutes(30).TotalMilliseconds;
                 var path = m.Split('/');
-                /*   items = client.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
-                    "SELECT d AS data " +
-                    "FROM Doc d " +
-                    "Where d.Type='Post' And d.Info.timestamp > '" + time + "'").OrderBy(o=>o.Info.timestamp).ToList();*/
-                /*  items =
-                    (from f in client.CreateDocumentQuery<PostMessage>(_database.SelfLink)
-                        where f.Type == "Post" && f.Info.timestamp > end
-                        select f).OrderBy(o => o.Info.timestamp).ToList();*/
-                var dataSelfLink = CloudConfigurationManager.GetSetting("DBSelfLink") ??
-                                   ConfigurationManager.AppSettings["DBSelfLink"];
-                items =
-                    client.CreateDocumentQuery<PostMessage>(dataSelfLink,
-                        new FeedOptions {MaxItemCount = 2000})
-                        .Where(f => f.Type == "Post" && f.Info.timestamp > end)
-                        .OrderBy(o => o.Info.timestamp).ToList();
+                items = _iDBoperation.GetPostMessages(end);
                 n++;
             }
 
@@ -101,9 +85,8 @@ namespace LMS.Common.Service
 
         public LMSresult GetMoreList(string m, long start)
         {
-            var client = GetDocumentClient(true);
             var t = (long) (DateTime.UtcNow.AddMonths(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-            List<PostMessage> items = new List<PostMessage>();
+            var items = new List<PostMessage>();
             var t1 = DateTime.Now;
             var n = 1;
             var i = 1;
@@ -111,22 +94,9 @@ namespace LMS.Common.Service
             while (items.Count < 5 && end > t)
             {
                 i = i + n;
-                end = end - (long) TimeSpan.FromHours(i).TotalMilliseconds;
+                start = start - (long) TimeSpan.FromHours(i).TotalMilliseconds;
                 var path = m.Split('/');
-                /*  items = client.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
-                    "SELECT d AS data " +
-                    "FROM Doc d " +
-                    "Where d.Type='Post' And d.Info.timestamp > '" + t2 + "'" +
-                    "And d.Info.timestamp < '" + t1 + "'").ToList();*/
-                /*  items =
-                    (from f in client.CreateDocumentQuery<PostMessage>(_database.SelfLink)
-                        where f.Type == "Post" && f.Info.timestamp < start && f.Info.timestamp > end
-                        select f).OrderBy(o => o.Info.timestamp).ToList();*/
-                var dataSelfLink = CloudConfigurationManager.GetSetting("DBSelfLink") ??
-                                   ConfigurationManager.AppSettings["DBSelfLink"];
-                items = client.CreateDocumentQuery<PostMessage>(dataSelfLink)
-                    .Where(f => f.Type == "Post" && f.Info.timestamp < start && f.Info.timestamp > end)
-                    .OrderBy(o => o.Info.timestamp).ToList();
+                items = _iDBoperation.GetPostMessages(start, end);
                 var t2 = DateTime.Now;
                 if (t2 - t1 > TimeSpan.FromSeconds(10))
                 {
@@ -142,7 +112,7 @@ namespace LMS.Common.Service
             var res = new LMSresult
             {
                 moreData = false,
-                time = end,
+                time = start,
                 list = items
             };
             return res;
@@ -171,7 +141,7 @@ namespace LMS.Common.Service
         public void UpdateDocumentClient()
         {
             var rangeResolver = _iResolverService.GetResolver();
-            _iDBoperation.UpdateDocumentClient(rangeResolver);
+            _iDBoperation.UpdateDbClientResolver(rangeResolver);
         }
 
         #endregion
@@ -236,7 +206,7 @@ namespace LMS.Common.Service
                 id = "CurrentCollection",
                 name = newDc.Id
             };
-            await _iDBoperation.CreateDocument("Default", doc);
+            await _iDBoperation.CreateDocument(null, doc);
         }
 
         #endregion

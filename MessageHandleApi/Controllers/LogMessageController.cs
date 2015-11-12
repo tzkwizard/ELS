@@ -2,9 +2,7 @@
 using System.Web.Http;
 using System.Web.Http.Cors;
 using LMS.Common.Models.ELS;
-using LMS.Common.Service;
 using LMS.Common.Service.Interface;
-
 
 namespace MessageHandleApi.Controllers
 {
