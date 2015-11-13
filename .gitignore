@@ -196,3 +196,6 @@ FakesAssemblies/
 *.opt
 /EventHubProcessor.cspkg
 /nuget.exe
+bin
+obj
+packages
