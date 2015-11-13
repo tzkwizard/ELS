@@ -93,5 +93,29 @@ namespace LMS.Common.Service
             };
             return res;
         }
+
+        public LMSChatresult SearchChat(string roomId, long end)
+        {
+            var t = (long)(DateTime.UtcNow.AddMonths(-1).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            List<TableChat> items = new List<TableChat>();
+            var n = 1;
+            var i = 1;
+            long start = end;
+            while (items.Count < 5 && end > t)
+            {
+                i = i + n;
+                start = (long)(DateTime.UtcNow.AddHours(-6 * i).Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                items = _iDbService.ASoperation().GetChat(roomId, start, end);
+                n++;
+            }
+            var res = new LMSChatresult
+            {
+                moreData = false,
+                time = start,
+                list = items
+            };
+
+            return res;
+        }
     }
 }

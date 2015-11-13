@@ -11,15 +11,12 @@ namespace MessageHandleApi.Controllers
     [RoutePrefix("api/LMS")]
     public class LmsController : ApiController
     {
-        private readonly IAzureStorageService _iAzureStorageService;
         private readonly ILmsDashboardService _iLmsDashboardService;
         private readonly IDbService _iDbService;
 
-        public LmsController(IDbService iDbService,
-            IAzureStorageService iAzureStorageService)
+        public LmsController(IDbService iDbService)
         {
             _iDbService = iDbService;
-            _iAzureStorageService = iAzureStorageService;
             _iLmsDashboardService = new LmsDashboardService(iDbService);
         }
 
@@ -109,7 +106,7 @@ namespace MessageHandleApi.Controllers
         {
             try
             {
-                var res = _iAzureStorageService.SearchChat(roomId, start);
+                var res = _iLmsDashboardService.SearchChat(roomId, start);
                 return Ok(res);
             }
             catch (Exception e)

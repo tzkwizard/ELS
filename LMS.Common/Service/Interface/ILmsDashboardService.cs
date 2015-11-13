@@ -9,5 +9,6 @@ namespace LMS.Common.Service.Interface
         LMSresult GetList(string m);
         LMSresult GetMoreList(string m, long start);
         List<Topic> GetCalendar();
+        LMSChatresult SearchChat(string roomId, long end);
     }
 }

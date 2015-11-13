@@ -24,9 +24,8 @@ namespace MessageHandleApi.Test
             IDbService iDbService = new DbService();
             _iLmsDashboardService = Substitute.For<ILmsDashboardService>();
             
-            IAzureStorageService iAzureStorageService = new AzureStorageService();
             IResolverService iResolverService=new ResolverService();
-            _controller = new LmsController(iDbService, iAzureStorageService);
+            _controller = new LmsController(iDbService);
         }
 
         [Test]

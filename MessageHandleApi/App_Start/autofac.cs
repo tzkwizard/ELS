@@ -21,7 +21,7 @@ namespace MessageHandleApi
             builder.RegisterType<ResolverService>().As<IResolverService>().InstancePerLifetimeScope();
             builder.RegisterType<CollectionService>().As<ICollectionService>().InstancePerLifetimeScope();
             builder.RegisterType<LmsDashboardService>().As<ILmsDashboardService>().InstancePerLifetimeScope();
-            builder.RegisterType<AzureStorageService>().As<IAzureStorageService>().InstancePerLifetimeScope();
+            builder.RegisterType<ASoperation>().As<IASoperation>().InstancePerLifetimeScope();
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }

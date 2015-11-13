@@ -19,5 +19,6 @@ namespace LMS.Common.Service.Interface
         IDBoperation DBoperation();
         IFBoperation FBoperation();
         ICollectionService CollectionService();
+        IASoperation ASoperation();
     }
 }

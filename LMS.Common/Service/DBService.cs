@@ -11,6 +11,7 @@ namespace LMS.Common.Service
         private static IFBoperation _iFBoperation;
         private static IResolverService _iResolverService;
         private static ICollectionService _iCollectionService;
+        private static IASoperation _iASoperation;
 
         public DbService()
         {
@@ -18,6 +19,7 @@ namespace LMS.Common.Service
             _iFBoperation = new FBoperation();
             _iResolverService = new ResolverService();
             _iCollectionService = new CollectionService();
+            _iASoperation=new ASoperation();
         }
 
 
@@ -63,6 +65,11 @@ namespace LMS.Common.Service
         public ICollectionService CollectionService()
         {
             return _iCollectionService;
+        }
+
+        public IASoperation ASoperation()
+        {
+            return _iASoperation;
         }
     }
 }
