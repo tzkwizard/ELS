@@ -16,15 +16,17 @@ namespace MessageHandleApi.Test
     [TestFixture]
     public class LmsTest
     {
-        private static LMSController _controller;
-        private static IDbService _iDbService;
+        private static LmsController _controller;
+        private static ILmsDashboardService _iLmsDashboardService;
         public LmsTest()
         {
             IQueueService iQueueService = new QueueService();
-            //IDbService iDbService = new DbService();
-            _iDbService = Substitute.For<IDbService>();
+            IDbService iDbService = new DbService();
+            _iLmsDashboardService = Substitute.For<ILmsDashboardService>();
+            
             IAzureStorageService iAzureStorageService = new AzureStorageService();
-            _controller = new LMSController(iQueueService, _iDbService, iAzureStorageService);
+            IResolverService iResolverService=new ResolverService();
+            _controller = new LmsController(iDbService, iAzureStorageService);
         }
 
         [Test]
@@ -32,7 +34,7 @@ namespace MessageHandleApi.Test
         {
             var time = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
 
-            _iDbService.GetMoreList("LMS/tst-azhang1/HS/Java/-K2hf2hPR4FZNk6ipEyn", time).Returns(new LMSresult
+            _iLmsDashboardService.GetMoreList("LMS/tst-azhang1/HS/Java/-K2hf2hPR4FZNk6ipEyn", time).Returns(new LMSresult
             {
                 time = 12,
                 list = new List<PostMessage>(),

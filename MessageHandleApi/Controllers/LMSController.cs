@@ -3,22 +3,24 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using FireSharp.Response;
 using LMS.Common.Models.Api;
+using LMS.Common.Service;
 using LMS.Common.Service.Interface;
-using Newtonsoft.Json;
 
 namespace MessageHandleApi.Controllers
 {
     [RoutePrefix("api/LMS")]
-    public class LMSController : ApiController
+    public class LmsController : ApiController
     {
-        private readonly IQueueService _iQueueService;
-        private readonly IDbService _iDbService;
         private readonly IAzureStorageService _iAzureStorageService;
-        public LMSController(IQueueService iQueueService, IDbService iDbService, IAzureStorageService iAzureStorageService)
+        private readonly ILmsDashboardService _iLmsDashboardService;
+        private readonly IDbService _iDbService;
+
+        public LmsController(IDbService iDbService,
+            IAzureStorageService iAzureStorageService)
         {
-            _iQueueService = iQueueService;
             _iDbService = iDbService;
             _iAzureStorageService = iAzureStorageService;
+            _iLmsDashboardService = new LmsDashboardService(iDbService);
         }
 
 
@@ -27,10 +29,9 @@ namespace MessageHandleApi.Controllers
         {
             try
             {
-                var res = (start == 0) ? _iDbService.GetList(url) : _iDbService.GetMoreList(url,start);
-                //FirebaseResponse response = await _client.GetAsync(url);
-                //dynamic ds = JsonConvert.DeserializeObject(response.Body);
-                //return Ok(ds);
+                var res = (start == 0)
+                    ? _iLmsDashboardService.GetList(url)
+                    : _iLmsDashboardService.GetMoreList(url, start);
                 return Ok(res);
             }
             catch (Exception e)
@@ -45,7 +46,7 @@ namespace MessageHandleApi.Controllers
         {
             try
             {
-                var res = _iDbService.GetCalendar();
+                var res = _iLmsDashboardService.GetCalendar();
                 return Ok(res);
             }
             catch (Exception e)
@@ -53,43 +54,6 @@ namespace MessageHandleApi.Controllers
                 return BadRequest(e.Message);
             }
         }
-
-
-
-        [HttpPost]
-        public async Task<IHttpActionResult> Post([FromBody] LMSMessage message)
-        {
-            try
-            {
-                message.body.timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-                string m = JsonConvert.SerializeObject(message);
-                await _iQueueService.SendToQueue(m);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
-
-        [HttpPost]
-        [Route("comment")]
-        public async Task<IHttpActionResult> PostC([FromBody] LMSMessage message)
-        {
-            try
-            {
-                message.body.timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-                string m = JsonConvert.SerializeObject(message);
-                await _iQueueService.SendToQueue(m);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
 
         [HttpDelete]
         public async Task<IHttpActionResult> Delete([FromUri] string url)
@@ -104,7 +68,6 @@ namespace MessageHandleApi.Controllers
             {
                 return BadRequest(e.Message);
             }
-
         }
 
 
@@ -123,7 +86,6 @@ namespace MessageHandleApi.Controllers
             {
                 return BadRequest(e.Message);
             }
-
         }
 
         [HttpPost]
@@ -147,7 +109,7 @@ namespace MessageHandleApi.Controllers
         {
             try
             {
-                var res=_iAzureStorageService.SearchChat(roomId,start);
+                var res = _iAzureStorageService.SearchChat(roomId, start);
                 return Ok(res);
             }
             catch (Exception e)

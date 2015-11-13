@@ -325,17 +325,13 @@ function bulkImport(docs) {
         public List<PostMessage> GetPostMessages(long start, long end)
         {
             var client = GetDocumentClient();
-            /*  items = client.CreateDocumentQuery<PostMessage>(documentCollection.DocumentsLink,
-                    "SELECT d AS data " +
-                    "FROM Doc d " +
-                    "Where d.Type='Post' And d.Info.timestamp > '" + t2 + "'" +
-                    "And d.Info.timestamp < '" + t1 + "'").ToList();*/
-            /*  items =
-                (from f in client.CreateDocumentQuery<PostMessage>(_database.SelfLink)
-                    where f.Type == "Post" && f.Info.timestamp < start && f.Info.timestamp > end
-                    select f).OrderBy(o => o.Info.timestamp).ToList();*/
             var dataSelfLink = CloudConfigurationManager.GetSetting("DBSelfLink") ??
                                ConfigurationManager.AppSettings["DBSelfLink"];
+            /* return client.CreateDocumentQuery<T>(dataSelfLink,
+                    "SELECT d AS data " +
+                    "FROM Doc d " +
+                    "Where d.Type='Post' And d.Info.timestamp > '" + start + "'" +
+                    "And d.Info.timestamp < '" + end + "'").ToList();*/
 
             return client.CreateDocumentQuery<PostMessage>(dataSelfLink)
                 .Where(f => f.Type == "Post" && f.Info.timestamp > start && f.Info.timestamp < end)
@@ -349,18 +345,15 @@ function bulkImport(docs) {
                     "SELECT d AS data " +
                     "FROM Doc d " +
                     "Where d.Type='Post' And d.Info.timestamp > '" + time + "'").OrderBy(o=>o.Info.timestamp).ToList();*/
-            /*  items =
-                (from f in client.CreateDocumentQuery<PostMessage>(_database.SelfLink)
-                    where f.Type == "Post" && f.Info.timestamp > end
-                    select f).OrderBy(o => o.Info.timestamp).ToList();*/
+
             var dataSelfLink = CloudConfigurationManager.GetSetting("DBSelfLink") ??
                                ConfigurationManager.AppSettings["DBSelfLink"];
-           
-             return  client.CreateDocumentQuery<PostMessage>(dataSelfLink,
-                    new FeedOptions { MaxItemCount = 2000 })
-                    .Where(f => f.Type == "Post" && f.Info.timestamp > end)
-                    .OrderBy(o => o.Info.timestamp).ToList();
-        } 
+
+            return client.CreateDocumentQuery<PostMessage>(dataSelfLink,
+                new FeedOptions {MaxItemCount = 2000})
+                .Where(f => f.Type == "Post" && f.Info.timestamp > end)
+                .OrderBy(o => o.Info.timestamp).ToList();
+        }
 
         #endregion
     }

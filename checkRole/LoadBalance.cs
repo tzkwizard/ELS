@@ -43,7 +43,7 @@ namespace CheckRole
                         {
                             try
                             {
-                                await _iDbService.UpdateCurrentCollection(newDc);
+                                await _iDbService.CollectionService().UpdateCurrentCollection(newDc);
                                 await _iDbService.RangePartitionResolver().UpdateResolver(newDc);
                                 await  UpdatePerformanceLevel(client);
                             }

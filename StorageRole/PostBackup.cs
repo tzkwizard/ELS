@@ -139,7 +139,7 @@ namespace StorageRole
                             offer.OfferType = "S3";
                             Offer updated = await client.ReplaceOfferAsync(offer);
                             await _iDbService.RangePartitionResolver().InitResolver();
-                            await _iDbService.UpdateCurrentCollection(dc);
+                            await _iDbService.CollectionService().UpdateCurrentCollection(dc);
                         }
                     }
                     else

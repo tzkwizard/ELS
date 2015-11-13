@@ -154,12 +154,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AzureStorageService.cs" />
     <Compile Include="DAL\DBoperation.cs" />
+    <Compile Include="Service\CollectionService.cs" />
+    <Compile Include="Service\LmsDashboardService.cs" />
+    <Compile Include="Service\Interface\ICollectionService.cs" />
+    <Compile Include="Service\Interface\ILmsDashboardService.cs" />
     <Compile Include="Service\ResolverService.cs" />
     <Compile Include="Service\Interface\IResolverService.cs" />
     <Compile Include="Service\ModelService.cs" />
     <Compile Include="Service\DBService.cs" />
     <Compile Include="Service\RetryService.cs" />
-    <Compile Include="Service\Interface\IRetryService.cs" />
     <Compile Include="Service\ELSService.cs" />
     <Compile Include="Service\Interface\IAzureStorageService.cs" />
     <Compile Include="DAL\IDBoperation.cs" />

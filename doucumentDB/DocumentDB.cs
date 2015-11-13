@@ -1,57 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using LMS.Common.Models;
 using LMS.Common.Service;
 using LMS.Common.Service.Interface;
-using Microsoft.Azure;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
-using Microsoft.Azure.Documents.Partitioning;
-using Microsoft.Practices.TransientFaultHandling;
-using Newtonsoft.Json;
-using Database = Microsoft.Azure.Documents.Database;
-
 
 namespace doucumentDB
 {
     internal class DocumentDB
     {
         private static string EndpointUrl = "https://tstaz.documents.azure.com:443/";
-
         private static string AuthorizationKey =
             "6xPkxpC7FyiozobQOtQ8yFxbqd7uLOCz0pRo4i+GKxHdmISxDrMKZdaKQH0/0BJe/xC3UKdQM4C1x5d4Rxk3AQ==";
-
         private static string EndpointUrl2 = "https://azurelmsdb.documents.azure.com:443/";
-
         private static string AuthorizationKey2 =
             "mlc6CIPF4GKaz7KekD+fAjcB/k6AkUh7chjKham+WuM2qHFrAg1Untll5g/x5uBEJTu6fBZ+7bifvpWZl1Xj6g==";
+        private static string database1 = "LMSRegistry";
+        private static string database2 = "LMS";
+        private static string db = "LMS";
+        private static string mc1 = "dbs/GZIeAA==/colls/GZIeANoVYwA=/";
+        private static string mc2 = "dbs/uLp-AA==/colls/uLp-AM46HwA=/";
+        private static string ds1 = "dbs/GZIeAA==/";
+        private static string ds2 = "dbs/uLp-AA==/";
 
         private static IDbService _iDbService;
 
         public static async Task GetStartedDemo()
         {
             // Create a new instance of the DocumentClient.
-            DocumentClient client = new DocumentClient(new Uri(EndpointUrl2), AuthorizationKey2);
-            ConfigurationManager.AppSettings["DocumentDBUrl"] = EndpointUrl2;
-            ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"] = AuthorizationKey2;
-            var database = await GetDB(client, "LMS");
+            var client = Swap(2);
+            var database = await GetDB(client, db);
             var documentCollection = await GetDC(client, database);
             _iDbService = new DbService();
 
 
-
-
-            // await DeleteAll(client, database, documentCollection);
-            await sp2(documentCollection, client, database);
+            //await DeleteAll(client, database, documentCollection);
+            await Resolver(documentCollection, client, database);
             //await GetData(client, documentCollection);
             //ReadData(client, documentCollection);
             //await WriteData(client, documentCollection);
@@ -60,76 +50,89 @@ namespace doucumentDB
              client.Dispose();*/
         }
 
-        private static async Task sp2(DocumentCollection dc, DocumentClient client, Database database)
+        private static DocumentClient Swap(int n)
         {
+            List<List<string>> l = new List<List<string>>
+            {
+                new List<string> {EndpointUrl, AuthorizationKey, mc1, ds1,database1},
+                new List<string> {EndpointUrl2, AuthorizationKey2, mc2, ds2,database2}
+            };
 
+            db = l[n - 1][4];
+            DocumentClient client = new DocumentClient(new Uri(l[n-1][0]), l[n-1][1]);
+            ConfigurationManager.AppSettings["DocumentDBUrl"] = l[0][0];
+            ConfigurationManager.AppSettings["DocumentDBAuthorizationKey"] = l[n-1][1];
+            ConfigurationManager.AppSettings["MasterCollectionSelfLink"] = l[n-1][2];
+            ConfigurationManager.AppSettings["DBSelfLink"] = l[n-1][3];
+            return client;
+        }
+
+        private static async Task Resolver(DocumentCollection dc, DocumentClient client, Database database)
+        {
             //transfer collection data
-             DocumentCollection dc2 = client.CreateDocumentCollectionQuery(database.SelfLink)
+            DocumentCollection dc2 = client.CreateDocumentCollectionQuery(database.SelfLink)
                 .Where(c => c.Id == "LMSCollection1444075919174")
                 .AsEnumerable()
                 .FirstOrDefault();
-            await client.OpenAsync();
-            //await _iDbService.CollectionTransfer(client, dc2, dc);
-            var mn=await client.ReadDatabaseAsync(database.SelfLink);
-
-
-
-
-            /*  await client.CreateDocumentAsync(dc.SelfLink, new CurrentCollection
+            //await _iDbService.CollectionTransfer(dc2, dc);
+   
+            /*await client.CreateDocumentAsync(dc.SelfLink, new CurrentCollection
             {
                 id = "CurrentCollection",
-                name=dc.Id
+                name = dc.Id
             });*/
-            //var resolver = _iDbService.GetResolver(client);
 
-            /* HashPartitionResolver hashResolver = new HashPartitionResolver(
+            //resolver
+            /*HashPartitionResolver hashResolver = new HashPartitionResolver(
                 u => ((PostMessage) u).Path.District,
                 new string[] {dc.SelfLink, dc2.SelfLink});
 
-            client.PartitionResolvers[database.SelfLink] = hashResolver;*/
+            client.PartitionResolvers[database.SelfLink] = hashResolver;
 
-            /* var rangeResolver = _iDbService.GetResolver(client);
-            client.PartitionResolvers[database.SelfLink] = rangeResolver;*/
-
+            var rangeResolver = _iDbService.RangePartitionResolver().GetResolver();
+            client.PartitionResolvers[database.SelfLink] = rangeResolver;
+            var z1 = rangeResolver.GetPartitionKey(new PostMessage
+            {
+                Type = "Post",
+                Info = new Info
+                {
+                    user = "tzk",
+                    uid = "1210808",
+                    message = "java",
+                    timestamp = 7
+                },
+                Path = new PostPath
+                {
+                    District = "tst-azhang"
+                }
+            });*/
 
             var created = await _iDbService.RangePartitionResolver().InitResolver();
 
 
-             while (true)
+            if (dc != null)
             {
-                var re2 = await _iDbService.RangePartitionResolver().UpdateResolver(dc2);
-                var p = re2;
-                await Task.Delay(TimeSpan.FromSeconds(4));
+                while (true)
+                {
+                    var re2 = await _iDbService.RangePartitionResolver().UpdateResolver(dc2);
+                    var p = re2;
+                    await Task.Delay(TimeSpan.FromSeconds(4));
+                }
             }
 
-            /*  var z1 = rangeResolver.GetPartitionKey(new PostMessage
-                    {
-                        Type = "Post",
-                        Info = new Info
-                        {
-                            user = "tzk",
-                            uid = "1210808",
-                            message = "java",
-                            timestamp = 7
-                        },
-                        Path = new PostPath
-                        {
-                            District = "tst-azhang" 
-                        }
-                    });*/
 
             //search global
             IQueryable<PostMessage> query = client.CreateDocumentQuery<PostMessage>(database.SelfLink)
                 .Where(u => u.Info.timestamp > 1);
 
-           
+
             //search on partition
-            var partitionKey = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            var partitionKey = (long) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
             var query2 = client.CreateDocumentQuery<PostMessage>(database.SelfLink, new FeedOptions
             {
                 MaxItemCount = 1200
             }, partitionKey);
-           
+
             foreach (PostMessage a in query2)
             {
                 Console.WriteLine(a.Info.timestamp);
@@ -146,7 +149,7 @@ namespace doucumentDB
                 totalRequestCharge += queryResponse.RequestCharge;
             }
             Console.WriteLine("Query consumed {0} request units in total", totalRequestCharge);*/
-    
+
             //await AddTestData(client,database,5);
 
             Console.ReadLine();
